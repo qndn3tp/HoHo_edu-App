@@ -1,0 +1,42 @@
+name: flutter_application
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.6.5
+  http: ^1.2.1
+  flutter_dotenv: ^5.0.2
+  crypto: ^3.0.3
+
+  connectivity_plus: ^5.0.2
+  cupertino_icons: ^1.0.6
+  flutter_native_splash: ^2.3.10
+  flutter_secure_storage : ^5.0.2
+  intl: ^0.17.0
+  shared_preferences: ^2.1.0
+  percent_indicator: ^4.0.1
+  banner_carousel: ^1.2.1
+  flutter_spinkit: ^5.1.0
+  awesome_dialog: ^3.2.0
+  glassmorphism: ^3.0.0
+  nice_buttons: ^0.0.3
+  flutter_animated_icons: ^1.0.1
+  lottie: ^1.4.3
+  eva_icons_flutter: ^3.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+# The following section is specific to Flutter packages.
+flutter:
+  uses-material-design: true
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+    - .env
