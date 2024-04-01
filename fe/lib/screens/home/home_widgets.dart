@@ -96,8 +96,8 @@ Widget bookButton() {
     // 서버로부터 독클 결과 데이터를 받은 후 독클 결과 화면으로 이동
     onTap: () async {
       await getYearlyBookData();                      // 연간 독서량 데이터
-      await getMonthlyBookReadData(currentMonth);     // 월간 독서 데이터(책 목록, 권수)
-      await getMonthlyBookScoreData(currentMonth);    // 월간 독서 데이터(영역별 점수)
+      await getMonthlyBookReadData(currentMonth-1);     // 월간 독서 데이터(책 목록, 권수)
+      await getMonthlyBookScoreData(currentMonth-1);    // 월간 독서 데이터(영역별 점수)
       Get.to(BookScreen(), transition: Transition.cupertino, duration: const Duration(milliseconds: 500)); 
     },
     child: Column(children: [
