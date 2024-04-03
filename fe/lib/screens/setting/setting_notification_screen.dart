@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/screens/setting/notification_toggle.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_animated_icons/lottiefiles.dart';
 import 'package:lottie/lottie.dart';
 import '../../style.dart' as style;
+import 'package:permission_handler/permission_handler.dart';
+
 
 ////////////////////////
 //      설정 화면     //
@@ -92,6 +95,21 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
           children: [
             // 상단 알림 내용
             alarmContent(isAllButtonsUnchecked, bellController),
+            Container(
+              padding: const EdgeInsets.only(right: 10, left: 10),
+              width: double.infinity,
+              color: Colors.deepPurple[50], 
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    onPressed: (){}, 
+                    child: const Text("알림 설정"),
+                  ),
+                  const ToggleButton()
+                ],
+              ),
+            ),
             // 알림  리스트
             Expanded(
                 child: ListView.builder(

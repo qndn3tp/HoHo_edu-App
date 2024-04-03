@@ -7,8 +7,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screens/login/login_screen.dart';
 import 'package:flutter/services.dart';
 
-////////////백업
-
 
 void main() async{
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();  // 앱의 바인딩 초기화(flutter engine과의 상호작용을 위한 준비)

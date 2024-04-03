@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import '../../utils/network_check.dart';
 import '../../models/login_data.dart';
 import '../../utils/login_encryption.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 ///////////////////////
 //  로그인 로직 수행  //
@@ -83,6 +84,9 @@ Future<void> loginService(
 
         // 수업정보 요청
         await getClassInfo();
+
+        requestNotificationPermission();
+        
         // 홈화면으로 이동
         Get.offAll(const HomeScreen(), transition: Transition.fadeIn, duration: const Duration(milliseconds: 500)); 
       }
@@ -99,5 +103,17 @@ Future<void> loginService(
   // 서버로부터 응답을 받지 못했을 때
   catch (e) {
     throw Exception('$e');
+  }
+}
+
+
+// 메시지 권한을 요청
+Future<void> requestNotificationPermission() async {
+  PermissionStatus status = await Permission.notification.status;
+  if (!status.isGranted) {
+    print("User isn't granted");
+    Permission.notification.request();
+  } else {
+    print("Great! User is granted");
   }
 }
