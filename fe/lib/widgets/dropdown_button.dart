@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/screens/book/dropdown_button_controller.dart';
+import 'package:flutter_application/utils/dropdown_button_controller.dart';
 import 'package:get/get.dart';
-import '../../style.dart' as style;
+import '../style.dart' as style;
 
 class DropDownButtonWidget extends GetView<DropdownButtonController> {
   const DropDownButtonWidget({super.key});
