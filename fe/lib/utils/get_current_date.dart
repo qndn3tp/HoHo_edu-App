@@ -1,5 +1,7 @@
 // 현재 시간 가져오기
 
+import 'package:intl/intl.dart';
+
 final currentYear = getCurrentYear();
 final currentMonth = getCurrentMonth();
 
@@ -11,4 +13,9 @@ int getCurrentYear() {
 int getCurrentMonth() {
   final now = DateTime.now();
   return now.month;
+}
+
+String getCurrentDateTime() {
+  final now = DateTime.now();
+  return DateFormat('yyyy.MM.dd HH:mm').format(now);
 }

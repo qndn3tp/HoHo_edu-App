@@ -32,6 +32,7 @@ class _NoticeScreenState extends State<NoticeScreen>
     "결제",
     "독클",
   ];
+  
   // TabBar TapView
   final List<Widget> pages = [
     totalNotice(),
@@ -47,10 +48,8 @@ class _NoticeScreenState extends State<NoticeScreen>
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
-
 
     return Scaffold(
       // 상단바
