@@ -3,6 +3,7 @@ import 'package:flutter_application/screens/payment/payment_animated_button.dart
 import 'package:flutter_application/screens/payment/payment_cost.dart';
 import 'package:flutter_application/screens/payment/payment_info.dart';
 import '../../style.dart' as style;
+import 'package:flutter/rendering.dart';
 
 ////////////////////////
 //   학원비 결제 화면  //
@@ -16,6 +17,38 @@ class PaymentListScreen extends StatefulWidget {
 
 class _PaymentListScreenState extends State<PaymentListScreen> {
   bool isChecked = false;
+
+  // 하단바 스크롤 컨트롤러
+  bool _showBottomBar = true;
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    // 스크롤 컨트롤러 생성
+    _scrollController = ScrollController()..addListener((){
+      try {
+        // 아래로 스크롤시 하단바 숨김
+        if (_scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+          setState(() {
+            _showBottomBar = false;
+          });
+        } 
+        // 위로 스크롤시 하단바 노출
+        else if (_scrollController.position.userScrollDirection == ScrollDirection.forward) {
+          setState(() {
+            _showBottomBar = true;
+          });
+        }
+    } catch (_) {}
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +67,7 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
             const SizedBox(height: 10,),
             Expanded(
               child: ListView.builder(
+                controller: _scrollController,
                 itemCount: 3,
                 itemBuilder: ((context, index) {
                   // 결제 내용
@@ -99,10 +133,15 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
         ),
       ),
       // 하단바
-      bottomNavigationBar: const BottomAppBar(
-        elevation: 0,
-        color: style.LIGHT_GREY,
-        child: PaymentAnimatedButton(),
+      bottomNavigationBar: AnimatedCrossFade(
+        firstChild: const BottomAppBar(
+          elevation: 0,
+          color: style.LIGHT_GREY,
+          child: PaymentAnimatedButton(),
+        ),
+        secondChild: const SizedBox.shrink(),
+        crossFadeState: _showBottomBar ? CrossFadeState.showFirst : CrossFadeState.showSecond,    // 스크롤 방향에 따라 하단바를 숨김
+        duration: const Duration(milliseconds: 200),
       ),
     );
   }
