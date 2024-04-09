@@ -16,6 +16,7 @@ Widget tableContent(context, AttendanceData attendanceData) {
   final date = DateTime.parse(attendanceData.ymd);
   final formattedDate = DateFormat('MM.dd').format(date);
   final formattedDayname = attendanceData.dayname.substring(0, 1);
+  
   // 등하원시간
   final formattedStime = "${attendanceData.stime.substring(0, 2)}:${attendanceData.stime.substring(2)}";
   final formattedEtime = "${attendanceData.etime.substring(0, 2)}:${attendanceData.etime.substring(2)}";

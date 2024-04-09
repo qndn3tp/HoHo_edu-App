@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/home/home_screen.dart';
+import 'package:flutter_application/screens/payment/payment_history_screen.dart';
+import 'package:flutter_application/screens/payment/payment_list_screen.dart';
 import 'package:get/get.dart';
 import '../../style.dart' as style;
-import './payment_animated_button.dart';
 
 ////////////////////////
 //   학원비 납부 화면  //
@@ -15,7 +16,8 @@ class PaymentScreen extends StatefulWidget {
   State<PaymentScreen> createState() => _PaymentScreenState();
 }
 
-class _PaymentScreenState extends State<PaymentScreen> with SingleTickerProviderStateMixin {
+class _PaymentScreenState extends State<PaymentScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -88,30 +90,11 @@ class _PaymentScreenState extends State<PaymentScreen> with SingleTickerProvider
       // TabBarView
       body: TabBarView(
         controller: _tabController,
-        children: [
-          Scaffold(
-            backgroundColor: style.LIGHT_GREY,
-            body: Container(
-              padding: const EdgeInsets.only(top: 20, bottom: 20),
-              child: const Column(
-                children: [
-                  Text(
-                    "수강료와 교재비는 함께 결제가 불가능합니다.",
-                    style: TextStyle(color: style.DEEP_GREY, fontSize: 12),
-                  ),
-                ],
-              ),
-            ),
-            // 하단바
-            bottomNavigationBar: const BottomAppBar(
-              elevation: 0,
-              color: Colors.white,
-              child: PaymentAnimatedButton(),
-            ),
-          ),
-          const Center(
-            child: Text("결제 내역"),
-          )
+        children: const [
+          // 학원비 결제 화면
+          PaymentListScreen(),
+          // 결제내역 화면
+          PaymentHistoryScreen(),
         ],
       ),
     );
