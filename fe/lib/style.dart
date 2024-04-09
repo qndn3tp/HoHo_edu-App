@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 const PRIMARY_BLUE = Color(0xff3c46ff);
 const PRIMARY_ORANGE = Color(0xffff5a00);
