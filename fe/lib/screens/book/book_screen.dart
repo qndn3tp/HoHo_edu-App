@@ -41,8 +41,8 @@ class BookScreen extends GetView<DropdownButtonController> {
             Container(
               margin: const EdgeInsets.all(20),
               child: DecoratedBox(
-                  decoration: dropDownBox(),
-                  child: const DropDownButtonWidget()),
+                decoration: dropDownBox(),
+                child: const DropDownButtonWidget()),
             ),
             // 드롭다운 화면
             Expanded(child: Obx(
@@ -56,14 +56,14 @@ class BookScreen extends GetView<DropdownButtonController> {
                         // 데이터를 가져오는 중
                         return Container(
                           color: style.PRIMARY_YELLOW,
-                          child: const SpinKitThreeBounce(
-                              color: style.LIGHT_GREY,
-                        ));
+                            child: const SpinKitThreeBounce(
+                            color: style.LIGHT_GREY,
+                          ));
                       } else if (snapshot.hasError) {
                         // 에러발생
                         return Container(
-                            color: style.PRIMARY_YELLOW,
-                            child: Text("Error: ${snapshot.error}"));
+                          color: style.PRIMARY_YELLOW,
+                          child: Text("Error: ${snapshot.error}"));
                       } else {
                         // 데이터를 성공적으로 가져오면 MonthlyScreen을 반환
                         return const MonthlyScreen();
@@ -76,7 +76,8 @@ class BookScreen extends GetView<DropdownButtonController> {
               },
             ))
           ],
-        ));
+        ),
+    );
   }
 
   // 해당 드롭다운 데이터로 api 재호출
@@ -118,8 +119,13 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
   void initState() {
     super.initState();
     currentPage = currentMonth - 1; // 현재 페이지(현재 달 - 1)
-    pageController = PageController(
-        initialPage: currentPage); // 페이지컨트롤러: 디폴트페이지는 현재 페이지(현재 달 - 1)
+    pageController = PageController(initialPage: currentPage); // 페이지컨트롤러: 디폴트페이지는 현재 페이지(현재 달 - 1)
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    pageController.dispose();
   }
 
   // 이전 페이지(이전 달)로 이동
@@ -171,53 +177,51 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
-                  onPressed: goToPreviousPage,
-                  icon: const Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: style.DEEP_GREY,
-                  )),
+                onPressed: goToPreviousPage,
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: style.DEEP_GREY,
+                )),
               Text(
-                DateFormat('yyyy.MM')
-                    .format(DateTime(currentYear, currentPage + 1)),
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                DateFormat('yyyy.MM').format(DateTime(currentYear, currentPage + 1)),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               IconButton(
-                  onPressed: goToNextPage,
-                  icon: const Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: style.DEEP_GREY,
-                  )),
+                onPressed: goToNextPage,
+                icon: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: style.DEEP_GREY,
+                )),
             ],
           ),
           // 페이지 뷰
           Expanded(
             child: PageView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: pageController,
-                itemCount: getCurrentMonth(),   // 1월~현재월
-                onPageChanged: (int page) {
-                  setState(() {
-                    currentPage = page; // 페이지를 넘기면 month가 변하도록 업데이트
-                  });
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return SingleChildScrollView(
-                    child: Container(
-                      color: style.PRIMARY_YELLOW,
-                      child: Column(
-                        children: [
-                          // 독서클리닉 결과 1
-                          BookResult1(index: index),
-                          // 독서클리닉 결과 2
-                          const BookResult2(),
-                          // 독서클리닉 결과
-                          const BookResult3()
-                        ],
-                      ),
+              physics: const NeverScrollableScrollPhysics(),
+              controller: pageController,
+              itemCount: getCurrentMonth(),   // 1월~현재월
+              onPageChanged: (int page) {
+                setState(() {
+                  currentPage = page; // 페이지를 넘기면 month가 변하도록 업데이트
+                });
+              },
+              itemBuilder: (BuildContext context, int index) {
+                return SingleChildScrollView(
+                  child: Container(
+                    color: style.PRIMARY_YELLOW,
+                    child: Column(
+                      children: [
+                        // 독서클리닉 결과 1
+                        BookResult1(index: index),
+                        // 독서클리닉 결과 2
+                        const BookResult2(),
+                        // 독서클리닉 결과
+                        const BookResult3()
+                      ],
                     ),
-                  );
-                }),
+                  ),
+                );
+              }),
           )
         ],
       ),

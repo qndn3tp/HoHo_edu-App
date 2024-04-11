@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 TextSpan normalText(text) {
   return TextSpan(
     text: text,
-    style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17),
+    style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
   );
 }
 // 강조 텍스트
@@ -14,6 +14,6 @@ TextSpan colorText(text, color) {
     style: TextStyle(
       color: color,
       fontWeight: FontWeight.bold,
-      fontSize: 17)
+      fontSize: 18)
   );
 }

@@ -15,9 +15,7 @@ class BookResult1 extends StatefulWidget {
   final int index;
   final String currentPageMonth;
 
-  BookResult1({super.key, required this.index})
-      : currentPageMonth =
-            DateFormat('yyyy년 M월').format(DateTime(currentYear, index + 1));
+  BookResult1({super.key, required this.index}) : currentPageMonth = DateFormat('yyyy년 M월').format(DateTime(currentYear, index + 1));
 
   @override
   State<BookResult1> createState() => _BookResult1State();
@@ -30,53 +28,59 @@ class _BookResult1State extends State<BookResult1> {
 
   @override
   Widget build(BuildContext context) {
+    // 페이지 높이
+    final pageHeight = MediaQuery.of(context).size.height - 200;
+
     return Container(
       padding: const EdgeInsets.only(top: 30),
       child: Column(
         children: [
+          SizedBox(height: pageHeight * 0.05,),
           // 텍스트
           Obx(
             () => RichText(
               text: TextSpan(children: [
                 normalText(
-                    "${dropdownButtonController.currentItem.value} 학생은 "),
-                colorText(widget.currentPageMonth, style.PRIMARY_DEEPBLUE),
-                normalText("에"),
+                  "${dropdownButtonController.currentItem.value} 학생은 "),
+                  colorText(widget.currentPageMonth, style.PRIMARY_DEEPBLUE),
+                  normalText("에"),
               ]),
             ),
           ),
-          RichText(
-            text: TextSpan(children: [
-              normalText("총 "),
-              colorText(
-                  "${bookTitleDataController.monthlyBookCount}권", style.PRIMARY_DEEPBLUE),
-              normalText("의 책을 읽었어요!"),
-            ]),
+          SizedBox(
+            height: pageHeight * 0.1,
+            child: RichText(
+              text: TextSpan(children: [
+                normalText("총 "),
+                colorText(
+                    "${bookTitleDataController.monthlyBookCount}권", style.PRIMARY_DEEPBLUE),
+                normalText("의 책을 읽었어요!"),
+              ]),
+            ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+
           // 이미지
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Image.asset("assets/images/menu_book_report1.png"),
-            // 월간 읽은 책의 권수
-            Container(
-              margin: const EdgeInsets.only(left: 10),
-              width: 50,
-              height: 50,
-              decoration:
-                  const BoxDecoration(shape: BoxShape.circle, color: style.PRIMARY_BLUE),
-              child: Center(
-                  child: Text("${bookTitleDataController.monthlyBookCount}",
+          SizedBox(
+            height: pageHeight * 0.3,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center, 
+              children: [
+                Image.asset("assets/images/menu_book_report1.png"),
+                // 월간 읽은 책의 권수
+                Container(
+                  margin: const EdgeInsets.only(left: 10),
+                  width: 50,
+                  height: 50,
+                  decoration: const BoxDecoration(shape: BoxShape.circle, color: style.PRIMARY_BLUE),
+                  child: Center(
+                    child: Text("${bookTitleDataController.monthlyBookCount}",
                       style: const TextStyle(
-                        fontSize: 35,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ))),
-            )
-          ]),
-          const SizedBox(
-            height: 20,
+                            fontSize: 35,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ))),
+                )
+              ]),
           ),
           // 독서클리닉 목록(책 제목 리스트)
           ListView.builder(
@@ -84,30 +88,22 @@ class _BookResult1State extends State<BookResult1> {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: bookTitleDataController.monthlyBookCount,
             itemBuilder: (context, index) {
-              final title =
-                  bookTitleDataController.bookTitleDataList?[index].title;
+              final title = bookTitleDataController.bookTitleDataList?[index].title;
               return Container(
-                margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.2),
+                margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.2),
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons.remove,
-                      color: style.DEEP_GREY,
-                    ),
+                    const Icon(Icons.remove, color: style.DEEP_GREY,),
                     Text(
                       title ?? "",
-                      style: const TextStyle(
-                          fontSize: 15, color: style.DEEP_GREY),
+                      style: const TextStyle(fontSize: 15, color: style.DEEP_GREY),
                     )
                   ],
                 ),
               );
             },
           ),
-          const SizedBox(
-            height: 50,
-          ),
+          SizedBox(height: pageHeight * 0.2,)
         ],
       ),
     );

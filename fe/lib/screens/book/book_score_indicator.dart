@@ -1,9 +1,11 @@
-// 점수 바
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/book_data.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+////////////////////////
+//    독클 점수 바    //
+////////////////////////
 final scoreColorList = [
   const Color(0xffff44b2),
   const Color(0xff5a60d8),

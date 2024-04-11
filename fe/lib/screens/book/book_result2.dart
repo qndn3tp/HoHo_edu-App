@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application/models/book_data.dart';
 import 'package:flutter_application/screens/book/book_score_indicator.dart';
 import 'package:flutter_application/widgets/text_span.dart';
@@ -24,29 +25,33 @@ class _BookResult2State extends State<BookResult2> {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
+    // 페이지 높이
+    final pageHeight = screenSize.height - 200;
 
-    return Column(
-          children: [
-            // 텍스트
-            RichText(
-              text: TextSpan(
-                children: [
-                  normalText("위의 책을 읽고 "),
-                  colorText(bookScoreDataController.getFirstScoreName(), style.PRIMARY_ORANGE),  // 가장 점수가 높은 영역
-                  normalText(", "),
-                  colorText(bookScoreDataController.getSecondScoreName(), style.PRIMARY_ORANGE), // 가장 점수가 낮은 영역
-                  normalText(" 능력이"),
-                ]
-              )
-            ),
-            RichText(text: normalText("풍부해졌어요."),),
-            const SizedBox(
-              height: 20,
-            ),
-            // 이미지
-            Image.asset("assets/images/menu_book_report2.png"),
-            // 각 영역별 점수 표시(가로배치) 
-            GridView.count(
+    return SizedBox(
+      height: pageHeight,
+      child: Column(
+        children: [
+          // 텍스트
+          RichText(
+            text: TextSpan(
+              children: [
+                normalText("위의 책을 읽고 "),
+                colorText(bookScoreDataController.getFirstScoreName(), style.PRIMARY_ORANGE),  // 가장 점수가 높은 영역
+                normalText(", "),
+                colorText(bookScoreDataController.getSecondScoreName(), style.PRIMARY_ORANGE), // 가장 점수가 낮은 영역
+                normalText(" 능력이"),
+              ]
+            )
+          ),
+          SizedBox(height: pageHeight * 0.1, child: RichText(text: normalText("풍부해졌어요."))),
+          // 이미지
+          SizedBox(height: pageHeight * 0.3, child: Image.asset("assets/images/menu_book_report2.png")),
+          SizedBox(height: pageHeight * 0.1,),
+          // 각 영역별 점수 표시(가로배치) 
+          SizedBox(
+            height: pageHeight * 0.2,
+            child: GridView.count(
               shrinkWrap: true,
               crossAxisCount: 2,
               physics: const NeverScrollableScrollPhysics(),  
@@ -62,10 +67,9 @@ class _BookResult2State extends State<BookResult2> {
                 },
               ),
             ),
-            const SizedBox(
-              height: 50,
-            )
-          ],
-        );
+          ),
+        ],
+      ),
+    );
   }
 }

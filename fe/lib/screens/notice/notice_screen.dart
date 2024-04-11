@@ -14,8 +14,7 @@ class NoticeScreen extends StatefulWidget {
   State<NoticeScreen> createState() => _NoticeScreenState();
 }
 
-class _NoticeScreenState extends State<NoticeScreen>
-    with SingleTickerProviderStateMixin {
+class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderStateMixin {
   
   // 화면 스크롤 컨트롤러
   final ScrollController scrollController = ScrollController();
@@ -46,6 +45,12 @@ class _NoticeScreenState extends State<NoticeScreen>
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollController.dispose();
   }
 
   @override
