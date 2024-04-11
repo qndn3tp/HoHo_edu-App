@@ -57,31 +57,41 @@ class _BookResult1State extends State<BookResult1> {
           ),
         ),
 
-        // 이미지
-        SizedBox(
-          height: pageHeight * 0.3,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center, 
-            children: [
-              // Image.asset("assets/images/menu_book_report1.png"),
-              Image.asset("assets/images/5.png"),
-              // 월간 읽은 책의 권수
-              Container(
-                margin: const EdgeInsets.only(left: 10),
-                width: 50,
-                height: 50,
-                decoration: const BoxDecoration(shape: BoxShape.circle, color: style.PRIMARY_BLUE),
-                child: Center(
-                  child: Text("${bookTitleDataController.monthlyBookCount}",
-                    style: const TextStyle(
-                      fontSize: 35,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ))),
-              )
-            ]),
-        ),
-        SizedBox(height: pageHeight * 0.05,),
+        // // 이미지
+        // SizedBox(
+        //   height: pageHeight * 0.3,
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.center, 
+        //     children: [
+        //       Image.asset("assets/images/menu_book_report1.png"),
+        //       Image.asset("assets/images/b0.png"),
+        //       Container(
+        //         height: 50,
+        //         width: 50,
+        //         decoration: const BoxDecoration(
+        //           image: DecorationImage(
+        //             image: AssetImage("assets/images/b0.png"),
+        //             fit: BoxFit.contain
+        //           )
+        //         ),
+        //       ),
+        //       // 월간 읽은 책의 권수
+        //       Container(
+        //         margin: const EdgeInsets.only(left: 10),
+        //         width: 50,
+        //         height: 50,
+        //         decoration: const BoxDecoration(shape: BoxShape.circle, color: style.PRIMARY_BLUE),
+        //         child: Center(
+        //           child: Text("${bookTitleDataController.monthlyBookCount}",
+        //             style: const TextStyle(
+        //               fontSize: 35,
+        //               color: Colors.white,
+        //               fontWeight: FontWeight.bold,
+        //             ))),
+        //       ),
+        //     ]),
+        // ),
+        // SizedBox(height: pageHeight * 0.05,),
         // 독서클리닉 목록(책 제목 리스트)
         ListView.builder(
           shrinkWrap: true,
@@ -103,7 +113,18 @@ class _BookResult1State extends State<BookResult1> {
             );
           },
         ),
-        SizedBox(height: pageHeight * 0.2,)
+        // 이미지
+        Container(
+          height: 200,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/b0.png"),
+              fit: BoxFit.fill
+              )
+          ),
+        ),
+        SizedBox(height: pageHeight * 0.2,),
       ],
     );
   }
