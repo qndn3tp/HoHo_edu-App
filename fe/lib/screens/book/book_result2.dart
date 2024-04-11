@@ -39,7 +39,7 @@ class _BookResult2State extends State<BookResult2> {
                 normalText("위의 책을 읽고 "),
                 colorText(bookScoreDataController.getFirstScoreName(), style.PRIMARY_ORANGE),  // 가장 점수가 높은 영역
                 normalText(", "),
-                colorText(bookScoreDataController.getSecondScoreName(), style.PRIMARY_ORANGE), // 가장 점수가 낮은 영역
+                colorText(bookScoreDataController.getSecondScoreName(), style.PRIMARY_ORANGE), // 두번째로 점수가 높은 영역
                 normalText(" 능력이"),
               ]
             )
