@@ -18,6 +18,9 @@ class PaymentListScreen extends StatefulWidget {
 class _PaymentListScreenState extends State<PaymentListScreen> {
   bool isChecked = false;
 
+  // 상단 텍스트 스크롤 
+  bool _showText = true;
+
   // 하단바 스크롤 컨트롤러
   bool _showBottomBar = true;
   late ScrollController _scrollController;
@@ -27,16 +30,18 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
     // 스크롤 컨트롤러 생성
     _scrollController = ScrollController()..addListener((){
       try {
-        // 아래로 스크롤시 하단바 숨김
+        // 아래로 스크롤시 상단텍스트, 하단바 숨김
         if (_scrollController.position.userScrollDirection == ScrollDirection.reverse) {
           setState(() {
             _showBottomBar = false;
+            _showText = false;
           });
         } 
-        // 위로 스크롤시 하단바 노출
+        // 위로 스크롤시 상단텍스트,하단바 노출
         else if (_scrollController.position.userScrollDirection == ScrollDirection.forward) {
           setState(() {
             _showBottomBar = true;
+            _showText = true;
           });
         }
     } catch (_) {}
@@ -55,11 +60,14 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
     return Scaffold(
       backgroundColor: style.LIGHT_GREY,
       body: Container(
-        padding: const EdgeInsets.only(top: 20, bottom: 20),
+        padding: const EdgeInsets.only(top: 20),
         child: Column(
           children: [
-            const Center(
-              child: Text(
+            // 상단 텍스트
+            AnimatedContainer(
+              height: _showText ? 20 : 0,
+              duration: const Duration(milliseconds: 200),
+              child: const Text(
                 "수강료와 교재비는 함께 결제가 불가능합니다.",
                 style: TextStyle(color: style.DEEP_GREY, fontSize: 12),
               ),
@@ -68,11 +76,11 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
             Expanded(
               child: ListView.builder(
                 controller: _scrollController,
-                itemCount: 3,
+                itemCount: 5,
                 itemBuilder: ((context, index) {
                   // 결제 내용
                   return Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                     margin: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
