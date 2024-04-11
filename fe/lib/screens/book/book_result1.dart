@@ -63,7 +63,8 @@ class _BookResult1State extends State<BookResult1> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center, 
             children: [
-              Image.asset("assets/images/menu_book_report1.png"),
+              // Image.asset("assets/images/menu_book_report1.png"),
+              Image.asset("assets/images/5.png"),
               // 월간 읽은 책의 권수
               Container(
                 margin: const EdgeInsets.only(left: 10),
@@ -80,6 +81,7 @@ class _BookResult1State extends State<BookResult1> {
               )
             ]),
         ),
+        SizedBox(height: pageHeight * 0.05,),
         // 독서클리닉 목록(책 제목 리스트)
         ListView.builder(
           shrinkWrap: true,
