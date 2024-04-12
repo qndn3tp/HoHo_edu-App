@@ -10,6 +10,7 @@ import 'package:flutter_application/screens/notice/notice_screen.dart';
 import 'package:flutter_application/screens/payment/payment_screen.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:get/get.dart';
+import '../../widgets/box_decoration.dart';
 
 ///////////////////////
 //    홈 화면 위젯    //
@@ -18,28 +19,28 @@ import 'package:get/get.dart';
 // 출석체크 버튼
 Widget attendanceButton() {
   const title = "출석체크";
-
   return GestureDetector(
     onTap: () async{
       await getAttendanceData(currentMonth);
-      Get.to(AttendanceScreen(), arguments: title, transition: Transition.cupertino, duration: const Duration(milliseconds: 500));
+      Get.to(
+        AttendanceScreen(), 
+        arguments: title, 
+        transition: Transition.cupertino, 
+        duration: const Duration(milliseconds: 500)
+      );
     },
     child: Container(
       alignment: Alignment.center,
-      child: Column(children: [
-        Container(
-          height: 55,
-          width: 55,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/menu_attendance.png'),
-                fit: BoxFit.contain),
+      child: Column(
+        children: [
+          Container(
+            height: 55,
+            width: 55,
+            decoration: customBoxDecoration('assets/images/menu_attendance.png'),
           ),
-        ),
-        const Text(
-          title,
-        )
-      ]),
+          const Text(title,)
+        ]
+      ),
     ),
   );
 }
@@ -48,22 +49,22 @@ Widget attendanceButton() {
 Widget paymentButton() {
   return GestureDetector(
     onTap: () {
-      Get.to(const PaymentScreen(), transition: Transition.cupertino, duration: const Duration(milliseconds: 500));
+      Get.to(
+        const PaymentScreen(), 
+        transition: Transition.cupertino, 
+        duration: const Duration(milliseconds: 500)
+      );
     },
-    child: Column(children: [
-      Container(
-        height: 55,
-        width: 55,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/menu_payment.png'),
-              fit: BoxFit.contain),
+    child: Column(
+      children: [
+        Container(
+          height: 55,
+          width: 55,
+          decoration: customBoxDecoration('assets/images/menu_payment.png'),
         ),
-      ),
-      const Text(
-        "학원비 납부",
-      )
-    ]),
+        const Text("학원비 납부",)
+      ]
+    ),
   );
 }
 
@@ -73,20 +74,16 @@ Widget noticeButton() {
     onTap: () {
       Get.to(const NoticeScreen(), transition: Transition.cupertino, duration: const Duration(milliseconds: 500));
     },
-    child: Column(children: [
-      Container(
-        height: 55,
-        width: 55,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/menu_notice.png'),
-              fit: BoxFit.contain),
+    child: Column(
+      children: [
+        Container(
+          height: 55,
+          width: 55,
+          decoration: customBoxDecoration('assets/images/menu_notice.png'),
         ),
-      ),
-      const Text(
-        "알림장",
-      )
-    ]),
+        const Text("알림장",)
+      ]
+    ),
   );
 }
 
@@ -100,19 +97,15 @@ Widget bookButton() {
       await getMonthlyBookScoreData(currentMonth-1);    // 월간 독서 데이터(영역별 점수)
       Get.to(BookScreen(), transition: Transition.cupertino, duration: const Duration(milliseconds: 500)); 
     },
-    child: Column(children: [
-      Container(
-        height: 55,
-        width: 55,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/menu_book.png'),
-              fit: BoxFit.contain),
+    child: Column(
+      children: [
+        Container(
+          height: 55,
+          width: 55,
+          decoration: customBoxDecoration('assets/images/menu_book.png'),
         ),
-      ),
-      const Text(
-        "독클결과",
-      )
-    ]),
+        const Text("독클결과",)
+      ]
+    ),
   );
 }

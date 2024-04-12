@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/home/home_screen.dart';
+import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:get/get.dart';
 
 // 상단바
@@ -26,11 +27,7 @@ PreferredSizeWidget customAppBar(title) {
           margin: const EdgeInsets.only(right: 15,),
         height: 22,
         width: 22,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/main_home.png'),
-            fit: BoxFit.contain),
-        ),
+        decoration: customBoxDecoration('assets/images/main_home.png'),
       ),
       ),
     ],

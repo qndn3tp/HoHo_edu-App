@@ -11,6 +11,7 @@ import 'package:flutter_application/services/book/monthly_book_read_data.dart';
 import 'package:flutter_application/services/book/monthly_book_score_data.dart';
 import 'package:flutter_application/services/book/yearly_book_read_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
+import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:get/get.dart';
 import '../style.dart' as style;
 
@@ -108,10 +109,7 @@ Widget drawerListTile(title, imgAddress) {
     leading: Container(
       height: 25,
       width: 25,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage(drawerImgAddress), fit: BoxFit.contain),
-      ),
+      decoration: customBoxDecoration(drawerImgAddress),
     ),
     trailing: const Icon(EvaIcons.chevronRightOutline, color: style.DEEP_GREY),
   );

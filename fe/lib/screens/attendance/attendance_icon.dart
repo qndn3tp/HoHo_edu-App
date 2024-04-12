@@ -1,5 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/widgets/box_decoration.dart';
 
 ///////////////////////////
 //    출결 상태 아이콘   //
@@ -42,11 +43,7 @@ Widget attendanceSubjectIcon(subject) {
     return Container(
       height: 18,
       width: 18,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/images/attendance_han.png'),
-            fit: BoxFit.contain),
-      ),
+      decoration: customBoxDecoration('assets/images/attendance_han.png')
     );
   }
   // 독서(북) 
@@ -54,11 +51,7 @@ Widget attendanceSubjectIcon(subject) {
     return Container(
       height: 18,
       width: 18,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/images/attendance_book.png'),
-            fit: BoxFit.contain),
-      ),
+      decoration: customBoxDecoration('assets/images/attendance_book.png')
     );
   } else {
     return Container();

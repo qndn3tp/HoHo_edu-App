@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:flutter_application/screens/payment/payment_history_screen.dart';
 import 'package:flutter_application/screens/payment/payment_list_screen.dart';
+import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:get/get.dart';
 import '../../style.dart' as style;
 
@@ -58,11 +59,7 @@ class _PaymentScreenState extends State<PaymentScreen>
               ),
               height: 22,
               width: 22,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/main_home.png'),
-                    fit: BoxFit.contain),
-              ),
+              decoration: customBoxDecoration('assets/images/main_home.png')
             ),
           ),
         ],

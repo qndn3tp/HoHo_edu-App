@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/class_info_data.dart';
 import 'package:flutter_application/models/login_data.dart';
+import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:get/get.dart';
 import '../../style.dart' as style;
 
@@ -90,11 +91,7 @@ Widget studentInfoBox(context, name) {
         Container(
           height: 70,
           width: screenSize.width * 0.15,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/main_profile_status_on.png'),
-                fit: BoxFit.contain),
-          ),
+          decoration: customBoxDecoration('assets/images/main_profile_status_on.png')
         )
       ],
     ),

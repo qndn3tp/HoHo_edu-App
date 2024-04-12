@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application/models/book_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
+import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_application/widgets/text_span.dart';
 import 'package:get/get.dart';
@@ -109,12 +110,7 @@ class _BookResult1State extends State<BookResult1> {
             Container(
               height: 200,
               width: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/b0.png"),
-                  fit: BoxFit.contain
-                  )
-              ),
+              decoration: customBoxDecoration("assets/images/b0.png")
             ),
             // 이미지(풍선)
             Positioned(
@@ -122,12 +118,7 @@ class _BookResult1State extends State<BookResult1> {
               child: Container(
                 height: 120,
                 width: 120,
-                decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/b5.png"),
-                  fit: BoxFit.contain
-                  )
-                )
+                decoration: customBoxDecoration("assets/images/b5.png")
               ),
             ),
             // 월간 읽은 책의 권수
