@@ -55,7 +55,7 @@ Future<void> getMonthlyBookScoreData(month) async {
     if (response.statusCode == 200) {
       // 응답 데이터 처리
       final resultList = json.decode(response.body);
-      print(resultList);
+      // print(resultList);
 
       // 응답 데이터가 성공일 때
       if (resultList[0]["result"] == null) {
@@ -64,7 +64,7 @@ Future<void> getMonthlyBookScoreData(month) async {
         List<BookScoreData> bookScoreDataList = resultList0.map<BookScoreData>((json) => BookScoreData.fromJson(json)).toList();
         final BookScoreDataController bookScoreDataController = Get.put(BookScoreDataController());     // 독서클리닉 영역별 획득 표시(점수) 데이터 컨트롤러를 Get에 등록
         bookScoreDataController.setBookScoreDataList(bookScoreDataList);                                // 컨트롤러에 bookScoreDataList를 저장
-        print(bookScoreDataController.bookScoreDataList);
+        // print(bookScoreDataController.bookScoreDataList);
       }
       // 응답 데이터가 오류일 때("9999": 오류)
       else {
@@ -76,7 +76,7 @@ Future<void> getMonthlyBookScoreData(month) async {
   catch (e) {
     BookScoreDataController bookScoreDataController = Get.find();
     bookScoreDataController.setBookScoreDataList([]);
-    print(bookScoreDataController.bookScoreDataList);
+    // print(bookScoreDataController.bookScoreDataList);
     // throw Exception('$e');
   }
 }

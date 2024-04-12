@@ -1,10 +1,11 @@
+import 'dart:math';
+
 import 'package:get/get.dart';  
 
 ///////////////////////////////////
-//  독서클리닉 데이터, 컨트롤러   //
+//  연간독서량 데이터, 컨트롤러   //
 ///////////////////////////////////
-
-//  연간 독서량 데이터 클래스
+// 데이터 클래스
 class YearBookData {
   final int total_rows;
 
@@ -19,23 +20,22 @@ class YearBookData {
     );
   }
 }
-// 연간 독서량 데이터 컨트롤러
+//데이터 컨트롤러
 class YearBookDataController extends GetxController {
-  YearBookData? _yearBookData;            // YearBookData의 객체 _yearBookData 선언
+  YearBookData? _yearBookData;           
 
   // _yearBookData를 받아온 YearBookData 객체로 설정
   void setYearBookData(YearBookData yearBookData) {
     _yearBookData = yearBookData;
     update();
   }
-
-  // getter()함수: userData
   YearBookData? get yearBookData => _yearBookData;
 }
 
-
-
-// 독서클리닉 목록(책 제목) 데이터 클래스
+///////////////////////////////////////
+//  독서클리닉 목록 데이터, 컨트롤러   //
+///////////////////////////////////////
+// 데이터 클래스
 class BookTitleData {
   final String book_gubun;
   final String title;
@@ -45,7 +45,6 @@ class BookTitleData {
     required this.title,
   });
 
-  // JSON 데이터를 받아 BookTitleData 객체로 파싱
   factory BookTitleData.fromJson(Map<String, dynamic> json) {
     return BookTitleData(
       book_gubun: json['book_gubun'] ?? "",
@@ -53,7 +52,7 @@ class BookTitleData {
     );
   }
 }
-// 독서클리닉 목록 데이터 컨트롤러
+// 데이터 컨트롤러
 class BookTitleDataController extends GetxController {
   List<BookTitleData>? _bookTitleDataList;
 
@@ -66,8 +65,10 @@ class BookTitleDataController extends GetxController {
   int get monthlyBookCount => _bookTitleDataList!.length;            // 월간 독서량
 }
 
-
-// 독서클리닉 영역별 획득 표시(점수) 데이터 클래스
+/////////////////////////////////////////////////////////
+//  독서클리닉 영역별 획득 표시(점수) 데이터, 컨트롤러   //
+////////////////////////////////////////////////////////
+// 데이터 클래스
 class BookScoreData {
   final String Qtype;
   final String QtypeName;
@@ -85,7 +86,6 @@ class BookScoreData {
   required this.ranking,
   });
   
-  // JSON 데이터를 받아 BookScoreData 객체로 파싱
   factory BookScoreData.fromJson(Map<String, dynamic> json) {
     return BookScoreData(
       Qtype: json['Qtype'] ?? "", 
@@ -97,7 +97,7 @@ class BookScoreData {
   }
 }
 
-// 독서클리닉 영역별 획득 표시(점수) 데이터 컨트롤러
+// 데이터 컨트롤러
 class BookScoreDataController extends GetxController {
   List<BookScoreData>? _bookScoreDataList;
 
@@ -128,3 +128,57 @@ class BookScoreDataController extends GetxController {
   }
 }
 
+
+/////////////////////////////////////////////////////////
+//  독서클리닉 영역별 획득 표시(점수) 데이터, 컨트롤러   //
+////////////////////////////////////////////////////////
+// 데이터 클래스
+class YMBookCountData {
+  final String month;
+  final int count;
+  
+  YMBookCountData({
+    required this.month,
+    required this.count,
+  });
+
+  factory YMBookCountData.fromJson(Map<String, dynamic> json) {
+    return YMBookCountData(
+      month: json['Month'] ?? "",
+      count: json['Count'] ?? 0,
+    );
+  }
+}
+// // 데이터 컨트롤러
+class YMBookCountDataController extends GetxController {
+  List<YMBookCountData>? _ymBookCountDataList;
+
+  final currentMonth = DateTime.now().month;      // 현재 달
+  late List<int> bookCountList;                   // 월별 독서량 리스트
+  late int maxReadCount;                          // 독서량 최대값
+  late int maxReadMonth;                          // 독서량 최대값인 달
+  late String meanReadCount;                      // 독서량 평균값
+  late List<double> meanCountList;                // 평균 독서량 리스트
+
+  void setYMBookCountDataList(List<YMBookCountData> ymBookCountDataList) {
+    _ymBookCountDataList = ymBookCountDataList;
+    setBookChartData();
+    update();
+  }
+
+  // 독서 차트 데이터
+  void setBookChartData() {
+    if (_ymBookCountDataList != null) {
+      bookCountList = [];
+      for (int i = 0; i < 12; i++) {
+        bookCountList.add(_ymBookCountDataList![i].count);
+      }
+      maxReadCount = bookCountList.reduce(max);
+      maxReadMonth = bookCountList.indexOf(maxReadCount) + 1;
+      meanReadCount = (bookCountList.sublist(0, currentMonth)
+              .reduce((value, element) => value + element) / currentMonth).toStringAsFixed(1);
+      meanCountList = List.filled(currentMonth, double.parse(meanReadCount)) +
+          List.filled(12 - currentMonth, 0.toDouble());
+    }
+  }
+}

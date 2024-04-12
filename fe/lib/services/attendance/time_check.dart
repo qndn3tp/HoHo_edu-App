@@ -57,7 +57,7 @@ Future<void> getAttendanceData(month) async {
     if (response.statusCode == 200) {
       // 응답 데이터 처리
       final resultList = json.decode(response.body);
-      print(resultList);
+      // print(resultList);
 
       // 응답 데이터가 성공일 때
       if (resultList[0]["result"] == null) {

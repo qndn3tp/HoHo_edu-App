@@ -1,27 +1,45 @@
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/models/book_data.dart';
+import 'package:get/get.dart';
 import '../../style.dart' as style;
 
-class BookLineChart extends StatefulWidget {
-  const BookLineChart({super.key});
+
+//////////////////////
+// 독서클리닉3 차트  //
+//////////////////////
+
+class BookChart extends StatefulWidget {
+  const BookChart({super.key});
 
   @override
-  State<BookLineChart> createState() => _BookLineChartState();
+  State<BookChart> createState() => _BookChartState();
 }
 
-class _BookLineChartState extends State<BookLineChart> {
+class _BookChartState extends State<BookChart> {
+  // 컨트롤러 생성
+  YMBookCountDataController ymBookCountDataController = Get.put(YMBookCountDataController());
+
+  // 색상값
   List<Color> gradientColors = [
+    Colors.white,
     style.PRIMARY_GREEN,
-    style.PRIMARY_BLUE
   ];
 
   // 평균값
   bool showAvg = false;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
+        // 차트 비율
         AspectRatio(
           aspectRatio: 1.50,
           child: Padding(
@@ -36,28 +54,32 @@ class _BookLineChartState extends State<BookLineChart> {
             ),
           ),
         ),
-        SizedBox(
-          width: 60,
-          height: 34,
-          // 평균값 버튼
-          child: TextButton(
-            onPressed: () {
-              setState(() {
-                showAvg = !showAvg;
-              });
-            },
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(const Color(0xfff8f8ed)),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
+        Positioned(
+          left: MediaQuery.of(context).size.width - 100,
+          child: Container(
+            color: Colors.amber,
+            width: 60,
+            height: 34,
+            // 평균값 버튼
+            child: TextButton(
+              onPressed: () {
+                setState(() {
+                  showAvg = !showAvg;
+                });
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(const Color(0xfff8f8ed)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                )),
+              child: Text(
+                '평균',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: showAvg ? Colors.black.withOpacity(0.5) : Colors.black,
                 ),
-              )),
-            child: Text(
-              '평균',
-              style: TextStyle(
-                fontSize: 15,
-                color: showAvg ? Colors.black.withOpacity(0.5) : Colors.black,
               ),
             ),
           ),
@@ -127,10 +149,10 @@ class _BookLineChartState extends State<BookLineChart> {
     );
     String text;
     switch (value.toInt()) {
-      case 4:
+      case 5:
         text = '5권';
         break;
-      case 9:
+      case 10:
         text = '10권';
         break;
       default:
@@ -187,29 +209,16 @@ class _BookLineChartState extends State<BookLineChart> {
       minX: 0,
       maxX: 11,
       minY: 0,
-      maxY: 9,
+      maxY: 11,
       // 각 데이터의 x,y 좌표값
       lineBarsData: [
         LineChartBarData(
-          spots: const [
-            FlSpot(0, 3),
-            FlSpot(1, 2),
-            FlSpot(2, 5),
-            FlSpot(3, 3),
-            FlSpot(4, 4),
-            FlSpot(5, 3),
-            FlSpot(6, 4),
-            FlSpot(7, 2),
-            FlSpot(8, 7),
-            FlSpot(9, 1),
-            FlSpot(10, 0),
-            FlSpot(11, 8),
-          ],
-          isCurved: true,
-          gradient: LinearGradient(
-            colors: gradientColors,
+          spots: List.generate(
+            12, 
+            (index) => FlSpot(index.toDouble(), ymBookCountDataController.bookCountList[index].toDouble())
           ),
-          barWidth: 3,
+          isCurved: true,
+          barWidth: 2,
           isStrokeCapRound: true,
           dotData: const FlDotData(
             show: false,
@@ -217,10 +226,16 @@ class _BookLineChartState extends State<BookLineChart> {
           belowBarData: BarAreaData(
             show: true,
             gradient: LinearGradient(
-              colors: gradientColors
-                  .map((color) => color.withOpacity(0.3))
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+            colors: gradientColors.map((color) => color.withOpacity(0.5))
                   .toList(),
-            ),
+          ),
+            // gradient: LinearGradient(
+            //   colors: gradientColors
+                  // .map((color) => color.withOpacity(0.3))
+                  // .toList(),
+            // ),
           ),
         ),
       ],
@@ -274,24 +289,13 @@ class _BookLineChartState extends State<BookLineChart> {
       minX: 0,
       maxX: 11,
       minY: 0,
-      maxY: 9,
+      maxY: 11,
       // 각 데이터의 x,y 좌표 값
       lineBarsData: [
         LineChartBarData(
-          spots: const [
-            FlSpot(0, 3),
-            FlSpot(1, 3),
-            FlSpot(2, 3),
-            FlSpot(3, 3),
-            FlSpot(4, 3),
-            FlSpot(5, 3),
-            FlSpot(6, 3),
-            FlSpot(7, 3),
-            FlSpot(8, 3),
-            FlSpot(9, 3),
-            FlSpot(10, 3),
-            FlSpot(11, 3),
-          ],
+          spots: List.generate(
+            12, 
+            (index) => FlSpot(index.toDouble(), ymBookCountDataController.meanCountList[index])),
           isCurved: true,
           color: const Color(0xff1c70cd),
           barWidth: 3,

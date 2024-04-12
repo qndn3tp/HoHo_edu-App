@@ -8,6 +8,7 @@ import 'package:flutter_application/services/book/yearly_book_read_data.dart';
 import 'package:flutter_application/screens/book/book_screen.dart';
 import 'package:flutter_application/screens/notice/notice_screen.dart';
 import 'package:flutter_application/screens/payment/payment_screen.dart';
+import 'package:flutter_application/services/book/ym_book_read_cnt_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:get/get.dart';
 import '../../widgets/box_decoration.dart';
@@ -92,9 +93,10 @@ Widget bookButton() {
   return GestureDetector(
     // 서버로부터 독클 결과 데이터를 받은 후 독클 결과 화면으로 이동
     onTap: () async {
-      await getYearlyBookData();                      // 연간 독서량 데이터
+      await getYearlyBookData();                        // 연간 독서량 데이터
       await getMonthlyBookReadData(currentMonth-1);     // 월간 독서 데이터(책 목록, 권수)
       await getMonthlyBookScoreData(currentMonth-1);    // 월간 독서 데이터(영역별 점수)
+      await getYMBookReadCountData();                   // 월간 독서 그래프
       Get.to(BookScreen(), transition: Transition.cupertino, duration: const Duration(milliseconds: 500)); 
     },
     child: Column(

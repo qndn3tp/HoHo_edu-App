@@ -6,7 +6,7 @@ import 'package:flutter_application/widgets/text_span.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../style.dart' as style;
-import 'book_line_chart.dart';
+import 'book_chart.dart';
 
 ////////////////////////////
 // 독서클리닉 결과3 (연간) //
@@ -21,8 +21,9 @@ class BookResult3 extends StatefulWidget {
 
 class _BookResult3State extends State<BookResult3> {
 
-  // 컨트롤러
+  // 컨트롤러 생성
   YearBookDataController yearBookDataController = Get.put(YearBookDataController());
+  YMBookCountDataController ymBookCountDataController = Get.put(YMBookCountDataController());
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +45,8 @@ class _BookResult3State extends State<BookResult3> {
         SizedBox(height: pageHeight * 0.05),
         // 독서 그래프
         Container(
-          padding: const EdgeInsets.all(20), 
-          child: const BookLineChart()
+          padding: const EdgeInsets.all(15), 
+          child: const BookChart()
         ),
         SizedBox(height: pageHeight * 0.05),
         // 독서 그래프 정보
@@ -59,11 +60,11 @@ class _BookResult3State extends State<BookResult3> {
               decoration: BoxDecoration(
                 color: const Color(0xfff8f8ed),
                 borderRadius: BorderRadius.circular(20),),
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center, 
                 children: [
-                  Text("평균 독서량", style: TextStyle(color: style.DEEP_GREY, fontSize: 14)), 
-                  Text("4.3권", style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff1c71cc), fontSize: 16),)
+                  const Text("평균 독서량", style: TextStyle(color: style.DEEP_GREY, fontSize: 14)), 
+                  Text("${ymBookCountDataController.meanReadCount}권", style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xff1c71cc), fontSize: 16),)
                 ],
               )
             ),
@@ -74,11 +75,13 @@ class _BookResult3State extends State<BookResult3> {
               decoration: BoxDecoration(
                 color: const Color(0xfff8f8ed),
                 borderRadius: BorderRadius.circular(15),),
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center, 
                 children: [
-                  Text("다독한 달", style: TextStyle(color: style.DEEP_GREY, fontSize: 15)), 
-                  Text("6권 / 6월", style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff1c71cc), fontSize: 17),)
+                  const Text("다독한 달", style: TextStyle(color: style.DEEP_GREY, fontSize: 15)), 
+                  Text(
+                    "${ymBookCountDataController.maxReadCount}권 / ${ymBookCountDataController.maxReadMonth}월", 
+                    style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xff1c71cc), fontSize: 17),)
                 ],
               )
             )
