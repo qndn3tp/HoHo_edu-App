@@ -1,5 +1,4 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/book_data.dart';
 import 'package:get/get.dart';
@@ -22,32 +21,49 @@ class _BookChartState extends State<BookChart> {
   YMBookCountDataController ymBookCountDataController = Get.put(YMBookCountDataController());
 
   // 색상값
-  List<Color> gradientColors = [
+  List<Color> mainGradientColors = [
     Colors.white,
-    style.PRIMARY_GREEN,
+    const Color(0xff8cda3e)
+  ];
+  List<Color> avgGradientColors = [
+    Colors.white,
+    const Color(0xfffa963c)
   ];
 
   // 평균값
   bool showAvg = false;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            color: const Color(0xfffefefa), // 배경색
+            borderRadius: BorderRadius.circular(15), // border-radius: 15%;
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0xffE7E7DD),
+                offset: Offset(6.91, 6.91),
+                blurRadius: 29,
+              ),
+              BoxShadow(
+                color: Color(0xffffffff),
+                offset: Offset(-6.91, -6.91),
+                blurRadius: 29,
+              ),
+            ],
+          ),
+          height: 250,
+          width: double.infinity,
+        ),
         // 차트 비율
         AspectRatio(
           aspectRatio: 1.50,
           child: Padding(
             padding: const EdgeInsets.only(
-              right: 18,
-              // left: 0,
-              top: 50,
-              // bottom: 12,
+              right: 20,
+              top: 40,
             ),
             child: LineChart(
               showAvg ? avgData() : mainData(),
@@ -55,33 +71,35 @@ class _BookChartState extends State<BookChart> {
           ),
         ),
         Positioned(
-          left: MediaQuery.of(context).size.width - 100,
-          child: Container(
-            color: Colors.amber,
-            width: 60,
-            height: 34,
-            // 평균값 버튼
-            child: TextButton(
-              onPressed: () {
-                setState(() {
-                  showAvg = !showAvg;
-                });
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(const Color(0xfff8f8ed)),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
+          left: MediaQuery.of(context).size.width - 130,
+          top: 8,
+          child: Column(
+            children: [
+              SizedBox(
+                width: 50,
+                height: 34,
+                // 평균값 버튼
+                child: TextButton(
+                  onPressed: () {
+                    setState(() {
+                      showAvg = !showAvg;
+                    });
+                  },
+                  child: Text(
+                    '평균',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: showAvg ? style.GREY : Colors.black,
+                    ),
                   ),
-                )),
-              child: Text(
-                '평균',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: showAvg ? Colors.black.withOpacity(0.5) : Colors.black,
                 ),
               ),
-            ),
+              Container(
+                height: 2,
+                width: 40,
+                color: showAvg ? style.GREY : Colors.black,
+              )
+            ],
           ),
         ),
       ],
@@ -140,7 +158,6 @@ class _BookChartState extends State<BookChart> {
     );
   }
 
-
   // y좌표 제목
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     const leftTitleStyle = TextStyle(
@@ -168,7 +185,7 @@ class _BookChartState extends State<BookChart> {
       gridData: FlGridData(
         show: true,
         drawVerticalLine: false,
-        horizontalInterval: 1,
+        horizontalInterval: 5,
         getDrawingHorizontalLine: (value) {
           return const FlLine(
             color: style.GREY,
@@ -218,6 +235,7 @@ class _BookChartState extends State<BookChart> {
             (index) => FlSpot(index.toDouble(), ymBookCountDataController.bookCountList[index].toDouble())
           ),
           isCurved: true,
+          color: const Color(0xff8cda3e),
           barWidth: 2,
           isStrokeCapRound: true,
           dotData: const FlDotData(
@@ -228,14 +246,9 @@ class _BookChartState extends State<BookChart> {
             gradient: LinearGradient(
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
-            colors: gradientColors.map((color) => color.withOpacity(0.5))
+            colors: mainGradientColors.map((color) => color.withOpacity(0.5))
                   .toList(),
-          ),
-            // gradient: LinearGradient(
-            //   colors: gradientColors
-                  // .map((color) => color.withOpacity(0.3))
-                  // .toList(),
-            // ),
+            ),
           ),
         ),
       ],
@@ -249,7 +262,7 @@ class _BookChartState extends State<BookChart> {
       gridData: FlGridData(
         show: true,
         drawVerticalLine: false,
-        horizontalInterval: 1,
+        horizontalInterval: 5,
         getDrawingHorizontalLine: (value) {
           return const FlLine(
             color: style.GREY,
@@ -297,8 +310,8 @@ class _BookChartState extends State<BookChart> {
             12, 
             (index) => FlSpot(index.toDouble(), ymBookCountDataController.meanCountList[index])),
           isCurved: true,
-          color: const Color(0xff1c70cd),
-          barWidth: 3,
+          color: const Color(0xfffa963c),
+          barWidth: 2,
           isStrokeCapRound: true,
           dotData: const FlDotData(
             show: false,
@@ -306,14 +319,10 @@ class _BookChartState extends State<BookChart> {
           belowBarData: BarAreaData(
             show: true,
             gradient: LinearGradient(
-              colors: [
-                ColorTween(begin: gradientColors[0], end: gradientColors[1])
-                    .lerp(0.2)!
-                    .withOpacity(0.1),
-                ColorTween(begin: gradientColors[0], end: gradientColors[1])
-                    .lerp(0.2)!
-                    .withOpacity(0.1),
-              ],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+            colors: avgGradientColors.map((color) => color.withOpacity(0.5))
+                  .toList(),
             ),
           ),
         ),

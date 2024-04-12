@@ -45,7 +45,7 @@ class _BookResult3State extends State<BookResult3> {
         SizedBox(height: pageHeight * 0.05),
         // 독서 그래프
         Container(
-          padding: const EdgeInsets.all(15), 
+          padding: const EdgeInsets.only(left: 30, right: 30), 
           child: const BookChart()
         ),
         SizedBox(height: pageHeight * 0.05),
@@ -63,8 +63,12 @@ class _BookResult3State extends State<BookResult3> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center, 
                 children: [
-                  const Text("평균 독서량", style: TextStyle(color: style.DEEP_GREY, fontSize: 14)), 
-                  Text("${ymBookCountDataController.meanReadCount}권", style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xff1c71cc), fontSize: 16),)
+                  const Text(
+                    "평균 독서량", 
+                    style: TextStyle(color: style.DEEP_GREY, fontSize: 14)), 
+                  Text(
+                    "${ymBookCountDataController.meanReadCount}권", 
+                    style: const TextStyle(fontWeight: FontWeight.bold, color: style.PRIMARY_DEEPBLUE, fontSize: 16),)
                 ],
               )
             ),
@@ -78,10 +82,13 @@ class _BookResult3State extends State<BookResult3> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center, 
                 children: [
-                  const Text("다독한 달", style: TextStyle(color: style.DEEP_GREY, fontSize: 15)), 
+                  const Text(
+                    "다독한 달", 
+                    style: TextStyle(color: style.DEEP_GREY, fontSize: 15)), 
                   Text(
-                    "${ymBookCountDataController.maxReadCount}권 / ${ymBookCountDataController.maxReadMonth}월", 
-                    style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xff1c71cc), fontSize: 17),)
+                    // "${ymBookCountDataController.maxReadCount}권 / ${ymBookCountDataController.maxReadMonth}월", 
+                    "${ymBookCountDataController.maxReadMonth}월, ${ymBookCountDataController.maxReadCount}권", 
+                    style: const TextStyle(fontWeight: FontWeight.bold, color: style.PRIMARY_DEEPBLUE, fontSize: 17),)
                 ],
               )
             )
