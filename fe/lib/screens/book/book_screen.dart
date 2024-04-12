@@ -22,6 +22,7 @@ import '../../style.dart' as style;
 //    독클결과 화면    //
 ////////////////////////
 
+// 드롭다운 버튼
 class BookScreen extends GetView<DropdownButtonController> {
   // 유저의 로그인 데이터 컨트롤러
   final UserDataController userDataController = Get.put(UserDataController());
@@ -141,7 +142,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
       pageController.animateToPage(
         currentPage,    
         duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
+        curve: Curves.fastEaseInToSlowEaseOut,
       );
       // }
     }
@@ -160,7 +161,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
       pageController.animateToPage(
       currentPage,          
       duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
+      curve: Curves.fastEaseInToSlowEaseOut,
       );
     } else {
       failDialog2("다음 달을 기다려주세요 :)");

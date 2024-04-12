@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application/models/book_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
@@ -33,7 +34,7 @@ class _BookResult1State extends State<BookResult1> {
 
     return Column(
       children: [
-        SizedBox(height: pageHeight * 0.15,),
+        SizedBox(height: pageHeight * 0.1,),
         // 텍스트
         Obx(
           () => RichText(
@@ -46,7 +47,7 @@ class _BookResult1State extends State<BookResult1> {
           ),
         ),
         SizedBox(
-          height: pageHeight * 0.1,
+          height: pageHeight * 0.15,
           child: RichText(
             text: TextSpan(children: [
               normalText("총 "),
@@ -57,24 +58,13 @@ class _BookResult1State extends State<BookResult1> {
           ),
         ),
 
-        // // 이미지
+        // 기존 이미지
         // SizedBox(
         //   height: pageHeight * 0.3,
         //   child: Row(
         //     mainAxisAlignment: MainAxisAlignment.center, 
         //     children: [
         //       Image.asset("assets/images/menu_book_report1.png"),
-        //       Image.asset("assets/images/b0.png"),
-        //       Container(
-        //         height: 50,
-        //         width: 50,
-        //         decoration: const BoxDecoration(
-        //           image: DecorationImage(
-        //             image: AssetImage("assets/images/b0.png"),
-        //             fit: BoxFit.contain
-        //           )
-        //         ),
-        //       ),
         //       // 월간 읽은 책의 권수
         //       Container(
         //         margin: const EdgeInsets.only(left: 10),
@@ -91,7 +81,6 @@ class _BookResult1State extends State<BookResult1> {
         //       ),
         //     ]),
         // ),
-        // SizedBox(height: pageHeight * 0.05,),
         // 독서클리닉 목록(책 제목 리스트)
         ListView.builder(
           shrinkWrap: true,
@@ -106,23 +95,59 @@ class _BookResult1State extends State<BookResult1> {
                   const Icon(Icons.remove, color: style.DEEP_GREY,),
                   Text(
                     title ?? "",
-                    style: const TextStyle(fontSize: 15, color: style.DEEP_GREY),
+                    style: const TextStyle(fontSize: 16, color: style.DEEP_GREY),
                   )
                 ],
               ),
             );
           },
         ),
-        // 이미지
-        Container(
-          height: 200,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/b0.png"),
-              fit: BoxFit.fill
-              )
-          ),
+        // 이미지, 월간 읽은 책의 권수
+        Stack(
+          children: [
+            // 이미지(배경)
+            Container(
+              height: 200,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/b0.png"),
+                  fit: BoxFit.contain
+                  )
+              ),
+            ),
+            // 이미지(풍선)
+            Positioned(
+              left: MediaQuery.of(context).size.width - 120,
+              child: Container(
+                height: 120,
+                width: 120,
+                decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/b5.png"),
+                  fit: BoxFit.contain
+                  )
+                )
+              ),
+            ),
+            // 월간 읽은 책의 권수
+            Positioned(
+              left: MediaQuery.of(context).size.width - 95,
+              top: 10,
+              child: SizedBox(
+                height: 80,
+                width: 80,
+                child: Center(
+                  child: Text(
+                    "${bookTitleDataController.monthlyBookCount}",
+                    style: const TextStyle(
+                      fontSize: 35,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ))),
+              ),
+            ),
+          ],
         ),
         SizedBox(height: pageHeight * 0.2,),
       ],
