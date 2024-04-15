@@ -36,14 +36,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // 로그인 컨트롤러의 객체 loginController를 Get에 등록
-  LoginController loginController = Get.put(LoginController());
-  AutoLoginController autoLoginController = Get.put(AutoLoginController());
+  LoginController loginController = Get.put(LoginController());                 // 로그인 컨트롤러
+  AutoLoginController autoLoginController = Get.put(AutoLoginController());     // 자동로그인 컨트롤러
+  PasswordVisibleController passwordVisibleController = Get.put(PasswordVisibleController());   // 비밀번호 숨김 컨트롤러
 
-  // 비밀번호 보기/숨김
-  PasswordVisibleController passwordVisibleController = Get.put(PasswordVisibleController());
-
-  // 자동로그인 storage
+  // 자동로그인 저장소
   String? userInfo = ""; // 유저 정보 저장 변수
   final storage = Get.put(const FlutterSecureStorage()); //flutter_secure_storage 사용을 위한 초기화 작업
 
@@ -95,14 +92,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     // 아이디
                     TextField(
-                      controller: loginController.idController, // 아이디 컨트롤러 연결
+                      controller: loginController.idController,
                       cursorColor: style.DEEP_GREY,
                       decoration: loginIdBoxDecoration("아이디"),
                     ),
                     const SizedBox(height: 20),
                     // 비밀번호
                     Obx(() => TextField(
-                      controller: loginController.passwordController, // 아이디 컨트롤러 연결
+                      controller: loginController.passwordController, 
                       cursorColor: style.DEEP_GREY,
                       obscureText: !passwordVisibleController.passwordVisible.value,
                       decoration: loginPwdBoxDecoration("비밀번호"),
