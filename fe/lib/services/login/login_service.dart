@@ -17,19 +17,18 @@ import 'package:permission_handler/permission_handler.dart';
 ///////////////////////
 
 // 로그인 로직 수행 함수
-Future<void> loginService(
-    String loginId, String loginPassword, autoLoginChecked) async {
+Future<void> loginService( String loginId, String loginPassword, autoLoginChecked) async {
     
   // 로컬 저장소: 사용자정보(아이디,비밀번호)를 기기에 저장
   final storage = Get.find<FlutterSecureStorage>();
 
-  // 네트워크가 연결되어있는지 체크
+  // 네트워크가 연결 체크
   var connectivityResult = await connectivityCheck();
 
-  // 연결되어있다면 정상적으로 수행
+  // 연결 되어있다면 정상적으로 수행
   if (connectivityResult) {
   } else {
-    // 연결되어있지 않다면 알림창 띄움
+    // 연결 되어있지 않다면 알림창 띄움
     failDialog1("연결 실패", "네트워크 연결을 확인해주세요");
   }
 
@@ -38,8 +37,8 @@ Future<void> loginService(
 
   // 로그인 아이디, 비밀번호
   String id = loginId;
-  String shaPassword = sha256_convertHash(loginPassword); // 비밀번호: sha256으로 암호화
-  String md5Password = md5_convertHash(loginPassword);
+  String shaPassword = sha256_convertHash(loginPassword);   // 비밀번호: sha256 암호화
+  String md5Password = md5_convertHash(loginPassword);      // 비밀번호: md5 암호화
 
   // HTTP POST 요청
   var response = await http.post(
@@ -68,11 +67,11 @@ Future<void> loginService(
       // 로그인 성공 -> 홈 화면으로 이동
       if (resultValue == "0000") {
 
-        UserData userData = UserData.fromJson(resultList[0]); // 서버로부터 받은 JSON 데이터를 UserData 객체리스트(userDataList)로 파싱
+        // 서버로부터 받은 JSON 데이터를 UserData 객체리스트(userDataList)로 파싱
+        UserData userData = UserData.fromJson(resultList[0]);
 
-        // UserDataController 사용
         final UserDataController userDataController = Get.put(UserDataController());
-        userDataController.setUserData(userData); // 서버로부터 받은 userData를 UserDataController에 저장
+        userDataController.setUserData(userData); 
 
         // 자동 로그인 로직: 체크된 경우 기기 저장소에 아이디, 비밀번호 저장
         if (autoLoginChecked) {
@@ -85,6 +84,7 @@ Future<void> loginService(
         // 수업정보 요청
         await getClassInfo();
 
+        // 푸시알림 권한 요청
         requestNotificationPermission();
         
         // 홈화면으로 이동
@@ -102,12 +102,15 @@ Future<void> loginService(
   }
   // 서버로부터 응답을 받지 못했을 때
   catch (e) {
-    throw Exception('$e');
+    failDialog1(
+      '로그인 실패',
+      '아이디 또는 비밀번호를 잘못 입력했어요.'
+    );
   }
 }
 
 
-// 메시지 권한을 요청
+// 푸시알림 권한 요청
 Future<void> requestNotificationPermission() async {
   PermissionStatus status = await Permission.notification.status;
   if (!status.isGranted) {

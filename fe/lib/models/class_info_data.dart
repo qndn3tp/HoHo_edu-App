@@ -30,7 +30,7 @@ class ClassInfoData {
     required this.DATENAME,
   });
 
-  // JSON 데이터를 받아 BookTitleData 객체로 파싱
+  // JSON 데이터를 받아 ClassInfoData 객체로 파싱
   factory ClassInfoData.fromJson(Map<String, dynamic> json) {
     return ClassInfoData(
       Stuid: json['Stuid'] ?? "",
@@ -45,7 +45,7 @@ class ClassInfoData {
     );
   }
 }
-// 독서클리닉 목록 데이터 컨트롤러
+// 수업정보 데이터 컨트롤러
 class ClassInfoDataController extends GetxController {
   List<ClassInfoData>? _classInfoDataList;
 

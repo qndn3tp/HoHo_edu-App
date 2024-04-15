@@ -13,14 +13,13 @@ import 'package:intl/intl.dart';
 //  연간 월별 독서량 데이터  //
 //////////////////////////////
 
-
-// 월간 독서 데이터 가져오는 함수
+// 연간 월별 독서량 데이터 가져오는 함수
 Future<void> getYMBookReadCountData() async {
 
   final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController()); // 드롭다운버튼 컨트롤러
   final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());    // 수업정보 컨트롤러
 
-  // 독서클리닉 목록 API URL
+  // 연간 월별 독서량 API URL
   String url = dotenv.get("BOOK_READ_YM_CNT");
 
   // 아이디
@@ -50,18 +49,15 @@ Future<void> getYMBookReadCountData() async {
     if (response.statusCode == 200) {
       // 응답 데이터 처리
       final resultList = json.decode(response.body);
-      print("@@@@@@@@@@@@@@");
-      print(resultList);
+      // print(resultList);
 
       // 응답 데이터가 성공일 때
       if (resultList[0]["result"] == null) {
         final resultList0 = resultList.cast<Map<String, dynamic>>();
          // 서버로부터 받은 JSON 데이터를 YMBookCountData 객체리스트로 파싱
         List<YMBookCountData> ymBookCountDataList = resultList0.map<YMBookCountData>((json) => YMBookCountData.fromJson(json)).toList();
-        final YMBookCountDataController ymBookCountDataController = Get.put(YMBookCountDataController());      // 독서클리닉 목록 데이터 컨트롤러를 Get에 등록
+        final YMBookCountDataController ymBookCountDataController = Get.put(YMBookCountDataController());      
         ymBookCountDataController.setYMBookCountDataList(ymBookCountDataList);
-        // print(ymBookCountDataController.ymBookCountDataList![0].month);
-        // print(ymBookCountDataController.ymBookCountDataList![0].count);
       }
       // 응답 데이터가 오류일 때("9999": 오류)
       else {
@@ -71,8 +67,6 @@ Future<void> getYMBookReadCountData() async {
   }
   // 서버로부터 응답을 받지 못했을 때
   catch (e) {
-    // BookTitleDataController bookTitleDataController = Get.find();
-    // bookTitleDataController.setBookTitleDataList([]);
     // failDialog2("$month월은 독클 결과가 없어요 :(");
   }
 }

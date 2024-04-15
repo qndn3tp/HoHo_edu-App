@@ -31,7 +31,7 @@ class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderSt
     "결제",
     "독클",
   ];
-  
+
   // TabBar TapView
   final List<Widget> pages = [
     totalNotice(),
@@ -128,32 +128,52 @@ Widget totalNotice() {
     child: ListView.builder(
       itemCount: 8,
       itemBuilder: (context, index) {
-        return noticeListTile(context);
+        return noticeListTile(context, 0);
         }),
   );
 }
 Widget officialNotice() {
-  return const Center(
-    child: Text("공지"),
+  return Center(
+    child: ListView.builder(
+      itemCount: 8,
+      itemBuilder: (context, index) {
+        return noticeListTile(context, 0);
+      }),
   );
 }
 Widget classNotice() {
-  return const Center(
-    child: Text("수업"),
+  return Center(
+    child: ListView.builder(
+      itemCount: 8,
+      itemBuilder: (context, index) {
+        return noticeListTile(context, 1);
+      }),
   );
 }
 Widget attendanceNotice() {
-  return const Center(
-    child: Text("출석"),
+  return Center(
+    child: ListView.builder(
+      itemCount: 8,
+      itemBuilder: (context, index) {
+        return noticeListTile(context, 2);
+      }),
   );
 }
 Widget paymentNotice() {
-  return const Center(
-    child: Text("결제"),
+  return Center(
+    child: ListView.builder(
+      itemCount: 8,
+      itemBuilder: (context, index) {
+        return noticeListTile(context, 3);
+      }),
   );
 }
 Widget bookNotice() {
-  return const Center(
-    child: Text("독클"),
+  return Center(
+    child: ListView.builder(
+      itemCount: 8,
+      itemBuilder: (context, index) {
+        return noticeListTile(context, 4);
+      }),
   );
 }

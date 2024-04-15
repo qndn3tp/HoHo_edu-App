@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:get/get.dart';  
 
 ///////////////////////////////////
@@ -107,7 +106,8 @@ class BookScoreDataController extends GetxController {
   }
 
   List<BookScoreData>? get bookScoreDataList => _bookScoreDataList;
-  int get scoreCategoryCount => _bookScoreDataList!.length;           // 영역 개수
+  // 영역 개수
+  int get scoreCategoryCount => _bookScoreDataList!.length;           
 
   // 가장 높은 점수의 영역 이름을 가져온다
   String getFirstScoreName() {

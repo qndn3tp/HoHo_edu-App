@@ -28,7 +28,7 @@ class AttendanceData {
     required this.timechk_i,
   });
 
-  // JSON 데이터를 받아 BookTitleData 객체로 파싱
+  // JSON 데이터를 받아 AttendanceData 객체로 파싱
   factory AttendanceData.fromJson(Map<String, dynamic> json) {
     return AttendanceData(
       ymd: json['ymd'] ?? "",
@@ -43,7 +43,7 @@ class AttendanceData {
   }
 }
 
-// 독서클리닉 목록 데이터 컨트롤러
+// 출석 데이터 컨트롤러
 class AttendanceDataController extends GetxController {
   List<AttendanceData>? _attendanceDataList;
 

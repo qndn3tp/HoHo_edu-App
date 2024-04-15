@@ -29,40 +29,45 @@ List<Image> noticeImageList = [
   Image.asset('assets/images/main_profile_status_on.png'),  // 수업 알림
   Image.asset('assets/images/menu_attendance.png'),         // 출석 알림
   Image.asset('assets/images/menu_payment.png'),            // 결제 알림
-  Image.asset('assets/images/book.png'),                    // 독클 알림
+  Image.asset('assets/images/menu_book.png'),                    // 독클 알림
 ];
 
 
 // 알림 리스트
-Widget noticeListTile(context) {
+Widget noticeListTile(context, int noticeIdx) {
   final Size screenSize = MediaQuery.of(context).size;      // 기기의 화면사이즈
 
   // 알림 내용
   const noticeBody = '안녕하세요 호호서당입니다. 김호호 학생의 이번 주 수업을 안내해 드립니다. 수업교실ㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂ';
 
-  String truncate(string) {
+  String truncate(string) {                 // 알림 내용 길이 수정
     if (string.length >= 45) {
       return string.substring(0, 45) + "...";
     }
     return string;
   }
+  // var string;
+  // string = string.length >= 45 ? string.substring(0, 45) : string;
   
   return Column(
     children: [
       ListTile(
         contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        // 이미지
         leading: Container(
           width: 60,
           height: 60,
           decoration: BoxDecoration(
-              color: noticeColorList[1], borderRadius: BorderRadius.circular(10)),
+              color: noticeColorList[noticeIdx], borderRadius: BorderRadius.circular(10)),
           padding: const EdgeInsets.all(5),
-          child: noticeImageList[1],
+          child: noticeImageList[noticeIdx],
         ),
+        // 텍스트
         title: Text(
-          noticeTitleList[1],
+          noticeTitleList[noticeIdx],
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
+        // 내용
         subtitle: Text(truncate(noticeBody)),
         onTap: () {},
       ),

@@ -12,7 +12,6 @@ import 'package:intl/intl.dart';
 //  수업 정보, 형제   //
 ////////////////////////
 
-
 // 수업정보 가져오는 함수
 Future<void> getClassInfo() async {
 
@@ -58,7 +57,7 @@ Future<void> getClassInfo() async {
         final resultList0 = resultList.cast<Map<String, dynamic>>();
          // 서버로부터 받은 JSON 데이터를 classInfoData 객체리스트로 파싱
         List<ClassInfoData> classInfoDataList = resultList0.map<ClassInfoData>((json) => ClassInfoData.fromJson(json)).toList();
-        final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());      // 독서클리닉 목록 데이터 컨트롤러를 Get에 등록
+        final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());     
         classInfoDataController.setClassInfoDataList(classInfoDataList);
       }
       // 응답 데이터가 오류일 때("9999": 오류)

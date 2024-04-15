@@ -37,14 +37,12 @@ class UserData {
 
 // 유저의 로그인 데이터 컨트롤러
 class UserDataController extends GetxController {
-  UserData? _userData;            // UserData의 객체 _userData 선언
+  UserData? _userData;           
 
-  // _userData를 받아온 UserData 객체로 설정
   void setUserData(UserData userData) {
     _userData = userData;
     update();
   }
 
-  // getter()함수: userData
   UserData? get userData => _userData;
 }

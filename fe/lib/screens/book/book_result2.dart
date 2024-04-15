@@ -47,7 +47,7 @@ class _BookResult2State extends State<BookResult2> {
           SizedBox(height: pageHeight * 0.1, child: RichText(text: normalText("풍부해졌어요."))),
           // 이미지
           // SizedBox(height: pageHeight * 0.3, child: Image.asset("assets/images/menu_book_report2.png")),
-          SizedBox(height: pageHeight * 0.3, child: Image.asset("assets/images/bb0.png")),
+          SizedBox(height: pageHeight * 0.35, child: Image.asset("assets/images/bb0.png")),
           SizedBox(height: pageHeight * 0.1,),
           // 각 영역별 점수 표시(가로배치) 
           SizedBox(

@@ -10,14 +10,13 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
-
 ////////////////////////
 // 연간 독서량 데이터  //
 ////////////////////////
 
 // 연간 독서량 데이터 가져오는 함수
 Future<void> getYearlyBookData() async {
-  final UserDataController userDataController = Get.put(UserDataController()); // 유저의 로그인 데이터 컨트롤러
+  final UserDataController userDataController = Get.put(UserDataController());                   // 유저의 로그인 데이터 컨트롤러
   final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController()); // 드롭다운버튼 컨트롤러
   final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());    // 수업정보 컨트롤러
 
@@ -55,8 +54,9 @@ Future<void> getYearlyBookData() async {
 
       // 응답 데이터가 성공일 때
       if (resultList[0]["result"] == null) {
-        YearBookData yearBookData = YearBookData.fromJson(resultList[0]);                           // 서버로부터 받은 JSON 데이터를 YearBookData 객체리스트로 파싱
-        final YearBookDataController yearBookDataController = Get.put(YearBookDataController());     // 연간독서량 컨트롤러를 Get에 등록
+        // 서버로부터 받은 JSON 데이터를 YearBookData 객체리스트로 파싱
+        YearBookData yearBookData = YearBookData.fromJson(resultList[0]);                          
+        final YearBookDataController yearBookDataController = Get.put(YearBookDataController());     
         yearBookDataController.setYearBookData(yearBookData);
       }
       // 응답 데이터가 오류일 때("9999": 오류)

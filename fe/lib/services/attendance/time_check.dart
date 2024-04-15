@@ -64,7 +64,7 @@ Future<void> getAttendanceData(month) async {
         final resultList0 = resultList.cast<Map<String, dynamic>>();
          // 서버로부터 받은 JSON 데이터를 AttendenceData 객체리스트로 파싱
         List<AttendanceData> attenceDataList = resultList0.map<AttendanceData>((json) => AttendanceData.fromJson(json)).toList();
-        final AttendanceDataController attendanceDataController = Get.put(AttendanceDataController());      // 출석 목록 데이터 컨트롤러를 Get에 등록
+        final AttendanceDataController attendanceDataController = Get.put(AttendanceDataController());     
         attendanceDataController.setAttendanceDataList(attenceDataList);
       }
       // 응답 데이터가 오류일 때("9999": 오류)

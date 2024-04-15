@@ -60,7 +60,7 @@ Future<void> getMonthlyBookReadData(month) async {
         final resultList0 = resultList.cast<Map<String, dynamic>>();
          // 서버로부터 받은 JSON 데이터를 bookTitleData 객체리스트로 파싱
         List<BookTitleData> bookTitleDataList = resultList0.map<BookTitleData>((json) => BookTitleData.fromJson(json)).toList();
-        final BookTitleDataController bookTitleDataController = Get.put(BookTitleDataController());      // 독서클리닉 목록 데이터 컨트롤러를 Get에 등록
+        final BookTitleDataController bookTitleDataController = Get.put(BookTitleDataController());     
         bookTitleDataController.setBookTitleDataList(bookTitleDataList);
       }
       // 응답 데이터가 오류일 때("9999": 오류)
