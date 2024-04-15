@@ -17,6 +17,16 @@ class LoginController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 }
 
+// 비밀번호 숨김 컨트롤러
+class  PasswordVisibleController extends GetxController {
+  var passwordVisible = false.obs;
+
+    void switchPasswordVisibility() {
+    passwordVisible.value = !passwordVisible.value;
+  }
+}
+
+
 // 로그인 화면
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -30,30 +40,29 @@ class _LoginScreenState extends State<LoginScreen> {
   LoginController loginController = Get.put(LoginController());
   AutoLoginController autoLoginController = Get.put(AutoLoginController());
 
+  // 비밀번호 보기/숨김
+  PasswordVisibleController passwordVisibleController = Get.put(PasswordVisibleController());
+
   // 자동로그인 storage
   String? userInfo = ""; // 유저 정보 저장 변수
-  final storage = Get.put(
-      const FlutterSecureStorage()); //flutter_secure_storage 사용을 위한 초기화 작업
+  final storage = Get.put(const FlutterSecureStorage()); //flutter_secure_storage 사용을 위한 초기화 작업
 
-  // 위젯이 생성되었을 때 호출
   @override
   void initState() {
     super.initState();
-    // 비동기로 flutter_secure_storage 정보를 불러옴
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {    // 비동기로 flutter_secure_storage 정보를 불러옴
       checkStoredUserInfo();
     });
   }
 
-  // 기기에 저장된 유저 정보가있는지 체크하는 함수
+  // 기기에 저장된 유저 정보가 있는지 체크하는 함수
   checkStoredUserInfo() async {
     // read 함수를 통해 key값에 맞는 정보를 불러옴(불러오는 타입은 String 데이터가 없다면 null)
     userInfo = await storage.read(key: "login");
 
     if (userInfo != null) {
       String storedUserId = userInfo?.split(" ")[1] ?? ""; // 기기에 저장된 유저 아이디
-      String storedUserPassword =
-          userInfo?.split(" ")[3] ?? ""; // 기기에 저장된 유저 비밀번호
+      String storedUserPassword = userInfo?.split(" ")[3] ?? ""; // 기기에 저장된 유저 비밀번호
 
       // 저장된 유저정보가 있다면 아이디와 비밀번호가 바로 뜨도록.
       loginController.idController.text = storedUserId;
@@ -62,7 +71,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // 위젯이 완전히 제거되었을 때 호출
   @override
   void dispose() {
     super.dispose();
@@ -79,9 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
             loginLogo(),
             // 로그인 입력
             GestureDetector(
-              // 유저의 행동을 감지
-              onTap: () => FocusManager.instance.primaryFocus
-                  ?.unfocus(), // 입력 칸 밖의 화면을 터치하면 키보드가 내려감
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(), // 입력 칸 밖의 화면을 터치하면 키보드가 내려감
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(30),
                 child: Column(
@@ -91,16 +97,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextField(
                       controller: loginController.idController, // 아이디 컨트롤러 연결
                       cursorColor: style.DEEP_GREY,
-                      decoration: loginBoxDecoration("아이디"),
+                      decoration: loginIdBoxDecoration("아이디"),
                     ),
                     const SizedBox(height: 20),
                     // 비밀번호
-                    TextField(
-                      controller:
-                          loginController.passwordController, // 아이디 컨트롤러 연결
+                    Obx(() => TextField(
+                      controller: loginController.passwordController, // 아이디 컨트롤러 연결
                       cursorColor: style.DEEP_GREY,
-                      decoration: loginBoxDecoration("비밀번호"),
-                    ),
+                      obscureText: !passwordVisibleController.passwordVisible.value,
+                      decoration: loginPwdBoxDecoration("비밀번호"),
+                    )),
                     const SizedBox(height: 20),
                     // 자동로그인 버튼
                     AutoLogin(),
@@ -125,44 +131,45 @@ class _LoginScreenState extends State<LoginScreen> {
 
 // 로그인 버튼
 Widget loginButton() {
-  // 로그인 컨트롤러의 객체 loginController를 Get에 등록
-  LoginController loginController = Get.put(LoginController());
-  // 자동로그인 컨트롤러의 객체 loginController를 Get에 등록
-  AutoLoginController autoLoginController = Get.put(AutoLoginController());
+  LoginController loginController = Get.put(LoginController());              // 로그인 컨트롤러
+  AutoLoginController autoLoginController = Get.put(AutoLoginController());  // 자동 로그인 컨트롤러
 
   return GestureDetector(
-      onTap: () => loginService(
-            // 아이디 입력값
-            loginController.idController.text,
-            // 비밀번호 입력값
-            loginController.passwordController.text,
-            // 자동로그인 체크값
-            autoLoginController.isChecked.value,
-          ),
-      child: Center(
-        child: Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [
-                  Color.fromARGB(255, 169, 176, 255), // 시작 색상
-                  Color.fromARGB(255, 46, 57, 251), // 종료 색상 (어두운 색상)
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(30),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(.3),
-                    spreadRadius: 1,
-                    blurRadius: 2,
-                    offset: const Offset(0, 1))
-              ]),
-          child: const Center(child: Icon(Icons.arrow_forward, color: Colors.white,)),
+    onTap: () => loginService(
+      // 아이디 입력값
+      loginController.idController.text,
+      // 비밀번호 입력값
+      loginController.passwordController.text,
+      // 자동로그인 체크값
+      autoLoginController.isChecked.value,
+    ),
+    child: Center(
+      child: Container(
+        height: 60,
+        width: 60,
+        decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [
+                Color.fromARGB(255, 169, 176, 255), 
+                Color.fromARGB(255, 46, 57, 251), 
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(30),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(.3),
+                spreadRadius: 1,
+                blurRadius: 2,
+                offset: const Offset(0, 1))
+            ]),
+        child: const Center(
+          child: Icon(Icons.arrow_forward, color: Colors.white,)
         ),
-      ));
+      ),
+    )
+  );
 }
 
 // 자동로그인 컨트롤러
@@ -176,9 +183,7 @@ class AutoLoginController extends GetxController {
 
 // 자동로그인 체크박스
 class AutoLogin extends StatelessWidget {
-  // 자동로그인 컨트롤러: 자동로그인 상태 관리(isChecked)
-  final AutoLoginController autoLoginController =
-      Get.put(AutoLoginController());
+  final AutoLoginController autoLoginController = Get.put(AutoLoginController()); // 자동로그인 컨트롤러: 자동로그인 상태 관리(isChecked)
 
   AutoLogin({super.key});
 
@@ -188,12 +193,10 @@ class AutoLogin extends StatelessWidget {
       children: [
         Obx(
           () => Checkbox(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             value: autoLoginController.isChecked.value,
             onChanged: (newValue) {
-              autoLoginController
-                  .updateCheck(newValue ?? false); // isChecked의 상태 관리
+              autoLoginController.updateCheck(newValue ?? false); // isChecked의 상태 관리
             },
             activeColor: style.PRIMARY_BLUE,
           ),

@@ -87,10 +87,9 @@ Widget appbarDrawer(context) {
           onTap: () {
             // 이전의 모든 화면을 지우고 로그인 페이지로 이동
             Get.offUntil(
-                GetPageRoute(
-                  page: () => const LoginScreen(),
-                ),
-                (route) => false);
+              GetPageRoute(page: () => const LoginScreen(),),
+              (route) => false
+            );
             logout();
           },
           child: drawerListTile("로그아웃", 'assets/images/menu_logout.png'),
@@ -104,6 +103,7 @@ Widget appbarDrawer(context) {
 Widget drawerListTile(title, imgAddress) {
   final drawerTitle = title;
   final drawerImgAddress = imgAddress;
+
   return ListTile(
     title: Text(drawerTitle),
     leading: Container(
