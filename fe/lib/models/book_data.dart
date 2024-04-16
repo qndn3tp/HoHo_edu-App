@@ -6,16 +6,16 @@ import 'package:get/get.dart';
 ///////////////////////////////////
 // 데이터 클래스
 class YearBookData {
-  final int total_rows;
+  final int totalRows;
 
   YearBookData({
-    required this.total_rows,
+    required this.totalRows,
   });
 
   // JSON 데이터를 받아 YearBookData 객체로 파싱
   factory YearBookData.fromJson(Map<String, dynamic> json) {
     return YearBookData(
-      total_rows: json['total_rows'] ?? "",
+      totalRows: json['total_rows'] ?? "",
     );
   }
 }
@@ -36,17 +36,17 @@ class YearBookDataController extends GetxController {
 ///////////////////////////////////////
 // 데이터 클래스
 class BookTitleData {
-  final String book_gubun;
+  final String bookGubun;
   final String title;
   
   BookTitleData({
-    required this.book_gubun,
+    required this.bookGubun,
     required this.title,
   });
 
   factory BookTitleData.fromJson(Map<String, dynamic> json) {
     return BookTitleData(
-      book_gubun: json['book_gubun'] ?? "",
+      bookGubun: json['book_gubun'] ?? "",
       title: json['title'] ?? "",
     );
   }
@@ -69,17 +69,17 @@ class BookTitleDataController extends GetxController {
 ////////////////////////////////////////////////////////
 // 데이터 클래스
 class BookScoreData {
-  final String Qtype;
-  final String QtypeName;
-  final int QtypeCnt;
+  final String qType;
+  final String qTypeName;
+  final int qTypeCnt;
   final int jumsu;
   final int per;
   final int ranking;
 
   BookScoreData ({
-  required this.Qtype,
-  required this.QtypeName,
-  required this.QtypeCnt,
+  required this.qType,
+  required this.qTypeName,
+  required this.qTypeCnt,
   required this.jumsu,
   required this.per,
   required this.ranking,
@@ -87,9 +87,9 @@ class BookScoreData {
   
   factory BookScoreData.fromJson(Map<String, dynamic> json) {
     return BookScoreData(
-      Qtype: json['Qtype'] ?? "", 
-      QtypeName: json['QtypeName'] ?? "", 
-      QtypeCnt: json['QtypeCnt'] ?? 0, 
+      qType: json['Qtype'] ?? "", 
+      qTypeName: json['QtypeName'] ?? "", 
+      qTypeCnt: json['QtypeCnt'] ?? 0, 
       jumsu: json['jumsu'] ?? 0, 
       per: json['per'] ?? 0, 
       ranking: json['ranking'] ?? 0);
@@ -116,7 +116,7 @@ class BookScoreDataController extends GetxController {
     } 
     // 점수를 기준으로 내림차순 정렬해서 표시
     _bookScoreDataList!.sort((a,b) => b.per.compareTo(a.per));
-    return _bookScoreDataList![0].QtypeName;
+    return _bookScoreDataList![0].qTypeName;
   }
 
   // 두번째로 높은 높은 점수의 영역 이름을 가져온다
@@ -124,7 +124,7 @@ class BookScoreDataController extends GetxController {
     if (_bookScoreDataList == null || scoreCategoryCount == 0) {
       return "";
     }
-    return _bookScoreDataList![1].QtypeName;
+    return _bookScoreDataList![1].qTypeName;
   }
 }
 

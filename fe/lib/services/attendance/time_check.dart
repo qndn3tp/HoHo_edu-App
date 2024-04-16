@@ -29,7 +29,7 @@ Future<void> getAttendanceData(month) async {
   // 아이디
   final nameIdMap = classInfoDataController.getNameId(classInfoDataController.classInfoDataList);   // 이름: 아이디
   final dropDownId = dropdownButtonController.currentItem.value;                                    // 드롭다운 선택된 이름
-  String stuid = nameIdMap[dropDownId] ?? userDataController.userData!.id;
+  String stuId = nameIdMap[dropDownId] ?? userDataController.userData!.id;
 
   // 현재 연도
   final currentPageMonth = month;
@@ -42,7 +42,7 @@ Future<void> getAttendanceData(month) async {
     body: {
       'yy': yy, 
       'mm': mm,
-      'stuid': stuid
+      'stuid': stuId
     }
   );
 

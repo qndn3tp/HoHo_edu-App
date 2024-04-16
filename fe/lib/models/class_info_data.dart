@@ -7,41 +7,41 @@ import 'package:get/get.dart';
 
 // 수업정보 데이터 클래스
 class ClassInfoData {
-  final String Stuid;
-  final String Sname;
+  final String stuId;
+  final String sName;
   final String gubunName;
   final String gubun;
   final String codeName;
   final String codeName2;
   final String stime;
   final String etime;
-  final String DATENAME;
+  final String dateName;
 
   
   ClassInfoData({
-    required this.Stuid,
-    required this.Sname,
+    required this.stuId,
+    required this.sName,
     required this.gubunName,
     required this.gubun,
     required this.codeName,
     required this.codeName2,
     required this.stime,
     required this.etime,
-    required this.DATENAME,
+    required this.dateName,
   });
 
   // JSON 데이터를 받아 ClassInfoData 객체로 파싱
   factory ClassInfoData.fromJson(Map<String, dynamic> json) {
     return ClassInfoData(
-      Stuid: json['Stuid'] ?? "",
-      Sname: json['Sname'] ?? "",
+      stuId: json['Stuid'] ?? "",
+      sName: json['Sname'] ?? "",
       gubunName: json['gubunName'] ?? "",
       gubun: json['gubun'] ?? "",
       codeName: json['codeName'] ?? "",
       codeName2: json['codeName2'] ?? "",
       stime: json['stime'] ?? "",
       etime: json['etime'] ?? "",
-      DATENAME: json['DATENAME'] ?? "",
+      dateName: json['DATENAME'] ?? "",
     );
   }
 }
@@ -58,13 +58,13 @@ class ClassInfoDataController extends GetxController {
   // 학생 이름 리스트
   List<String> getSnamesList(List<ClassInfoData>? classInfoDataList) {
   if (classInfoDataList == null) return []; // 예외 처리: null 체크
-  return classInfoDataList.map((classInfoData) => classInfoData.Sname).toSet().toList();
+  return classInfoDataList.map((classInfoData) => classInfoData.sName).toSet().toList();
   }
 
   // 학생 수
   int getStuNum(List<ClassInfoData>? classInfoDataList) {
   if (classInfoDataList == null) return 0; // 예외 처리: null 체크
-  return classInfoDataList.map((classInfoData) => classInfoData.Sname).toSet().toList().length;
+  return classInfoDataList.map((classInfoData) => classInfoData.sName).toSet().toList().length;
   }
 
   // 학생이름: 아이디를 가지는 Map
@@ -73,8 +73,8 @@ class ClassInfoDataController extends GetxController {
     if (classInfoDataList == null) return stuNameIdMap;
 
     for (var data in classInfoDataList) {
-    String studentName = data.Sname;
-    String studentId = data.Stuid; 
+    String studentName = data.sName;
+    String studentId = data.stuId; 
     
     // 이미 해당 학생 이름의 학생 아이디가 Map에 존재하는지 확인하고, 없으면 추가
     if (!stuNameIdMap.containsKey(studentName)) {
@@ -90,12 +90,12 @@ class ClassInfoDataController extends GetxController {
     if (classInfoDataList == null) return subjectMap;
     
     for (var data in classInfoDataList) {
-      String studentName = data.Sname;
+      String studentName = data.sName;
       String subjectName = data.codeName;
       String subjectNumber = data.codeName2;
       String subjectSTime = data.stime;
       String subjectETime = data.etime;
-      String subjectDateName = data.DATENAME;
+      String subjectDateName = data.dateName;
       
       if (!subjectMap.containsKey(studentName)) {
         subjectMap[studentName] = [];

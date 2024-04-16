@@ -33,7 +33,7 @@ Widget scoreIndicator(context, index) {
   // 퍼센트 점수
   final scorePercent = bookScoreDataController.bookScoreDataList![index].per * (1 / 100);
   // 영역별 구분번호
-  final areaIndex = int.parse(bookScoreDataController.bookScoreDataList![index].Qtype);    // 영역코드에 따른 값
+  final areaIndex = int.parse(bookScoreDataController.bookScoreDataList![index].qType);    // 영역코드에 따른 값
   // 진행률 색상
   final progressColor = scoreColorList[areaIndex-1];
   // 분야 이미지

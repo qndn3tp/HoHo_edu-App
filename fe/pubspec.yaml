@@ -49,5 +49,6 @@ flutter:
     - assets/images/book/
     - assets/images/attendance/
     - assets/images/appbar/
+    - assets/images/drawer/
 
     - .env

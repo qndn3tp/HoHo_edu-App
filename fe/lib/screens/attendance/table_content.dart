@@ -23,8 +23,8 @@ Widget tableContent(context, AttendanceData attendanceData) {
 
   // 과목별 출석
   final subjectList = [
-    [attendanceData.gb_s, attendanceData.timechk_s], 
-    [attendanceData.gb_i, attendanceData.timechk_i],
+    [attendanceData.gbS, attendanceData.timecheckS], 
+    [attendanceData.gbI, attendanceData.timecheckI],
   ];
 
   return Container(

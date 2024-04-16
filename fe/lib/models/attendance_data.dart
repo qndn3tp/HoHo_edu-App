@@ -11,10 +11,10 @@ class AttendanceData {
   final String dayname;
   final String stime;
   final String etime;
-  final String gb_s;
-  final String timechk_s;
-  final String gb_i;
-  final String timechk_i;
+  final String gbS;
+  final String timecheckS;
+  final String gbI;
+  final String timecheckI;
 
   
   AttendanceData({
@@ -22,10 +22,10 @@ class AttendanceData {
     required this.dayname,
     required this.stime,
     required this.etime,
-    required this.gb_s,
-    required this.timechk_s,
-    required this.gb_i,
-    required this.timechk_i,
+    required this.gbS,
+    required this.timecheckS,
+    required this.gbI,
+    required this.timecheckI,
   });
 
   // JSON 데이터를 받아 AttendanceData 객체로 파싱
@@ -35,10 +35,10 @@ class AttendanceData {
       dayname: json['dayname'] ?? "",
       stime: json['stime'] ?? "",
       etime: json['etime'] ?? "",
-      gb_s: json['gb_s'] ?? "",
-      timechk_s: json['timechk_s'] ?? "",
-      gb_i: json['gb_i'] ?? "",
-      timechk_i: json['timechk_i'] ?? "",
+      gbS: json['gb_s'] ?? "",
+      timecheckS: json['timechk_s'] ?? "",
+      gbI: json['gb_i'] ?? "",
+      timecheckI: json['timechk_i'] ?? "",
     );
   }
 }
