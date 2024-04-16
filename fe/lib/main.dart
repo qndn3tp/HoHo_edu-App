@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/firebase_options.dart';
+import 'package:flutter_application/notifications/background_noti.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:get/get.dart';
 import 'style.dart' as style;
@@ -6,16 +8,28 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screens/login/login_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 
-void main() async{
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();  // 앱의 바인딩 초기화(flutter engine과의 상호작용을 위한 준비)
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);               // 앱이 초기화될 때동안 splash 이미지 표시
-  await dotenv.load(fileName: ".env");                                        // 환경변수 파일 로드
-  await SystemChrome.setPreferredOrientations([                               // 화면을 세로방향으로 고정
+Future<void> main() async{
+  // 앱의 바인딩 초기화(flutter engine과의 상호작용을 위한 준비)
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();  
+  // 앱이 초기화될 때동안 splash 이미지 표시
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);               
+
+  // FCM 초기화
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);  
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
+  // 환경변수 파일 로드
+  await dotenv.load(fileName: ".env");
+  // 화면 세로방향 고정                                        
+  await SystemChrome.setPreferredOrientations([                               
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
   runApp(
     GetMaterialApp(
       initialBinding: BindingsBuilder((){

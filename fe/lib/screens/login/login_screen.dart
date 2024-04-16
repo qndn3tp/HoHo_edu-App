@@ -1,4 +1,7 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/notifications/show_noti.dart';
+import 'package:flutter_application/notifications/token_management.dart';
 import 'package:flutter_application/services/login/login_service.dart';
 import 'package:flutter_application/screens/login/login_box.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -50,9 +53,26 @@ class _LoginScreenState extends State<LoginScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {    // 비동기로 flutter_secure_storage 정보를 불러옴
       checkStoredUserInfo();
     });
+    // 로그인시 토큰 발급, 전송
+    getMyDeviceToken();
+    // 포그라운드 메시지
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      RemoteNotification? notification = message.notification;
+      if (notification != null) {
+        print("foreground 메시지 수신 $notification");
+        String title = notification.title ?? "";
+        String body = notification.body ?? "";
+        print(title);
+        print(body);
+        showNotification(title, body);
+      }
+      else {
+        print("foreground 메시지 없음");
+      }
+    });
   }
 
-  // 기기에 저장된 유저 정보가 있는지 체크하는 함수
+  // 기기에 저장된 유저 정보 체크
   checkStoredUserInfo() async {
     // read 함수를 통해 key값에 맞는 정보를 불러옴(불러오는 타입은 String 데이터가 없다면 null)
     userInfo = await storage.read(key: "login");
