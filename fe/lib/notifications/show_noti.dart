@@ -1,4 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'dart:ui';
+
 
 Future<void> showNotification(String title, String body) async {
 
@@ -16,7 +18,7 @@ Future<void> showNotification(String title, String body) async {
   // Android: 초기 설정, 알림 아이콘 설정
   await flutterLocalNotificationsPlugin.initialize(
     const InitializationSettings(
-      android: AndroidInitializationSettings("@mipmap/ic_launcher"),
+      android: AndroidInitializationSettings("@drawable/ic_notification"),
     ),
   );
 
@@ -32,6 +34,7 @@ Future<void> showNotification(String title, String body) async {
         'high_importance_notification',           // channelName: 앱 설정>알림에 보여지는 이름
         importance: Importance.max,
         priority: Priority.max,
+        color: Color(0xFF3043f2),             // 아이콘 색상
       ),
     ),
   );
