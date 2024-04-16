@@ -27,7 +27,7 @@ PreferredSizeWidget customAppBar(title) {
           margin: const EdgeInsets.only(right: 15,),
         height: 22,
         width: 22,
-        decoration: customBoxDecoration('assets/images/main_home.png'),
+        decoration: customBoxDecoration('assets/images/appbar/appbar_home.png'),
       ),
       ),
     ],

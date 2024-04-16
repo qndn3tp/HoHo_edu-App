@@ -37,7 +37,7 @@ Widget attendanceButton() {
           Container(
             height: 55,
             width: 55,
-            decoration: customBoxDecoration('assets/images/menu_attendance.png'),
+            decoration: customBoxDecoration('assets/images/attendance.png'),
           ),
           const Text(title,)
         ]
@@ -61,7 +61,7 @@ Widget paymentButton() {
         Container(
           height: 55,
           width: 55,
-          decoration: customBoxDecoration('assets/images/menu_payment.png'),
+          decoration: customBoxDecoration('assets/images/payment.png'),
         ),
         const Text("학원비 납부",)
       ]
@@ -80,7 +80,7 @@ Widget noticeButton() {
         Container(
           height: 55,
           width: 55,
-          decoration: customBoxDecoration('assets/images/menu_notice.png'),
+          decoration: customBoxDecoration('assets/images/notice.png'),
         ),
         const Text("알림장",)
       ]
@@ -104,7 +104,7 @@ Widget bookButton() {
         Container(
           height: 55,
           width: 55,
-          decoration: customBoxDecoration('assets/images/menu_book.png'),
+          decoration: customBoxDecoration('assets/images/book.png'),
         ),
         const Text("독클결과",)
       ]

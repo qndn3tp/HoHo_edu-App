@@ -25,11 +25,11 @@ List<Color> noticeColorList = [
 
 // 알림 이미지
 List<Image> noticeImageList = [
-  Image.asset('assets/images/menu_notice_official.png'),    // 공지 알림
-  Image.asset('assets/images/main_profile_status_on.png'),  // 수업 알림
-  Image.asset('assets/images/menu_attendance.png'),         // 출석 알림
-  Image.asset('assets/images/menu_payment.png'),            // 결제 알림
-  Image.asset('assets/images/menu_book.png'),                    // 독클 알림
+  Image.asset('assets/images/notice_official.png'),    // 공지 알림
+  Image.asset('assets/images/class.png'),  // 수업 알림
+  Image.asset('assets/images/attendance.png'),         // 출석 알림
+  Image.asset('assets/images/payment.png'),            // 결제 알림
+  Image.asset('assets/images/book.png'),                    // 독클 알림
 ];
 
 

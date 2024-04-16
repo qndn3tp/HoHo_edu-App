@@ -43,7 +43,7 @@ Widget attendanceSubjectIcon(subject) {
     return Container(
       height: 18,
       width: 18,
-      decoration: customBoxDecoration('assets/images/attendance_han.png')
+      decoration: customBoxDecoration('assets/images/attendance/attendance_han.png')
     );
   }
   // 독서(북) 
@@ -51,7 +51,7 @@ Widget attendanceSubjectIcon(subject) {
     return Container(
       height: 18,
       width: 18,
-      decoration: customBoxDecoration('assets/images/attendance_book.png')
+      decoration: customBoxDecoration('assets/images/attendance/attendance_book.png')
     );
   } else {
     return Container();

@@ -65,7 +65,6 @@ class _BookResult1State extends State<BookResult1> {
         //   child: Row(
         //     mainAxisAlignment: MainAxisAlignment.center, 
         //     children: [
-        //       Image.asset("assets/images/menu_book_report1.png"),
         //       // 월간 읽은 책의 권수
         //       Container(
         //         margin: const EdgeInsets.only(left: 10),
@@ -110,7 +109,7 @@ class _BookResult1State extends State<BookResult1> {
             Container(
               height: 200,
               width: double.infinity,
-              decoration: customBoxDecoration("assets/images/b0.png")
+              decoration: customBoxDecoration("assets/images/book/b0.png")
             ),
             // 이미지(풍선)
             Positioned(
@@ -118,7 +117,7 @@ class _BookResult1State extends State<BookResult1> {
               child: Container(
                 height: 120,
                 width: 120,
-                decoration: customBoxDecoration("assets/images/b5.png")
+                decoration: customBoxDecoration("assets/images/book/b5.png")
               ),
             ),
             // 월간 읽은 책의 권수

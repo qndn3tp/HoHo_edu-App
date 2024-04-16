@@ -91,7 +91,7 @@ Widget studentInfoBox(context, name) {
         Container(
           height: 70,
           width: screenSize.width * 0.15,
-          decoration: customBoxDecoration('assets/images/main_profile_status_on.png')
+          decoration: customBoxDecoration('assets/images/class.png')
         )
       ],
     ),

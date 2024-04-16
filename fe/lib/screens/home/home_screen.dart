@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Image.asset('assets/images/main_logo.png'),
+            title: Image.asset('assets/images/appbar/appbar_logo.png'),
             backgroundColor: const Color(0xfffffde3),
             elevation: 0,
           ),

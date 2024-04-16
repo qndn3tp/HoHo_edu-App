@@ -45,21 +45,21 @@ Widget appbarDrawer(context) {
           onTap: () {
             Get.to(AttendanceScreen());
           },
-          child: drawerListTile("출석체크", 'assets/images/menu_attendance.png'),
+          child: drawerListTile("출석체크", 'assets/images/attendance.png'),
         ),
         // 학원비 납부
         GestureDetector(
           onTap: () {
             Get.to(const PaymentScreen());
           },
-          child: drawerListTile("학원비 납부", 'assets/images/menu_payment.png'),
+          child: drawerListTile("학원비 납부", 'assets/images/payment.png'),
         ),
         // 알림장
         GestureDetector(
           onTap: () {
             Get.to(const NoticeScreen());
           },
-          child: drawerListTile("알림장", 'assets/images/menu_notice.png'),
+          child: drawerListTile("알림장", 'assets/images/notice.png'),
         ),
         // 독클 결과
         GestureDetector(
@@ -69,14 +69,14 @@ Widget appbarDrawer(context) {
             await getMonthlyBookScoreData(currentMonth);    // 월간 독서 데이터(영역별 점수)
             Get.to(BookScreen());
           },
-          child: drawerListTile("독클결과", 'assets/images/menu_book.png'),
+          child: drawerListTile("독클결과", 'assets/images/book.png'),
         ),
         // 설정
         GestureDetector(
           onTap: () {
             Get.to(const SettingScreen());
           },
-          child: drawerListTile("설정", 'assets/images/menu_setting.png'),
+          child: drawerListTile("설정", 'assets/images/drawer/drawer_setting.png'),
         ),
         // 높이 조절
         SizedBox(height: screenSize.height * 0.3),
@@ -92,7 +92,7 @@ Widget appbarDrawer(context) {
             );
             logout();
           },
-          child: drawerListTile("로그아웃", 'assets/images/menu_logout.png'),
+          child: drawerListTile("로그아웃", 'assets/images/drawer/drawer_logout.png'),
         ),
       ],
     ),

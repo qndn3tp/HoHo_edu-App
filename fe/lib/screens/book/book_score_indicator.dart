@@ -16,12 +16,12 @@ final scoreColorList = [
 ];
 
 final scoreImageList = [
-  const AssetImage('assets/images/menu_book_area1.png'),
-  const AssetImage('assets/images/menu_book_area2.png'),
-  const AssetImage('assets/images/menu_book_area3.png'),
-  const AssetImage('assets/images/menu_book_area4.png'),
-  const AssetImage('assets/images/menu_book_area5.png'),
-  const AssetImage('assets/images/menu_book_area6.png'),
+  const AssetImage('assets/images/book/book_score_area1.png'),
+  const AssetImage('assets/images/book/book_score_area2.png'),
+  const AssetImage('assets/images/book/book_score_area3.png'),
+  const AssetImage('assets/images/book/book_score_area4.png'),
+  const AssetImage('assets/images/book/book_score_area5.png'),
+  const AssetImage('assets/images/book/book_score_area6.png'),
 ];
 
 

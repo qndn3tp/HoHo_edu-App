@@ -5,6 +5,6 @@ Widget loginLogo() {
   return SizedBox(
     width: 120,
     height:120,
-    child: Image.asset('assets/images/logo.png')
+    child: Image.asset('assets/images/login_logo.png')
     );
 }
