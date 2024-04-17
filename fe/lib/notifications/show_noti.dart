@@ -1,8 +1,16 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:ui';
 
 
 Future<void> showNotification(String title, String body) async {
+
+  // iOS: 포그라운드 메시지 프레젠테이션 옵션 업데이트
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
 
   // Android: 알림 채널 생성, 초기화(Android에서는 알림을 표시하기 전에 채널을 설정)
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
