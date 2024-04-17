@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/Notice/Notice_list_tile.dart';
 import 'package:flutter_application/screens/notice/tab_bar_scroller.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
+import '../../style.dart' as style;
 
 ////////////////////////
 //    알림장  화면    //
@@ -21,7 +22,7 @@ class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderSt
 
   // TabBar 인덱스
   int current = 0;
-
+  
   // TabBar Tabs
   final List<String> tabs = [
     "전체",
@@ -81,18 +82,18 @@ class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderSt
                       });
                     },
                     child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 200),
                       margin: const EdgeInsets.all(10),
                       height: 40,
                       width: 80,
                       decoration: BoxDecoration(
                         color: current == index 
-                        ? const Color(0xff474747)
-                        : Colors.white,
+                          ? style.DEEP_GREY
+                          : Colors.white,
                         borderRadius: BorderRadius.circular(30),
                         border: current == index
-                        ? Border.all(color: const Color(0xff474747), width: 2)
-                        : Border.all(color: const Color(0xffdfdfdf), width: 2),
+                          ? Border.all(color: style.DEEP_GREY, width: 2)
+                          : Border.all(color: const Color(0xffdfdfdf), width: 2),
                       ),
                       // Tabs 텍스트
                       child: Center(
@@ -101,7 +102,7 @@ class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderSt
                           style: TextStyle(
                             color: current == index
                             ? Colors.white
-                            : const Color(0xff474747),
+                            : style.DEEP_GREY,
                             fontWeight: FontWeight.bold
                           ),),
                         ),
@@ -112,15 +113,20 @@ class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderSt
             ),
             // Tab View
             Expanded(
-              child: pages[current],
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 100),
+                switchOutCurve: Curves.easeInOut, 
+                switchInCurve: Curves.easeInOut, 
+                child: KeyedSubtree(
+                  key: ValueKey(current), 
+                  child: pages[current]),
+              ),
             ),
           ],
         ),
     );
   }
 }
-
-
 
 
 Widget totalNotice() {
