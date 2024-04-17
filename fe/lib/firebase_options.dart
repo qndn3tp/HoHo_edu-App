@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '84498195538',
     projectId: 'hohofcm-4d87d',
     storageBucket: 'hohofcm-4d87d.appspot.com',
-    iosBundleId: 'com.example.flutterApplication',
+    iosBundleId: 'com.hohoedu.app',
   );
 }
