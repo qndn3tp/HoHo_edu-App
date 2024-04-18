@@ -27,6 +27,11 @@ Future<void> showNotification(String title, String body) async {
   await flutterLocalNotificationsPlugin.initialize(
     const InitializationSettings(
       android: AndroidInitializationSettings("@drawable/ic_notification"),
+      iOS: DarwinInitializationSettings(
+        requestAlertPermission: true,
+        requestBadgePermission: true,
+        requestCriticalPermission: true,
+      ),
     ),
   );
 
@@ -44,6 +49,11 @@ Future<void> showNotification(String title, String body) async {
         priority: Priority.max,
         color: Color(0xFF3043f2),             // 아이콘 색상
       ),
+      iOS: DarwinNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentBanner: true,
+      )
     ),
   );
 }

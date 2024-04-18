@@ -1,6 +1,4 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_application/notifications/show_noti.dart';
-
 
 // 백그라운드 메시지 핸들러
 @pragma('vm:entry-point')
@@ -12,7 +10,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
       String body = notification.body ?? "";
       print(title);
       print(body);
-      showNotification(title, body);
+      // showNotification(title, body);
     } else {
       print("background 메시지 없음");
     }

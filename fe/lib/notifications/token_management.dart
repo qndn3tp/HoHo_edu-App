@@ -1,20 +1,11 @@
-// 디바이스 토큰을 가져옴
-import 'dart:io';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:http/http.dart' as http;
 
 void getMyDeviceToken() async {
   FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
-  String? token;
-
   // 토큰
-  if (Platform.isIOS) {
-    token = await firebaseMessaging.getAPNSToken();
-  } else if (Platform.isAndroid) {
-    token = await firebaseMessaging.getToken();
-  }
+  final token = await firebaseMessaging.getToken();
   print("내 디바이스 토큰: $token");
   // sendToken(token);
 }
