@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/firebase_options.dart';
 import 'package:flutter_application/notifications/background_noti.dart';
+import 'package:flutter_application/notifications/setup_noti.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:get/get.dart';
 import 'style.dart' as style;
@@ -20,6 +21,7 @@ Future<void> main() async{
 
   // FCM 초기화
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);  
+  await setupNotifications();
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   // 환경변수 파일 로드

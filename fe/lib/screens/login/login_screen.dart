@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import '../../style.dart' as style;
 
 ///////////////////
-//  로그인 화면  //
+//  로그인 화면     //
 ///////////////////
 
 // 로그인 컨트롤러
@@ -57,18 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
     getMyDeviceToken();
     // 포그라운드 메시지
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      RemoteNotification? notification = message.notification;
-      if (notification != null) {
-        print("foreground 메시지 수신 $notification");
-        String title = notification.title ?? "";
-        String body = notification.body ?? "";
-        print(title);
-        print(body);
-        showNotification(title, body);
-      }
-      else {
-        print("foreground 메시지 없음");
-      }
+      print("포그라운드 수신");
+      showNotification(message);
     });
   }
 
