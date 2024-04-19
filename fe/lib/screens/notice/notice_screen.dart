@@ -77,7 +77,8 @@ class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderSt
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    margin: const EdgeInsets.all(10),
+                    // margin: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
                     height: 40,
                     width: 80,
                     decoration: BoxDecoration(

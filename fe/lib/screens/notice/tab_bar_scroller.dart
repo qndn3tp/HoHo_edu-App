@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 void scrollToIndex(context, int index, scrollController, tabsLength) {
   final screenWidth = MediaQuery.of(context).size.width;        // 현재 기기의 화면넓이
-  const itemWidth = 80 + 20;                                    // tab width + margin
+  const itemWidth = 80 + 10;                                    // tab width + margin
   final maxScroll = (tabsLength - 1) * itemWidth - screenWidth + itemWidth;   // 최대 스크롤 위치
   
   // tab 스크롤 위치 계산
