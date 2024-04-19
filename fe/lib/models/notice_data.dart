@@ -9,14 +9,24 @@ import 'package:get/get.dart';
 class NoticeData {
   final String title;
   final String body;
-  final int index;
-  final String time;
+  final int noticeNum;
+  final String ymdTime;
+  final String ymd;
+  final String teacherId;
+  final String sTime;
+  final String subjectGb;
+  final String stuId2;
 
   NoticeData({
     required this.title,
     required this.body,
-    required this.index,
-    required this.time,
+    required this.noticeNum,
+    required this.ymdTime,
+    required this.ymd,
+    required this.teacherId,
+    required this.sTime,
+    required this.subjectGb,
+    required this.stuId2,
   });
 
   // JSON 데이터를 받아 NoticeData 객체로 파싱
@@ -24,8 +34,13 @@ class NoticeData {
     return NoticeData(
       title: json['title'] ?? "",
       body: json['body'] ?? "",
-      index: json['index'] ?? 0,
-      time: json['time'] ?? "",
+      noticeNum: json['noticeNum'] ?? 0,
+      ymdTime: json['ymdtime'] ?? "",
+      ymd: json['ymd'] ?? "",
+      teacherId: json['teaid'] ?? "",
+      sTime: json['stime'] ?? "",
+      subjectGb: json['sgb'] ?? "",
+      stuId2: json['stuid2'] ?? "",
     );
   }
 }

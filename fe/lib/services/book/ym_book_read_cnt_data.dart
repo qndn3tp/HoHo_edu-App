@@ -20,7 +20,7 @@ Future<void> getYMBookReadCountData() async {
   final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());    // 수업정보 컨트롤러
 
   // 연간 월별 독서량 API URL
-  String url = dotenv.get("BOOK_READ_YM_CNT");
+  String url = dotenv.get("BOOK_READ_YM_CNT_URL");
 
   // 아이디
   final nameIdMap = classInfoDataController.getNameId(classInfoDataController.classInfoDataList);   // 이름: 아이디

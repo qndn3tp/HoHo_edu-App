@@ -14,27 +14,33 @@ import 'package:flutter_application/models/notice_data.dart';
 
 
 // 알림 정보 가져오는 함수
-Future<void> getNoticeInfo() async {
+Future<void> getNoticeData(noticeNum) async {
 
   final UserDataController userDataController = Get.put(UserDataController()); // 유저의 로그인 데이터 컨트롤러
 
   // 알림 정보 API URL
-  String url = dotenv.get('');
+  String url = dotenv.get('NOTICE_URL');
 
   // 로그인 아이디
   String id = userDataController.userData!.id;
   // 현재 연도
   String yy = DateFormat('yyyy').format(DateTime(currentYear));
   String mm = DateFormat('MM').format(DateTime(currentYear, currentMonth));
+  // 알림 구분 번호
+  String noticeNum0 = noticeNum;
+  // 형제자매 코드
+  String sibling = userDataController.userData!.sibling;
 
 
   // HTTP POST 요청
   var response = await http.post(
     Uri.parse(url), 
     body: {
-      'id': id,
+      'sibling': sibling,
       'yy': yy,
       'mm': mm,
+      'stuid': id,
+      'noticeNum': noticeNum0,
     }
   );
 
