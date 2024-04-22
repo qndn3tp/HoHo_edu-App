@@ -25,13 +25,13 @@ Future<bool> requestNotification() async{
   );
 
   // 권한 확인
-  if (Platform.isAndroid) {
+  if (Platform.isIOS) {
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       isNotificationChecked = true;
     } else {
       isNotificationChecked = false;
     }
-  } else if (Platform.isIOS){
+  } else if (Platform.isAndroid){
     if (status.isGranted == true) {
       isNotificationChecked = true;
     } else {
