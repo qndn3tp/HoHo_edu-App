@@ -21,7 +21,7 @@ Future<void> main() async{
 
   // FCM 초기화
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);  
-  await setupNotifications();
+  await setupNotification();
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   // 환경변수 파일 로드

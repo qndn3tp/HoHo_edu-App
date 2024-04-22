@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_application/notifications/request_noti.dart';
 import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:flutter_application/services/home/class_info.dart';
 import 'package:flutter_application/widgets/dialog.dart';
@@ -11,7 +11,6 @@ import 'package:get/get.dart';
 import '../../utils/network_check.dart';
 import '../../models/login_data.dart';
 import '../../utils/login_encryption.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 ///////////////////////
 //  로그인 로직 수행  //
@@ -26,11 +25,8 @@ Future<void> loginService(
 
   // 네트워크가 연결되어있는지 체크
   var connectivityResult = await connectivityCheck();
-
-  // 연결되어있다면 정상적으로 수행
   if (connectivityResult) {
   } else {
-    // 연결되어있지 않다면 알림창 띄움
     failDialog1("연결 실패", "네트워크 연결을 확인해주세요");
   }
 
@@ -54,9 +50,8 @@ Future<void> loginService(
 
   // 응답의 content-type utf-8로 인코딩으로 설정
   if (response.headers['content-type']
-          ?.toLowerCase()
-          .contains('charset=utf-8') !=
-      true) {
+    ?.toLowerCase()
+    .contains('charset=utf-8') != true) {
     response.headers['content-type'] = 'application/json; charset=utf-8';
   }
   try {
@@ -85,25 +80,8 @@ Future<void> loginService(
 
         // 수업정보 요청
         await getClassInfo();
-
         // 푸시알림 권한 설정
-        /// 안드로이드
-        await Permission.notification.request();
-        PermissionStatus status = await Permission.notification.status;
-        print("안드로이드 알림 권한: ${status.isGranted}");
-        /// iOS
-        NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
-          alert: true,
-          announcement: false,
-          badge: true,
-          carPlay: false,
-          criticalAlert: false,
-          provisional: false,
-          sound: true,
-        );
-        print('iOS 알림 권한: ${settings.authorizationStatus}');
-        
-        
+        await requestNotification();
         // 홈화면으로 이동
         Get.offAll(const HomeScreen(), transition: Transition.fadeIn, duration: const Duration(milliseconds: 500)); 
       }

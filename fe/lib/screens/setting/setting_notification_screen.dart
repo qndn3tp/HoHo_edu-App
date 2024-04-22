@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/notifications/request_noti.dart';
 import 'package:flutter_application/screens/setting/notification_info_box.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:get/get.dart';
@@ -58,7 +59,7 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
   }
 
   // 전체 알림 스위치
-  late bool _isChecked = false;
+  late bool _isNotiChecked = false;
 
   @override
   void initState() {
@@ -70,10 +71,10 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
 
   // 알림 권한 여부를 체크
   Future<void> checkNotificationPermission() async {
-    PermissionStatus status = await Permission.notification.status;
+    _isNotiChecked = await requestNotification();
     setState(() {
-      _isChecked = status.isGranted;
-      print("알림권한$_isChecked");
+      _isNotiChecked = _isNotiChecked;
+      print("알림권한$_isNotiChecked");
     });
   }
 
@@ -92,56 +93,53 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
       body: Column(
         children: [
           // 상단 알림 내용
-          notificationInfoBox(_isChecked, bellController),
+          notificationInfoBox(_isNotiChecked, bellController),
           // 전체 알림 권한 
           ListTile(
             tileColor: Colors.white,
             title: const Text("알림",style: TextStyle(fontWeight: FontWeight.bold),),
             trailing: CupertinoSwitch(
               activeColor: style.PRIMARY_BLUE,
-              value: _isChecked,
+              value: _isNotiChecked,
               onChanged: (value) {
-                setState(() {
                   openAppSettings(); // 앱 알림설정으로 이동
-                  checkNotificationPermission(); // 알림설정에 따라 토글버튼의 상태 변경
-                });
               },
             ),
           ),
           // 개별 알림(알림  리스트)
           Expanded(
             child: ListView.builder(
-            itemCount: switchButtonController.buttonNameList.length,
-            itemBuilder: (c, i) {
-              return Column(
-                children: [
-                  // 각 개별 알림
-                  ListTile(
-                    tileColor: Colors.white,
-                    title: Text( switchButtonController.buttonNameList[i],),
-                    // 스위치 버튼
-                    trailing: Obx(() => CupertinoSwitch(
-                      activeColor: style.PRIMARY_BLUE,
-                      value: switchButtonController.buttonCheckedList[i],
-                      onChanged: _isChecked     // 전체 알림 권한이 true -> 개별 알림 가능
-                        ? (value) {
-                          setState(() {
-                            switchButtonController.buttonCheckedList[i] = value;
-                            switchButtonController.storeButtonCheckedInfo(i);  // 알림버튼 상태를 기기에 저장
-                          });
-                        }
-                        : null      // 전체 알림 권한이 false -> 개별 알림 불가능
-                    )),
-                  ),
-                  // 구분선
-                  const Divider(
-                    height: 1,
-                  ),
-                ],
-              );
-            },
+              itemCount: switchButtonController.buttonNameList.length,
+              itemBuilder: (c, i) {
+                return Column(
+                  children: [
+                    // 각 개별 알림
+                    ListTile(
+                      tileColor: Colors.white,
+                      title: Text( switchButtonController.buttonNameList[i],),
+                      // 스위치 버튼
+                      trailing: Obx(() => CupertinoSwitch(
+                        activeColor: style.PRIMARY_BLUE,
+                        value: switchButtonController.buttonCheckedList[i],
+                        onChanged: _isNotiChecked     // 전체 알림 권한이 true -> 개별 알림 가능
+                          ? (value) {
+                            setState(() {
+                              switchButtonController.buttonCheckedList[i] = value;
+                              switchButtonController.storeButtonCheckedInfo(i);  // 알림버튼 상태를 기기에 저장
+                            });
+                          }
+                          : null      // 전체 알림 권한이 false -> 개별 알림 불가능
+                      )),
+                    ),
+                    // 구분선
+                    const Divider(
+                      height: 1,
+                    ),
+                  ],
+                );
+              },
             ))
-          ],
-        ));
+        ],
+      ));
   }
 }
