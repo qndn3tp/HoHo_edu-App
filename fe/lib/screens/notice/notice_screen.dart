@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/models/notice_data.dart';
 import 'package:flutter_application/screens/Notice/Notice_list_tile.dart';
 import 'package:flutter_application/screens/notice/tab_bar_scroller.dart';
-import 'package:flutter_application/services/attendance/time_check.dart';
 import 'package:flutter_application/services/notice/get_notice_data.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/class_info_data.dart';
 import 'package:flutter_application/models/login_data.dart';
-import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:get/get.dart';
 import '../../style.dart' as style;
 
@@ -12,12 +11,8 @@ import '../../style.dart' as style;
 Widget studentInfoBox(context, name) {
   final screenSize = MediaQuery.of(context).size;
 
-  // 유저 로그인 데이터 컨트롤러
   UserDataController userDataController = Get.put(UserDataController());
-
-  // 수업 정보 데이터 컨트롤러
-  ClassInfoDataController classInfoDataController =
-      Get.put(ClassInfoDataController());
+  ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());
   // 이름:[수업정보]를 가지는 map
   Map<String, List<List<String>>> nameSubjectMap = classInfoDataController
       .getSubjectMap(classInfoDataController.classInfoDataList);
@@ -40,11 +35,9 @@ Widget studentInfoBox(context, name) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 센터이름
-            Text(userDataController.userData!.cname,
-                style: const TextStyle(
-                  color: style.DARK_WHITE,
-                  fontSize: 15,
-                )),
+            Text(
+              userDataController.userData!.cname,
+              style: const TextStyle(color: style.DARK_WHITE,fontSize: 15,)),
             const SizedBox(
               height: 5,
             ),
@@ -52,47 +45,40 @@ Widget studentInfoBox(context, name) {
             RichText(
               text: TextSpan(children: [
                 TextSpan(
-                    text: name,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 25)),
+                  text: name,
+                  style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 25)),
                 const TextSpan(
-                    text: " 학생",
-                    style: TextStyle(color: Colors.white, fontSize: 25)),
+                  text: " 학생",
+                  style: TextStyle(color: Colors.white, fontSize: 25)),
               ]),
             ),
             // 수강정보
             SizedBox(
-                width: screenSize.width * 0.7,
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    itemCount: subjectList.length,
-                    itemBuilder: (context, index) {
-                      final subjectName = subjectList[index][0];
-                      final subjectNum = subjectList[index][1];
-                      final formattedStartTime =
-                          "${subjectList[index][2].substring(0, 2)}:${subjectList[index][2].substring(2)}";
-                      final formattedEndTime =
-                          "${subjectList[index][3].substring(0, 2)}:${subjectList[index][3].substring(2)}";
-                      final dateName = subjectList[index][4];
+              width: screenSize.width * 0.7,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: subjectList.length,
+                itemBuilder: (context, index) {
+                  final subjectName = subjectList[index][0];
+                  final subjectNum = subjectList[index][1];
+                  final formattedStartTime = "${subjectList[index][2].substring(0, 2)}:${subjectList[index][2].substring(2)}";
+                  final formattedEndTime = "${subjectList[index][3].substring(0, 2)}:${subjectList[index][3].substring(2)}";
+                  final dateName = subjectList[index][4];
 
-                      return Text(
-                        "[$subjectName$subjectNum] 수업중 ($dateName $formattedStartTime~$formattedEndTime) ",
-                        style: const TextStyle(
-                            color: style.DARK_WHITE, fontSize: 14),
-                      );
-                    }))
+                  return Text(
+                    "[$subjectName$subjectNum] 수업중 ($dateName $formattedStartTime~$formattedEndTime) ",
+                    style: const TextStyle(color: style.DARK_WHITE, fontSize: 14),);
+                }))
           ],
         ),
         // 아이콘
-        Container(
-          height: 70,
-          width: screenSize.width * 0.15,
-          decoration: customBoxDecoration('assets/images/class.png')
-        )
+        // Container(
+        //   height: 70,
+        //   width: screenSize.width * 0.15,
+        //   decoration: customBoxDecoration('assets/images/class.png')
+        // )
       ],
     ),
   );

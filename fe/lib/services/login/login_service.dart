@@ -89,7 +89,8 @@ Future<void> loginService(
         // 푸시알림 권한 설정
         /// 안드로이드
         await Permission.notification.request();
-        print("안드로이드 알림 권한: ${Permission.notification.status}");
+        PermissionStatus status = await Permission.notification.status;
+        print("안드로이드 알림 권한: ${status.isGranted}");
         /// iOS
         NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
           alert: true,

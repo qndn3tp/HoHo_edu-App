@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/models/notice_data.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import '../../style.dart' as style;
 
 /////////////////////////
@@ -134,7 +133,7 @@ class NoticeDetail extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(top: 30),
                 width: double.infinity,
-                height: 400,
+                height: 300,
                 color: Colors.deepPurple[100],
                 child: const Center(child: Text("이미지")),
               ),
@@ -142,7 +141,7 @@ class NoticeDetail extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(top: 30),
                 width: double.infinity,
-                height: 400,
+                height: 300,
                 color: Colors.amber[100],
                 child: const Center(child: Text("본문")),
               )
