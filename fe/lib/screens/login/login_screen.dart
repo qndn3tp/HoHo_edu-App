@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
     getMyDeviceToken();
     // 포그라운드 메시지
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      print("포그라운드 수신");
+      print("포그라운드 수신 ${message.data}");
       showNotification(message);
     });
   }

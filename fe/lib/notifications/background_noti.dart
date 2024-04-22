@@ -1,23 +1,20 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_application/notifications/load_button_checked_info.dart';
 import 'package:flutter_application/notifications/show_noti.dart';
-import 'package:flutter_application/screens/setting/setting_notification_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get/get.dart';
 
-///////////////////
-//  백그라운드 알림  //
-///////////////////
+/////////////////////
+//  백그라운드 알림 //
+/////////////////////
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  print("백그라운드 수신");
+  print("백그라운드 수신 ${message.data}");
     
-  // 저장된 알림 정보 로드
+  // 저장된 개별 알림 정보 로드
   await loadButtonCheckedInfo();
-  
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-    // Android: 채널 
+  // Android: 채널 
   const channel = AndroidNotificationChannel(     
     'high_importance_channel', 
     'high_importance_notification',
@@ -42,14 +39,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     ),
   );
 
-  final switchButtonController = Get.put(SwitchButtonController());
-
-  if (switchButtonController.buttonCheckedList[0] == true) {
-    print("공지알림 O");
-    showNotification(message);
-  } else {
-    print("공지알림 X");
-  }
-  // showNotification(message);
+  // 메세지 수신
+  showNotification(message);
 }
 
