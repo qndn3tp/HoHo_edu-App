@@ -67,6 +67,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
+                                                <entry key="color" value="000000" />
                                                 <entry key="imagePath" value="C:\Users\user\AppData\Local\Temp\ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
@@ -79,8 +80,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\user\Desktop\logo.png" />
-                                                <entry key="scalingPercent" value="61" />
+                                                <entry key="imagePath" value="C:\Users\user\Downloads\appicon.png" />
+                                                <entry key="scalingPercent" value="63" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -113,7 +114,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="ffffff" />
+                                      <entry key="backgroundColor" value="3043f2" />
+                                      <entry key="outputName" value="app_icon" />
                                     </map>
                                   </option>
                                 </PersistentState>
