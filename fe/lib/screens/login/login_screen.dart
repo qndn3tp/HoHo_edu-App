@@ -1,6 +1,4 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/notifications/show_noti.dart';
 import 'package:flutter_application/notifications/token_management.dart';
 import 'package:flutter_application/services/login/login_service.dart';
 import 'package:flutter_application/screens/login/login_box.dart';
@@ -55,11 +53,6 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     // 로그인시 토큰 발급, 전송
     getMyDeviceToken();
-    // 포그라운드 메시지
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      print("포그라운드 수신 ${message.data}");
-      showNotification(message);
-    });
   }
 
   // 기기에 저장된 유저 정보 체크

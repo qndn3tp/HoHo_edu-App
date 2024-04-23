@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/firebase_options.dart';
 import 'package:flutter_application/notifications/background_noti.dart';
 import 'package:flutter_application/notifications/setup_noti.dart';
+import 'package:flutter_application/notifications/show_noti.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:get/get.dart';
 import 'style.dart' as style;
@@ -23,6 +24,11 @@ Future<void> main() async{
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);  
   await setupNotification();
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  // 포그라운드 메시지
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    print("포그라운드 수신 ${message.data}");
+    showNotification(message);
+  });
 
   // 환경변수 파일 로드
   await dotenv.load(fileName: ".env");
