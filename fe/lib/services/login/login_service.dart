@@ -97,6 +97,9 @@ Future<void> loginService(
   }
   // 서버로부터 응답을 받지 못했을 때
   catch (e) {
-    throw Exception('$e');
+    failDialog1(
+      '로그인 실패',
+      '아이디와 비밀번호를 입력해주세요.'
+    );
   }
 }
