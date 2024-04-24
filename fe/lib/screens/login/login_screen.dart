@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/notifications/token_management.dart';
-import 'package:flutter_application/services/login/login_service.dart';
-import 'package:flutter_application/screens/login/login_box.dart';
+import 'package:flutter_application/screens/login/auto_login.dart';
+import 'package:flutter_application/screens/login/login_button.dart';
+import 'package:flutter_application/screens/login/login_input_decoratioin.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../widgets/login_logo.dart';
 import 'package:get/get.dart';
 import '../../style.dart' as style;
 
 ///////////////////
-//  로그인 화면     //
+//  로그인 화면   //
 ///////////////////
 
 // 로그인 컨트롤러
@@ -27,6 +28,29 @@ class  PasswordVisibleController extends GetxController {
   }
 }
 
+// 기기에 저장된 유저 정보 컨트롤러
+class CheckStoredUserInfoController extends GetxController {
+  LoginController loginController = Get.put(LoginController());
+  AutoLoginController autoLoginController = Get.put(AutoLoginController());
+
+  String? userInfo = "";
+  final storage = Get.put(const FlutterSecureStorage()); 
+
+  checkStoredUserInfo() async {
+    // read 함수를 통해 key값에 맞는 정보를 불러옴(불러오는 타입은 String 데이터가 없다면 null)
+    userInfo = await storage.read(key: "login");
+
+    if (userInfo != null) {
+      String storedUserId = userInfo?.split(" ")[1] ?? ""; 
+      String storedUserPassword = userInfo?.split(" ")[3] ?? ""; 
+      
+      loginController.idController.text = storedUserId;
+      loginController.passwordController.text = storedUserPassword;
+      autoLoginController.isChecked.value = true;
+    }
+  }
+}
+
 
 // 로그인 화면
 class LoginScreen extends StatefulWidget {
@@ -37,38 +61,18 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  LoginController loginController = Get.put(LoginController());                 // 로그인 컨트롤러
-  AutoLoginController autoLoginController = Get.put(AutoLoginController());     // 자동로그인 컨트롤러
-  PasswordVisibleController passwordVisibleController = Get.put(PasswordVisibleController());   // 비밀번호 숨김 컨트롤러
-
-  // 자동로그인 저장소
-  String? userInfo = ""; // 유저 정보 저장 변수
-  final storage = Get.put(const FlutterSecureStorage()); //flutter_secure_storage 사용을 위한 초기화 작업
+  LoginController loginController = Get.put(LoginController());                 
+  PasswordVisibleController passwordVisibleController = Get.put(PasswordVisibleController());  
+  CheckStoredUserInfoController checkStoredUserInfoController = Get.put(CheckStoredUserInfoController());
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {    // 비동기로 flutter_secure_storage 정보를 불러옴
-      checkStoredUserInfo();
+      checkStoredUserInfoController.checkStoredUserInfo();
     });
     // 로그인시 토큰 발급, 전송
     getMyDeviceToken();
-  }
-
-  // 기기에 저장된 유저 정보 체크
-  checkStoredUserInfo() async {
-    // read 함수를 통해 key값에 맞는 정보를 불러옴(불러오는 타입은 String 데이터가 없다면 null)
-    userInfo = await storage.read(key: "login");
-
-    if (userInfo != null) {
-      String storedUserId = userInfo?.split(" ")[1] ?? ""; // 기기에 저장된 유저 아이디
-      String storedUserPassword = userInfo?.split(" ")[3] ?? ""; // 기기에 저장된 유저 비밀번호
-
-      // 저장된 유저정보가 있다면 아이디와 비밀번호가 바로 뜨도록.
-      loginController.idController.text = storedUserId;
-      loginController.passwordController.text = storedUserPassword;
-      autoLoginController.isChecked.value = true;
-    }
   }
 
   @override
@@ -127,100 +131,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-}
-
-// 로그인 버튼
-Widget loginButton() {
-  LoginController loginController = Get.put(LoginController());              // 로그인 컨트롤러
-  AutoLoginController autoLoginController = Get.put(AutoLoginController());  // 자동 로그인 컨트롤러
-
-  return GestureDetector(
-    onTap: () => loginService(
-      // 아이디 입력값
-      loginController.idController.text,
-      // 비밀번호 입력값
-      loginController.passwordController.text,
-      // 자동로그인 체크값
-      autoLoginController.isChecked.value,
-    ),
-    child: Center(
-      child: Container(
-        height: 60,
-        width: 60,
-        decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [
-                Color.fromARGB(255, 169, 176, 255), 
-                Color.fromARGB(255, 46, 57, 251), 
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(.3),
-                spreadRadius: 1,
-                blurRadius: 2,
-                offset: const Offset(0, 1))
-            ]),
-        child: const Center(
-          child: Icon(Icons.arrow_forward, color: Colors.white,)
-        ),
-      ),
-    )
-  );
-}
-
-// 자동로그인 컨트롤러
-class AutoLoginController extends GetxController {
-  var isChecked = false.obs;
-
-  void updateCheck(bool newValue) {
-    isChecked.value = newValue;
-  }
-}
-
-// 자동로그인 체크박스
-class AutoLogin extends StatelessWidget {
-  final AutoLoginController autoLoginController = Get.put(AutoLoginController()); // 자동로그인 컨트롤러: 자동로그인 상태 관리(isChecked)
-
-  AutoLogin({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Obx(
-          () => Checkbox(
-            shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            value: autoLoginController.isChecked.value,
-            onChanged: (newValue) {
-              autoLoginController.updateCheck(newValue ?? false); // isChecked의 상태 관리
-            },
-            activeColor: style.PRIMARY_BLUE,
-          ),
-        ),
-        const Text("자동 로그인")
-      ],
-    );
-  }
-}
-
-// 로그아웃 함수 (아이디,비밀번호,자동로그인 초기화)
-void logout() async {
-  final _LoginScreenState loginScreenState = Get.put(_LoginScreenState());
-  final storage = Get.find<FlutterSecureStorage>();
-
-  // 기기에 저장된 유저정보가 있는 경우(자동로그인)
-  if (loginScreenState.userInfo != null) {
-    await storage.delete(key: "login"); // 유저 정보 삭제(아이디, 비밀번호)
-  }
-
-  LoginController loginController = Get.put(LoginController());
-  AutoLoginController autoLoginController = Get.put(AutoLoginController());
-
-  loginController.idController.clear(); // 아이디 입력칸 초기화
-  loginController.passwordController.clear(); // 비밀번호 입력칸 초기화
-  autoLoginController.isChecked.value = false; // 자동로그인 체크 해제
 }
