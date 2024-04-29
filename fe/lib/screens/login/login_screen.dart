@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/notifications/token_management.dart';
 import 'package:flutter_application/screens/login/auto_login.dart';
 import 'package:flutter_application/screens/login/login_button.dart';
-import 'package:flutter_application/screens/login/login_input_decoratioin.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../widgets/login_logo.dart';
 import 'package:get/get.dart';
 import '../../style.dart' as style;
+import '../login/login_box.dart';
 
 ///////////////////
 //  로그인 화면   //

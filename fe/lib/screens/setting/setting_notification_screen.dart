@@ -43,10 +43,8 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> with TickerProviderStateMixin {
-  // 아이콘 컨트롤러
+  
   late AnimationController bellController;
-
-  // 알림설정 토글 버튼 컨트롤러
   final SwitchButtonController switchButtonController = Get.put(SwitchButtonController());
 
   // 저장된 알림 정보 로드
@@ -57,6 +55,14 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
           prefs.getBool('buttonChecked$i') ?? false; // 저장된 값이 있으면 불러오고, 없으면 false
     }
   }
+  // 알림 권한 여부를 체크
+  Future<void> checkNotificationPermission() async {
+    _isNotiChecked = await requestNotification();
+    setState(() {
+      _isNotiChecked = _isNotiChecked;
+    });
+  }
+
 
   // 전체 알림 스위치
   late bool _isNotiChecked = false;
@@ -67,15 +73,6 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
     loadButtonCheckedInfo(); // 저장된 알림 정보 로드
     bellController = AnimationController(vsync: this, duration: const Duration(seconds: 2))..repeat(); // 아이콘 컨트롤러 생성
     checkNotificationPermission(); // 알림 권한 여부를 체크(on/off)
-  }
-
-  // 알림 권한 여부를 체크
-  Future<void> checkNotificationPermission() async {
-    _isNotiChecked = await requestNotification();
-    setState(() {
-      _isNotiChecked = _isNotiChecked;
-      print("알림권한$_isNotiChecked");
-    });
   }
 
   @override

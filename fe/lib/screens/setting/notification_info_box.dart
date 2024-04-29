@@ -33,7 +33,7 @@ Widget notificationInfoBox(isChecked, bellController) {
   );
 }
 
-// 알림을 받는 경우
+// 알림 On
 Widget notificationChecked() {
   return const Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +46,7 @@ Widget notificationChecked() {
   );
 }
 
-// 알림을 받지않는 경우
+// 알림 Off
 Widget notificationUnChecked() {
   return const Column(
     crossAxisAlignment: CrossAxisAlignment.start,
