@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/notifications/load_button_checked_info.dart';
 import 'package:flutter_application/notifications/request_noti.dart';
 import 'package:flutter_application/screens/setting/notification_info_box.dart';
+import 'package:flutter_application/utils/load_button_checked_info.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';

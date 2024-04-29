@@ -8,9 +8,9 @@ import 'package:intl/intl.dart';
 import '../../style.dart' as style;
 import 'book_chart.dart';
 
-///////////////////////
+////////////////////
 // 독클 결과3 (연간) //
-///////////////////////
+///////////////////
 
 class BookResult3 extends StatefulWidget {
   const BookResult3({super.key});
