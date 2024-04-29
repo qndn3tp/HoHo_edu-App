@@ -1,6 +1,6 @@
-// 일반 텍스트
 import 'package:flutter/material.dart';
 
+// 일반 텍스트
 TextSpan normalText(text) {
   return TextSpan(
     text: text,

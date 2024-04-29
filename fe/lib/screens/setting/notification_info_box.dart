@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_icons/lottiefiles.dart';
 import 'package:lottie/lottie.dart';
 
+//////////////////////
+//  상단 알림 설명  //
+/////////////////////
 
-// 상단 알림 설명
 Widget notificationInfoBox(isChecked, bellController) {
   return Container(
     height: 80,
@@ -11,6 +13,7 @@ Widget notificationInfoBox(isChecked, bellController) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        // 알림 아이콘
         IconButton(
           onPressed: () {},
           icon: Lottie.asset(
@@ -19,6 +22,7 @@ Widget notificationInfoBox(isChecked, bellController) {
             height: 50,
           ),
         ),
+        // 알림 설명
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,

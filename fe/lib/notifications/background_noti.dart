@@ -1,11 +1,12 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_application/notifications/load_button_checked_info.dart';
 import 'package:flutter_application/notifications/show_noti.dart';
+import 'package:flutter_application/utils/load_button_checked_info.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 /////////////////////
 //  백그라운드 알림 //
 /////////////////////
+
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("백그라운드 수신 ${message.data}");
@@ -42,4 +43,3 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // 메세지 수신
   showNotification(message);
 }
-

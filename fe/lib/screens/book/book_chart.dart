@@ -4,7 +4,6 @@ import 'package:flutter_application/models/book_data.dart';
 import 'package:get/get.dart';
 import '../../style.dart' as style;
 
-
 //////////////////////
 // 독서클리닉3 차트  //
 //////////////////////
@@ -17,7 +16,7 @@ class BookChart extends StatefulWidget {
 }
 
 class _BookChartState extends State<BookChart> {
-  // 컨트롤러 생성
+  // 컨트롤러
   YMBookCountDataController ymBookCountDataController = Get.put(YMBookCountDataController());
 
   // 색상값

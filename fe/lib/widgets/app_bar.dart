@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/screens/home/home_screen.dart';
-import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:get/get.dart';
 
-// 상단바
+//////////////
+//  상단바  //
+//////////////
+
 PreferredSizeWidget customAppBar(title) {
   String title0 = title;
 
@@ -15,24 +16,14 @@ PreferredSizeWidget customAppBar(title) {
         Get.back();
       },
     ),
+    // 제목
     title: Text(
       title0,
       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
     ),
     centerTitle: true,
-    actions: [
-      GestureDetector(
-        onTap: () => Get.offAll(const HomeScreen()),
-        child: Container(
-          margin: const EdgeInsets.only(right: 15,),
-        height: 22,
-        width: 22,
-        decoration: customBoxDecoration('assets/images/appbar/appbar_home.png'),
-      ),
-      ),
-    ],
+    // 상단바 구분선
     bottom: const PreferredSize(
-      // 상단바 구분선
       preferredSize: Size.fromHeight(1.0),
       child: Divider(
         height: 1.0,

@@ -16,9 +16,10 @@ import 'package:http/http.dart' as http;
 
 // 연간 독서량 데이터 가져오는 함수
 Future<void> getYearlyBookData() async {
-  final UserDataController userDataController = Get.put(UserDataController());                   // 유저의 로그인 데이터 컨트롤러
-  final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController()); // 드롭다운버튼 컨트롤러
-  final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());    // 수업정보 컨트롤러
+  // 컨트롤러
+  final UserDataController userDataController = Get.put(UserDataController());                   // 유저의 로그인 데이터 
+  final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController()); // 드롭다운 버튼 
+  final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());    // 수업정보 
 
   // 연간 독서량 API URL
   String url = dotenv.get('BOOK_READ_YEAR_TOTAL_URL');
@@ -42,19 +43,17 @@ Future<void> getYearlyBookData() async {
 
   // 응답의 content-type utf-8로 인코딩으로 설정
   if (response.headers['content-type']
-          ?.toLowerCase()
-          .contains('charset=utf-8') != true) {
+  ?.toLowerCase().contains('charset=utf-8') != true) {
     response.headers['content-type'] = 'application/json; charset=utf-8';
   }
   try {
-    // 서버로부터 응답을 성공적으로 받았을 때
+    // 응답을 성공적으로 받았을 때
     if (response.statusCode == 200) {
-      // 응답 데이터 처리
       final resultList = json.decode(response.body);
 
       // 응답 데이터가 성공일 때
       if (resultList[0]["result"] == null) {
-        // 서버로부터 받은 JSON 데이터를 YearBookData 객체리스트로 파싱
+        // JSON 데이터를 YearBookData 객체리스트로 파싱
         YearBookData yearBookData = YearBookData.fromJson(resultList[0]);                          
         final YearBookDataController yearBookDataController = Get.put(YearBookDataController());     
         yearBookDataController.setYearBookData(yearBookData);
@@ -65,7 +64,7 @@ Future<void> getYearlyBookData() async {
       }
     }
   }
-  // 서버로부터 응답을 받지 못했을 때
+  // 응답을 받지 못했을 때
   catch (e) {
     throw Exception('$e');
   }

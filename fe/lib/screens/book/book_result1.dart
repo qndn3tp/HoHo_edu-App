@@ -8,9 +8,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../style.dart' as style;
 
-//////////////////////////////////////
-// 독서클리닉 결과1 (월간 독서리스트) //
-//////////////////////////////////////
+/////////////////////////////////
+// 독클 결과1 (월간 독서리스트) //
+/////////////////////////////////
 
 class BookResult1 extends StatefulWidget {
   final int index;
@@ -24,12 +24,11 @@ class BookResult1 extends StatefulWidget {
 
 class _BookResult1State extends State<BookResult1> {
   // 컨트롤러
-  BookTitleDataController bookTitleDataController = Get.find();
-  DropdownButtonController dropdownButtonController = Get.find();
+  BookTitleDataController bookTitleDataController = Get.find();       // 책 제목
+  DropdownButtonController dropdownButtonController = Get.find();     // 드롭다운 버튼
 
   @override
   Widget build(BuildContext context) {
-    // 페이지 높이
     final pageHeight = MediaQuery.of(context).size.height - 200;
 
     return Column(
@@ -38,12 +37,12 @@ class _BookResult1State extends State<BookResult1> {
         // 텍스트
         Obx(
           () => RichText(
-            text: TextSpan(children: [
-              normalText(
-                "${dropdownButtonController.currentItem.value} 학생은 "),
+            text: TextSpan(
+              children: [
+                normalText("${dropdownButtonController.currentItem.value} 학생은 "),
                 colorText(widget.currentPageMonth, style.PRIMARY_DEEPBLUE),
                 normalText("에"),
-            ]),
+              ]),
           ),
         ),
         SizedBox(
@@ -51,35 +50,11 @@ class _BookResult1State extends State<BookResult1> {
           child: RichText(
             text: TextSpan(children: [
               normalText("총 "),
-              colorText(
-                "${bookTitleDataController.monthlyBookCount}권", style.PRIMARY_DEEPBLUE),
-                normalText("의 책을 읽었어요!"),
+              colorText("${bookTitleDataController.monthlyBookCount}권", style.PRIMARY_DEEPBLUE),
+              normalText("의 책을 읽었어요!"),
             ]),
           ),
         ),
-
-        // 기존 이미지
-        // SizedBox(
-        //   height: pageHeight * 0.3,
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.center, 
-        //     children: [
-        //       // 월간 읽은 책의 권수
-        //       Container(
-        //         margin: const EdgeInsets.only(left: 10),
-        //         width: 50,
-        //         height: 50,
-        //         decoration: const BoxDecoration(shape: BoxShape.circle, color: style.PRIMARY_BLUE),
-        //         child: Center(
-        //           child: Text("${bookTitleDataController.monthlyBookCount}",
-        //             style: const TextStyle(
-        //               fontSize: 35,
-        //               color: Colors.white,
-        //               fontWeight: FontWeight.bold,
-        //             ))),
-        //       ),
-        //     ]),
-        // ),
         // 독서클리닉 목록(책 제목 리스트)
         ListView.builder(
           shrinkWrap: true,
@@ -108,7 +83,7 @@ class _BookResult1State extends State<BookResult1> {
             Container(
               height: 200,
               width: double.infinity,
-              decoration: customBoxDecoration("assets/images/book/b0.png")
+              decoration: customBoxDecoration1("assets/images/book/b0.png")
             ),
             // 이미지(풍선)
             Positioned(
@@ -116,7 +91,7 @@ class _BookResult1State extends State<BookResult1> {
               child: Container(
                 height: 120,
                 width: 120,
-                decoration: customBoxDecoration("assets/images/book/b5.png")
+                decoration: customBoxDecoration1("assets/images/book/b5.png")
               ),
             ),
             // 월간 읽은 책의 권수
@@ -129,11 +104,8 @@ class _BookResult1State extends State<BookResult1> {
                 child: Center(
                   child: Text(
                     "${bookTitleDataController.monthlyBookCount}",
-                    style: const TextStyle(
-                      fontSize: 35,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ))),
+                    style: const TextStyle(fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold,))
+                ),
               ),
             ),
           ],

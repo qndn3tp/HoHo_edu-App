@@ -14,7 +14,7 @@ import 'package:intl/intl.dart';
 
 // 수업정보 가져오는 함수
 Future<void> getClassInfo() async {
-
+  // 컨트롤러
   final UserDataController userDataController = Get.put(UserDataController()); // 유저의 로그인 데이터 컨트롤러
 
   // 수업정보 API URL
@@ -41,21 +41,18 @@ Future<void> getClassInfo() async {
 
   // 응답의 content-type utf-8로 인코딩으로 설정
   if (response.headers['content-type']
-          ?.toLowerCase()
-          .contains('charset=utf-8') != true) {
+  ?.toLowerCase().contains('charset=utf-8') != true) {
     response.headers['content-type'] = 'application/json; charset=utf-8';
   }
   try {
-    // 서버로부터 응답을 성공적으로 받았을 때
+    // 응답을 성공적으로 받았을 때
     if (response.statusCode == 200) {
-      // 응답 데이터 처리
       final resultList = json.decode(response.body);
-      print(resultList);
 
       // 응답 데이터가 성공일 때
       if (resultList[0]["result"] == null) {
         final resultList0 = resultList.cast<Map<String, dynamic>>();
-         // 서버로부터 받은 JSON 데이터를 classInfoData 객체리스트로 파싱
+         // JSON 데이터를 classInfoData 객체리스트로 파싱
         List<ClassInfoData> classInfoDataList = resultList0.map<ClassInfoData>((json) => ClassInfoData.fromJson(json)).toList();
         final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());     
         classInfoDataController.setClassInfoDataList(classInfoDataList);
@@ -66,7 +63,7 @@ Future<void> getClassInfo() async {
       }
     }
   }
-  // 서버로부터 응답을 받지 못했을 때
+  // 응답을 받지 못했을 때
   catch (e) {
     throw Exception('$e');
   }

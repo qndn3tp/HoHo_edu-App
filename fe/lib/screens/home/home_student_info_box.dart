@@ -11,17 +11,18 @@ import '../../style.dart' as style;
 Widget studentInfoBox(context, name) {
   final screenSize = MediaQuery.of(context).size;
 
-  UserDataController userDataController = Get.put(UserDataController());
-  ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());
+  // 컨트롤러 
+  UserDataController userDataController = Get.put(UserDataController());                // 유저의 로그인 데이터
+  ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController()); //수업 정보
+  
   // 이름:[수업정보]를 가지는 map
   Map<String, List<List<String>>> nameSubjectMap = classInfoDataController
-      .getSubjectMap(classInfoDataController.classInfoDataList);
+    .getSubjectMap(classInfoDataController.classInfoDataList);
   // 수업정보 리스트(과목명, 과목호수, 시작시간, 종료시간, 요일)
   List<List<String>> subjectList = nameSubjectMap[name] ?? [];
 
   return Container(
     padding: const EdgeInsets.only(left: 10, right: 5),
-    // 박스 스타일
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(30),
       color: style.PRIMARY_BLUE,
@@ -73,12 +74,6 @@ Widget studentInfoBox(context, name) {
                 }))
           ],
         ),
-        // 아이콘
-        // Container(
-        //   height: 70,
-        //   width: screenSize.width * 0.15,
-        //   decoration: customBoxDecoration('assets/images/class.png')
-        // )
       ],
     ),
   );

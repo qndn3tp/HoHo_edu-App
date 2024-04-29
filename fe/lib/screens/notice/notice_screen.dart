@@ -21,7 +21,6 @@ class NoticeScreen extends StatefulWidget {
 
 class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderStateMixin {
   
-  // 화면 스크롤 컨트롤러
   final ScrollController scrollController = ScrollController();
 
   // TabBar 인덱스
@@ -76,7 +75,6 @@ class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderSt
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    // margin: const EdgeInsets.all(10),
                     margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
                     height: 40,
                     width: 80,
@@ -126,9 +124,8 @@ class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderSt
   }
 }
 
-
+// Tab View Page
 class TabPage extends StatefulWidget {
-
   const TabPage({super.key});
 
   @override

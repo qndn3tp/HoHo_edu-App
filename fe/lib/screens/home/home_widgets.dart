@@ -17,97 +17,87 @@ import '../../widgets/box_decoration.dart';
 //    홈 화면 위젯    //
 ///////////////////////
 
+Widget menuButton({
+  required String imagePath,
+  required String buttonText,
+  required VoidCallback onTap,
+}) {
+  return InkWell(
+    onTap: onTap,
+    child: Column(
+      children: [
+        Container(
+          height: 55,
+          width: 55,
+          decoration: customBoxDecoration1(imagePath),
+        ),
+        Text(buttonText)
+      ]
+    ),
+  );
+}
+
 // 출석체크 버튼
 Widget attendanceButton() {
-  const title = "출석체크";
-  return GestureDetector(
-    onTap: () async{
+  return menuButton(
+    imagePath: 'assets/images/attendance.png',
+    buttonText: '출석체크',
+    onTap: () async {
       await getAttendanceData(currentMonth);
       Get.to(
-        AttendanceScreen(), 
-        arguments: title, 
-        transition: Transition.cupertino, 
-        duration: const Duration(milliseconds: 500)
+        AttendanceScreen(),
+        transition: Transition.cupertino,
+        duration: const Duration(milliseconds: 500),
       );
     },
-    child: Container(
-      alignment: Alignment.center,
-      child: Column(
-        children: [
-          Container(
-            height: 55,
-            width: 55,
-            decoration: customBoxDecoration('assets/images/attendance.png'),
-          ),
-          const Text(title,)
-        ]
-      ),
-    ),
   );
 }
 
 // 학원비 납부 버튼
 Widget paymentButton() {
-  return GestureDetector(
+  return menuButton(
+    imagePath: 'assets/images/payment.png',
+    buttonText: '학원비 납부',
     onTap: () {
       Get.to(
-        const PaymentScreen(), 
-        transition: Transition.cupertino, 
-        duration: const Duration(milliseconds: 500)
+        const PaymentScreen(),
+        transition: Transition.cupertino,
+        duration: const Duration(milliseconds: 500),
       );
     },
-    child: Column(
-      children: [
-        Container(
-          height: 55,
-          width: 55,
-          decoration: customBoxDecoration('assets/images/payment.png'),
-        ),
-        const Text("학원비 납부",)
-      ]
-    ),
   );
 }
 
 // 알림장 버튼
 Widget noticeButton() {
-  return GestureDetector(
-    onTap: () {
-      Get.to(const NoticeScreen(), transition: Transition.cupertino, duration: const Duration(milliseconds: 500));
+  return menuButton(
+    imagePath: 'assets/images/notice.png',
+    buttonText: '알림장',
+    onTap: () async {
+      Get.to(
+        const NoticeScreen(),
+        transition: Transition.cupertino,
+        duration: const Duration(milliseconds: 500),
+      );
     },
-    child: Column(
-      children: [
-        Container(
-          height: 55,
-          width: 55,
-          decoration: customBoxDecoration('assets/images/notice.png'),
-        ),
-        const Text("알림장",)
-      ]
-    ),
   );
 }
 
 // 독클결과 버튼
 Widget bookButton() {
-  return GestureDetector(
-    // 서버로부터 독클 결과 데이터를 받은 후 독클 결과 화면으로 이동
+  return menuButton(
+    imagePath: 'assets/images/book.png',
+    buttonText: '독클결과',
     onTap: () async {
-      await getYearlyBookData();                        // 연간 독서량 데이터
-      await getMonthlyBookReadData(currentMonth-1);     // 월간 독서 데이터(책 목록, 권수)
-      await getMonthlyBookScoreData(currentMonth-1);    // 월간 독서 데이터(영역별 점수)
-      await getYMBookReadCountData();                   // 월간 독서 그래프
-      Get.to(BookScreen(), transition: Transition.cupertino, duration: const Duration(milliseconds: 500)); 
+      await getYearlyBookData();
+      await getMonthlyBookReadData(currentMonth - 1);
+      await getMonthlyBookScoreData(currentMonth - 1);
+      await getYMBookReadCountData();
+      Get.to(
+        BookScreen(),
+        transition: Transition.cupertino,
+        duration: const Duration(milliseconds: 500),
+      );
     },
-    child: Column(
-      children: [
-        Container(
-          height: 55,
-          width: 55,
-          decoration: customBoxDecoration('assets/images/book.png'),
-        ),
-        const Text("독클결과",)
-      ]
-    ),
   );
 }

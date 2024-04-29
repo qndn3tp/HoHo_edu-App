@@ -4,10 +4,14 @@ import 'package:flutter_application/screens/login/login_screen.dart';
 import 'package:flutter_application/services/login/login_service.dart';
 import 'package:get/get.dart';
 
-// 로그인 버튼
+///////////////////
+//  로그인 버튼   //
+///////////////////
+
 Widget loginButton() {
-  LoginController loginController = Get.put(LoginController());              // 로그인 컨트롤러
-  AutoLoginController autoLoginController = Get.put(AutoLoginController());  // 자동 로그인 컨트롤러
+  // 컨트롤러
+  LoginController loginController = Get.put(LoginController());              // 로그인
+  AutoLoginController autoLoginController = Get.put(AutoLoginController());  // 자동 로그인
 
   return GestureDetector(
     onTap: () => loginService(

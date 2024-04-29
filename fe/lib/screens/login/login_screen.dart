@@ -3,7 +3,6 @@ import 'package:flutter_application/notifications/token_management.dart';
 import 'package:flutter_application/screens/login/auto_login.dart';
 import 'package:flutter_application/screens/login/login_button.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import '../../widgets/login_logo.dart';
 import 'package:get/get.dart';
 import '../../style.dart' as style;
 import '../login/login_box.dart';
@@ -14,7 +13,6 @@ import '../login/login_box.dart';
 
 // 로그인 컨트롤러
 class LoginController extends GetxController {
-  // 사용자의 아이디, 패스워드 입력을 저장하기 위한 TextEditingController 생성
   TextEditingController idController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 }
@@ -22,7 +20,6 @@ class LoginController extends GetxController {
 // 비밀번호 숨김 컨트롤러
 class  PasswordVisibleController extends GetxController {
   var passwordVisible = false.obs;
-
     void switchPasswordVisibility() {
     passwordVisible.value = !passwordVisible.value;
   }
@@ -61,6 +58,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // 컨트롤러
   LoginController loginController = Get.put(LoginController());                 
   PasswordVisibleController passwordVisibleController = Get.put(PasswordVisibleController());  
   CheckStoredUserInfoController checkStoredUserInfoController = Get.put(CheckStoredUserInfoController());
@@ -88,7 +86,11 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             // 로그인 로고
-            loginLogo(),
+            SizedBox(
+              width: 120,
+              height:120,
+              child: Image.asset('assets/images/login_logo.png')
+            ),
             // 로그인 입력
             GestureDetector(
               onTap: () => FocusManager.instance.primaryFocus?.unfocus(), // 입력 칸 밖의 화면을 터치하면 키보드가 내려감
@@ -114,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 20),
                     // 자동로그인 버튼
                     AutoLogin(),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 40),
                     // 로그인 버튼
                     loginButton(),
                   ],

@@ -6,9 +6,9 @@ import 'package:flutter_application/widgets/text_span.dart';
 import 'package:get/get.dart';
 import '../../style.dart' as style;
 
-///////////////////////////////////
-// 독서클리닉 결과2 (분야별 점수) //
-///////////////////////////////////
+/////////////////////////////
+// 독클 결과2 (분야별 점수) //
+/////////////////////////////
 
 class BookResult2 extends StatefulWidget {
   const BookResult2({super.key});
@@ -25,7 +25,6 @@ class _BookResult2State extends State<BookResult2> {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
-    // 페이지 높이
     final pageHeight = screenSize.height - 200;
 
     return SizedBox(

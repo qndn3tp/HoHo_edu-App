@@ -27,45 +27,45 @@ class AttendanceScreen extends GetView<DropdownButtonController> {
   Widget build(BuildContext context) {
     dropdownButtonController.updateDropDownMenus();
     return Scaffold(
-        appBar: customAppBar("출석 체크"),
-        body: Column(
-          children: [
-            // 드롭다운 버튼 박스
-            dropDownBox(),
-            // 드롭다운 화면
-            Expanded(
-              child: Obx(() {
-                if (controller.currentItem.value != null) {
-                  // 드롭다운 값이 바뀌면 api를 재호출한뒤, 렌더링
-                  return FutureBuilder<void>(
-                    future: _updateAttendanceData(), // api 재호출
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        // 데이터를 가져오는 중
-                        return Container(
-                          color: Colors.white,
-                          child: const SpinKitThreeBounce(
-                            color: style.LIGHT_GREY,
-                          ));
-                      } else if (snapshot.hasError) {
-                        // 에러발생
-                        return Container(
-                          color: Colors.white,
-                          child: Text("Error: ${snapshot.error}"));
-                      } else {
-                        // 데이터를 성공적으로 가져오면 MonthlyScreen을 반환
-                        currentPage = getCurrentMonth()-1;
-                        return const MonthlyScreen();
-                      }
-                    },
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            )),
-          ],
-        ));
+      appBar: customAppBar("출석 체크"),
+      body: Column(
+        children: [
+          // 드롭다운 버튼 박스
+          dropDownBox(),
+          // 드롭다운 화면
+          Expanded(
+            child: Obx(() {
+              if (controller.currentItem.value != null) {
+                // 드롭다운 값이 바뀌면 api를 재호출한뒤, 렌더링
+                return FutureBuilder<void>(
+                  future: _updateAttendanceData(), // api 재호출
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      // 데이터를 가져오는 중
+                      return Container(
+                        color: Colors.white,
+                        child: const SpinKitThreeBounce(
+                          color: style.LIGHT_GREY,
+                        ));
+                    } else if (snapshot.hasError) {
+                      // 에러발생
+                      return Container(
+                        color: Colors.white,
+                        child: Text("Error: ${snapshot.error}"));
+                    } else {
+                      // 데이터를 성공적으로 가져오면 MonthlyScreen을 반환
+                      currentPage = getCurrentMonth()-1;
+                      return const MonthlyScreen();
+                    }
+                  },
+                );
+              } else {
+                return Container();
+              }
+            },
+          )),
+        ],
+      ));
   }
   // 해당 드롭다운 데이터로 api 재호출
   Future<void> _updateAttendanceData() async {
@@ -87,7 +87,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
   Widget build(BuildContext context) {
 
     // 출석데이터 컨트롤러
-    final attendanceDataController= Get.put(AttendanceDataController());
+    final attendanceDataController = Get.put(AttendanceDataController());
 
     return Scaffold(
       body: Column(

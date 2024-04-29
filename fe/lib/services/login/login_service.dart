@@ -17,13 +17,12 @@ import '../../utils/login_encryption.dart';
 ///////////////////////
 
 // 로그인 로직 수행 함수
-Future<void> loginService(
-    String loginId, String loginPassword, autoLoginChecked) async {
+Future<void> loginService(String loginId, String loginPassword, autoLoginChecked) async {
     
-  // 로컬 저장소: 사용자정보(아이디,비밀번호)를 기기에 저장
+  // 사용자 로그인 정보(아이디,비밀번호)를 기기에 저장
   final storage = Get.find<FlutterSecureStorage>();
 
-  // 네트워크가 연결되어있는지 체크
+  // 네트워크가 연결 확인
   var connectivityResult = await connectivityCheck();
   if (connectivityResult) {
   } else {
@@ -50,25 +49,21 @@ Future<void> loginService(
 
   // 응답의 content-type utf-8로 인코딩으로 설정
   if (response.headers['content-type']
-    ?.toLowerCase()
-    .contains('charset=utf-8') != true) {
+  ?.toLowerCase().contains('charset=utf-8') != true) {
     response.headers['content-type'] = 'application/json; charset=utf-8';
   }
   try {
-    // 서버로부터 응답을 성공적으로 받았을 때
+    // 응답을 성공적으로 받았을 때
     if (response.statusCode == 200) {
-      // 응답 데이터 처리
       final resultList = json.decode(response.body);
-      final resultValue = resultList[0]['result']; // id, pwd가 서버에 저장된 것과 같다면 "0000", "9999"
+      final resultValue = resultList[0]['result']; 
 
-      // 로그인 성공 -> 홈 화면으로 이동
       if (resultValue == "0000") {
+        // JSON 데이터를 UserData 객체리스트(userDataList)로 파싱
+        UserData userData = UserData.fromJson(resultList[0]); 
 
-        UserData userData = UserData.fromJson(resultList[0]); // 서버로부터 받은 JSON 데이터를 UserData 객체리스트(userDataList)로 파싱
-
-        // UserDataController 사용
         final UserDataController userDataController = Get.put(UserDataController());
-        userDataController.setUserData(userData); // 서버로부터 받은 userData를 UserDataController에 저장
+        userDataController.setUserData(userData); 
 
         // 자동 로그인 로직: 체크된 경우 기기 저장소에 아이디, 비밀번호 저장
         if (autoLoginChecked) {
@@ -85,17 +80,13 @@ Future<void> loginService(
         // 홈화면으로 이동
         Get.offAll(const HomeScreen(), transition: Transition.fadeIn, duration: const Duration(milliseconds: 500)); 
       }
-
-      // 로그인 실패 -> 알림창 띄움
+      // 응답 데이터가 오류일 때("9999": 오류)
       else {
-        failDialog1(
-          '로그인 실패',
-          '아이디 또는 비밀번호를 잘못 입력했어요.'
-        );
+        failDialog1('로그인 실패','아이디 또는 비밀번호를 잘못 입력했어요.');
       }
     }
   }
-  // 서버로부터 응답을 받지 못했을 때
+  // 응답을 받지 못했을 때
   catch (e) {
     failDialog1(
       '로그인 실패',

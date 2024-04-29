@@ -22,8 +22,8 @@ import '../../style.dart' as style;
 // 드롭다운 화면
 class BookScreen extends GetView<DropdownButtonController> {
 
-  // 드롭다운 버튼 컨트롤러
-  final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController());  
+  // 컨트롤러
+  final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController());  // 드롭다운 버튼 
 
   BookScreen({super.key});
 

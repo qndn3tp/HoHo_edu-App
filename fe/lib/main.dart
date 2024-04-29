@@ -47,7 +47,7 @@ Future<void> main() async{
       home: const MyApp()
       )
     );
-  FlutterNativeSplash.remove();                                               // 앱이 초기화되면 splash 이미지 제거
+  FlutterNativeSplash.remove();                     // 앱이 초기화되면 splash 이미지 제거
 }
 
 class MyApp extends StatelessWidget {

@@ -17,8 +17,7 @@ class DropDownButtonWidget extends GetView<DropdownButtonController> {
         style: const TextStyle(color: Colors.black, fontSize: 18),
         underline: Container(height: 2, color: Colors.transparent),
         // 현재 선택된 드롭다운 항목의 인덱스
-        value: controller.nameList.value
-            .indexOf(controller.currentItem.value ?? ''),
+        value: controller.nameList.value.indexOf(controller.currentItem.value ?? ''),
         // 드롭다운 항목을 변경(다른 것을 선택)
         onChanged: (int? index) {
           controller.changeDropDownMenu(index);

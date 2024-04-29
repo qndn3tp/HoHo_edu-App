@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_application/models/class_info_data.dart';
+import 'package:flutter_application/models/login_data.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application/models/book_data.dart';
@@ -16,8 +17,10 @@ import 'package:intl/intl.dart';
 // 연간 월별 독서량 데이터 가져오는 함수
 Future<void> getYMBookReadCountData() async {
 
-  final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController()); // 드롭다운버튼 컨트롤러
-  final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());    // 수업정보 컨트롤러
+  // 컨트롤러
+  final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController()); // 드롭다운 버튼
+  final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());    // 수업정보 
+  final UserDataController userDataController = Get.put(UserDataController());                   // 유저의 로그인 데이터
 
   // 연간 월별 독서량 API URL
   String url = dotenv.get("BOOK_READ_YM_CNT_URL");
@@ -41,20 +44,18 @@ Future<void> getYMBookReadCountData() async {
 
   // 응답의 content-type utf-8로 인코딩으로 설정
   if (response.headers['content-type']
-          ?.toLowerCase().contains('charset=utf-8') != true) {
+  ?.toLowerCase().contains('charset=utf-8') != true) {
     response.headers['content-type'] = 'application/json; charset=utf-8';
   }
   try {
-    // 서버로부터 응답을 성공적으로 받았을 때
+    // 응답을 성공적으로 받았을 때
     if (response.statusCode == 200) {
-      // 응답 데이터 처리
       final resultList = json.decode(response.body);
-      // print(resultList);
 
       // 응답 데이터가 성공일 때
       if (resultList[0]["result"] == null) {
         final resultList0 = resultList.cast<Map<String, dynamic>>();
-         // 서버로부터 받은 JSON 데이터를 YMBookCountData 객체리스트로 파싱
+        // JSON 데이터를 YMBookCountData 객체리스트로 파싱
         List<YMBookCountData> ymBookCountDataList = resultList0.map<YMBookCountData>((json) => YMBookCountData.fromJson(json)).toList();
         final YMBookCountDataController ymBookCountDataController = Get.put(YMBookCountDataController());      
         ymBookCountDataController.setYMBookCountDataList(ymBookCountDataList);
@@ -65,8 +66,8 @@ Future<void> getYMBookReadCountData() async {
       }
     }
   }
-  // 서버로부터 응답을 받지 못했을 때
+  // 응답을 받지 못했을 때
   catch (e) {
-    // failDialog2("$month월은 독클 결과가 없어요 :(");
+    throw Exception('$e');
   }
 }

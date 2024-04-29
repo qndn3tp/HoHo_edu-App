@@ -17,7 +17,7 @@ Widget tableContent(context, AttendanceData attendanceData) {
   final formattedDate = DateFormat('MM.dd').format(date);
   final formattedDayname = attendanceData.dayname.substring(0, 1);
   
-  // 등하원시간
+  // 등하원 시간
   final formattedStime = "${attendanceData.stime.substring(0, 2)}:${attendanceData.stime.substring(2)}";
   final formattedEtime = "${attendanceData.etime.substring(0, 2)}:${attendanceData.etime.substring(2)}";
 
@@ -37,15 +37,13 @@ Widget tableContent(context, AttendanceData attendanceData) {
         Expanded(
           flex: 3,
           child: Center(
-            child: Text(
-              '$formattedDate($formattedDayname)'
-            ),
+            child: Text('$formattedDate($formattedDayname)'),
           ),
         ),
         // 수직 구분선
-        SizedBox(
+        Container(
           width: 1,
-          child: Container(color: style.GREY,),
+          color: style.GREY,
         ),
         // 출결 세부 내용
         Expanded(
@@ -78,17 +76,17 @@ Widget tableContent(context, AttendanceData attendanceData) {
 }
 
 // 과목별 세부 출결 내용
-Widget detailTableContent(subject, attendance, formattedStime, formattedEtime) {
+Widget detailTableContent(subject, status, formattedStime, formattedEtime) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
       // 출결 과목 아이콘
       attendanceSubjectIcon(subject),
       // 출결 상태 아이콘
-      attendanceStatusIcon(attendance),
+      attendanceStatusIcon(status),
       // 출결 텍스트
       Text(
-        "$attendance",
+        "$status",
         style: const TextStyle(fontWeight: FontWeight.bold,),
       ),
     ],

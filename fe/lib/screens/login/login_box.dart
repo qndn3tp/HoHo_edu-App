@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/login/login_screen.dart';
 import 'package:get/get.dart';
 
+
+///////////////////////////////
+// 아이디,비밀번호 입력 박스 ///
+///////////////////////////////
+
 // 아이디
 InputDecoration loginIdBoxDecoration(text) {
   return InputDecoration(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/notifications/load_button_checked_info.dart';
 import 'package:flutter_application/notifications/request_noti.dart';
 import 'package:flutter_application/screens/setting/notification_info_box.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
@@ -11,7 +12,6 @@ import '../../style.dart' as style;
 ////////////////////////
 //      설정 화면     //
 ////////////////////////
-
 
 // 알림 토글 버튼 컨트롤러
 class SwitchButtonController extends GetxController {
@@ -47,14 +47,6 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
   late AnimationController bellController;
   final SwitchButtonController switchButtonController = Get.put(SwitchButtonController());
 
-  // 저장된 알림 정보 로드
-  Future<void> loadButtonCheckedInfo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    for (int i = 0; i < switchButtonController.buttonCheckedList.length; i++) {
-      switchButtonController.buttonCheckedList[i] =
-          prefs.getBool('buttonChecked$i') ?? false; // 저장된 값이 있으면 불러오고, 없으면 false
-    }
-  }
   // 알림 권한 여부를 체크
   Future<void> checkNotificationPermission() async {
     _isNotiChecked = await requestNotification();
@@ -63,16 +55,15 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
     });
   }
 
-
   // 전체 알림 스위치
   late bool _isNotiChecked = false;
 
   @override
   void initState() {
     super.initState();
-    loadButtonCheckedInfo(); // 저장된 알림 정보 로드
-    bellController = AnimationController(vsync: this, duration: const Duration(seconds: 2))..repeat(); // 아이콘 컨트롤러 생성
-    checkNotificationPermission(); // 알림 권한 여부를 체크(on/off)
+    loadButtonCheckedInfo();
+    bellController = AnimationController(vsync: this, duration: const Duration(seconds: 2))..repeat(); 
+    checkNotificationPermission(); 
   }
 
   @override

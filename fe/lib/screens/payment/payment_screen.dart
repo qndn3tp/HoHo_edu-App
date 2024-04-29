@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:flutter_application/screens/payment/payment_history_screen.dart';
 import 'package:flutter_application/screens/payment/payment_list_screen.dart';
-import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:get/get.dart';
 import '../../style.dart' as style;
 
@@ -45,24 +43,12 @@ class _PaymentScreenState extends State<PaymentScreen>
             Get.back();
           },
         ),
+        // 제목
         title: const Text(
           "학원비 납부",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        actions: [
-          GestureDetector(
-            onTap: () => Get.offAll(const HomeScreen()),
-            child: Container(
-              margin: const EdgeInsets.only(
-                right: 15,
-              ),
-              height: 22,
-              width: 22,
-              decoration: customBoxDecoration('assets/images/appbar/appbar_home.png')
-            ),
-          ),
-        ],
         // TabBar
         bottom: TabBar(
           /// style
