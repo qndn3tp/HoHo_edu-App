@@ -8,6 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:get/get.dart';
+import '../../notifications/token_management.dart';
 import '../../utils/network_check.dart';
 import '../../models/login_data.dart';
 import '../../utils/login_encryption.dart';
@@ -77,6 +78,11 @@ Future<void> loginService(String loginId, String loginPassword, autoLoginChecked
         await getClassInfo();
         // 푸시알림 권한 설정
         await requestNotification();
+        // 로그인시 토큰 발급
+        final token = await getToken();
+        // 토큰을 서버로 전송
+        sendToken(token, id);
+        
         // 홈화면으로 이동
         Get.offAll(const HomeScreen(), transition: Transition.fadeIn, duration: const Duration(milliseconds: 500)); 
       }

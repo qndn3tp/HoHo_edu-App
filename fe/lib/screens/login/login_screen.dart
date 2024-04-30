@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/notifications/token_management.dart';
 import 'package:flutter_application/screens/login/auto_login.dart';
 import 'package:flutter_application/screens/login/login_button.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -69,8 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {    // 비동기로 flutter_secure_storage 정보를 불러옴
       checkStoredUserInfoController.checkStoredUserInfo();
     });
-    // 로그인시 토큰 발급, 전송
-    getMyDeviceToken();
   }
 
   @override

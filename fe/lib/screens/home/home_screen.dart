@@ -6,7 +6,6 @@ import 'package:flutter_application/widgets/app_bar_drawer.dart';
 import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import '../../models/login_data.dart';
 import 'package:banner_carousel/banner_carousel.dart';
 import '../../style.dart' as style;
 
@@ -23,7 +22,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // 컨트롤러
-  final UserDataController userDataController = Get.put(UserDataController());                // 유저의 로그인 데이터
   final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController()); // 수업 정보 
   final ScrollController scrollController = ScrollController();                               // 스크롤
 
