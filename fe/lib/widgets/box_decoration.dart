@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 // 이미지 박스 위젯 //
 /////////////////////
 
-BoxDecoration customBoxDecoration1(String imgPath) {
+BoxDecoration imageBoxDecoration1(String imgPath) {
   return BoxDecoration(
     image: DecorationImage(
       image: AssetImage(imgPath),
@@ -14,7 +14,7 @@ BoxDecoration customBoxDecoration1(String imgPath) {
   );
 }
 
-BoxDecoration customBoxDecoration2(String imgPath) {
+BoxDecoration imageBoxDecoration2(String imgPath) {
   return BoxDecoration(
     image: DecorationImage(
       image: AssetImage(imgPath),

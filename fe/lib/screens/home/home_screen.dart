@@ -60,14 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
     ? 
     // 로딩화면
     Container(
-      decoration: customBoxDecoration2('assets/images/background.jpg'),
+      decoration: imageBoxDecoration2('assets/images/background.jpg'),
       child: const SpinKitThreeBounce(color: style.LIGHT_GREY),
     )
     : 
     // 로딩 후 화면
     Container(
       // 홈 배경화면
-      decoration: customBoxDecoration2('assets/images/background.jpg'),
+      decoration: imageBoxDecoration2('assets/images/background.jpg'),
       // 홈 Content
       child: Scaffold(
         backgroundColor: Colors.transparent,

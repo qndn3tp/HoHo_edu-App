@@ -37,7 +37,7 @@ Widget attendanceSubjectIcon(subject) {
     return Container(
       height: 18,
       width: 18,
-      decoration: customBoxDecoration1(subjectList[subject].toString())
+      decoration: imageBoxDecoration1(subjectList[subject].toString())
     );
   } else {
     return Container();

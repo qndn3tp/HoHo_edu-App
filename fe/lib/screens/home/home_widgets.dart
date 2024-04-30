@@ -29,7 +29,7 @@ Widget menuButton({
         Container(
           height: 55,
           width: 55,
-          decoration: customBoxDecoration1(imagePath),
+          decoration: imageBoxDecoration1(imagePath),
         ),
         Text(buttonText)
       ]

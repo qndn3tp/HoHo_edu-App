@@ -83,7 +83,7 @@ class _BookResult1State extends State<BookResult1> {
             Container(
               height: 200,
               width: double.infinity,
-              decoration: customBoxDecoration1("assets/images/book/b0.png")
+              decoration: imageBoxDecoration1("assets/images/book/b0.png")
             ),
             // 이미지(풍선)
             Positioned(
@@ -91,7 +91,7 @@ class _BookResult1State extends State<BookResult1> {
               child: Container(
                 height: 120,
                 width: 120,
-                decoration: customBoxDecoration1("assets/images/book/b5.png")
+                decoration: imageBoxDecoration1("assets/images/book/b5.png")
               ),
             ),
             // 월간 읽은 책의 권수

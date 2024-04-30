@@ -61,7 +61,7 @@ Widget appbarDrawer(context) {
                   leading: Container(
                     height: 25,
                     width: 25,
-                    decoration: customBoxDecoration1(drawerList[i][1].toString()),
+                    decoration: imageBoxDecoration1(drawerList[i][1].toString()),
                   ),
                   trailing: const Icon(EvaIcons.chevronRightOutline,color: style.DEEP_GREY),
                 ),
@@ -86,7 +86,7 @@ Widget appbarDrawer(context) {
             leading: Container(
               height: 25,
               width: 25,
-              decoration: customBoxDecoration1('assets/images/drawer/drawer_logout.png'),
+              decoration: imageBoxDecoration1('assets/images/drawer/drawer_logout.png'),
             ),
           ),
         ),
