@@ -44,8 +44,9 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> with TickerProviderStateMixin {
   
-  late AnimationController bellController;
-  final SwitchButtonController switchButtonController = Get.put(SwitchButtonController());
+  // 컨트롤러
+  late AnimationController bellController;        // 알림 아이콘
+  final SwitchButtonController switchButtonController = Get.put(SwitchButtonController()); // 알림 토글 버튼
 
   // 알림 권한 여부를 체크
   Future<void> checkNotificationPermission() async {

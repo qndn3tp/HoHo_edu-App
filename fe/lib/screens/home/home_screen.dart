@@ -23,7 +23,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // 컨트롤러
   final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController()); // 수업 정보 
-  final ScrollController scrollController = ScrollController();                               // 스크롤
 
   // 로딩값
   late bool isLoading;

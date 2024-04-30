@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 //  알림 데이터, 컨트롤러   //
 /////////////////////////////
 
-
 // 알림 데이터 클래스
 class NoticeData {
   final String title;

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 //  출석 데이터, 컨트롤러   //
 /////////////////////////////
 
-
 // 출석 데이터 클래스
 class AttendanceData {
   final String ymd;
@@ -15,7 +14,6 @@ class AttendanceData {
   final String timecheckS;
   final String gbI;
   final String timecheckI;
-
   
   AttendanceData({
     required this.ymd,

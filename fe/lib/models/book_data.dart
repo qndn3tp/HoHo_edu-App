@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 ///////////////////////////////////
 //  연간독서량 데이터, 컨트롤러   //
 ///////////////////////////////////
+
 // 데이터 클래스
 class YearBookData {
   final int totalRows;
@@ -129,9 +130,9 @@ class BookScoreDataController extends GetxController {
 }
 
 
-/////////////////////////////////////////////////////////
-//  독서클리닉 영역별 획득 표시(점수) 데이터, 컨트롤러   //
-////////////////////////////////////////////////////////
+////////////////////////////////////////
+//  연간 월별 독서량 데이터, 컨트롤러  //
+////////////////////////////////////////
 // 데이터 클래스
 class YMBookCountData {
   final String month;
@@ -149,7 +150,8 @@ class YMBookCountData {
     );
   }
 }
-// // 데이터 컨트롤러
+
+// 데이터 컨트롤러
 class YMBookCountDataController extends GetxController {
   List<YMBookCountData>? _ymBookCountDataList;
 
