@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application/screens/attendance/attendance_screen.dart';
+import 'package:flutter_application/screens/home/home_menu_box.dart';
 import 'package:flutter_application/services/attendance/time_check.dart';
 import 'package:flutter_application/services/book/monthly_book_read_data.dart';
 import 'package:flutter_application/services/book/monthly_book_score_data.dart';
@@ -27,8 +27,8 @@ Widget menuButton({
     child: Column(
       children: [
         Container(
-          height: 55,
-          width: 55,
+          height: 60,
+          width: 60,
           decoration: imageBoxDecoration1(imagePath),
         ),
         Text(buttonText)
@@ -70,10 +70,14 @@ Widget paymentButton() {
 
 // 알림장 버튼
 Widget noticeButton() {
+  final unreadNotiController = Get.put(UnreadNotiController());
+
   return menuButton(
     imagePath: 'assets/images/notice.png',
     buttonText: '알림장',
     onTap: () async {
+      // db에서 배지를 0으로 업데이트하는 코드
+      unreadNotiController.isUnread.value = false;
       Get.to(
         const NoticeScreen(),
         transition: Transition.cupertino,

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/home/home_widgets.dart';
+import 'package:get/get.dart';
 
 /////////////////
 //  메뉴 박스  //
 /////////////////
 
+// 안읽은 알림의 여부 컨트롤러
+class UnreadNotiController extends GetxController {
+  RxBool isUnread = true.obs;
+}
+
 Widget menuBox(screenSize) {
+  final unreadNotiController = Get.put(UnreadNotiController());
+
   return Container(
     width: screenSize.width * 0.9,
     height: (screenSize.height * 0.45),
@@ -38,13 +46,35 @@ Widget menuBox(screenSize) {
             paymentButton(),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        Stack(
           children: [
-            // 알림장
-            noticeButton(),
-            // 독클결과
-            bookButton(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // 알림장
+                noticeButton(),
+                // 독클결과
+                bookButton(),
+              ],
+            ),
+            // 안읽은 알림 
+            Obx(() => Positioned(
+              left: screenSize.width / 2 - 75,
+              child: unreadNotiController.isUnread.value
+              ? Container(
+                width: 20, 
+                height: 20, 
+                decoration: BoxDecoration(
+                  color: Colors.red, 
+                  shape: BoxShape.circle, 
+                  border: Border.all(
+                    color: Colors.white, 
+                    width: 2, 
+                  ),
+                )
+              ) 
+              : Container()
+            ))
           ],
         )
       ],

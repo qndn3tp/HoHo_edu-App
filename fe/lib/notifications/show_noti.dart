@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_application/screens/home/home_menu_box.dart';
 import 'package:flutter_application/screens/setting/setting_notification_screen.dart';
 import 'package:flutter_application/utils/load_button_checked_info.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -18,6 +19,15 @@ Future<void> showNotification(RemoteMessage message) async {
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   final noticeNum = int.parse(message.data['noticeNum']); // 개별 알림 구분번호
+
+  // 알림뱃지
+  // final unreadNotiController = Get.put(UnreadNotiController());
+  // final badge = int.parse(message.data['badge']); 
+  // if (badge > 0) {
+  //   unreadNotiController.isUnread.value = true;
+  // } else {
+  //   unreadNotiController.isUnread.value = false;
+  // }
 
   // 사용자가 허용한 개별알림만 수신
   if (switchButtonController.buttonCheckedList[noticeNum] == true) {    
