@@ -7,6 +7,7 @@ import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:banner_carousel/banner_carousel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../style.dart' as style;
 
 ///////////////////
@@ -27,6 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
   // 로딩값
   late bool isLoading;
 
+  // 로컬 저장소에서 로드
+  Future<void> loadisReadInfo() async {
+    final unreadNotiController = Get.put(ReadNotiController());
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    unreadNotiController.isRead.value = prefs.getBool('isRead') ?? false; 
+  }
+
   @override
   void initState() {
     super.initState();
@@ -36,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
         isLoading = false;
       });
     });
+    loadisReadInfo();
   }
 
   @override

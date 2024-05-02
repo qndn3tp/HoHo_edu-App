@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/home/home_widgets.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /////////////////
 //  메뉴 박스  //
 /////////////////
 
 // 안읽은 알림의 여부 컨트롤러
-class UnreadNotiController extends GetxController {
-  RxBool isUnread = true.obs;
+class ReadNotiController extends GetxController {
+  RxBool isRead = true.obs;
+
+  // 로컬 저장소에 저장
+  Future<void> storeisReadInfo(value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isRead', value);
+    print("isRead: $isRead");
+  }
 }
 
+
 Widget menuBox(screenSize) {
-  final unreadNotiController = Get.put(UnreadNotiController());
+  final readNotiController = Get.put(ReadNotiController());
 
   return Container(
     width: screenSize.width * 0.9,
@@ -57,11 +66,12 @@ Widget menuBox(screenSize) {
                 bookButton(),
               ],
             ),
-            // 안읽은 알림 
+            // 알림여부에 따른 표시
             Obx(() => Positioned(
               left: screenSize.width / 2 - 75,
-              child: unreadNotiController.isUnread.value
-              ? Container(
+              child: readNotiController.isRead.value
+              ? Container()           // 알림 확인 O  
+              : Container(            // 알림 확인 X
                 width: 20, 
                 height: 20, 
                 decoration: BoxDecoration(
@@ -72,11 +82,11 @@ Widget menuBox(screenSize) {
                     width: 2, 
                   ),
                 )
-              ) 
-              : Container()
-            ))
+              )
+            )
+            ) 
           ],
-        )
+        ),
       ],
     ),
   );

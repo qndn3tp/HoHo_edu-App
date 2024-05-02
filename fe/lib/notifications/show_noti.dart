@@ -10,7 +10,13 @@ import 'dart:ui';
 // fcm 로컬 알림 띄우기  //
 //////////////////////////
 
+
 Future<void> showNotification(RemoteMessage message) async {
+  // 알림배지
+  final readNotiController = Get.put(ReadNotiController());
+  readNotiController.isRead.value = false;
+  readNotiController.storeisReadInfo(false);
+
   // 저장된 개별 알림 정보 로드
   await loadButtonCheckedInfo();
   final switchButtonController = Get.put(SwitchButtonController());
@@ -19,15 +25,6 @@ Future<void> showNotification(RemoteMessage message) async {
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   final noticeNum = int.parse(message.data['noticeNum']); // 개별 알림 구분번호
-
-  // 알림뱃지
-  // final unreadNotiController = Get.put(UnreadNotiController());
-  // final badge = int.parse(message.data['badge']); 
-  // if (badge > 0) {
-  //   unreadNotiController.isUnread.value = true;
-  // } else {
-  //   unreadNotiController.isUnread.value = false;
-  // }
 
   // 사용자가 허용한 개별알림만 수신
   if (switchButtonController.buttonCheckedList[noticeNum] == true) {    

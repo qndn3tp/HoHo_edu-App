@@ -70,14 +70,16 @@ Widget paymentButton() {
 
 // 알림장 버튼
 Widget noticeButton() {
-  final unreadNotiController = Get.put(UnreadNotiController());
+  final readNotiController = Get.put(ReadNotiController());
 
   return menuButton(
     imagePath: 'assets/images/notice.png',
     buttonText: '알림장',
     onTap: () async {
       // db에서 배지를 0으로 업데이트하는 코드
-      unreadNotiController.isUnread.value = false;
+      readNotiController.isRead.value =true;
+      readNotiController.storeisReadInfo(true);
+
       Get.to(
         const NoticeScreen(),
         transition: Transition.cupertino,
