@@ -41,7 +41,6 @@ Future<bool> requestNotification() async{
 
   print("안드로이드 알림 권한: ${status.isGranted}");
   print('iOS 알림 권한: ${settings.authorizationStatus}');
-  print(isNotificationChecked);
 
   return isNotificationChecked;
 }

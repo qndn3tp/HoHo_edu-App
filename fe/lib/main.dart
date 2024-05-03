@@ -23,8 +23,8 @@ Future<void> main() async{
   // FCM 초기화
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);  
   await setupNotification();
+  // FCM 메시지
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  // 포그라운드 메시지
   FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
     print("포그라운드 수신 ${message.data}");
     showNotification(message);
@@ -45,8 +45,8 @@ Future<void> main() async{
       }),
       theme: style.theme,
       home: const MyApp()
-      )
-    );
+    )
+  );
   FlutterNativeSplash.remove();                     // 앱이 초기화되면 splash 이미지 제거
 }
 

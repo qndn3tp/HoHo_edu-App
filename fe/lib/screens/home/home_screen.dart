@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // 로딩값
   late bool isLoading;
 
-  // 로컬 저장소에서 로드
+  // 알림 확인 여부 로드
   Future<void> loadisReadInfo() async {
     final unreadNotiController = Get.put(ReadNotiController());
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -81,6 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Image.asset('assets/images/appbar/appbar_logo.png'),
           backgroundColor: const Color(0xfffffde3),
           elevation: 0,
+          centerTitle: false
         ),
         // 앱 바의 사이드 메뉴
         endDrawer: appbarDrawer(context),

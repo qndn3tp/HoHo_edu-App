@@ -49,7 +49,5 @@ Future<void> showNotification(RemoteMessage message) async {
         )
       ),
     );
-  } else {
-    print("알림 X");
   }
 }

@@ -31,7 +31,7 @@ Widget menuButton({
           width: 60,
           decoration: imageBoxDecoration1(imagePath),
         ),
-        Text(buttonText)
+        Text(buttonText, style: const TextStyle(fontSize: 15),)
       ]
     ),
   );
@@ -76,7 +76,7 @@ Widget noticeButton() {
     imagePath: 'assets/images/notice.png',
     buttonText: '알림장',
     onTap: () async {
-      // db에서 배지를 0으로 업데이트하는 코드
+      // 알림 확인
       readNotiController.isRead.value =true;
       readNotiController.storeisReadInfo(true);
 

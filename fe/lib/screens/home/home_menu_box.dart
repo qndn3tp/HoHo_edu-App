@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 //  메뉴 박스  //
 /////////////////
 
-// 안읽은 알림의 여부 컨트롤러
+// 알림 확인 여부 컨트롤러
 class ReadNotiController extends GetxController {
   RxBool isRead = true.obs;
 
@@ -15,7 +15,6 @@ class ReadNotiController extends GetxController {
   Future<void> storeisReadInfo(value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('isRead', value);
-    print("isRead: $isRead");
   }
 }
 
@@ -66,20 +65,20 @@ Widget menuBox(screenSize) {
                 bookButton(),
               ],
             ),
-            // 알림여부에 따른 표시
+            // 알림 확인 여부에 따른 배지
             Obx(() => Positioned(
               left: screenSize.width / 2 - 75,
               child: readNotiController.isRead.value
               ? Container()           // 알림 확인 O  
               : Container(            // 알림 확인 X
-                width: 20, 
-                height: 20, 
+                width: 22, 
+                height: 22, 
                 decoration: BoxDecoration(
-                  color: Colors.red, 
+                  color: const Color(0xffff3939), 
                   shape: BoxShape.circle, 
                   border: Border.all(
-                    color: Colors.white, 
-                    width: 2, 
+                    color: const Color(0xfff2f2f2), 
+                    width: 4, 
                   ),
                 )
               )
