@@ -31,19 +31,24 @@ class CheckStoredUserInfoController extends GetxController {
 
   String? userInfo = "";
   final storage = Get.put(const FlutterSecureStorage()); 
+  late String storedUserId;
+  late String storedUserPassword;
 
   checkStoredUserInfo() async {
     // read 함수를 통해 key값에 맞는 정보를 불러옴(불러오는 타입은 String 데이터가 없다면 null)
     userInfo = await storage.read(key: "login");
 
     if (userInfo != null) {
-      String storedUserId = userInfo?.split(" ")[1] ?? ""; 
-      String storedUserPassword = userInfo?.split(" ")[3] ?? ""; 
+      storedUserId = userInfo?.split(" ")[1] ?? ""; 
+      storedUserPassword = userInfo?.split(" ")[3] ?? ""; 
       
       loginController.idController.text = storedUserId;
       loginController.passwordController.text = storedUserPassword;
       autoLoginController.isChecked.value = true;
+
+      return true;
     }
+    return false;
   }
 }
 
@@ -90,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             // 로그인 입력
             GestureDetector(
-              onTap: () => FocusManager.instance.primaryFocus?.unfocus(), // 입력 칸 밖의 화면을 터치하면 키보드가 내려감
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(), // 입력 칸 밖의 화면을 터치 시, 키보드 입력 해제
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(30),
                 child: Column(

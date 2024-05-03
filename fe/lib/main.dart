@@ -3,7 +3,9 @@ import 'package:flutter_application/firebase_options.dart';
 import 'package:flutter_application/notifications/background_noti.dart';
 import 'package:flutter_application/notifications/setup_noti.dart';
 import 'package:flutter_application/notifications/show_noti.dart';
+import 'package:flutter_application/services/check_perform_autologin.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'style.dart' as style;
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -50,11 +52,27 @@ Future<void> main() async{
   FlutterNativeSplash.remove();                     // 앱이 초기화되면 splash 이미지 제거
 }
 
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const LoginScreen();
+    
+    return FutureBuilder<Widget>(
+      future: checkAndPerformAutoLogin(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // 데이터를 가져오는 중
+          return const SpinKitThreeBounce(color: style.LIGHT_GREY,);
+        } else if (snapshot.hasError) {
+          // 에러 발생
+          return const LoginScreen(); 
+        } else {
+          // 데이터에 따라 반환할 위젯을 결정
+          return snapshot.data!; 
+        }
+      },
+    );
   }
 }

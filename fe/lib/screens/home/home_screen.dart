@@ -4,11 +4,9 @@ import 'package:flutter_application/screens/home/home_menu_box.dart';
 import 'package:flutter_application/screens/home/home_student_info_box.dart';
 import 'package:flutter_application/widgets/app_bar_drawer.dart';
 import 'package:flutter_application/widgets/box_decoration.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../style.dart' as style;
 
 ///////////////////
 //    홈 화면    //
@@ -25,9 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
   // 컨트롤러
   final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController()); // 수업 정보 
 
-  // 로딩값
-  late bool isLoading;
-
   // 알림 확인 여부 로드
   Future<void> loadisReadInfo() async {
     final unreadNotiController = Get.put(ReadNotiController());
@@ -38,12 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    isLoading = true;
-    Future.delayed(const Duration(milliseconds: 500), () {        // 500 milliseconds 동안 로딩바 표시
-      setState(() {
-        isLoading = false;
-      });
-    });
     loadisReadInfo();
   }
 
@@ -62,16 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
       banners.add(studentInfoBox(context, name));
     }
 
-    return isLoading 
-    ? 
-    // 로딩화면
-    Container(
-      decoration: imageBoxDecoration2('assets/images/background.jpg'),
-      child: const SpinKitThreeBounce(color: style.LIGHT_GREY),
-    )
-    : 
-    // 로딩 후 화면
-    Container(
+    return Container(
       // 홈 배경화면
       decoration: imageBoxDecoration2('assets/images/background.jpg'),
       // 홈 Content
