@@ -14,14 +14,17 @@ Widget loginButton() {
   AutoLoginController autoLoginController = Get.put(AutoLoginController());  // 자동 로그인
 
   return GestureDetector(
-    onTap: () => loginService(
-      // 아이디 입력값
-      loginController.idController.text,
-      // 비밀번호 입력값
-      loginController.passwordController.text,
-      // 자동로그인 체크값
-      autoLoginController.isChecked.value,
-    ),
+    onTap: () {
+      FocusManager.instance.primaryFocus?.unfocus();      // 키보드 입력 해제
+      loginService(
+        // 아이디 입력값
+        loginController.idController.text,
+        // 비밀번호 입력값
+        loginController.passwordController.text,
+        // 자동로그인 체크값
+        autoLoginController.isChecked.value,
+      );
+    }, 
     child: Center(
       child: Container(
         height: 50,

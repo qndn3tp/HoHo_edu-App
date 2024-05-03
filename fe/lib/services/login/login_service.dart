@@ -84,7 +84,7 @@ Future<void> loginService(String loginId, String loginPassword, autoLoginChecked
         sendToken(token, id);
         
         // 홈화면으로 이동
-        Get.offAll(const HomeScreen(), transition: Transition.fadeIn, duration: const Duration(milliseconds: 500)); 
+        Get.offAll(const HomeScreen(), transition: Transition.fadeIn, duration: const Duration(milliseconds: 800)); 
       }
       // 응답 데이터가 오류일 때("9999": 오류)
       else {
