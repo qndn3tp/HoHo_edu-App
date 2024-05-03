@@ -24,8 +24,8 @@ class BookResult1 extends StatefulWidget {
 
 class _BookResult1State extends State<BookResult1> {
   // 컨트롤러
-  BookTitleDataController bookTitleDataController = Get.find();       // 책 제목
-  DropdownButtonController dropdownButtonController = Get.find();     // 드롭다운 버튼
+  final bookTitleDataController = Get.put(BookTitleDataController());       // 책 제목
+  final dropdownButtonController = Get.put(DropdownButtonController());     // 드롭다운 버튼
 
   @override
   Widget build(BuildContext context) {

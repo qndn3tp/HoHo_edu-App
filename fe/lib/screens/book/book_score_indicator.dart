@@ -28,7 +28,7 @@ final scoreImageList = [
 
 Widget scoreIndicator(context, index) {
   
-  final BookScoreDataController bookScoreDataController = Get.find();
+  final BookScoreDataController bookScoreDataController = Get.put(BookScoreDataController());
   final Size screenSize = MediaQuery.of(context).size;
 
   // 퍼센트 점수

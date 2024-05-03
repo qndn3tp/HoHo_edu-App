@@ -20,7 +20,7 @@ class BookResult2 extends StatefulWidget {
 class _BookResult2State extends State<BookResult2> {
   
   // 컨트롤러
-  BookScoreDataController bookScoreDataController = Get.find();
+  BookScoreDataController bookScoreDataController = Get.put(BookScoreDataController());
 
   @override
   Widget build(BuildContext context) {

@@ -70,7 +70,7 @@ Future<void> getMonthlyBookScoreData(month) async {
   }
   // 응답을 받지 못했을 때
   catch (e) {
-    BookScoreDataController bookScoreDataController = Get.find();
+    BookScoreDataController bookScoreDataController = Get.put(BookScoreDataController());
     bookScoreDataController.setBookScoreDataList([]);
   }
 }
