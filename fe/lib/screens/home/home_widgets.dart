@@ -27,11 +27,12 @@ Widget menuButton({
     child: Column(
       children: [
         Container(
+          margin: const EdgeInsets.only(bottom: 10),
           height: 60,
           width: 60,
           decoration: imageBoxDecoration1(imagePath),
         ),
-        Text(buttonText, style: const TextStyle(fontSize: 15),)
+        Text(buttonText, style: const TextStyle(fontSize: 17),)
       ]
     ),
   );
