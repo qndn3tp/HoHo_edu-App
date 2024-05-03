@@ -17,7 +17,6 @@ import '../style.dart' as style;
 /////////////////////
 
 Widget appbarDrawer(context) {
-  final Size screenSize = MediaQuery.of(context).size;
 
   // 학생 정보
   ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());
@@ -33,10 +32,9 @@ Widget appbarDrawer(context) {
   ];
 
   return Drawer(
-    child: ListView(
-      padding: EdgeInsets.zero,
+    child: Column(
       children: [
-        // 상단 박스 내용
+        // 상단 프로필
         UserAccountsDrawerHeader(
           accountName: const Text("안녕하세요", style: TextStyle(color: Colors.white, fontSize: 20),),
           accountEmail: Text('$namesText학생 학부모님', style: const TextStyle(fontSize: 17),),
@@ -49,27 +47,28 @@ Widget appbarDrawer(context) {
           ),
         ),
         // 리스트
-        Column(
-          children: [
-            for (int i=0; i<drawerList.length; i++)
-              GestureDetector(
-                onTap: () {
-                  Get.to(drawerList[i][2]);
-                },
-                child: ListTile(
-                  title: Text(drawerList[i][0].toString()),
-                  leading: Container(
-                    height: 25,
-                    width: 25,
-                    decoration: imageBoxDecoration1(drawerList[i][1].toString()),
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              for (int i=0; i<drawerList.length; i++)
+                GestureDetector(
+                  onTap: () {
+                    Get.to(drawerList[i][2]);
+                  },
+                  child: ListTile(
+                    title: Text(drawerList[i][0].toString()),
+                    leading: Container(
+                      height: 25,
+                      width: 25,
+                      decoration: imageBoxDecoration1(drawerList[i][1].toString()),
+                    ),
+                    trailing: const Icon(EvaIcons.chevronRightOutline,color: style.DEEP_GREY),
                   ),
-                  trailing: const Icon(EvaIcons.chevronRightOutline,color: style.DEEP_GREY),
-                ),
-              )
-          ],
+                )
+            ],
+          ),
         ),
-        // 높이 조절
-        SizedBox(height: screenSize.height * 0.3),
         // 구분선
         const Divider(),
         // 로그아웃
