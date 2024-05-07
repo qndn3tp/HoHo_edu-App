@@ -12,8 +12,8 @@ Widget studentInfoBox(context, name) {
   final screenSize = MediaQuery.of(context).size;
 
   // 컨트롤러 
-  UserDataController userDataController = Get.put(UserDataController());                // 유저의 로그인 데이터
-  ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController()); //수업 정보
+  final userDataController = Get.put(UserDataController());             // 유저의 로그인 데이터
+  final classInfoDataController = Get.put(ClassInfoDataController());   //수업 정보
   
   // 이름:[수업정보]를 가지는 map
   Map<String, List<List<String>>> nameSubjectMap = classInfoDataController
@@ -22,7 +22,6 @@ Widget studentInfoBox(context, name) {
   List<List<String>> subjectList = nameSubjectMap[name] ?? [];
 
   return Container(
-    padding: const EdgeInsets.only(left: 10, right: 5),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(30),
       color: style.PRIMARY_BLUE,
@@ -35,23 +34,22 @@ Widget studentInfoBox(context, name) {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 센터이름
+            // 센터 이름
             Text(
               userDataController.userData!.cname,
               style: const TextStyle(color: style.DARK_WHITE,fontSize: 15,)),
-            const SizedBox(
-              height: 5,
-            ),
-            // 학생이름
+            const SizedBox(height: 5),
+            // 학생 이름
             RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                  text: name,
-                  style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 25)),
-                const TextSpan(
-                  text: " 학생",
-                  style: TextStyle(color: Colors.white, fontSize: 25)),
-              ]),
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: name,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                  const TextSpan(
+                    text: " 학생",
+                    style: TextStyle(fontSize: 25)),
+                ]),
             ),
             // 수강정보
             SizedBox(
@@ -69,9 +67,11 @@ Widget studentInfoBox(context, name) {
                   final dateName = subjectList[index][4];
 
                   return Text(
-                    "[$subjectName$subjectNum] 수업중 ($dateName $formattedStartTime~$formattedEndTime) ",
-                    style: const TextStyle(color: style.DARK_WHITE, fontSize: 14),);
-                }))
+                    "[$subjectName$subjectNum] 수업중 ($dateName $formattedStartTime~$formattedEndTime)",
+                    style: const TextStyle(color: style.DARK_WHITE, fontSize: 15),);
+                }
+              )
+            )
           ],
         ),
       ],

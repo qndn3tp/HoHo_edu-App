@@ -6,6 +6,8 @@ import 'package:flutter_application/widgets/box_decoration.dart';
 //  출결 아이콘  //
 ///////////////////
 
+const double attendanceIconSize = 18;
+
 // 출결 상태 아이콘
 Widget attendanceStatusIcon(status) {
   final Map<String, Map<String, dynamic>> statusList = {
@@ -18,7 +20,7 @@ Widget attendanceStatusIcon(status) {
   if (statusList.containsKey(status)) {
     return Icon(
       statusList[status]!['icon'],
-      size: 18,
+      size: attendanceIconSize,
       color: statusList[status]!['color'],
     );
   } else {
@@ -35,9 +37,9 @@ Widget attendanceSubjectIcon(subject) {
 
   if (subjectList.containsKey(subject)) {
     return Container(
-      height: 18,
-      width: 18,
-      decoration: imageBoxDecoration1(subjectList[subject].toString())
+      height: attendanceIconSize,
+      width: attendanceIconSize,
+      decoration: imageBoxDecoration(subjectList[subject].toString(), BoxFit.contain)
     );
   } else {
     return Container();

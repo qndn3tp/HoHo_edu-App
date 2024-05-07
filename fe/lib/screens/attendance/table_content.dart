@@ -11,6 +11,7 @@ import '../../style.dart' as style;
 
 Widget tableContent(context, AttendanceData attendanceData) {
   final Size screenSize = MediaQuery.of(context).size;
+  const int columnFlex = 3; 
 
   // 일자
   final date = DateTime.parse(attendanceData.ymd);
@@ -28,14 +29,14 @@ Widget tableContent(context, AttendanceData attendanceData) {
   ];
 
   return Container(
-    margin: const EdgeInsets.only(right: 10, left: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 10),
     height: screenSize.height * 0.1,
     color: style.LIGHT_GREY,
     child: Row(
       children: [
         // 날짜
         Expanded(
-          flex: 3,
+          flex: columnFlex,
           child: Center(
             child: Text('$formattedDate($formattedDayname)'),
           ),
@@ -47,7 +48,7 @@ Widget tableContent(context, AttendanceData attendanceData) {
         ),
         // 출결 세부 내용
         Expanded(
-          flex: 3,
+          flex: columnFlex,
           child: ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -64,7 +65,7 @@ Widget tableContent(context, AttendanceData attendanceData) {
         ),
         // 등하원 시간
         Expanded(
-          flex: 4,
+          flex: (10 - columnFlex*2),
           child: Text(
             "(등원 $formattedStime, 하원 $formattedEtime)",
             style: const TextStyle(color: style.DEEP_GREY, fontSize: 13),

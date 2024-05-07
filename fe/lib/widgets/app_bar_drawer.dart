@@ -16,20 +16,39 @@ import '../style.dart' as style;
 // 앱 바의 사이드바 //
 /////////////////////
 
-Widget appbarDrawer(context) {
+final drawerList = [
+  {
+    "title": "출석체크",
+    "iconPath": 'assets/images/attendance.png',
+    "screen": AttendanceScreen(),
+  },
+  {
+    "title": "학원비 납부",
+    "iconPath": 'assets/images/payment.png',
+    "screen": const PaymentScreen(),
+  },
+  {
+    "title": "알림장",
+    "iconPath": 'assets/images/notice.png',
+    "screen": const NoticeScreen(),
+  },
+  {
+    "title": "독클결과",
+    "iconPath": 'assets/images/book.png',
+    "screen": BookScreen(),
+  },
+  {
+    "title": "설정",
+    "iconPath": 'assets/images/drawer/drawer_setting.png',
+    "screen": const SettingScreen(),
+  },
+];
 
+Widget appbarDrawer(context) {
   // 학생 정보
-  ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());
+  final classInfoDataController = Get.put(ClassInfoDataController());
   final namesList = classInfoDataController.getSnamesList(classInfoDataController.classInfoDataList);
   final namesText = namesList.join(",");
-
-  final drawerList = [
-    ["출석체크", 'assets/images/attendance.png', AttendanceScreen()],
-    ["학원비 납부", 'assets/images/payment.png', const PaymentScreen()],
-    ["알림장", 'assets/images/notice.png', const NoticeScreen()],
-    ["독클결과", 'assets/images/book.png', BookScreen()],
-    ["설정", 'assets/images/drawer/drawer_setting.png', const SettingScreen()],
-  ];
 
   return Drawer(
     child: Column(
@@ -48,25 +67,29 @@ Widget appbarDrawer(context) {
         ),
         // 리스트
         Expanded(
-          child: ListView(
+          child: ListView.builder(
             padding: EdgeInsets.zero,
-            children: [
-              for (int i=0; i<drawerList.length; i++)
-                GestureDetector(
-                  onTap: () {
-                    Get.to(drawerList[i][2]);
-                  },
-                  child: ListTile(
-                    title: Text(drawerList[i][0].toString()),
-                    leading: Container(
-                      height: 25,
-                      width: 25,
-                      decoration: imageBoxDecoration1(drawerList[i][1].toString()),
-                    ),
-                    trailing: const Icon(EvaIcons.chevronRightOutline,color: style.DEEP_GREY),
+            itemCount: drawerList.length,
+            itemBuilder: (c, i) {
+              return GestureDetector(
+                onTap: () {
+                  Get.to(drawerList[i]["screen"]);
+                },
+                // 알림
+                child: ListTile(
+                  title: Text(drawerList[i]["title"].toString()),
+                  leading: Container(
+                    height: 25,
+                    width: 25,
+                    decoration: imageBoxDecoration(drawerList[i]["iconPath"].toString(), BoxFit.contain),
                   ),
-                )
-            ],
+                  trailing: const Icon(
+                    EvaIcons.chevronRightOutline, 
+                    color: style.DEEP_GREY
+                  ),
+                ),
+              );
+            },
           ),
         ),
         // 구분선
@@ -85,7 +108,7 @@ Widget appbarDrawer(context) {
             leading: Container(
               height: 25,
               width: 25,
-              decoration: imageBoxDecoration1('assets/images/drawer/drawer_logout.png'),
+              decoration: imageBoxDecoration('assets/images/drawer/drawer_logout.png', BoxFit.contain),
             ),
           ),
         ),

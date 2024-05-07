@@ -27,38 +27,20 @@ Widget notificationInfoBox(isChecked, bellController) {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            isChecked
-            ? notificationChecked()
-            : notificationUnChecked(),
+            Text(
+              isChecked 
+              ? "알림을 받고 있어요." 
+              : "알림을 받고 있지 않아요.",
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              isChecked
+              ? "방해금지모드나 무음모드에서는 울리지 않아요."
+              : "개별 알림을 받으려면 알림을 켜주세요!",
+            ),
           ],
         )
       ],
     ),
-  );
-}
-
-// 알림 On
-Widget notificationChecked() {
-  return const Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        "알림을 받고 있어요.",
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-      Text("방해금지모드나 무음모드에서는 울리지 않아요.")
-    ],
-  );
-}
-
-// 알림 Off
-Widget notificationUnChecked() {
-  return const Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        "알림을 받고 있지 않아요.",
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-      Text("개별 알림을 받으려면 알림을 켜주세요!")    
-    ],
   );
 }

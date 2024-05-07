@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_application/notifications/show_noti.dart';
-import 'package:flutter_application/utils/load_button_checked_info.dart';
+import 'package:flutter_application/utils/load_noti_list_info.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 /////////////////////

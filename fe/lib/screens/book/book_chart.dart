@@ -60,10 +60,7 @@ class _BookChartState extends State<BookChart> {
         AspectRatio(
           aspectRatio: 1.50,
           child: Padding(
-            padding: const EdgeInsets.only(
-              right: 20,
-              top: 40,
-            ),
+            padding: const EdgeInsets.only(right: 20, top: 40,),
             child: LineChart(
               showAvg ? avgData() : mainData(),
             ),

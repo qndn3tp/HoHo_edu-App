@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../style.dart' as style;
 
-
 //////////////////////////
 // 자동 로그인 체크 박스 //
 //////////////////////////
 
-// 자동로그인 컨트롤러
-class AutoLoginController extends GetxController {
+// 자동로그인 체크 컨트롤러
+class AutoLoginCheckController extends GetxController {
   var isChecked = false.obs;
 
   void updateCheck(bool newValue) {
@@ -17,10 +16,11 @@ class AutoLoginController extends GetxController {
 }
 
 // 자동로그인 체크박스
-class AutoLogin extends StatelessWidget {
-  final AutoLoginController autoLoginController = Get.put(AutoLoginController()); // 자동로그인 컨트롤러: 자동로그인 상태 관리(isChecked)
+class AutoLoginCheck extends StatelessWidget {
+  // 컨트롤러
+  final autoLoginCheckController = Get.put(AutoLoginCheckController()); // 자동로그인 체크 
 
-  AutoLogin({super.key});
+  AutoLoginCheck({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +29,9 @@ class AutoLogin extends StatelessWidget {
         Obx(
           () => Checkbox(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            value: autoLoginController.isChecked.value,
+            value: autoLoginCheckController.isChecked.value,
             onChanged: (newValue) {
-              autoLoginController.updateCheck(newValue ?? false); // isChecked의 상태 관리
+              autoLoginCheckController.updateCheck(newValue ?? false); // isChecked의 상태 관리
             },
             activeColor: style.PRIMARY_BLUE,
           ),

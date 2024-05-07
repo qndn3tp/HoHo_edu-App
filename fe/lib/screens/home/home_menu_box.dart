@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 //  메뉴 박스  //
 /////////////////
 
-// 알림 확인 여부 컨트롤러
+// 푸시 알림 확인 여부 컨트롤러
 class ReadNotiController extends GetxController {
   RxBool isRead = true.obs;
 
@@ -18,13 +18,12 @@ class ReadNotiController extends GetxController {
   }
 }
 
-
-Widget menuBox(screenSize) {
+Widget menuBox(Size screenSize) {
   final readNotiController = Get.put(ReadNotiController());
 
   return Container(
     width: screenSize.width * 0.9,
-    height: (screenSize.height * 0.45),
+    height: screenSize.height * 0.45,
     decoration: BoxDecoration(
       color: const Color(0xfff2f2f2),
       borderRadius: BorderRadius.circular(38.5),

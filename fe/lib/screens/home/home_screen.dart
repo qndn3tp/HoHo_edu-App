@@ -22,38 +22,36 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // 컨트롤러
   final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController()); // 수업 정보 
-
-  // 알림 확인 여부 로드
-  Future<void> loadisReadInfo() async {
-    final unreadNotiController = Get.put(ReadNotiController());
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    unreadNotiController.isRead.value = prefs.getBool('isRead') ?? false; 
-  }
+  final readNotiController = Get.put(ReadNotiController());   // 푸시 알림 확인 여부
 
   @override
   void initState() {
     super.initState();
-    loadisReadInfo();
+    _loadisReadInfo();
+  }
+
+  // 푸시 알림 확인 여부 로드
+  Future<void> _loadisReadInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    readNotiController.isRead.value = prefs.getBool('isRead') ?? false; 
+  }
+  
+  // 수업정보 박스
+  List<Widget> _buildBanners(BuildContext context, List<String> snamesList) {
+    return snamesList.map((name) => studentInfoBox(context, name)).toList();
   }
 
   @override
   Widget build(BuildContext context) {
-
     final Size screenSize = MediaQuery.of(context).size;
-
     // 형제자매 이름 리스트
     List<String> snamesList = classInfoDataController.getSnamesList(classInfoDataController.classInfoDataList);
-
     // 수업정보 박스
-    List<Widget> banners = [];
-    for (int i = 0; i < snamesList.length; i++) {         // 학생 수만큼 반복하여 banners에 studentInfoBox 추가
-      final name = snamesList[i];
-      banners.add(studentInfoBox(context, name));
-    }
+    final banners = _buildBanners(context, snamesList);
 
     return Container(
       // 홈 배경화면
-      decoration: imageBoxDecoration2('assets/images/background.jpg'),
+      decoration: imageBoxDecoration('assets/images/background.jpg', BoxFit.cover),
       // 홈 Content
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -69,10 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Center(
           child: Column(
             children: [
-              // 빈칸
-              SizedBox(
-                height: (screenSize.height * 0.1),
-              ),
+              SizedBox(height: screenSize.height * 0.1),
               // 학생 정보 박스(이름, 센터, 수강정보)
               BannerCarousel(
                 customizedIndicators: const IndicatorModel.animation(width: 10, height: 5, spaceBetween: 2, widthAnimation: 30),
@@ -84,9 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 indicatorBottom: false,
                 customizedBanners: banners,
               ),
-              const SizedBox(
-                height: 30,
-              ),
+              const SizedBox(height: 30),
               // 메뉴 박스(출석체크, 학원비 납부, 알림장, 독클결과)
               menuBox(screenSize),
             ],

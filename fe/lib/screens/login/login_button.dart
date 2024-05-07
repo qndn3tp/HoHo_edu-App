@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/screens/login/auto_login.dart';
+import 'package:flutter_application/screens/login/auto_login_check.dart';
 import 'package:flutter_application/screens/login/login_screen.dart';
 import 'package:flutter_application/services/login/login_service.dart';
 import 'package:get/get.dart';
@@ -10,8 +10,8 @@ import 'package:get/get.dart';
 
 Widget loginButton() {
   // 컨트롤러
-  LoginController loginController = Get.put(LoginController());              // 로그인
-  AutoLoginController autoLoginController = Get.put(AutoLoginController());  // 자동 로그인
+  final loginController = Get.put(LoginController());                    // 로그인
+  final autoLoginCheckController = Get.put(AutoLoginCheckController());  // 자동 로그인
 
   return GestureDetector(
     onTap: () {
@@ -22,7 +22,7 @@ Widget loginButton() {
         // 비밀번호 입력값
         loginController.passwordController.text,
         // 자동로그인 체크값
-        autoLoginController.isChecked.value,
+        autoLoginCheckController.isChecked.value,
       );
     }, 
     child: Center(
@@ -47,7 +47,9 @@ Widget loginButton() {
                 offset: const Offset(0, 1))
             ]),
         child: const Center(
-           child: Text("로그인", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
+           child: Text(
+            "로그인", 
+            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
         ),
       ),
     )

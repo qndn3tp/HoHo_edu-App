@@ -8,11 +8,7 @@ import 'package:flutter_application/services/book/yearly_book_read_data.dart';
 import 'package:flutter_application/services/book/ym_book_read_cnt_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/widgets/calendar_tab.dart';
-import 'package:flutter_application/widgets/drop_down_box.dart';
-import 'package:flutter_application/widgets/app_bar.dart';
-import 'package:flutter_application/widgets/dropdown_button_controller.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
+import 'package:flutter_application/widgets/dropdown_screen.dart';
 import '../../style.dart' as style;
 
 ////////////////////////
@@ -20,64 +16,18 @@ import '../../style.dart' as style;
 ////////////////////////
 
 // 드롭다운 화면
-class BookScreen extends GetView<DropdownButtonController> {
-
-  // 컨트롤러
-  final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController());  // 드롭다운 버튼 
-
-  BookScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    dropdownButtonController.updateDropDownMenus();
-    return Scaffold(
-      appBar: customAppBar("독서클리닉 결과"),
-      body: Column(
-        children: [
-          // 드롭다운 버튼 박스
-          dropDownBox(),
-          // 드롭다운 화면
-          Expanded(
-            child: Obx(() {
-              if (controller.currentItem.value != null) {
-                // 드롭다운 값이 바뀌면 api를 재호출한뒤, 렌더링
-                return FutureBuilder<void>(
-                  future: _updateBookData(), // api 재호출
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      // 데이터를 가져오는 중
-                      return Container(
-                        color: style.PRIMARY_YELLOW,
-                          child: const SpinKitThreeBounce(
-                          color: style.LIGHT_GREY,
-                        ));
-                    } else if (snapshot.hasError) {
-                      // 에러발생
-                      return Container(
-                        color: style.PRIMARY_YELLOW,
-                        child: Text("Error: ${snapshot.error}"));
-                    } else {
-                      // 데이터를 성공적으로 가져오면 MonthlyScreen을 반환
-                      currentPage = getCurrentMonth()-1;
-                      return const MonthlyScreen();
-                    }
-                  },
-                );
-              } else {
-                return Container();
-              }
-            },
-          ))
-        ],
-      ),
+class BookScreen extends DropDownScreen {
+  BookScreen({super.key})
+    : super(
+      title: "독서클리닉 결과",
+      updateData: _updateBookData,
+      monthlyScreenBuilder: const MonthlyScreen(),
     );
-  }
 
-  // 해당 드롭다운 데이터로 api 재호출
-  Future<void> _updateBookData() async {
-    await getYearlyBookData();                        
-    await getMonthlyBookReadData(getCurrentMonth());  
-    await getMonthlyBookScoreData(getCurrentMonth()); 
+  static Future<void> _updateBookData() async {
+    await getYearlyBookData();
+    await getMonthlyBookReadData(getCurrentMonth());
+    await getMonthlyBookScoreData(getCurrentMonth());
     await getYMBookReadCountData();
   }
 }

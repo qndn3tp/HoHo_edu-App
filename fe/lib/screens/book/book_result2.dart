@@ -26,6 +26,7 @@ class _BookResult2State extends State<BookResult2> {
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     final pageHeight = screenSize.height - 200;
+    const pointTextColor = style.PRIMARY_ORANGE;
 
     return SizedBox(
       height: pageHeight,
@@ -36,16 +37,20 @@ class _BookResult2State extends State<BookResult2> {
             text: TextSpan(
               children: [
                 normalText("위의 책을 읽고 "),
-                colorText(bookScoreDataController.getFirstScoreName(), style.PRIMARY_ORANGE),  // 가장 점수가 높은 영역
+                colorText(bookScoreDataController.getFirstScoreName(), pointTextColor),  // 가장 점수가 높은 영역
                 normalText(", "),
-                colorText(bookScoreDataController.getSecondScoreName(), style.PRIMARY_ORANGE), // 두번째로 점수가 높은 영역
+                colorText(bookScoreDataController.getSecondScoreName(), pointTextColor), // 두번째로 점수가 높은 영역
                 normalText(" 능력이"),
               ]
             )
           ),
-          SizedBox(height: pageHeight * 0.1, child: RichText(text: normalText("풍부해졌어요."))),
+          SizedBox(
+            height: pageHeight * 0.1, 
+            child: RichText(text: normalText("풍부해졌어요."))),
           // 이미지
-          SizedBox(height: pageHeight * 0.35, child: Image.asset("assets/images/book/bb0.png")),
+          SizedBox(
+            height: pageHeight * 0.35, 
+            child: Image.asset("assets/images/book/book_report2.png")),
           SizedBox(height: pageHeight * 0.1,),
           // 각 영역별 점수 표시(가로배치) 
           SizedBox(

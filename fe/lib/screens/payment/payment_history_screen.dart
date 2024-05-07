@@ -19,7 +19,7 @@ class _PaymentHistoryScreenState extends State<PaymentHistoryScreen> {
     return Scaffold(
       backgroundColor: style.LIGHT_GREY,
       body: Container(
-        padding: const EdgeInsets.only(top: 20, bottom: 20),
+        padding: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
             Expanded(
@@ -51,7 +51,7 @@ class _PaymentHistoryScreenState extends State<PaymentHistoryScreen> {
                       children: [
                         // 날짜
                         const Text("2023년 03월 수강료", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
-                        const SizedBox(height: 5,),
+                        const SizedBox(height: 5),
                         // 학생이름
                         paymentInfo("학생 이름", "김호호"),
                         // 수업명
@@ -60,7 +60,7 @@ class _PaymentHistoryScreenState extends State<PaymentHistoryScreen> {
                         paymentInfo("결제요청일", "2023.02.25"),
                         // 구분선
                         const Padding(
-                          padding: EdgeInsets.only(top: 8, bottom: 8),
+                          padding: EdgeInsets.symmetric(vertical: 8),
                           child: Divider(height: 3,),
                         ),
                         // 결제수단
@@ -69,7 +69,7 @@ class _PaymentHistoryScreenState extends State<PaymentHistoryScreen> {
                         paymentInfo("결제요청일", "2023.02.27 11:00:31"),
                         // 구분선
                         const Padding(
-                          padding: EdgeInsets.only(top: 8, bottom: 8),
+                          padding: EdgeInsets.symmetric(vertical: 8),
                           child: Divider(height: 3,),
                         ),
                         // 결제금액

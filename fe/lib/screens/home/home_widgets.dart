@@ -30,7 +30,7 @@ Widget menuButton({
           margin: const EdgeInsets.only(bottom: 10),
           height: 60,
           width: 60,
-          decoration: imageBoxDecoration1(imagePath),
+          decoration: imageBoxDecoration(imagePath, BoxFit.contain),
         ),
         Text(buttonText, style: const TextStyle(fontSize: 17),)
       ]

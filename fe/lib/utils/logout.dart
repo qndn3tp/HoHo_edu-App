@@ -1,4 +1,4 @@
-import 'package:flutter_application/screens/login/auto_login.dart';
+import 'package:flutter_application/screens/login/auto_login_check.dart';
 import 'package:flutter_application/screens/login/login_screen.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -14,11 +14,11 @@ void logout() async {
     await storage.delete(key: "login"); 
   }
 
-  LoginController loginController = Get.put(LoginController());
-  AutoLoginController autoLoginController = Get.put(AutoLoginController());
+  final loginController = Get.put(LoginController());
+  final autoLoginCheckController = Get.put(AutoLoginCheckController());
 
   // 초기화
   loginController.idController.clear(); 
   loginController.passwordController.clear();
-  autoLoginController.isChecked.value = false; 
+  autoLoginCheckController.isChecked.value = false; 
 }

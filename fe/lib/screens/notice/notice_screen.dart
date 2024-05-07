@@ -19,32 +19,13 @@ class NoticeScreen extends StatefulWidget {
   State<NoticeScreen> createState() => _NoticeScreenState();
 }
 
-class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderStateMixin {
-  
+class _NoticeScreenState extends State<NoticeScreen> {
   final ScrollController scrollController = ScrollController();
 
   // TabBar 인덱스
   int current = 0;
-  
   // TabBar Tabs
-  final List<String> tabs = [
-    "공지",  
-    "수업",
-    "출석",
-    "결제",
-    "독클",
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    scrollController.dispose();
-  }
+  final List<String> tabs = ["공지", "수업", "출석", "결제", "독클"];
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +94,7 @@ class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderSt
                 } else if (snapshot.hasError) {
                   return Container();
                 } else {
-                  return const TabPage();
+                  return TabPage();
                 }
               },
             ),
@@ -125,27 +106,19 @@ class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderSt
 }
 
 // Tab View Page
-class TabPage extends StatefulWidget {
-  const TabPage({super.key});
-
-  @override
-  State<TabPage> createState() => _TabPageState();
-}
-
-class _TabPageState extends State<TabPage> {
+class TabPage extends StatelessWidget {
   final noticeDataController = Get.put(NoticeDataController());
+
+  TabPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListView.builder(
-        itemCount: 
-          noticeDataController.noticeDataList == null 
-          ? 0 
-          : noticeDataController.noticeDataList!.length,
-        itemBuilder: (context, index) {
-          return noticeListTile(context, index);
-        }),
+
+    return ListView.builder(
+      itemCount: noticeDataController.noticeDataList?.length ?? 0,
+      itemBuilder: (context, index) {
+        return noticeListTile(context, index);
+      }
     );
   }
 }

@@ -24,8 +24,8 @@ void scrollToIndex(context, int index, scrollController, tabsLength) {
 
   // 목표위치로 스크롤 이동
   scrollController.animateTo(
-      targetScroll,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
+    targetScroll,
+    duration: const Duration(milliseconds: 300),
+    curve: Curves.easeInOut,
+  );
 }

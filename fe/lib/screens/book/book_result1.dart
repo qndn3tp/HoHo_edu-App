@@ -30,6 +30,8 @@ class _BookResult1State extends State<BookResult1> {
   @override
   Widget build(BuildContext context) {
     final pageHeight = MediaQuery.of(context).size.height - 200;
+    const pointTextColor = style.PRIMARY_DEEPBLUE;
+    const detailTextColor = style.DEEP_GREY;
 
     return Column(
       children: [
@@ -40,7 +42,7 @@ class _BookResult1State extends State<BookResult1> {
             text: TextSpan(
               children: [
                 normalText("${dropdownButtonController.currentItem.value} 학생은 "),
-                colorText(widget.currentPageMonth, style.PRIMARY_DEEPBLUE),
+                colorText(widget.currentPageMonth, pointTextColor),
                 normalText("에"),
               ]),
           ),
@@ -50,7 +52,7 @@ class _BookResult1State extends State<BookResult1> {
           child: RichText(
             text: TextSpan(children: [
               normalText("총 "),
-              colorText("${bookTitleDataController.monthlyBookCount}권", style.PRIMARY_DEEPBLUE),
+              colorText("${bookTitleDataController.monthlyBookCount}권", pointTextColor),
               normalText("의 책을 읽었어요!"),
             ]),
           ),
@@ -61,15 +63,14 @@ class _BookResult1State extends State<BookResult1> {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: bookTitleDataController.monthlyBookCount,
           itemBuilder: (context, index) {
-            final title = bookTitleDataController.bookTitleDataList?[index].title;
             return Container(
               margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.2),
               child: Row(
                 children: [
-                  const Icon(Icons.remove, color: style.DEEP_GREY,),
+                  const Icon(Icons.remove, color: detailTextColor),
                   Text(
-                    title ?? "",
-                    style: const TextStyle(fontSize: 16, color: style.DEEP_GREY),
+                    bookTitleDataController.bookTitleDataList?[index].title ?? "",
+                    style: const TextStyle(fontSize: 16, color: detailTextColor),
                   )
                 ],
               ),
@@ -83,7 +84,7 @@ class _BookResult1State extends State<BookResult1> {
             Container(
               height: 200,
               width: double.infinity,
-              decoration: imageBoxDecoration1("assets/images/book/b0.png")
+              decoration: imageBoxDecoration("assets/images/book/book_report1_1.png", BoxFit.contain)
             ),
             // 이미지(풍선)
             Positioned(
@@ -91,7 +92,7 @@ class _BookResult1State extends State<BookResult1> {
               child: Container(
                 height: 120,
                 width: 120,
-                decoration: imageBoxDecoration1("assets/images/book/b5.png")
+                decoration: imageBoxDecoration("assets/images/book/book_report1_2.png", BoxFit.contain)
               ),
             ),
             // 월간 읽은 책의 권수

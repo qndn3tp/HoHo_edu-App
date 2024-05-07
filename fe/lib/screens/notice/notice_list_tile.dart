@@ -127,7 +127,7 @@ class NoticeDetail extends StatelessWidget {
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                 ],
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(height: 10),
               const Divider(
                 height: 1,
               ),

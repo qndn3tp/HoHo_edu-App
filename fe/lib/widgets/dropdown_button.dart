@@ -10,8 +10,7 @@ class DropDownButtonWidget extends GetView<DropdownButtonController> {
   Widget build(BuildContext context) {
     return Obx(
       () => DropdownButton(
-        // 스타일
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         dropdownColor: style.LIGHT_GREY,
         isExpanded: true,
         style: const TextStyle(color: Colors.black, fontSize: 18),

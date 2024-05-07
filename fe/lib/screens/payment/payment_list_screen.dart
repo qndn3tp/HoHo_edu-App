@@ -72,7 +72,7 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
                 style: TextStyle(color: style.DEEP_GREY, fontSize: 12),
               ),
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
                 controller: _scrollController,
@@ -115,7 +115,7 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
                               }
                             ),
                             const Text("2023년 03월 수강료", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
-                            const SizedBox(height: 5,),
+                            const SizedBox(height: 5),
                           ],
                         ),
                         // 학생이름
@@ -126,7 +126,7 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
                         paymentInfo("결제요청일", "2023.02.25"),
                         // 구분선
                         const Padding(
-                          padding: EdgeInsets.only(top: 8, bottom: 8),
+                          padding: EdgeInsets.symmetric(vertical: 8),
                           child: Divider(height: 3,),
                         ),
                         // 결제금액

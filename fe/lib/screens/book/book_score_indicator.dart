@@ -47,7 +47,7 @@ Widget scoreIndicator(context, index) {
     leading: Container(
       height: 30,
       width: 30,
-      decoration: imageBoxDecoration1(titleImage)
+      decoration: imageBoxDecoration(titleImage, BoxFit.contain)
     ),
     backgroundColor: Colors.grey,
     progressColor: progressColor,
