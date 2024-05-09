@@ -58,13 +58,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // 아이디
+                    const Padding(
+                      padding: EdgeInsets.only(left: 5, bottom: 5),
+                      child: Text("아이디", style: TextStyle(color: style.DEEP_GREY, fontWeight: FontWeight.bold, fontSize: 13),),
+                    ),
                     TextField(
                       controller: loginController.idController,
                       cursorColor: style.DEEP_GREY,
                       decoration: loginBoxDecoration("아이디",),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 5),
                     // 비밀번호
+                    const Padding(
+                      padding: EdgeInsets.only(left: 5, bottom: 5),
+                      child: Text("비밀번호", style: TextStyle(color: style.DEEP_GREY, fontWeight: FontWeight.bold, fontSize: 13),),
+                    ),
                     Obx(() => TextField(
                       controller: loginController.passwordController, 
                       cursorColor: style.DEEP_GREY,

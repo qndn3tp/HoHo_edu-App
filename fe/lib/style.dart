@@ -26,10 +26,9 @@ var theme = ThemeData(
   ),
 
   dialogTheme: const DialogTheme(
-    
   ),
 
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.white,
-    )
-  );
+  )
+);
