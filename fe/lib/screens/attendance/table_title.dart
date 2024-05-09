@@ -23,10 +23,7 @@ Widget tableTitle(context) {
             child: Text("일자", style: textStyle,)),
         ),
         // 수직 구분선
-        Container(
-          width: 1,
-          color: style.GREY,
-        ),
+        Container(width: 1, color: style.GREY),
         // 내용
         const Expanded(
           flex: (10 - columnFlex),

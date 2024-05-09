@@ -16,10 +16,9 @@ Widget studentInfoBox(context, name) {
   final classInfoDataController = Get.put(ClassInfoDataController());   //수업 정보
   
   // 이름:[수업정보]를 가지는 map
-  Map<String, List<List<String>>> nameSubjectMap = classInfoDataController
-    .getSubjectMap(classInfoDataController.classInfoDataList);
+  final nameSubjectMap = classInfoDataController.getSubjectMap(classInfoDataController.classInfoDataList);
   // 수업정보 리스트(과목명, 과목호수, 시작시간, 종료시간, 요일)
-  List<List<String>> subjectList = nameSubjectMap[name] ?? [];
+  final subjectList = nameSubjectMap[name] ?? [];
 
   return Container(
     decoration: BoxDecoration(

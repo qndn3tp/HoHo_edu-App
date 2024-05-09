@@ -4,7 +4,6 @@ import 'package:flutter_application/notifications/background_noti.dart';
 import 'package:flutter_application/notifications/setup_noti.dart';
 import 'package:flutter_application/notifications/show_noti.dart';
 import 'package:flutter_application/services/check_perform_autologin.dart';
-import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'style.dart' as style;
@@ -14,7 +13,6 @@ import 'screens/login/login_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
 
 Future<void> main() async{
   // 앱의 바인딩 초기화(flutter engine과의 상호작용을 위한 준비)
@@ -42,14 +40,13 @@ Future<void> main() async{
 
   runApp(
     GetMaterialApp(
-      initialBinding: BindingsBuilder((){
-        Get.put(DropdownButtonController());
-      }),
       theme: style.theme,
       home: const MyApp()
     )
   );
-  FlutterNativeSplash.remove();                     // 앱이 초기화되면 splash 이미지 제거
+
+  // 앱이 초기화되면 splash 이미지 제거
+  FlutterNativeSplash.remove();                     
 }
 
 

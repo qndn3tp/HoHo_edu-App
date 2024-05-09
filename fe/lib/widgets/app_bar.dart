@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 //  상단바  //
 //////////////
 
+// 각 페이지 화면 앱바
 PreferredSizeWidget customAppBar(title) {
   String title0 = title;
 
@@ -30,5 +31,15 @@ PreferredSizeWidget customAppBar(title) {
         color: Color(0xffe4e1e1),
       ),
     ),
+  );
+}
+
+// 홈 화면 앱바
+PreferredSizeWidget homeAppBar() {
+  return AppBar(
+    title: Image.asset('assets/images/appbar/appbar_logo.png'),
+    backgroundColor: const Color(0xfffffde3),
+    elevation: 0,
+    centerTitle: false
   );
 }

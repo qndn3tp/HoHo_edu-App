@@ -8,9 +8,9 @@ import 'package:intl/intl.dart';
 import '../../style.dart' as style;
 import 'book_chart.dart';
 
-////////////////////
+//////////////////////
 // 독클 결과3 (연간) //
-///////////////////
+//////////////////////
 
 class BookResult3 extends StatefulWidget {
   const BookResult3({super.key});
@@ -20,7 +20,6 @@ class BookResult3 extends StatefulWidget {
 }
 
 class _BookResult3State extends State<BookResult3> {
-
   // 컨트롤러
   YearBookDataController yearBookDataController = Get.put(YearBookDataController());          // 연간 독서량
   YMBookCountDataController ymBookCountDataController = Get.put(YMBookCountDataController()); // 연간 월별 독서량
@@ -33,11 +32,11 @@ class _BookResult3State extends State<BookResult3> {
 
     return Column(
       children: [
+        // 텍스트
         RichText(
           text: normalText(
             "${DateFormat('yyyy년 M월').format(DateTime(currentYear, 1))}부터 ${DateFormat('yyyy년 M월').format(DateTime(currentYear, currentMonth))}까지"
           )),
-        // 연간 독서량
         RichText(
           text: TextSpan(
             children: [
@@ -70,7 +69,7 @@ class _BookResult3State extends State<BookResult3> {
             ),
           ],
         ),
-        SizedBox(height: pageHeight * 0.1,)
+        SizedBox(height: pageHeight * 0.1)
       ],
     );
   }

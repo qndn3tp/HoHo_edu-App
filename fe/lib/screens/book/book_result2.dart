@@ -18,7 +18,6 @@ class BookResult2 extends StatefulWidget {
 }
 
 class _BookResult2State extends State<BookResult2> {
-  
   // 컨트롤러
   BookScoreDataController bookScoreDataController = Get.put(BookScoreDataController());
 
@@ -52,16 +51,16 @@ class _BookResult2State extends State<BookResult2> {
             height: pageHeight * 0.35, 
             child: Image.asset("assets/images/book/book_report2.png")),
           SizedBox(height: pageHeight * 0.1,),
-          // 각 영역별 점수 표시(가로배치) 
+          // 각 영역별 점수 표시
           SizedBox(
             height: pageHeight * 0.2,
             child: GridView.count(
               shrinkWrap: true,
               crossAxisCount: 2,
               physics: const NeverScrollableScrollPhysics(),  
-              childAspectRatio: 5 / 1,                        // 각 그리드의 가로/세로 비율
+              childAspectRatio: 5 / 1,                        
               children: List.generate(
-                bookScoreDataController.scoreCategoryCount,   // 아이템 개수
+                bookScoreDataController.scoreCategoryCount,  
                 (index) {
                   // 각 영역별 점수
                   return Container(
