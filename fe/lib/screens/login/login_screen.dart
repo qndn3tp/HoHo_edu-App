@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/login/auto_login_check.dart';
 import 'package:flutter_application/screens/login/login_button.dart';
+import 'package:flutter_application/widgets/phone_number.dart';
 import 'package:get/get.dart';
 import '../../style.dart' as style;
 import '../login/login_box.dart';
@@ -67,10 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       cursorColor: style.DEEP_GREY,
                       decoration: loginBoxDecoration("아이디",),
                     ),
-                    const SizedBox(height: 5),
                     // 비밀번호
                     const Padding(
-                      padding: EdgeInsets.only(left: 5, bottom: 5),
+                      padding: EdgeInsets.only(left: 5, bottom: 5, top: 5),
                       child: Text("비밀번호", style: TextStyle(color: style.DEEP_GREY, fontWeight: FontWeight.bold, fontSize: 13),),
                     ),
                     Obx(() => TextField(
@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       obscureText: !passwordVisibleController.passwordVisible.value,
                       decoration: loginBoxDecoration("비밀번호", passwordVisibleController: passwordVisibleController),
                     )),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     // 자동로그인 버튼
                     AutoLoginCheck(),
                     const SizedBox(height: 40),
@@ -89,10 +89,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            // 로그인 분실 메세지
-            const Text(
-              "아이디/비밀번호 분실 시 직원에게 문의해주세요.",
-              style: TextStyle(color: style.DEEP_GREY, fontSize: 12),
+            // 로그인 분실 메세지, 고객센터
+            const Column(
+              children: [
+                Text(
+                  "아이디/비밀번호 분실 시 직원에게 문의해주세요.",
+                  style: TextStyle(color: style.DEEP_GREY, fontSize: 12),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("고객센터: ", style: TextStyle(color: style.DEEP_GREY, fontSize: 13)),
+                    PhoneNumber(phoneNumber: "1899-0898"),
+                  ],
+                ),
+              ],
             )
           ],
         ),
