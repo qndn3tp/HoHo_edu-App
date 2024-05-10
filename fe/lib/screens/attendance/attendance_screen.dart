@@ -46,7 +46,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
       body: Column(
         children: [
           // 이전-현재 날짜-다음
-          calendarTab("attendance"),
+          calendarTab("attendance", context),
           // 페이지 뷰
           Expanded(
             child: PageView.builder(

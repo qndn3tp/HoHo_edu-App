@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:flutter_application/screens/payment/payment_history_screen.dart';
 import 'package:flutter_application/screens/payment/payment_list_screen.dart';
 import 'package:get/get.dart';
-import '../../style.dart' as style;
-
+import '../../style.dart';
 ////////////////////////
 //   학원비 납부 화면  //
 ////////////////////////
@@ -15,9 +15,9 @@ class PaymentScreen extends StatefulWidget {
   State<PaymentScreen> createState() => _PaymentScreenState();
 }
 
-class _PaymentScreenState extends State<PaymentScreen>
-    with SingleTickerProviderStateMixin {
+class _PaymentScreenState extends State<PaymentScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  final themeController = Get.put(ThemeController());
 
   @override
   void initState() {
@@ -53,14 +53,14 @@ class _PaymentScreenState extends State<PaymentScreen>
         bottom: TabBar(
           /// style
           dividerColor: Colors.transparent,
-          indicatorColor: style.PRIMARY_DEEPBLUE,
-          labelColor: style.PRIMARY_DEEPBLUE,
-          unselectedLabelColor: style.GREY,
+          indicatorColor: themeController.isLightTheme.value ? LightColors.indigo : DarkColors.blue,
+          labelColor: themeController.isLightTheme.value ? LightColors.indigo : DarkColors.blue,
+          unselectedLabelColor: CommonColors.grey3,
           labelStyle: const TextStyle(fontWeight: FontWeight.bold),
           indicatorSize: TabBarIndicatorSize.tab,
           overlayColor: MaterialStateProperty.resolveWith<Color>(
               (Set<MaterialState> states) {
-            return Colors.transparent; // 선택되지 않은 탭 위에는 투명한 색상 적용
+            return Colors.transparent; 
           }),
           ///
           controller: _tabController,

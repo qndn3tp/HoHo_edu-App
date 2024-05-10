@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application/models/book_data.dart';
 import 'package:flutter_application/screens/book/book_score_indicator.dart';
+import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:flutter_application/widgets/text_span.dart';
 import 'package:get/get.dart';
-import '../../style.dart' as style;
+import '../../style.dart';
 
 /////////////////////////////
 // 독클 결과2 (분야별 점수) //
@@ -20,12 +21,14 @@ class BookResult2 extends StatefulWidget {
 class _BookResult2State extends State<BookResult2> {
   // 컨트롤러
   BookScoreDataController bookScoreDataController = Get.put(BookScoreDataController());
+  final themeController = Get.put(ThemeController());
+
 
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     final pageHeight = screenSize.height - 200;
-    const pointTextColor = style.PRIMARY_ORANGE;
+    final pointTextColor = themeController.isLightTheme.value ? LightColors.orange : DarkColors.orange;
 
     return SizedBox(
       height: pageHeight,

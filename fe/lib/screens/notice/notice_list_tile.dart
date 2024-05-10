@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/notice_data.dart';
 import 'package:flutter_application/screens/Notice/notice_detail_screen.dart';
+import 'package:flutter_application/screens/home/home_screen.dart';
+import 'package:flutter_application/style.dart';
 import 'package:get/get.dart';
-import '../../style.dart' as style;
 
 /////////////////////////
 //  알림장 리스트 타일  //
 /////////////////////////
 
 // 알림 색상
-List<Color> noticeColorList = [
-  const Color(0xff8c8c8c),        // 공지
-  const Color(0xff3c46ff),        // 수업
-  const Color(0xff0096a0),        // 출석
-  const Color(0xffff5a00),        // 결제
-  const Color(0xff854fc8),        // 독클
+List<Color> lightNoticeColorList = [
+  CommonColors.grey3,            // 공지
+  LightColors.blue,             // 수업
+  LightColors.green,            // 출석
+  LightColors.orange,           // 결제
+  LightColors.purple,           // 독클
+];
+List<Color> darkNoticeColorList = [
+  CommonColors.grey2,
+  DarkColors.blue,
+  DarkColors.green,
+  DarkColors.orange,
+  DarkColors.purple,
 ];
 
 // 알림 이미지
@@ -31,6 +39,7 @@ Widget noticeListTile(context, index) {
   final Size screenSize = MediaQuery.of(context).size;      
   final noticeDataController = Get.put(NoticeDataController());
   final noticeNum = noticeDataController.noticeDataList![index].noticeNum;
+  final themeController = Get.put(ThemeController());
 
   return GestureDetector(
     onTap: () {
@@ -48,15 +57,17 @@ Widget noticeListTile(context, index) {
         ListTile(
           contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           // 이미지
-          leading: Container(
+          leading: Obx(() => Container(
             width: 60,
             height: 60,
             decoration: BoxDecoration(
-              color: noticeColorList[noticeNum], 
+              color: themeController.isLightTheme.value 
+                ? lightNoticeColorList[noticeNum]
+                : darkNoticeColorList[noticeNum], 
               borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.all(5),
             child: noticeImageList[noticeNum],
-          ),
+          )),
           // 텍스트
           title: Text(
             noticeDataController.noticeDataList![index].title,
@@ -71,12 +82,12 @@ Widget noticeListTile(context, index) {
           height: 25,
           width: screenSize.width * 0.25,
           decoration: BoxDecoration(
-            color: style.LIGHT_GREY,
+            color: Theme.of(context).colorScheme.onSecondary,
             borderRadius: BorderRadius.circular(20)),
           child: Center(
             child: Text(
               noticeDataController.noticeDataList![index].ymdTime.split(" ")[0],
-              style: const TextStyle(fontSize: 12),))
+              style: const TextStyle(fontSize: 12,),))
         ),
         // 구분선
         const Divider(height: 1),

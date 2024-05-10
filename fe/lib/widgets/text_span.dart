@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/screens/home/home_screen.dart';
+import 'package:get/get.dart';
 
 // 일반 텍스트
 TextSpan normalText(text) {
+  final themeController = Get.put(ThemeController());
+
   return TextSpan(
     text: text,
-    style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+    style: TextStyle(
+      color: themeController.isLightTheme.value ? Colors.black : Colors.white, 
+      fontWeight: FontWeight.bold, 
+      fontSize: 20),
   );
 }
 // 강조 텍스트

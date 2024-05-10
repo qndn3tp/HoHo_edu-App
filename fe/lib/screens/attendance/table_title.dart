@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../style.dart' as style;
-
+import '../../style.dart';
 ///////////////////////////
 //    출석 테이블 제목    //
 ///////////////////////////
@@ -12,7 +11,7 @@ Widget tableTitle(context) {
 
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 10),
-    color: style.PRIMARY_BLUE,
+    color: Theme.of(context).colorScheme.onSecondaryContainer,
     height: screenSize.height * 0.05,
     child: Row(
       children: [
@@ -23,7 +22,7 @@ Widget tableTitle(context) {
             child: Text("일자", style: textStyle,)),
         ),
         // 수직 구분선
-        Container(width: 1, color: style.GREY),
+        Container(width: 1, color: CommonColors.grey3),
         // 내용
         const Expanded(
           flex: (10 - columnFlex),

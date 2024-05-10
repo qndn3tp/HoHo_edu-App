@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../style.dart' as style;
-
+import '../../style.dart';
 ///////////////////////////////
 // 아이디,비밀번호 입력 박스 ///
 ///////////////////////////////
@@ -23,7 +22,7 @@ InputDecoration loginBoxDecoration(text, {passwordVisibleController}) {
         passwordVisibleController.passwordVisible.value
         ? Icons.visibility
         : Icons.visibility_off,
-        color: style.DEEP_GREY,
+        color: CommonColors.grey4,
       ),
       onPressed: passwordVisibleController.switchPasswordVisibility
     )

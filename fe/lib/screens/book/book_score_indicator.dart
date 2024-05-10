@@ -49,7 +49,7 @@ Widget scoreIndicator(context, index) {
       width: 30,
       decoration: imageBoxDecoration(titleImage, BoxFit.contain)
     ),
-    backgroundColor: Colors.grey,
+    backgroundColor: Theme.of(context).colorScheme.onBackground,
     progressColor: progressColor,
     barRadius: const Radius.circular(10),
     animation: true,

@@ -32,7 +32,7 @@ class NoticeDetail extends StatelessWidget {
                     width: 30,
                     height: 30,
                     decoration: BoxDecoration(
-                      color: noticeColorList[noticeDataController.noticeDataList![index].noticeNum], 
+                      color: lightNoticeColorList[noticeDataController.noticeDataList![index].noticeNum], 
                       borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.all(5),
                     child: noticeImageList[noticeDataController.noticeDataList![index].noticeNum], 

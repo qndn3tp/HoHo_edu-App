@@ -3,8 +3,7 @@ import 'package:flutter_application/screens/login/auto_login_check.dart';
 import 'package:flutter_application/screens/login/login_button.dart';
 import 'package:flutter_application/widgets/phone_number.dart';
 import 'package:get/get.dart';
-import '../../style.dart' as style;
-import '../login/login_box.dart';
+import '../../style.dart';import '../login/login_box.dart';
 
 ///////////////////
 //  로그인 화면  //
@@ -39,6 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textColor = Theme.of(context).colorScheme.secondary;
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -59,25 +60,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // 아이디
-                    const Padding(
-                      padding: EdgeInsets.only(left: 5, bottom: 5),
-                      child: Text("아이디", style: TextStyle(color: style.DEEP_GREY, fontWeight: FontWeight.bold, fontSize: 13),),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5, bottom: 5),
+                      child: Text("아이디", style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 13),),
                     ),
                     TextField(
                       controller: loginController.idController,
-                      cursorColor: style.DEEP_GREY,
+                      cursorColor: CommonColors.grey4,
                       decoration: loginBoxDecoration("아이디",),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     // 비밀번호
-                    const Padding(
-                      padding: EdgeInsets.only(left: 5, bottom: 5, top: 5),
-                      child: Text("비밀번호", style: TextStyle(color: style.DEEP_GREY, fontWeight: FontWeight.bold, fontSize: 13),),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5, bottom: 5, top: 5),
+                      child: Text("비밀번호", style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 13),),
                     ),
                     Obx(() => TextField(
                       controller: loginController.passwordController, 
-                      cursorColor: style.DEEP_GREY,
+                      cursorColor: CommonColors.grey4,
                       obscureText: !passwordVisibleController.passwordVisible.value,
                       decoration: loginBoxDecoration("비밀번호", passwordVisibleController: passwordVisibleController),
+                      style: const TextStyle(color: Colors.black),
                     )),
                     const SizedBox(height: 10),
                     // 자동로그인 버튼
@@ -90,17 +93,17 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             // 로그인 분실 메세지, 고객센터
-            const Column(
+            Column(
               children: [
                 Text(
                   "아이디/비밀번호 분실 시 직원에게 문의해주세요.",
-                  style: TextStyle(color: style.DEEP_GREY, fontSize: 12),
+                  style: TextStyle(color: textColor, fontSize: 12),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("고객센터: ", style: TextStyle(color: style.DEEP_GREY, fontSize: 13)),
-                    PhoneNumber(phoneNumber: "1899-0898"),
+                    Text("고객센터: ", style: TextStyle(color: textColor, fontSize: 13)),
+                    const PhoneNumber(phoneNumber: "1899-0898"),
                   ],
                 ),
               ],

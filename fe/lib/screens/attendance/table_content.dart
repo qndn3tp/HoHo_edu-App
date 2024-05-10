@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application/models/attendance_data.dart';
 import 'package:flutter_application/screens/attendance/attendance_icon.dart';
 import 'package:intl/intl.dart';
-import '../../style.dart' as style;
-
+import '../../style.dart';
 //////////////////////////////////
 //    하단 내용(일자-출석내용)   //
 //////////////////////////////////
@@ -31,7 +29,7 @@ Widget tableContent(context, AttendanceData attendanceData) {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 10),
     height: screenSize.height * 0.1,
-    color: style.LIGHT_GREY,
+    color: Theme.of(context).colorScheme.onSecondary,
     child: Row(
       children: [
         // 날짜
@@ -42,10 +40,7 @@ Widget tableContent(context, AttendanceData attendanceData) {
           ),
         ),
         // 수직 구분선
-        Container(
-          width: 1,
-          color: style.GREY,
-        ),
+        Container(width: 1, color: CommonColors.grey3),
         // 출결 세부 내용
         Expanded(
           flex: columnFlex,
@@ -68,7 +63,7 @@ Widget tableContent(context, AttendanceData attendanceData) {
           flex: (10 - columnFlex*2),
           child: Text(
             "(등원 $formattedStime, 하원 $formattedEtime)",
-            style: const TextStyle(color: style.DEEP_GREY, fontSize: 13),
+            style: TextStyle(color: Theme.of(context).colorScheme.secondary, fontSize: 13),
           ),
         )
       ],

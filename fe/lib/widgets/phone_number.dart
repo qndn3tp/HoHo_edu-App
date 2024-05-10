@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../style.dart' as style;
 
 ///////////////////////////////////
 // 전화번호 위젯: 탭하면 전화걸기 //
@@ -21,7 +20,7 @@ class PhoneNumber extends StatelessWidget {
           null;
         }
       },
-      child: Text(phoneNumber, style: const TextStyle(color: style.DEEP_GREY, fontSize: 13),),
+      child: Text(phoneNumber, style: TextStyle(color: Theme.of(context).colorScheme.secondary, fontSize: 13),),
     );
   }
 }

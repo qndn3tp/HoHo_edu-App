@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/book/book_result1.dart';
 import 'package:flutter_application/screens/book/book_result2.dart';
 import 'package:flutter_application/screens/book/book_result3.dart';
+import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:flutter_application/services/book/monthly_book_read_data.dart';
 import 'package:flutter_application/services/book/monthly_book_score_data.dart';
 import 'package:flutter_application/services/book/yearly_book_read_data.dart';
@@ -9,8 +10,8 @@ import 'package:flutter_application/services/book/ym_book_read_cnt_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/widgets/calendar_tab.dart';
 import 'package:flutter_application/widgets/dropdown_screen.dart';
-import '../../style.dart' as style;
-
+import 'package:get/get.dart';
+import '../../style.dart';
 ////////////////////////
 //    독클결과 화면    //
 ////////////////////////
@@ -41,6 +42,7 @@ class MonthlyScreen extends StatefulWidget {
 }
 
 class _MonthlyScreenState extends State<MonthlyScreen> {
+  final themeController = Get.put(ThemeController());
   
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
       body: Column(
         children: [
           // 이전-현재 날짜-다음
-          calendarTab("book"),
+          calendarTab("book", context),
           // 페이지 뷰
           Expanded(
             child: PageView.builder(
@@ -62,8 +64,10 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
               },
               itemBuilder: (BuildContext context, int index) {
                 return SingleChildScrollView(
-                  child: Container(
-                    color: style.PRIMARY_YELLOW,
+                  child: Obx(() => Container(
+                    color: themeController.isLightTheme.value 
+                      ? LightColors.yellow 
+                      : DarkColors.basic,
                     child: Column(
                       children: [
                         // 독서클리닉 결과 1
@@ -74,7 +78,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                         const BookResult3()
                       ],
                     ),
-                  ),
+                  )),
                 );
               }),
           )

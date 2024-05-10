@@ -7,7 +7,6 @@ import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../style.dart' as style;
 
 //////////////////
 //  설정 화면   //
@@ -74,8 +73,10 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
+    final tileColor = Theme.of(context).colorScheme.surface;
+
     return Scaffold(
-      backgroundColor: style.LIGHT_GREY,
+      backgroundColor: Theme.of(context).colorScheme.onSecondary,
       // 앱 바
       appBar: customAppBar("설정"),
       body: Column(
@@ -84,10 +85,10 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
           notificationInfoBox(_isNotiChecked, bellController),
           // 전체 알림 권한 
           ListTile(
-            tileColor: Colors.white,
-            title: const Text("알림", style: TextStyle(fontWeight: FontWeight.bold),),
+            tileColor: tileColor,
+            title: const Text("알림", style: TextStyle(fontWeight: FontWeight.bold,),),
             trailing: CupertinoSwitch(
-              activeColor: style.PRIMARY_BLUE,
+              activeColor: Theme.of(context).colorScheme.onSecondaryContainer,
               value: _isNotiChecked,
               onChanged: (value) {
                 openAppSettings(); // 앱 알림설정으로 이동
@@ -103,11 +104,12 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
                   children: [
                     // 각 개별 알림
                     ListTile(
-                      tileColor: Colors.white,
+                      tileColor: tileColor,
                       title: Text(switchButtonController.buttonNameList[i]),
                       // 스위치 버튼
                       trailing: Obx(() => CupertinoSwitch(
-                        activeColor: style.PRIMARY_BLUE,
+                        activeColor: Theme.of(context).colorScheme.onSecondaryContainer,
+                        trackColor: Theme.of(context).colorScheme.secondaryContainer,
                         value: switchButtonController.buttonCheckedList[i],
                         onChanged: _isNotiChecked     // 전체 알림 권한이 true -> 개별 알림 가능
                           ? (value) {

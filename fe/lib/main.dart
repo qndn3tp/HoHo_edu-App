@@ -4,9 +4,10 @@ import 'package:flutter_application/notifications/background_noti.dart';
 import 'package:flutter_application/notifications/setup_noti.dart';
 import 'package:flutter_application/notifications/show_noti.dart';
 import 'package:flutter_application/services/check_perform_autologin.dart';
+import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'style.dart' as style;
+import 'style.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screens/login/login_screen.dart';
@@ -40,7 +41,12 @@ Future<void> main() async{
 
   runApp(
     GetMaterialApp(
-      theme: style.theme,
+      initialBinding: BindingsBuilder((){
+        Get.put(DropdownButtonController());
+      }),
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       home: const MyApp()
     )
   );
@@ -57,11 +63,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return FutureBuilder<Widget>(
-      future: checkAndPerformAutoLogin(),
+      future: checkAndPerformAutoLogin(context),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // 데이터를 가져오는 중
-          return const SpinKitThreeBounce(color: style.LIGHT_GREY,);
+          return SpinKitThreeBounce(color: Theme.of(context).colorScheme.onSecondary);
         } else if (snapshot.hasError) {
           // 에러 발생
           return const LoginScreen(); 

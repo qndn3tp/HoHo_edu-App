@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/book_data.dart';
+import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_application/widgets/text_span.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../style.dart' as style;
+import '../../style.dart';
 
 /////////////////////////////////
 // 독클 결과1 (월간 독서리스트) //
@@ -26,12 +27,13 @@ class _BookResult1State extends State<BookResult1> {
   // 컨트롤러
   final bookTitleDataController = Get.put(BookTitleDataController());       // 책 제목
   final dropdownButtonController = Get.put(DropdownButtonController());     // 드롭다운 버튼
+  final themeController = Get.put(ThemeController());
 
   @override
   Widget build(BuildContext context) {
     final pageHeight = MediaQuery.of(context).size.height - 200;
-    const pointTextColor = style.PRIMARY_DEEPBLUE;
-    const detailTextColor = style.DEEP_GREY;
+    final pointTextColor = themeController.isLightTheme.value ? LightColors.indigo : DarkColors.blue;
+    final detailTextColor = themeController.isLightTheme.value ? CommonColors.grey4 : CommonColors.grey3;
 
     return Column(
       children: [
@@ -67,10 +69,10 @@ class _BookResult1State extends State<BookResult1> {
               margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.2),
               child: Row(
                 children: [
-                  const Icon(Icons.remove, color: detailTextColor),
+                  Icon(Icons.remove, color: detailTextColor),
                   Text(
                     bookTitleDataController.bookTitleDataList?[index].title ?? "",
-                    style: const TextStyle(fontSize: 16, color: detailTextColor),
+                    style: TextStyle(fontSize: 16, color: detailTextColor),
                   )
                 ],
               ),

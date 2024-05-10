@@ -20,10 +20,17 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+// 라이트/다크 모드 컨트롤러
+class ThemeController extends GetxController {
+  RxBool isLightTheme = true.obs;
+}
+
+
 class _HomeScreenState extends State<HomeScreen> {
   // 컨트롤러
   final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController()); // 수업 정보 
   final readNotiController = Get.put(ReadNotiController());   // 푸시 알림 확인 여부
+  final themeController = Get.put(ThemeController());
 
   // 푸시 알림 확인 여부 로드
   Future<void> _loadisReadInfo() async {
@@ -63,29 +70,49 @@ class _HomeScreenState extends State<HomeScreen> {
     // 형제자매 이름 리스트
     List<String> snamesList = classInfoDataController.getSnamesList(classInfoDataController.classInfoDataList);
 
-    return Container(
-      // 홈 배경화면
-      decoration: imageBoxDecoration('assets/images/background.jpg', BoxFit.cover),
-      // 홈 Content
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: homeAppBar(),
-        // 앱 바의 사이드 메뉴
-        endDrawer: appbarDrawer(context),
-        // 바디
-        body: Center(
-          child: Column(
-            children: [
-              SizedBox(height: screenSize.height * 0.1),
-              // 학생 정보 박스(이름, 센터, 수강정보)
-              bannerCarousel(context, snamesList),
-              const SizedBox(height: 30),
-              // 메뉴 박스(출석체크, 학원비 납부, 알림장, 독클결과)
-              menuBox(screenSize),
-            ],
+    return Obx(
+      () => Container(
+        // 홈 배경화면
+        decoration: 
+          // 라이트/다크 모드 배경이미지
+          themeController.isLightTheme.value
+          ? imageBoxDecoration('assets/images/background.jpg', BoxFit.cover)
+          : imageBoxDecoration('assets/images/dark_background.jpg', BoxFit.cover),
+        // 홈 Content
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: homeAppBar(screenSize),
+          // 앱 바의 사이드 메뉴
+          endDrawer: appbarDrawer(context),
+          // 바디
+          body: Center(
+            child: Column(
+              children: [
+                SizedBox(height: screenSize.height * 0.1),
+                // 라이트/다크 모드 변경
+                ElevatedButton(
+                  child: const Text('Dark/Light', style: TextStyle(color: Colors.black),),
+                  onPressed: (){
+                    if (themeController.isLightTheme.value) {
+                        Get.changeThemeMode(ThemeMode.dark);
+                        themeController.isLightTheme.value = false;
+                    }
+                    else {
+                      Get.changeThemeMode(ThemeMode.light);  
+                      themeController.isLightTheme.value = true;
+                    }
+                  },
+                ),
+                // 학생 정보 박스(이름, 센터, 수강정보)
+                bannerCarousel(context, snamesList),
+                const SizedBox(height: 30),
+                // 메뉴 박스(출석체크, 학원비 납부, 알림장, 독클결과)
+                menuBox(screenSize),
+              ],
+            ),
           ),
         ),
       ),
-    );
+);
   }
 }

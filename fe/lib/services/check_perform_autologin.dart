@@ -5,7 +5,6 @@ import 'package:flutter_application/services/login/login_service.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import '../style.dart' as style;
 
 // 기기에 저장된 유저 정보 컨트롤러
 class CheckStoredUserInfoController extends GetxController {
@@ -33,7 +32,7 @@ class CheckStoredUserInfoController extends GetxController {
 }
 
 // 자동 로그인 수행
-Future<Widget> checkAndPerformAutoLogin() async {
+Future<Widget> checkAndPerformAutoLogin(context) async {
   final autoLoginController = Get.put(AutoLoginCheckController());
   final checkStoredUserInfoController = Get.put(CheckStoredUserInfoController());
 
@@ -49,7 +48,7 @@ Future<Widget> checkAndPerformAutoLogin() async {
     loginService(id, pwd, isAutoLoginChecked);
     return Container(
       color: Colors.white,
-      child: const SpinKitThreeBounce(color: style.LIGHT_GREY,)
+      child: SpinKitThreeBounce(color: Theme.of(context).colorScheme.onSecondary)
     );
   } else {
     return const LoginScreen();

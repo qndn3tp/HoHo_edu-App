@@ -1,7 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../style.dart' as style;
 
 // 실패 알림 (설명O)
 Future<dynamic> failDialog1(failTitle, failDescription) {
@@ -22,7 +21,7 @@ Future<dynamic> failDialog1(failTitle, failDescription) {
 }
 
 // 실패 알림 (설명X)
-Future<dynamic> failDialog2(failDescription) {
+Future<dynamic> failDialog2(failDescription, context) {
   return AwesomeDialog(
     context: Get.context!,
     width: 400,
@@ -34,7 +33,7 @@ Future<dynamic> failDialog2(failDescription) {
     desc: failDescription,
     title: "",
     btnOkText: "확인",
-    btnOkColor: style.PRIMARY_BLUE,
+    btnOkColor: Theme.of(context).colorScheme.onSecondaryContainer,
     btnOkOnPress: () => {},
   ).show();
 }

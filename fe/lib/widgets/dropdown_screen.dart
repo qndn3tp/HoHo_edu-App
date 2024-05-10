@@ -6,7 +6,10 @@ import 'package:flutter_application/widgets/dropdown_box.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import '../style.dart' as style;
+
+///////////////////
+// 드롭다운 화면 //
+///////////////////
 
 class DropDownScreen extends GetView<DropdownButtonController> {
 
@@ -32,7 +35,7 @@ class DropDownScreen extends GetView<DropdownButtonController> {
       appBar: customAppBar(title),
       body: Column(
         children: [
-          dropDownBox(),
+          dropDownBox(context),
           Expanded(
             child: Obx(() {
               if (controller.currentItem.value != null) {
@@ -40,7 +43,7 @@ class DropDownScreen extends GetView<DropdownButtonController> {
                   future: updateData(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const SpinKitThreeBounce(color: style.LIGHT_GREY);
+                      return SpinKitThreeBounce(color: Theme.of(context).colorScheme.onSecondary);
                     } else if (snapshot.hasError) {
                       return Text("Error: ${snapshot.error}");
                     } else {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:flutter_application/screens/home/home_widgets.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,25 +21,32 @@ class ReadNotiController extends GetxController {
 
 Widget menuBox(Size screenSize) {
   final readNotiController = Get.put(ReadNotiController());
+  final themeController = Get.put(ThemeController());
 
-  return Container(
+  return Obx(() => Container(
     width: screenSize.width * 0.9,
     height: screenSize.height * 0.45,
     decoration: BoxDecoration(
-      color: const Color(0xfff2f2f2),
+      color: themeController.isLightTheme.value 
+        ? const Color(0xfff2f2f2) 
+        : const Color(0xff3c3c3c),
       borderRadius: BorderRadius.circular(38.5),
-      boxShadow: const [
+      boxShadow: [
         BoxShadow(
-          color: Color(0xffcccccc), 
-          offset: Offset(6.0, 6.0),
+          color: themeController.isLightTheme.value 
+            ? const Color(0xffcccccc) 
+            : const Color(0xff2e2e2e), 
+          offset: const Offset(6.0, 6.0),
           blurRadius: 16.0,
-          spreadRadius: 1.0,
+          spreadRadius: 1.0
         ),
         BoxShadow(
-          color: Color(0xffededed),
-          offset: Offset(-6.0, -6.0),
+          color: themeController.isLightTheme.value 
+            ? const Color(0xffededed) 
+            : const Color(0xff292929), 
+          offset: const Offset(-6.0, -6.0),
           blurRadius: 16.0,
-          spreadRadius: 1.0,
+          spreadRadius: 1.0
         ),
       ]),
     
@@ -74,10 +82,10 @@ Widget menuBox(Size screenSize) {
                 width: 22, 
                 height: 22, 
                 decoration: BoxDecoration(
-                  color: const Color(0xffff3939), 
+                  color: themeController.isLightTheme.value ? const Color(0xffff3939): const Color.fromARGB(255, 250, 84, 84),
                   shape: BoxShape.circle, 
                   border: Border.all(
-                    color: const Color(0xfff2f2f2), 
+                    color: themeController.isLightTheme.value ? const Color(0xfff2f2f2): const Color(0xff3c3c3c), 
                     width: 4, 
                   ),
                 )
@@ -88,5 +96,5 @@ Widget menuBox(Size screenSize) {
         ),
       ],
     ),
-  );
+  ));
 }

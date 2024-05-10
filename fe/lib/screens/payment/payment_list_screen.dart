@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:flutter_application/screens/payment/payment_animated_button.dart';
 import 'package:flutter_application/screens/payment/payment_cost.dart';
 import 'package:flutter_application/screens/payment/payment_info.dart';
-import '../../style.dart' as style;
-import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
+import '../../style.dart';import 'package:flutter/rendering.dart';
 
 ////////////////////////
 //   학원비 결제 화면  //
@@ -17,10 +18,9 @@ class PaymentListScreen extends StatefulWidget {
 
 class _PaymentListScreenState extends State<PaymentListScreen> {
   bool isChecked = false;
-
+  final themeController = Get.put(ThemeController());
   // 상단 텍스트 스크롤 
   bool _showText = true;
-
   // 하단바 스크롤 컨트롤러
   bool _showBottomBar = true;
   late ScrollController _scrollController;
@@ -57,8 +57,11 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textColor = Theme.of(context).colorScheme.secondary;
+    final pointColor = themeController.isLightTheme.value ? LightColors.indigo : DarkColors.indigo;
+
     return Scaffold(
-      backgroundColor: style.LIGHT_GREY,
+      backgroundColor: themeController.isLightTheme.value ? CommonColors.grey2 : DarkColors.basic,
       body: Container(
         padding: const EdgeInsets.only(top: 20),
         child: Column(
@@ -67,9 +70,9 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
             AnimatedContainer(
               height: _showText ? 20 : 0,
               duration: const Duration(milliseconds: 200),
-              child: const Text(
+              child: Text(
                 "수강료와 교재비는 함께 결제가 불가능합니다.",
-                style: TextStyle(color: style.DEEP_GREY, fontSize: 12),
+                style: TextStyle(color: textColor, fontSize: 12),
               ),
             ),
             const SizedBox(height: 10),
@@ -83,21 +86,26 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
                     padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                     margin: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
+                      color: themeController.isLightTheme.value 
+                        ? const Color(0xFFFFFFFF) 
+                        : const Color(0xff3c3c3c),
                       borderRadius: BorderRadius.circular(15),
-                      color: const Color(0xFFFFFFFF),
-                      boxShadow: const [
+                      boxShadow: [
                         BoxShadow(
-                          color: Color(0xFFededed),
-                          offset: Offset(10, 10),
-                          blurRadius: 22,
+                          color: themeController.isLightTheme.value 
+                            ? const Color(0xFFededed) 
+                            : const Color(0xff2e2e2e), 
+                          offset: const Offset(10, 10),
+                          blurRadius: 22.0,
                         ),
                         BoxShadow(
-                          color: Color(0xFFFFFFFF),
-                          offset: Offset(-10, -10),
-                          blurRadius: 22,
+                          color: themeController.isLightTheme.value 
+                            ? const Color(0xFFFFFFFF) 
+                            : const Color(0xff292929), 
+                          offset: const Offset(-10, -10),
+                          blurRadius: 22.0,
                         ),
-                      ],
-                    ),
+                      ]),
                     child: Column(
                       children: [
                         // 체크박스, 날짜
@@ -105,8 +113,7 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
                           children: [
                             Checkbox(
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                              // activeColor: style.PRIMARY_BLUE,
-                              activeColor: style.PRIMARY_GREEN,
+                              activeColor: themeController.isLightTheme.value ? LightColors.green : DarkColors.green,
                               value: isChecked, 
                               onChanged: (value){
                                 setState(() {
@@ -119,18 +126,18 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
                           ],
                         ),
                         // 학생이름
-                        paymentInfo("학생 이름", "김호호"),
+                        paymentInfo("학생 이름", "김호호", textColor: textColor),
                         // 수업명
-                        paymentInfo("수업명", "한스쿨i, 북스쿨i"),
+                        paymentInfo("수업명", "한스쿨i, 북스쿨i", textColor: textColor),
                         // 결제요청일
-                        paymentInfo("결제요청일", "2023.02.25"),
+                        paymentInfo("결제요청일", "2023.02.25", textColor: textColor),
                         // 구분선
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 8),
                           child: Divider(height: 3,),
                         ),
                         // 결제금액
-                        paymentCost("180,000"),
+                        paymentCost("180,000", textColor: textColor, pointColor: pointColor),
                       ],
                     ),
                   );
@@ -144,7 +151,7 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
       bottomNavigationBar: AnimatedCrossFade(
         firstChild: const BottomAppBar(
           elevation: 0,
-          color: style.LIGHT_GREY,
+          color: Colors.transparent,
           child: PaymentAnimatedButton(),
         ),
         secondChild: const SizedBox.shrink(),

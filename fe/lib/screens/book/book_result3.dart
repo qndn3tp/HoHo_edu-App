@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application/models/book_data.dart';
+import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/widgets/text_span.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../style.dart' as style;
-import 'book_chart.dart';
+import '../../style.dart';import 'book_chart.dart';
 
 //////////////////////
 // 독클 결과3 (연간) //
@@ -23,12 +23,13 @@ class _BookResult3State extends State<BookResult3> {
   // 컨트롤러
   YearBookDataController yearBookDataController = Get.put(YearBookDataController());          // 연간 독서량
   YMBookCountDataController ymBookCountDataController = Get.put(YMBookCountDataController()); // 연간 월별 독서량
+  final themeController = Get.put(ThemeController());
 
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     final pageHeight = MediaQuery.of(context).size.height - 200;
-    const pointTextColor = style.PRIMARY_GREEN;
+    final pointTextColor = themeController.isLightTheme.value ? LightColors.green : DarkColors.green;
 
     return Column(
       children: [
@@ -77,12 +78,13 @@ class _BookResult3State extends State<BookResult3> {
 
 // 독서 그래프 정보
 Widget bookChartReport({required Size screenSize, required String title, required String value}) {
+  final themeController = Get.put(ThemeController());
 
   return Container(
     height: 80,
     width: screenSize.width * 0.4,
     decoration: BoxDecoration(
-      color: const Color(0xfff8f8ed),
+      color: themeController.isLightTheme.value ? const Color(0xfff8f8ed) : CommonColors.grey5,
       borderRadius: BorderRadius.circular(15),
     ),
     child: Column(
@@ -90,11 +92,16 @@ Widget bookChartReport({required Size screenSize, required String title, require
       children: [
         Text(
           title,
-          style: const TextStyle(color: style.DEEP_GREY, fontSize: 15),
+          style: TextStyle(
+            color: themeController.isLightTheme.value ? CommonColors.grey4 : CommonColors.grey2, 
+            fontSize: 15),
         ),
         Text(
           value,
-          style: const TextStyle(fontWeight: FontWeight.bold, color: style.PRIMARY_DEEPBLUE, fontSize: 17),
+          style: TextStyle(
+            fontWeight: FontWeight.bold, 
+            color: themeController.isLightTheme.value ? LightColors.indigo : DarkColors.blue, 
+            fontSize: 17),
         ),
       ],
     ),

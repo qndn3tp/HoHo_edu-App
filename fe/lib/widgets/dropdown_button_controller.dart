@@ -1,9 +1,12 @@
 import 'package:flutter_application/models/class_info_data.dart';
 import 'package:get/get.dart';
 
-final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());
+///////////////////////////
+// 드롭다운 버튼 컨트롤러 //
+//////////////////////////
 
 class DropdownButtonController extends GetxController {
+  final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());
 
   Rx<List<String>> nameList = Rx<List<String>>([]); // 드롭다운 목록의 이름 리스트
   Rx<String?> currentItem = Rx<String?>(null);      // 현재 선택된 드롭다운 메뉴

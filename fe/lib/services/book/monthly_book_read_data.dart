@@ -73,6 +73,6 @@ Future<void> getMonthlyBookReadData(month) async {
   catch (e) {
     final BookTitleDataController bookTitleDataController = Get.put(BookTitleDataController());     
     bookTitleDataController.setBookTitleDataList([]);
-    failDialog2("$month월은 독클 결과가 없어요 :(");
+    // failDialog1("$month월은 독클 결과가 없어요 :(",'');
   }
 }

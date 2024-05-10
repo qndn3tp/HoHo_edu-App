@@ -7,10 +7,10 @@ import 'package:flutter_application/screens/login/login_screen.dart';
 import 'package:flutter_application/screens/notice/notice_screen.dart';
 import 'package:flutter_application/screens/payment/payment_screen.dart';
 import 'package:flutter_application/screens/setting/setting_notification_screen.dart';
+import 'package:flutter_application/style.dart';
 import 'package:flutter_application/utils/logout.dart';
 import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:get/get.dart';
-import '../style.dart' as style;
 
 /////////////////////
 // 앱 바의 사이드바 //
@@ -56,10 +56,10 @@ Widget appbarDrawer(context) {
         // 상단 프로필
         UserAccountsDrawerHeader(
           accountName: const Text("안녕하세요", style: TextStyle(color: Colors.white, fontSize: 20),),
-          accountEmail: Text('$namesText학생 학부모님', style: const TextStyle(fontSize: 17),),
-          decoration: const BoxDecoration(
-            color: style.PRIMARY_DEEPBLUE,
-            borderRadius: BorderRadius.only(
+          accountEmail: Text('$namesText학생 학부모님', style: const TextStyle(color: Colors.white, fontSize: 17),),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onSecondaryContainer,
+            borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(20.0),
               bottomRight: Radius.circular(20.0),
             ),
@@ -85,7 +85,7 @@ Widget appbarDrawer(context) {
                   ),
                   trailing: const Icon(
                     EvaIcons.chevronRightOutline, 
-                    color: style.DEEP_GREY
+                    color: CommonColors.grey4
                   ),
                 ),
               );
@@ -105,10 +105,8 @@ Widget appbarDrawer(context) {
           },
           child: ListTile(
             title: const Text("로그아웃"),
-            leading: Container(
-              height: 25,
-              width: 25,
-              decoration: imageBoxDecoration('assets/images/drawer/drawer_logout.png', BoxFit.contain),
+            leading: SizedBox(
+              child: Icon(Icons.logout, color: Theme.of(context).colorScheme.secondary),
             ),
           ),
         ),

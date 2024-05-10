@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../style.dart' as style;
-
 //////////////////////////
 // 자동 로그인 체크 박스 //
 //////////////////////////
@@ -33,7 +31,7 @@ class AutoLoginCheck extends StatelessWidget {
             onChanged: (newValue) {
               autoLoginCheckController.updateCheck(newValue ?? false); // isChecked의 상태 관리
             },
-            activeColor: style.PRIMARY_BLUE,
+            activeColor: Theme.of(context).colorScheme.onSecondaryContainer,
           ),
         ),
         const Text("자동 로그인")

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../style.dart' as style;
 
 //////////////////
 //   결제 버튼  //
@@ -55,7 +54,7 @@ class _PaymentAnimatedButtonState extends State<PaymentAnimatedButton> with Sing
         // 결제 버튼
         child: Container(
           decoration: BoxDecoration(
-            color: style.PRIMARY_BLUE,
+            color: Theme.of(context).colorScheme.onSecondaryContainer,
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: const [
               BoxShadow(

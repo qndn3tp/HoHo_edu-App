@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/models/class_info_data.dart';
 import 'package:flutter_application/models/login_data.dart';
 import 'package:get/get.dart';
-import '../../style.dart' as style;
-
+import '../../style.dart';
 ///////////////////////////////////////////
 // 학생 정보 박스(센터명, 이름, 수강정보) //
 ///////////////////////////////////////////
@@ -23,7 +22,7 @@ Widget studentInfoBox(context, name) {
   return Container(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(30),
-      color: style.PRIMARY_BLUE,
+      color: Theme.of(context).colorScheme.onSecondaryContainer,
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -36,7 +35,7 @@ Widget studentInfoBox(context, name) {
             // 센터 이름
             Text(
               userDataController.userData!.cname,
-              style: const TextStyle(color: style.DARK_WHITE,fontSize: 15,)),
+              style: const TextStyle(color: CommonColors.grey1,fontSize: 15,)),
             const SizedBox(height: 5),
             // 학생 이름
             RichText(
@@ -67,7 +66,7 @@ Widget studentInfoBox(context, name) {
 
                   return Text(
                     "[$subjectName$subjectNum] 수업중 ($dateName $formattedStartTime~$formattedEndTime)",
-                    style: const TextStyle(color: style.DARK_WHITE, fontSize: 15),);
+                    style: const TextStyle(color: CommonColors.grey1, fontSize: 15),);
                 }
               )
             )

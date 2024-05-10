@@ -6,8 +6,7 @@ import 'package:flutter_application/services/notice/get_notice_data.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import '../../style.dart' as style;
-
+import '../../style.dart';
 ////////////////////////
 //    알림장  화면    //
 ////////////////////////
@@ -61,11 +60,11 @@ class _NoticeScreenState extends State<NoticeScreen> {
                     width: 80,
                     decoration: BoxDecoration(
                       color: current == index 
-                        ? style.DEEP_GREY
+                        ? CommonColors.grey4
                         : Colors.white,
                       borderRadius: BorderRadius.circular(30),
                       border: current == index
-                        ? Border.all(color: style.DEEP_GREY, width: 2)
+                        ? Border.all(color: CommonColors.grey4, width: 2)
                         : Border.all(color: const Color(0xffdfdfdf), width: 2),
                     ),
                     // Tabs 텍스트
@@ -75,7 +74,7 @@ class _NoticeScreenState extends State<NoticeScreen> {
                         style: TextStyle(
                           color: current == index
                             ? Colors.white
-                            : style.DEEP_GREY,
+                            : CommonColors.grey4,
                             fontWeight: FontWeight.bold
                         ),),
                     ),
@@ -90,7 +89,7 @@ class _NoticeScreenState extends State<NoticeScreen> {
               future: getNoticeData(current.toString()),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SpinKitThreeBounce(color: style.LIGHT_GREY,);
+                  return SpinKitThreeBounce(color: Theme.of(context).colorScheme.onSecondary);
                 } else if (snapshot.hasError) {
                   return Container();
                 } else {

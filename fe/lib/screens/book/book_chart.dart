@@ -1,8 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/book_data.dart';
+import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:get/get.dart';
-import '../../style.dart' as style;
+import '../../style.dart';
 
 //////////////////////
 // 독서클리닉3 차트  //
@@ -18,16 +19,27 @@ class BookChart extends StatefulWidget {
 class _BookChartState extends State<BookChart> {
   // 컨트롤러
   YMBookCountDataController ymBookCountDataController = Get.put(YMBookCountDataController());
+  final themeController = Get.put(ThemeController());
 
   // 색상값
-  List<Color> mainGradientColors = [
+  List<Color> lightMainGradientColors = [
     Colors.white,
     const Color(0xff8cda3e)
   ];
-  List<Color> avgGradientColors = [
+  List<Color> lightAvgGradientColors = [
     Colors.white,
     const Color(0xfffa963c)
   ];
+
+  List<Color> darkMainGradientColors = [
+    const Color(0xff5a5a5a),
+    const Color(0xff8cda3e)
+  ];
+  List<Color> darkAvgGradientColors = [
+    const Color(0xff5a5a5a),
+    const Color(0xfffa963c)
+  ];
+
 
   // 평균값
   bool showAvg = false;
@@ -38,17 +50,17 @@ class _BookChartState extends State<BookChart> {
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
-            color: const Color(0xfffefefa), // 배경색
+            color: themeController.isLightTheme.value ? const Color(0xfffefefa) : const Color(0xff5a5a5a), // 배경색
             borderRadius: BorderRadius.circular(15), // border-radius: 15%;
-            boxShadow: const [
+            boxShadow: [
               BoxShadow(
-                color: Color(0xffE7E7DD),
-                offset: Offset(6.91, 6.91),
+                color: themeController.isLightTheme.value ? const Color(0xffE7E7DD) : const Color(0xff343333),
+                offset: const Offset(6.91, 6.91),
                 blurRadius: 29,
               ),
               BoxShadow(
-                color: Color(0xffffffff),
-                offset: Offset(-6.91, -6.91),
+                color: themeController.isLightTheme.value ? const Color(0xffffffff) : const Color(0xff383838),
+                offset: const Offset(-6.91, -6.91),
                 blurRadius: 29,
               ),
             ],
@@ -85,7 +97,7 @@ class _BookChartState extends State<BookChart> {
                     '평균',
                     style: TextStyle(
                       fontSize: 13,
-                      color: showAvg ? style.GREY : Colors.black,
+                      color: showAvg ? CommonColors.grey3 : Colors.black,
                     ),
                   ),
                 ),
@@ -93,7 +105,7 @@ class _BookChartState extends State<BookChart> {
               Container(
                 height: 2,
                 width: 40,
-                color: showAvg ? style.GREY : Colors.black,
+                color: showAvg ? CommonColors.grey3 : Colors.black,
               )
             ],
           ),
@@ -104,47 +116,47 @@ class _BookChartState extends State<BookChart> {
 
   // x좌표 제목
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    const bottomtitleStyle = TextStyle(
-      color: style.DEEP_GREY,
+    final bottomtitleStyle = TextStyle(
+      color: themeController.isLightTheme.value ? CommonColors.grey4 : CommonColors.grey2,
       fontSize: 15,
     );
     Widget text;
     switch (value.toInt()) {
       case 0:
-        text = const Text('1', style: bottomtitleStyle);
+        text = Text('1', style: bottomtitleStyle);
         break;
       case 1:
-        text = const Text('2', style: bottomtitleStyle);
+        text = Text('2', style: bottomtitleStyle);
         break;
       case 2:
-        text = const Text('3', style: bottomtitleStyle);
+        text = Text('3', style: bottomtitleStyle);
         break;
       case 3:
-        text = const Text('4', style: bottomtitleStyle);
+        text = Text('4', style: bottomtitleStyle);
         break;
       case 4:
-        text = const Text('5', style: bottomtitleStyle);
+        text = Text('5', style: bottomtitleStyle);
         break;
       case 5:
-        text = const Text('6', style: bottomtitleStyle);
+        text = Text('6', style: bottomtitleStyle);
         break;
       case 6:
-        text = const Text('7', style: bottomtitleStyle);
+        text = Text('7', style: bottomtitleStyle);
         break;
       case 7:
-        text = const Text('8', style: bottomtitleStyle);
+        text = Text('8', style: bottomtitleStyle);
         break;
       case 8:
-        text = const Text('9', style: bottomtitleStyle);
+        text = Text('9', style: bottomtitleStyle);
         break;
       case 9:
-        text = const Text('10', style: bottomtitleStyle);
+        text = Text('10', style: bottomtitleStyle);
         break;
       case 10:
-        text = const Text('11', style: bottomtitleStyle);
+        text = Text('11', style: bottomtitleStyle);
         break;
       default:
-        text = const Text('12', style: bottomtitleStyle);
+        text = Text('12', style: bottomtitleStyle);
         break;
     }
 
@@ -156,8 +168,8 @@ class _BookChartState extends State<BookChart> {
 
   // y좌표 제목
   Widget leftTitleWidgets(double value, TitleMeta meta) {
-    const leftTitleStyle = TextStyle(
-      color: style.DEEP_GREY,
+    final leftTitleStyle = TextStyle(
+      color: themeController.isLightTheme.value ? CommonColors.grey4 : CommonColors.grey2,
       fontSize: 15,
     );
     String text;
@@ -183,8 +195,8 @@ class _BookChartState extends State<BookChart> {
         drawVerticalLine: false,
         horizontalInterval: 5,
         getDrawingHorizontalLine: (value) {
-          return const FlLine(
-            color: style.GREY,
+          return FlLine(
+            color: themeController.isLightTheme.value ? CommonColors.grey4 :CommonColors.grey2,
             strokeWidth: 0.5,
           );
         },
@@ -216,7 +228,7 @@ class _BookChartState extends State<BookChart> {
       ),
       borderData: FlBorderData(
         show: false,
-        border: Border.all(color: const Color(0xff37434d)),
+        // border: Border.all(color: const Color(0xff37434d)),
       ),
       // x, y 좌표 개수 
       minX: 0,
@@ -231,7 +243,7 @@ class _BookChartState extends State<BookChart> {
             (index) => FlSpot(index.toDouble(), ymBookCountDataController.bookCountList[index].toDouble())
           ),
           isCurved: true,
-          color: const Color(0xff8cda3e),
+          color: const Color.fromARGB(255, 173, 253, 93),
           barWidth: 2,
           isStrokeCapRound: true,
           dotData: const FlDotData(
@@ -242,8 +254,9 @@ class _BookChartState extends State<BookChart> {
             gradient: LinearGradient(
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
-            colors: mainGradientColors.map((color) => color.withOpacity(0.5))
-                  .toList(),
+            colors: themeController.isLightTheme.value 
+              ? lightMainGradientColors.map((color) => color.withOpacity(0.5)).toList()
+              : darkMainGradientColors.map((color) => color.withOpacity(0.5)).toList(),
             ),
           ),
         ),
@@ -260,8 +273,8 @@ class _BookChartState extends State<BookChart> {
         drawVerticalLine: false,
         horizontalInterval: 5,
         getDrawingHorizontalLine: (value) {
-          return const FlLine(
-            color: style.GREY,
+          return FlLine(
+            color: themeController.isLightTheme.value ? CommonColors.grey4 : CommonColors.grey2,
             strokeWidth: 0.5,
           );
         },
@@ -306,7 +319,7 @@ class _BookChartState extends State<BookChart> {
             12, 
             (index) => FlSpot(index.toDouble(), ymBookCountDataController.meanCountList[index])),
           isCurved: true,
-          color: const Color(0xfffa963c),
+          color: const Color.fromARGB(255, 255, 193, 100),
           barWidth: 2,
           isStrokeCapRound: true,
           dotData: const FlDotData(
@@ -317,8 +330,9 @@ class _BookChartState extends State<BookChart> {
             gradient: LinearGradient(
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
-            colors: avgGradientColors.map((color) => color.withOpacity(0.5))
-                  .toList(),
+            colors: themeController.isLightTheme.value 
+              ? lightAvgGradientColors.map((color) => color.withOpacity(0.5)).toList()
+              : darkAvgGradientColors.map((color) => color.withOpacity(0.5)).toList(),
             ),
           ),
         ),
