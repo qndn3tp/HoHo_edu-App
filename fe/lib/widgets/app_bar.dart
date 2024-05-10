@@ -35,11 +35,15 @@ PreferredSizeWidget customAppBar(title) {
 }
 
 // 홈 화면 앱바
-PreferredSizeWidget homeAppBar() {
+PreferredSizeWidget homeAppBar(screenSize) {
   return AppBar(
-    title: Image.asset('assets/images/appbar/appbar_logo.png'),
+    title: SizedBox(
+      width: screenSize.width * 0.3, 
+      height: screenSize.height * 0.1, 
+      child: Image.asset('assets/images/appbar/appbar_logo.png'),
+    ),
     backgroundColor: const Color(0xfffffde3),
     elevation: 0,
-    centerTitle: false
+    centerTitle: false,
   );
 }
