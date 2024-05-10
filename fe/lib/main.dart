@@ -5,8 +5,10 @@ import 'package:flutter_application/notifications/setup_noti.dart';
 import 'package:flutter_application/notifications/show_noti.dart';
 import 'package:flutter_application/services/check_perform_autologin.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
+import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'style.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -38,6 +40,20 @@ Future<void> main() async{
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  // 라이트/다크 모드 로드
+  final themeController = Get.put(ThemeController());
+  Future<void> loadThemeInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    themeController.isLightTheme.value = prefs.getBool('isLightTheme') ?? false; 
+  }
+  await loadThemeInfo();
+  /// 현재 모드에 따라 테마 변경
+  if (themeController.isLightTheme.value) {
+    Get.changeThemeMode(ThemeMode.light);
+  } else {
+     Get.changeThemeMode(ThemeMode.dark);  
+  }
 
   runApp(
     GetMaterialApp(

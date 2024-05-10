@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/book_data.dart';
-import 'package:flutter_application/screens/home/home_screen.dart';
+import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:get/get.dart';
 import '../../style.dart';
 

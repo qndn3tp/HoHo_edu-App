@@ -5,6 +5,7 @@ import 'package:flutter_application/screens/home/home_student_info_box.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:flutter_application/widgets/app_bar_drawer.dart';
 import 'package:flutter_application/widgets/box_decoration.dart';
+import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:get/get.dart';
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,12 +21,6 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-// 라이트/다크 모드 컨트롤러
-class ThemeController extends GetxController {
-  RxBool isLightTheme = true.obs;
-}
-
-
 class _HomeScreenState extends State<HomeScreen> {
   // 컨트롤러
   final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController()); // 수업 정보 
@@ -37,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     readNotiController.isRead.value = prefs.getBool('isRead') ?? false; 
   }
-  
+
   // 수업정보 박스
   List<Widget> _buildBanners(BuildContext context, List<String> snamesList) {
     return snamesList.map((name) => studentInfoBox(context, name)).toList();
@@ -94,12 +89,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: const Text('Dark/Light', style: TextStyle(color: Colors.black),),
                   onPressed: (){
                     if (themeController.isLightTheme.value) {
-                        Get.changeThemeMode(ThemeMode.dark);
-                        themeController.isLightTheme.value = false;
-                    }
-                    else {
+                      Get.changeThemeMode(ThemeMode.dark);
+                      themeController.isLightTheme.value = false;
+                      themeController.storeThemeInfo(false);
+                    } else {
                       Get.changeThemeMode(ThemeMode.light);  
                       themeController.isLightTheme.value = true;
+                      themeController.storeThemeInfo(true);
                     }
                   },
                 ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/notice_data.dart';
 import 'package:flutter_application/screens/Notice/notice_detail_screen.dart';
-import 'package:flutter_application/screens/home/home_screen.dart';
+import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_application/style.dart';
 import 'package:get/get.dart';
 

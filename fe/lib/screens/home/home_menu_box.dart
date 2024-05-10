@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:flutter_application/screens/home/home_widgets.dart';
+import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
