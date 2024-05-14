@@ -13,7 +13,6 @@ class ThemeController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('themeMode', value);
   }
-  // 앱 내의 위젯 테마 관리
   void changeIsLightTheme(bool value) {
     isLightTheme.value = value;
   }
