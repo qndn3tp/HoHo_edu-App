@@ -84,21 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               children: [
                 SizedBox(height: screenSize.height * 0.1),
-                // 라이트/다크 모드 변경
-                ElevatedButton(
-                  child: const Text('Dark/Light', style: TextStyle(color: Colors.black),),
-                  onPressed: (){
-                    if (themeController.isLightTheme.value) {
-                      Get.changeThemeMode(ThemeMode.dark);
-                      themeController.isLightTheme.value = false;
-                      themeController.storeThemeInfo(false);
-                    } else {
-                      Get.changeThemeMode(ThemeMode.light);  
-                      themeController.isLightTheme.value = true;
-                      themeController.storeThemeInfo(true);
-                    }
-                  },
-                ),
                 // 학생 정보 박스(이름, 센터, 수강정보)
                 bannerCarousel(context, snamesList),
                 const SizedBox(height: 30),

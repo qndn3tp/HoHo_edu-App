@@ -8,7 +8,6 @@ import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'style.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -41,18 +40,16 @@ Future<void> main() async{
     DeviceOrientation.portraitDown,
   ]);
 
-  // 라이트/다크 모드 로드
+  // 화면모드: 라이트/다크 모드
   final themeController = Get.put(ThemeController());
-  Future<void> loadThemeInfo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    themeController.isLightTheme.value = prefs.getBool('isLightTheme') ?? false; 
-  }
+
   await loadThemeInfo();
-  /// 현재 모드에 따라 테마 변경
-  if (themeController.isLightTheme.value) {
+  if (themeController.themeMode.value == 'light') {
     Get.changeThemeMode(ThemeMode.light);
-  } else {
-     Get.changeThemeMode(ThemeMode.dark);  
+    themeController.changeIsLightTheme(true);
+  } else if(themeController.themeMode.value == 'dark') {
+    Get.changeThemeMode(ThemeMode.dark);  
+    themeController.changeIsLightTheme(false);
   }
 
   runApp(
@@ -63,7 +60,7 @@ Future<void> main() async{
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
-      home: const MyApp()
+      home: MyApp()
     )
   );
 
@@ -73,11 +70,18 @@ Future<void> main() async{
 
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final ThemeController themeController = Get.put(ThemeController());
 
   @override
   Widget build(BuildContext context) {
-    
+
+    // 화면모드: 시스템 모드
+    if (themeController.themeMode.value == 'system') {
+      changeSystemMode(context);
+    }
+
     return FutureBuilder<Widget>(
       future: checkAndPerformAutoLogin(context),
       builder: (context, snapshot) {

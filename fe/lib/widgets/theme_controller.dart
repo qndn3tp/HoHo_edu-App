@@ -1,13 +1,40 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// 라이트/다크 모드 컨트롤러
+// 화면 모드 컨트롤러
 class ThemeController extends GetxController {
-  RxBool isLightTheme = true.obs;
+  RxString themeMode = 'system'.obs;             // ThemeMode: light, dark, system
+  RxBool isLightTheme = true.obs;                // isLightTheme: lgiht: true, dark: false, system: depends on system
   
-  // 로컬 저장소에 저장
-  Future<void> storeThemeInfo(value) async {
+  //  화면 모드 로드를 로컬 저장소에 저장
+  Future<void> changeAndStoreThemeMode(String value) async {
+    themeMode.value = value;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isLightTheme', value);
+    prefs.setString('themeMode', value);
+  }
+  // 앱 내의 위젯 테마 관리
+  void changeIsLightTheme(bool value) {
+    isLightTheme.value = value;
+  }
+}
+
+// 화면 모드 로드
+Future<void> loadThemeInfo() async {
+  final themeController = Get.put(ThemeController());
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  themeController.themeMode.value = prefs.getString('themeMode') ?? 'system'; 
+}
+
+// 화면 모드: 시스템, isLightTheme 관리
+void changeSystemMode(context) {
+  final themeController = Get.put(ThemeController());
+  Brightness systemBrightness = MediaQuery.of(context).platformBrightness; //현재 기기 시스템의 화면 모드 설정
+  
+  if (systemBrightness == Brightness.light) {
+    themeController.changeIsLightTheme(true);
+  } else {
+    themeController.changeIsLightTheme(false);
   }
 }

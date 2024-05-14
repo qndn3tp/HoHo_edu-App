@@ -2,15 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/notifications/request_noti.dart';
 import 'package:flutter_application/screens/setting/notification_info_box.dart';
+import 'package:flutter_application/screens/setting/setting_screen_mode.dart';
 import 'package:flutter_application/utils/load_noti_list_info.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-//////////////////
-//  설정 화면   //
-//////////////////
+/////////////////
+//  설정 화면  //
+////////////////
 
 // 알림 토글 버튼 컨트롤러
 class SwitchButtonController extends GetxController {
@@ -46,7 +47,7 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
   // 컨트롤러
   late AnimationController bellController;        // 알림 아이콘
   final SwitchButtonController switchButtonController = Get.put(SwitchButtonController()); // 알림 토글 버튼
-  
+
   // 전체 알림 스위치
   late bool _isNotiChecked;
 
@@ -83,12 +84,19 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
         children: [
           // 상단 알림 내용
           notificationInfoBox(_isNotiChecked, bellController),
+          // 화면 모드 설정
+          ListTile(
+            tileColor: tileColor,
+            title: const Text("화면 설정", style: TextStyle(fontWeight: FontWeight.bold,),),
+            onTap: (){Get.to(ScreenMode());},
+          ),
           // 전체 알림 권한 
           ListTile(
             tileColor: tileColor,
             title: const Text("알림", style: TextStyle(fontWeight: FontWeight.bold,),),
             trailing: CupertinoSwitch(
               activeColor: Theme.of(context).colorScheme.onSecondaryContainer,
+              trackColor: Theme.of(context).colorScheme.secondaryContainer,
               value: _isNotiChecked,
               onChanged: (value) {
                 openAppSettings(); // 앱 알림설정으로 이동
