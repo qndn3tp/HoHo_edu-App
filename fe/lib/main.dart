@@ -42,7 +42,6 @@ Future<void> main() async{
 
   // 화면모드: 라이트/다크 모드
   final themeController = Get.put(ThemeController());
-
   await loadThemeInfo();
   if (themeController.themeMode.value == 'light') {
     Get.changeThemeMode(ThemeMode.light);
@@ -60,7 +59,7 @@ Future<void> main() async{
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
-      home: MyApp()
+      home: const MyApp()
     )
   );
 
@@ -69,10 +68,22 @@ Future<void> main() async{
 }
 
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final ThemeController themeController = Get.put(ThemeController());
+  late Future<Widget> autoLoginFuture;    // 자동 로그인
+
+  @override
+  void initState() {
+    super.initState();
+    autoLoginFuture = checkAndPerformAutoLogin(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +94,7 @@ class MyApp extends StatelessWidget {
     }
 
     return FutureBuilder<Widget>(
-      future: checkAndPerformAutoLogin(context),
+      future: autoLoginFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // 데이터를 가져오는 중

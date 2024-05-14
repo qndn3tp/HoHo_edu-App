@@ -24,7 +24,6 @@ class CheckStoredUserInfoController extends GetxController {
       storedUserPassword = userInfo.split(" ")[3]; 
       
       autoLoginCheckController.isChecked.value = true;
-
       return true;
     }
     return false;
@@ -47,7 +46,7 @@ Future<Widget> checkAndPerformAutoLogin(context) async {
   if (isUserInfoStored && isAutoLoginChecked) {
     loginService(id, pwd, isAutoLoginChecked);
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.background,
       child: SpinKitThreeBounce(color: Theme.of(context).colorScheme.onSecondary)
     );
   } else {
