@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/style.dart';
 import 'package:get/get.dart';
 
 //////////////
@@ -42,6 +43,7 @@ PreferredSizeWidget homeAppBar(screenSize) {
       height: screenSize.height * 0.1, 
       child: Image.asset('assets/images/appbar/appbar_logo.png'),
     ),
+    iconTheme: const IconThemeData(color: CommonColors.grey5),
     backgroundColor: const Color(0xfffffde3),
     elevation: 0,
     centerTitle: false,

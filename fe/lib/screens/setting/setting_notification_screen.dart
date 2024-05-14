@@ -87,13 +87,13 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
           // 화면 모드 설정
           ListTile(
             tileColor: tileColor,
-            title: const Text("화면 설정", style: TextStyle(fontWeight: FontWeight.bold,),),
+            title: const Text("화면 설정"),
             onTap: (){Get.to(ScreenMode());},
           ),
           // 전체 알림 권한 
           ListTile(
             tileColor: tileColor,
-            title: const Text("알림", style: TextStyle(fontWeight: FontWeight.bold,),),
+            title: const Text("알림"),
             trailing: CupertinoSwitch(
               activeColor: Theme.of(context).colorScheme.onSecondaryContainer,
               trackColor: Theme.of(context).colorScheme.secondaryContainer,
