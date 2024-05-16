@@ -228,7 +228,6 @@ class _BookChartState extends State<BookChart> {
       ),
       borderData: FlBorderData(
         show: false,
-        // border: Border.all(color: const Color(0xff37434d)),
       ),
       // x, y 좌표 개수 
       minX: 0,

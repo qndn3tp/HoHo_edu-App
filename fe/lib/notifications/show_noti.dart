@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_application/screens/home/home_menu_box.dart';
-import 'package:flutter_application/screens/setting/setting_notification_screen.dart';
+import 'package:flutter_application/screens/setting/setting_notification.dart';
 import 'package:flutter_application/utils/load_noti_list_info.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
@@ -9,7 +9,6 @@ import 'dart:ui';
 //////////////////////////
 // fcm 로컬 알림 띄우기  //
 //////////////////////////
-
 
 Future<void> showNotification(RemoteMessage message) async {
   // 알림배지

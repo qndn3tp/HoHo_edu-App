@@ -2,16 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/notifications/request_noti.dart';
 import 'package:flutter_application/screens/setting/notification_info_box.dart';
-import 'package:flutter_application/screens/setting/setting_screen_mode.dart';
 import 'package:flutter_application/utils/load_noti_list_info.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/////////////////
-//  설정 화면  //
-////////////////
+////////////////////
+// 알림 설정 화면 //
+///////////////////
 
 // 알림 토글 버튼 컨트롤러
 class SwitchButtonController extends GetxController {
@@ -35,18 +34,17 @@ class SwitchButtonController extends GetxController {
   int get buttonCount => buttonNameList.length;
 }
 
-
-class SettingScreen extends StatefulWidget {
-  const SettingScreen({super.key});
+class SettingNotification extends StatefulWidget {
+  const SettingNotification({super.key});
 
   @override
-  State<SettingScreen> createState() => _SettingScreenState();
+  State<SettingNotification> createState() => _SettingNotificationState();
 }
 
-class _SettingScreenState extends State<SettingScreen> with TickerProviderStateMixin {
+class _SettingNotificationState extends State<SettingNotification> with TickerProviderStateMixin {
   // 컨트롤러
   late AnimationController bellController;        // 알림 아이콘
-  final SwitchButtonController switchButtonController = Get.put(SwitchButtonController()); // 알림 토글 버튼
+  final switchButtonController = Get.put(SwitchButtonController()); // 알림 토글 버튼
 
   // 전체 알림 스위치
   late bool _isNotiChecked;
@@ -79,17 +77,11 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.onSecondary,
       // 앱 바
-      appBar: customAppBar("설정"),
+      appBar: customAppBar("알림"),
       body: Column(
         children: [
           // 상단 알림 내용
           notificationInfoBox(_isNotiChecked, bellController),
-          // 화면 모드 설정
-          ListTile(
-            tileColor: tileColor,
-            title: const Text("화면 설정"),
-            onTap: (){Get.to(ScreenMode());},
-          ),
           // 전체 알림 권한 
           ListTile(
             tileColor: tileColor,
@@ -106,6 +98,7 @@ class _SettingScreenState extends State<SettingScreen> with TickerProviderStateM
           // 개별 알림(알림  리스트)
           Expanded(
             child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: switchButtonController.buttonCount,
               itemBuilder: (c, i) {
                 return Column(

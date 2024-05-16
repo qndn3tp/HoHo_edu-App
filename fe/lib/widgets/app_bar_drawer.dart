@@ -6,7 +6,7 @@ import 'package:flutter_application/screens/book/book_screen.dart';
 import 'package:flutter_application/screens/login/login_screen.dart';
 import 'package:flutter_application/screens/notice/notice_screen.dart';
 import 'package:flutter_application/screens/payment/payment_screen.dart';
-import 'package:flutter_application/screens/setting/setting_notification_screen.dart';
+import 'package:flutter_application/screens/setting/setting_screen.dart';
 import 'package:flutter_application/style.dart';
 import 'package:flutter_application/utils/logout.dart';
 import 'package:flutter_application/widgets/box_decoration.dart';

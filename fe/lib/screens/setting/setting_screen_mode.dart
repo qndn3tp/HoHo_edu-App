@@ -3,8 +3,8 @@ import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:get/get.dart';
 
-class ScreenMode extends StatelessWidget {
-  ScreenMode({super.key});
+class SettingNotificationMode extends StatelessWidget {
+  SettingNotificationMode({super.key});
   
   final themeController = Get.put(ThemeController());
   
