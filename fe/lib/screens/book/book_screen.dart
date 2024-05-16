@@ -8,10 +8,12 @@ import 'package:flutter_application/services/book/monthly_book_score_data.dart';
 import 'package:flutter_application/services/book/yearly_book_read_data.dart';
 import 'package:flutter_application/services/book/ym_book_read_cnt_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
-import 'package:flutter_application/widgets/calendar_tab.dart';
 import 'package:flutter_application/widgets/dropdown_screen.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../style.dart';
+
+
 ////////////////////////
 //    독클결과 화면    //
 ////////////////////////
@@ -26,10 +28,13 @@ class BookScreen extends DropDownScreen {
     );
 
   static Future<void> _updateBookData() async {
-    await getYearlyBookData();
-    await getMonthlyBookReadData(getCurrentMonth());
-    await getMonthlyBookScoreData(getCurrentMonth());
-    await getYMBookReadCountData();
+    final year = getCurrentYear();
+    final month = getCurrentMonth();
+
+    await getMonthlyBookReadData(year, month);
+    await getMonthlyBookScoreData(year, month);
+    await getYearlyBookData(year, month);
+    await getYMBookReadCountData(year, month);
   }
 }
 
@@ -43,6 +48,29 @@ class MonthlyScreen extends StatefulWidget {
 
 class _MonthlyScreenState extends State<MonthlyScreen> {
   final themeController = Get.put(ThemeController());
+  late PageController _pageController;
+
+  // 총 페이지 수
+  late int totalPage;
+  // 현재 페이지 인덱스
+  late int currentPageIndex;    
+  // 페이지 이동을 위한 변수
+  late var currentPage;
+  // 가입 연월                
+  int startYear = 2023;
+  int startMonth = 5;
+  // 현재 연월
+  int endYear = 2024;
+  int endMonth = 5;
+
+  @override
+  void initState() {
+    super.initState();
+    currentPageIndex = _getPageCount() - 1;        // 현재페이지 = 총 페이지수- 1 (가장 최근 연월)
+    totalPage = _getPageCount(); 
+    currentPage = _getPageCount() - 1; 
+    _pageController = PageController(initialPage: currentPageIndex);
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -50,19 +78,20 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
       body: Column(
         children: [
           // 이전-현재 날짜-다음
-          calendarTab("book", context),
+          calendarTab(),
           // 페이지 뷰
           Expanded(
             child: PageView.builder(
               physics: const NeverScrollableScrollPhysics(),
-              controller: pageController,
-              itemCount: getCurrentMonth(),   // 1월~현재월
-              onPageChanged: (int page) {
+              controller: _pageController,
+              onPageChanged: (int index) {
                 setState(() {
-                  currentPage = page; // 페이지를 넘기면 month가 변하도록 업데이트
+                  currentPageIndex = index;
                 });
               },
-              itemBuilder: (BuildContext context, int index) {
+              itemCount: _getPageCount(),   // 총 페이지 수
+              itemBuilder: (context, index) {
+                final currentPage = DateTime(startYear, startMonth + index);
                 return SingleChildScrollView(
                   child: Obx(() => Container(
                     color: themeController.isLightTheme.value 
@@ -71,11 +100,11 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                     child: Column(
                       children: [
                         // 독서클리닉 결과 1
-                        BookResult1(index: index),
+                        BookResult1(year: currentPage.year, month: currentPage.month),
                         // 독서클리닉 결과 2
                         const BookResult2(),
                         // 독서클리닉 결과
-                        const BookResult3()
+                        BookResult3(year: currentPage.year, month: currentPage.month)
                       ],
                     ),
                   )),
@@ -84,6 +113,76 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
           )
         ],
       ),
+    );
+  }
+  // 가입 월 ~ 현재 월까지 페이지 개수
+  int _getPageCount() {
+    return DateTime(endYear, endMonth).difference(DateTime(startYear, startMonth)).inDays ~/ 30 + 1;
+  }
+  // 페이지에 따른 연도
+  int _getPageYear() {
+    return DateTime(startYear, startMonth + currentPageIndex).year;
+  }
+  // 페이지에 따른 월
+  int _getPageMonth() {
+    return DateTime(startYear, startMonth + currentPageIndex).month;
+  }
+  
+  // 페이지 이동
+  void goToPage(int newPage) async {
+    final year = _getPageYear();
+    final month = _getPageMonth();
+
+    Future fetchData(year, month) async { 
+      await getMonthlyBookReadData(year, month);
+      await getMonthlyBookScoreData(year, month);
+      await getYearlyBookData(year, month);
+      await getYMBookReadCountData(year, month);
+    }
+
+    if (newPage >= 0 && newPage <= totalPage-1) {
+      // 이전
+      if (currentPage > newPage) {
+        currentPage = newPage;
+        await fetchData(year, month-1);
+      }
+      // 다음
+      else if (currentPage < newPage) {
+        currentPage = newPage;
+        await fetchData(year, month+1);
+      }
+      _pageController.animateToPage(
+        currentPage,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  // 이전-현재-다음
+  Widget calendarTab() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+          onPressed: () => goToPage(currentPageIndex - 1),
+        ),
+        Text(
+          DateFormat('yyyy.MM').format(DateTime(_getPageYear(), _getPageMonth())),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),        
+        IconButton(
+          icon: Icon(
+            Icons.arrow_forward_ios_rounded,
+            color: Theme.of(context).colorScheme.secondary
+          ),
+          onPressed: () => goToPage(currentPageIndex + 1),
+        ),
+      ],
     );
   }
 }

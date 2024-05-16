@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/book_data.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
-import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_application/widgets/text_span.dart';
@@ -14,10 +13,11 @@ import '../../style.dart';
 /////////////////////////////////
 
 class BookResult1 extends StatefulWidget {
-  final int index;
-  final String currentPageMonth;
+  final int year;
+  final int month;
+  final String pageDate;
 
-  BookResult1({super.key, required this.index}) : currentPageMonth = DateFormat('yyyy년 M월').format(DateTime(currentYear, index + 1));
+  BookResult1({super.key, required this.year, required this.month}) : pageDate = DateFormat('yyyy년 M월').format(DateTime(year, month));
 
   @override
   State<BookResult1> createState() => _BookResult1State();
@@ -44,7 +44,7 @@ class _BookResult1State extends State<BookResult1> {
             text: TextSpan(
               children: [
                 normalText("${dropdownButtonController.currentItem.value} 학생은 "),
-                colorText(widget.currentPageMonth, pointTextColor),
+                colorText(widget.pageDate, pointTextColor),
                 normalText("에"),
               ]),
           ),
@@ -66,7 +66,7 @@ class _BookResult1State extends State<BookResult1> {
           itemCount: bookTitleDataController.monthlyBookCount,
           itemBuilder: (context, index) {
             return Container(
-              margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.2),
+              margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1),
               child: Row(
                 children: [
                   Icon(Icons.remove, color: detailTextColor),

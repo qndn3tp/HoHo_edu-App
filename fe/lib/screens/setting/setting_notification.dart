@@ -8,9 +8,9 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-////////////////////
-// 알림 설정 화면 //
-///////////////////
+///////////////
+// 알림 설정 //
+//////////////
 
 // 알림 토글 버튼 컨트롤러
 class SwitchButtonController extends GetxController {

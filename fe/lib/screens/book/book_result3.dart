@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application/models/book_data.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
-import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/widgets/text_span.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../style.dart';import 'book_chart.dart';
 
 //////////////////////
@@ -13,7 +11,10 @@ import '../../style.dart';import 'book_chart.dart';
 //////////////////////
 
 class BookResult3 extends StatefulWidget {
-  const BookResult3({super.key});
+  final int year;
+  final int month;
+
+  const BookResult3({super.key, required this.year, required this.month});
 
   @override
   State<BookResult3> createState() => _BookResult3State();
@@ -36,7 +37,7 @@ class _BookResult3State extends State<BookResult3> {
         // 텍스트
         RichText(
           text: normalText(
-            "${DateFormat('yyyy년 M월').format(DateTime(currentYear, 1))}부터 ${DateFormat('yyyy년 M월').format(DateTime(currentYear, currentMonth))}까지"
+            "${widget.year}년에는"
           )),
         RichText(
           text: TextSpan(

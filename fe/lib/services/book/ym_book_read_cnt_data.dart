@@ -4,7 +4,6 @@ import 'package:flutter_application/models/login_data.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application/models/book_data.dart';
-import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
@@ -15,7 +14,7 @@ import 'package:intl/intl.dart';
 //////////////////////////////
 
 // 연간 월별 독서량 데이터 가져오는 함수
-Future<void> getYMBookReadCountData() async {
+Future<void> getYMBookReadCountData(year, month) async {
 
   // 컨트롤러
   final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController()); // 드롭다운 버튼
@@ -30,8 +29,10 @@ Future<void> getYMBookReadCountData() async {
   final dropDownId = dropdownButtonController.currentItem.value;                                    // 드롭다운 선택된 이름
   String id = nameIdMap[dropDownId] ?? userDataController.userData!.id;
 
-  // 현재 연도
-  String yy = DateFormat('yyyy').format(DateTime(currentYear));
+  // 해당 페이지 연월
+  final currrentPageYear = year;
+  final currentPageMonth = month;
+  String yy = DateFormat('yyyy').format(DateTime(currrentPageYear, currentPageMonth));
 
   // HTTP POST 요청
   var response = await http.post(

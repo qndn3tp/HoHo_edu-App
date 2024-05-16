@@ -48,7 +48,7 @@ class _BookResult2State extends State<BookResult2> {
           ),
           SizedBox(
             height: pageHeight * 0.1, 
-            child: RichText(text: normalText("풍부해졌어요."))),
+            child: RichText(text: normalText("풍부해졌어요"))),
           // 이미지
           SizedBox(
             height: pageHeight * 0.35, 

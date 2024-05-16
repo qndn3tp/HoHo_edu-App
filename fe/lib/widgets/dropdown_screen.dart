@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
-import 'package:flutter_application/widgets/calendar_tab.dart';
 import 'package:flutter_application/widgets/dropdown_box.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -47,7 +45,6 @@ class DropDownScreen extends GetView<DropdownButtonController> {
                     } else if (snapshot.hasError) {
                       return Text("Error: ${snapshot.error}");
                     } else {
-                      currentPage = getCurrentMonth() - 1;
                       // MonthlyScreen을 생성하여 반환
                       return monthlyScreenBuilder;
                     }

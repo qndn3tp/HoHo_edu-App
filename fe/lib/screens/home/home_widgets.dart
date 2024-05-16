@@ -96,10 +96,10 @@ Widget bookButton() {
     imagePath: 'assets/images/book.png',
     buttonText: '독클결과',
     onTap: () async {
-      await getYearlyBookData();
-      await getMonthlyBookReadData(currentMonth - 1);
-      await getMonthlyBookScoreData(currentMonth - 1);
-      await getYMBookReadCountData();
+      await getMonthlyBookReadData(currentYear, currentMonth - 1);
+      await getMonthlyBookScoreData(currentYear, currentMonth - 1);
+      await getYearlyBookData(currentYear, currentMonth - 1);
+      await getYMBookReadCountData(currentYear, currentMonth - 1);
       Get.to(
         BookScreen(),
         transition: Transition.cupertino,

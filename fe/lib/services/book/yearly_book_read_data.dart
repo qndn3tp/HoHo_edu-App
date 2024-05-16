@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter_application/models/book_data.dart';
 import 'package:flutter_application/models/class_info_data.dart';
 import 'package:flutter_application/models/login_data.dart';
-import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -15,7 +14,7 @@ import 'package:http/http.dart' as http;
 ////////////////////////
 
 // 연간 독서량 데이터 가져오는 함수
-Future<void> getYearlyBookData() async {
+Future<void> getYearlyBookData(year, month) async {
   // 컨트롤러
   final UserDataController userDataController = Get.put(UserDataController());                   // 유저의 로그인 데이터 
   final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController()); // 드롭다운 버튼 
@@ -29,8 +28,10 @@ Future<void> getYearlyBookData() async {
   final dropDownId = dropdownButtonController.currentItem.value;                                    // 드롭다운 선택된 이름
   String id = nameIdMap[dropDownId] ?? userDataController.userData!.id;
 
-  // 현재 연도
-  String yy = DateFormat('yyyy').format(DateTime(getCurrentYear()));
+  // 해당 페이지 연월
+  final currrentPageYear = year;
+  final currentPageMonth = month;
+  String yy = DateFormat('yyyy').format(DateTime(currrentPageYear, currentPageMonth));
 
   // HTTP POST 요청
   var response = await http.post(
