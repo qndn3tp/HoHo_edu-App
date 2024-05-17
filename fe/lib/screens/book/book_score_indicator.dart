@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/models/book_data.dart';
+import 'package:flutter_application/models/book_data/monthly_book_score_data.dart';
 import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';

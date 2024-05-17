@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter_application/models/book_data.dart';
+import 'package:flutter_application/models/book_data/monthly_book_score_data.dart';
 import 'package:flutter_application/models/class_info_data.dart';
 import 'package:flutter_application/models/login_data.dart';
 import 'package:flutter_application/widgets/dialog.dart';
@@ -8,7 +8,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
-
 
 ////////////////////////////
 //  월간 독서 점수 데이터  //

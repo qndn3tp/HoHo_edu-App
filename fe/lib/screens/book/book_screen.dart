@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/models/book_data/first_book_read_date_data.dart';
 import 'package:flutter_application/screens/book/book_result1.dart';
 import 'package:flutter_application/screens/book/book_result2.dart';
 import 'package:flutter_application/screens/book/book_result3.dart';
+import 'package:flutter_application/services/book/first_book_read_date_data.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_application/services/book/monthly_book_read_data.dart';
 import 'package:flutter_application/services/book/monthly_book_score_data.dart';
@@ -12,7 +14,6 @@ import 'package:flutter_application/widgets/dropdown_screen.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../style.dart';
-
 
 ////////////////////////
 //    독클결과 화면    //
@@ -31,6 +32,7 @@ class BookScreen extends DropDownScreen {
     final year = getCurrentYear();
     final month = getCurrentMonth();
 
+    await getFirstBookReadDateData();
     await getMonthlyBookReadData(year, month);
     await getMonthlyBookScoreData(year, month);
     await getYearlyBookData(year, month);
@@ -47,27 +49,30 @@ class MonthlyScreen extends StatefulWidget {
 }
 
 class _MonthlyScreenState extends State<MonthlyScreen> {
+  final bookReadDateDataController = Get.put(BookReadDateDataController());
   final themeController = Get.put(ThemeController());
   late PageController _pageController;
 
+  // 가입 연월                
+  late int startYear;
+  late int startMonth;
+  // 현재 연월
+  int endYear = getCurrentYear();
+  int endMonth = getCurrentMonth();
   // 총 페이지 수
   late int totalPage;
   // 현재 페이지 인덱스
   late int currentPageIndex;    
   // 페이지 이동을 위한 변수
   late var currentPage;
-  // 가입 연월                
-  int startYear = 2023;
-  int startMonth = 5;
-  // 현재 연월
-  int endYear = 2024;
-  int endMonth = 5;
 
   @override
   void initState() {
     super.initState();
+    startYear = int.parse(bookReadDateDataController.bookReadDateData!.startYear);
+    startMonth = int.parse(bookReadDateDataController.bookReadDateData!.startMonth);
+    totalPage = _getPageCount();
     currentPageIndex = _getPageCount() - 1;        // 현재페이지 = 총 페이지수- 1 (가장 최근 연월)
-    totalPage = _getPageCount(); 
     currentPage = _getPageCount() - 1; 
     _pageController = PageController(initialPage: currentPageIndex);
   }

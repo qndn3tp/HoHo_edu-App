@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/models/book_data.dart';
+import 'package:flutter_application/models/book_data/monthly_book_title_data.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
@@ -25,13 +25,14 @@ class BookResult1 extends StatefulWidget {
 
 class _BookResult1State extends State<BookResult1> {
   // 컨트롤러
-  final bookTitleDataController = Get.put(BookTitleDataController());       // 책 제목
-  final dropdownButtonController = Get.put(DropdownButtonController());     // 드롭다운 버튼
-  final themeController = Get.put(ThemeController());
+  final bookTitleDataController = Get.put(BookTitleDataController());  
+  final dropdownButtonController = Get.put(DropdownButtonController());    
+  final themeController = Get.put(ThemeController());                      
 
   @override
   Widget build(BuildContext context) {
-    final pageHeight = MediaQuery.of(context).size.height - 200;
+    final Size screenSize = MediaQuery.of(context).size;
+    final pageHeight = screenSize.height - 200;
     final pointTextColor = themeController.isLightTheme.value ? LightColors.indigo : DarkColors.blue;
     final detailTextColor = themeController.isLightTheme.value ? CommonColors.grey4 : CommonColors.grey3;
 
@@ -39,24 +40,23 @@ class _BookResult1State extends State<BookResult1> {
       children: [
         SizedBox(height: pageHeight * 0.1,),
         // 텍스트
-        Obx(
-          () => RichText(
-            text: TextSpan(
-              children: [
-                normalText("${dropdownButtonController.currentItem.value} 학생은 "),
-                colorText(widget.pageDate, pointTextColor),
-                normalText("에"),
-              ]),
-          ),
-        ),
+        Obx(() => RichText(
+          text: TextSpan(
+            children: [
+              normalText("${dropdownButtonController.currentItem.value} 학생은 "),
+              colorText(widget.pageDate, pointTextColor),
+              normalText("에"),
+            ]),
+          )), 
         SizedBox(
           height: pageHeight * 0.15,
           child: RichText(
-            text: TextSpan(children: [
-              normalText("총 "),
-              colorText("${bookTitleDataController.monthlyBookCount}권", pointTextColor),
-              normalText("의 책을 읽었어요!"),
-            ]),
+            text: TextSpan(
+              children: [
+                normalText("총 "),
+                colorText("${bookTitleDataController.monthlyBookCount}권", pointTextColor),
+                normalText("의 책을 읽었어요!"),
+              ]),
           ),
         ),
         // 독서클리닉 목록(책 제목 리스트)
@@ -66,7 +66,7 @@ class _BookResult1State extends State<BookResult1> {
           itemCount: bookTitleDataController.monthlyBookCount,
           itemBuilder: (context, index) {
             return Container(
-              margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1),
+              margin: EdgeInsets.only(left: screenSize.width * 0.1),
               child: Row(
                 children: [
                   Icon(Icons.remove, color: detailTextColor),
@@ -90,7 +90,7 @@ class _BookResult1State extends State<BookResult1> {
             ),
             // 이미지(풍선)
             Positioned(
-              left: MediaQuery.of(context).size.width - 120,
+              left: screenSize.width - 120,
               child: Container(
                 height: 120,
                 width: 120,
@@ -99,7 +99,7 @@ class _BookResult1State extends State<BookResult1> {
             ),
             // 월간 읽은 책의 권수
             Positioned(
-              left: MediaQuery.of(context).size.width - 95,
+              left: screenSize.width - 95,
               top: 10,
               child: SizedBox(
                 height: 80,
@@ -107,7 +107,10 @@ class _BookResult1State extends State<BookResult1> {
                 child: Center(
                   child: Text(
                     "${bookTitleDataController.monthlyBookCount}",
-                    style: const TextStyle(fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold,))
+                    style: const TextStyle(
+                      fontSize: 35, 
+                      color: Colors.white, 
+                      fontWeight: FontWeight.bold,))
                 ),
               ),
             ),

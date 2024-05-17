@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/attendance/attendance_screen.dart';
 import 'package:flutter_application/screens/home/home_menu_box.dart';
 import 'package:flutter_application/services/attendance/time_check.dart';
+import 'package:flutter_application/services/book/first_book_read_date_data.dart';
 import 'package:flutter_application/services/book/monthly_book_read_data.dart';
 import 'package:flutter_application/services/book/monthly_book_score_data.dart';
 import 'package:flutter_application/services/book/yearly_book_read_data.dart';
@@ -96,6 +97,7 @@ Widget bookButton() {
     imagePath: 'assets/images/book.png',
     buttonText: '독클결과',
     onTap: () async {
+      await getFirstBookReadDateData();
       await getMonthlyBookReadData(currentYear, currentMonth - 1);
       await getMonthlyBookScoreData(currentYear, currentMonth - 1);
       await getYearlyBookData(currentYear, currentMonth - 1);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application/models/book_data.dart';
+import 'package:flutter_application/models/book_data/monthly_book_score_data.dart';
 import 'package:flutter_application/screens/book/book_score_indicator.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_application/widgets/text_span.dart';
@@ -50,10 +50,10 @@ class _BookResult2State extends State<BookResult2> {
             height: pageHeight * 0.1, 
             child: RichText(text: normalText("풍부해졌어요"))),
           // 이미지
-          SizedBox(
+          Container(
             height: pageHeight * 0.35, 
+            margin: EdgeInsets.symmetric(vertical: pageHeight * 0.05),
             child: Image.asset("assets/images/book/book_report2.png")),
-          SizedBox(height: pageHeight * 0.1,),
           // 각 영역별 점수 표시
           SizedBox(
             height: pageHeight * 0.2,
