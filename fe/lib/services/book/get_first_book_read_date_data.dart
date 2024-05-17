@@ -9,10 +9,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
 ////////////////////////////
-//  월간 독서 목록 데이터  //
+//  독클 시작 날짜 데이터  //
 ////////////////////////////
 
-// 월간 독서 데이터 가져오는 함수
+// 독클 시작 날짜 독서 데이터 가져오는 함수
 Future<void> getFirstBookReadDateData() async {
 
   // 컨트롤러

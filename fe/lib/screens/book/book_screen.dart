@@ -3,12 +3,12 @@ import 'package:flutter_application/models/book_data/first_book_read_date_data.d
 import 'package:flutter_application/screens/book/book_result1.dart';
 import 'package:flutter_application/screens/book/book_result2.dart';
 import 'package:flutter_application/screens/book/book_result3.dart';
-import 'package:flutter_application/services/book/first_book_read_date_data.dart';
+import 'package:flutter_application/services/book/get_first_book_read_date_data.dart';
+import 'package:flutter_application/services/book/get_monthly_book_read_data.dart';
+import 'package:flutter_application/services/book/get_yearly_book_read_count_data.dart';
+import 'package:flutter_application/services/book/get_ym_book_read_cnt_data.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
-import 'package:flutter_application/services/book/monthly_book_read_data.dart';
-import 'package:flutter_application/services/book/monthly_book_score_data.dart';
-import 'package:flutter_application/services/book/yearly_book_read_data.dart';
-import 'package:flutter_application/services/book/ym_book_read_cnt_data.dart';
+import 'package:flutter_application/services/book/get_monthly_book_score_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/widgets/dropdown_screen.dart';
 import 'package:get/get.dart';
@@ -35,7 +35,7 @@ class BookScreen extends DropDownScreen {
     await getFirstBookReadDateData();
     await getMonthlyBookReadData(year, month);
     await getMonthlyBookScoreData(year, month);
-    await getYearlyBookData(year, month);
+    await getYearlyBookReadCountData(year, month);
     await getYMBookReadCountData(year, month);
   }
 }
@@ -141,7 +141,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
     Future fetchData(year, month) async { 
       await getMonthlyBookReadData(year, month);
       await getMonthlyBookScoreData(year, month);
-      await getYearlyBookData(year, month);
+      await getYearlyBookReadCountData(year, month);
       await getYMBookReadCountData(year, month);
     }
 

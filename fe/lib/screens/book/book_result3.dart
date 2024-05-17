@@ -23,7 +23,7 @@ class BookResult3 extends StatefulWidget {
 
 class _BookResult3State extends State<BookResult3> {
   // 컨트롤러
-  YearBookDataController yearBookDataController = Get.put(YearBookDataController());          // 연간 독서량
+  YearBookCountDataController yearBookCountDataController = Get.put(YearBookCountDataController());          // 연간 독서량
   YMBookCountDataController ymBookCountDataController = Get.put(YMBookCountDataController()); // 연간 월별 독서량
   final themeController = Get.put(ThemeController());
 
@@ -40,7 +40,7 @@ class _BookResult3State extends State<BookResult3> {
         RichText(
           text: TextSpan(
             children: [
-              colorText("총 ${yearBookDataController.yearBookData!.totalRows}권", pointTextColor),
+              colorText("총 ${yearBookCountDataController.yearBookCountData!.totalRows}권", pointTextColor),
               normalText("의 책을 읽었어요"),
             ])
         ),

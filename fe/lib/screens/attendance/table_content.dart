@@ -3,9 +3,10 @@ import 'package:flutter_application/models/attendance_data.dart';
 import 'package:flutter_application/screens/attendance/attendance_icon.dart';
 import 'package:intl/intl.dart';
 import '../../style.dart';
-//////////////////////////////////
-//    하단 내용(일자-출석내용)   //
-//////////////////////////////////
+
+///////////////////////////////
+//  하단 내용(일자-출석내용)  //
+///////////////////////////////
 
 Widget tableContent(context, AttendanceData attendanceData) {
   final Size screenSize = MediaQuery.of(context).size;

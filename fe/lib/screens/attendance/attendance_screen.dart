@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/models/attendance_data.dart';
 import 'package:flutter_application/screens/attendance/table_content.dart';
 import 'package:flutter_application/screens/attendance/table_title.dart';
-import 'package:flutter_application/services/attendance/time_check.dart';
+import 'package:flutter_application/services/attendance/get_attendance_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_application/widgets/dropdown_screen.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-////////////////////////
-//    출석체크 화면    //
-////////////////////////
+////////////////////
+//  출석체크 화면 //
+///////////////////
 
 // 드롭다운 화면
 class AttendanceScreen extends DropDownScreen {

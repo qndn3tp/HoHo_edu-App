@@ -1,10 +1,10 @@
 import 'package:get/get.dart';  
 
-/////////////////////////////////
-//  수업정보 데이터, 컨트롤러   //
-/////////////////////////////////
+/////////////////////
+// 수업정보 데이터 //
+/////////////////////
 
-// 수업정보 데이터 클래스
+// 데이터 클래스
 class ClassInfoData {
   final String stuId;
   final String sName;
@@ -29,7 +29,6 @@ class ClassInfoData {
     required this.dateName,
   });
 
-  // JSON 데이터를 받아 ClassInfoData 객체로 파싱
   factory ClassInfoData.fromJson(Map<String, dynamic> json) {
     return ClassInfoData (
       stuId: json['Stuid'] ?? "",
@@ -44,7 +43,7 @@ class ClassInfoData {
     );
   }
 }
-// 수업정보 데이터 컨트롤러
+// 데이터 컨트롤러
 class ClassInfoDataController extends GetxController {
   List<ClassInfoData>? _classInfoDataList;
 
@@ -88,7 +87,7 @@ class ClassInfoDataController extends GetxController {
         stuNameIdMap[studentName] = studentId;
       }
     }
-  return stuNameIdMap;
+    return stuNameIdMap;
   }
 
   // 학생 이름:[수업정보]를 가지는 Map

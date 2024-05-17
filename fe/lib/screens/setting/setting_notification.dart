@@ -72,10 +72,11 @@ class _SettingNotificationState extends State<SettingNotification> with TickerPr
 
   @override
   Widget build(BuildContext context) {
-    final tileColor = Theme.of(context).colorScheme.surface;
+    final colorScheme = Theme.of(context).colorScheme;
+    final tileColor = colorScheme.surface;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.onSecondary,
+      backgroundColor: colorScheme.onSecondary,
       // 앱 바
       appBar: customAppBar("알림"),
       body: Column(
@@ -87,8 +88,8 @@ class _SettingNotificationState extends State<SettingNotification> with TickerPr
             tileColor: tileColor,
             title: const Text("알림"),
             trailing: CupertinoSwitch(
-              activeColor: Theme.of(context).colorScheme.onSecondaryContainer,
-              trackColor: Theme.of(context).colorScheme.secondaryContainer,
+              activeColor: colorScheme.onSecondaryContainer,
+              trackColor: colorScheme.secondaryContainer,
               value: _isNotiChecked,
               onChanged: (value) {
                 openAppSettings(); // 앱 알림설정으로 이동
@@ -109,8 +110,8 @@ class _SettingNotificationState extends State<SettingNotification> with TickerPr
                       title: Text(switchButtonController.buttonNameList[i]),
                       // 스위치 버튼
                       trailing: Obx(() => CupertinoSwitch(
-                        activeColor: Theme.of(context).colorScheme.onSecondaryContainer,
-                        trackColor: Theme.of(context).colorScheme.secondaryContainer,
+                        activeColor: colorScheme.onSecondaryContainer,
+                        trackColor: colorScheme.secondaryContainer,
                         value: switchButtonController.buttonCheckedList[i],
                         onChanged: _isNotiChecked     // 전체 알림 권한이 true -> 개별 알림 가능
                           ? (value) {

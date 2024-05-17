@@ -1,10 +1,10 @@
 import 'package:get/get.dart';  
 
-/////////////////////////////
-//  출석 데이터, 컨트롤러   //
-/////////////////////////////
+//////////////////
+//  출석 데이터 //
+/////////////////
 
-// 출석 데이터 클래스
+// 데이터 클래스
 class AttendanceData {
   final String ymd;
   final String dayname;
@@ -26,7 +26,6 @@ class AttendanceData {
     required this.timecheckI,
   });
 
-  // JSON 데이터를 받아 AttendanceData 객체로 파싱
   factory AttendanceData.fromJson(Map<String, dynamic> json) {
     return AttendanceData(
       ymd: json['ymd'] ?? "",
@@ -41,7 +40,7 @@ class AttendanceData {
   }
 }
 
-// 출석 데이터 컨트롤러
+// 데이터 컨트롤러
 class AttendanceDataController extends GetxController {
   List<AttendanceData>? _attendanceDataList;
 

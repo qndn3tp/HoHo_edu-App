@@ -3,6 +3,7 @@ import 'package:flutter_application/models/class_info_data.dart';
 import 'package:flutter_application/models/login_data.dart';
 import 'package:get/get.dart';
 import '../../style.dart';
+
 ///////////////////////////////////////////
 // 학생 정보 박스(센터명, 이름, 수강정보) //
 ///////////////////////////////////////////

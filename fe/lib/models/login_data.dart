@@ -1,10 +1,10 @@
 import 'package:get/get.dart';  
 
-/////////////////////////////////////////////
-//  로그인시 받아온 유저의 데이터, 컨트롤러  //
-/////////////////////////////////////////////
+////////////////////////////////////
+//  로그인시 받아온 유저의 데이터  //
+///////////////////////////////////
 
-//  유저의 로그인 데이터 클래스
+// 유저의 로그인 데이터 클래스
 class UserData {
   final String id;
   final String name;
@@ -22,7 +22,6 @@ class UserData {
     required this.sibling,
   });
 
-  // JSON 데이터를 받아 UserData 객체로 파싱
   factory UserData.fromJson(Map<String, dynamic> json) {
     return UserData(
       id: json['id'] ?? "",

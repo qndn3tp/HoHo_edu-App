@@ -1,8 +1,8 @@
 import 'package:get/get.dart';  
 
-/////////////////////////////
-//  알림 데이터, 컨트롤러   //
-/////////////////////////////
+/////////////////
+// 알림 데이터 //
+////////////////
 
 // 알림 데이터 클래스
 class NoticeData {
@@ -28,7 +28,6 @@ class NoticeData {
     required this.stuId2,
   });
 
-  // JSON 데이터를 받아 NoticeData 객체로 파싱
   factory NoticeData.fromJson(Map<String, dynamic> json) {
     return NoticeData(
       title: json['title'] ?? "",

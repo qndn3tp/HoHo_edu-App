@@ -1,33 +1,31 @@
 import 'package:get/get.dart';  
 
-///////////////////////////////////
-//  연간독서량 데이터, 컨트롤러   //
-///////////////////////////////////
+///////////////////////
+//  연간독서량 데이터 //
+////////////////////////
 
 // 데이터 클래스
-class YearBookData {
+class YearBookCountData {
   final int totalRows;
 
-  YearBookData({
+  YearBookCountData({
     required this.totalRows,
   });
 
-  // JSON 데이터를 받아 YearBookData 객체로 파싱
-  factory YearBookData.fromJson(Map<String, dynamic> json) {
-    return YearBookData(
+  factory YearBookCountData.fromJson(Map<String, dynamic> json) {
+    return YearBookCountData(
       totalRows: json['total_rows'] ?? "",
     );
   }
 }
 
-//데이터 컨트롤러
-class YearBookDataController extends GetxController {
-  YearBookData? _yearBookData;           
+// 데이터 컨트롤러
+class YearBookCountDataController extends GetxController {
+  YearBookCountData? _yearBookCountData;           
 
-  // _yearBookData를 받아온 YearBookData 객체로 설정
-  void setYearBookData(YearBookData yearBookData) {
-    _yearBookData = yearBookData;
+  void setYearBookCountData(YearBookCountData yearBookCountData) {
+    _yearBookCountData = yearBookCountData;
     update();
   }
-  YearBookData? get yearBookData => _yearBookData;
+  YearBookCountData? get yearBookCountData => _yearBookCountData;
 }

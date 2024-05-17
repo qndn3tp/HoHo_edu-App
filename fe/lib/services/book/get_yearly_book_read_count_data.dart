@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 ////////////////////////
 
 // 연간 독서량 데이터 가져오는 함수
-Future<void> getYearlyBookData(year, month) async {
+Future<void> getYearlyBookReadCountData(year, month) async {
   // 컨트롤러
   final UserDataController userDataController = Get.put(UserDataController());                   // 유저의 로그인 데이터 
   final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController()); // 드롭다운 버튼 
@@ -54,10 +54,10 @@ Future<void> getYearlyBookData(year, month) async {
 
       // 응답 데이터가 성공일 때
       if (resultList[0]["result"] == null) {
-        // JSON 데이터를 YearBookData 객체리스트로 파싱
-        YearBookData yearBookData = YearBookData.fromJson(resultList[0]);                          
-        final YearBookDataController yearBookDataController = Get.put(YearBookDataController());     
-        yearBookDataController.setYearBookData(yearBookData);
+        // JSON 데이터를 YearBookCountData 객체리스트로 파싱
+        YearBookCountData yearBookCountData = YearBookCountData.fromJson(resultList[0]);                          
+        final YearBookCountDataController yearBookCountDataController = Get.put(YearBookCountDataController());     
+        yearBookCountDataController.setYearBookCountData(yearBookCountData);
       }
       // 응답 데이터가 오류일 때("9999": 오류)
       else {

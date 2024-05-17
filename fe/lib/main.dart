@@ -3,7 +3,7 @@ import 'package:flutter_application/firebase_options.dart';
 import 'package:flutter_application/notifications/background_noti.dart';
 import 'package:flutter_application/notifications/setup_noti.dart';
 import 'package:flutter_application/notifications/show_noti.dart';
-import 'package:flutter_application/services/check_perform_autologin.dart';
+import 'package:flutter_application/services/login/check_perform_autologin.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

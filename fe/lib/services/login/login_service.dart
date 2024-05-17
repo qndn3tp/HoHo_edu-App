@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter_application/notifications/request_noti.dart';
 import 'package:flutter_application/screens/home/home_screen.dart';
-import 'package:flutter_application/services/home/class_info.dart';
+import 'package:flutter_application/services/home/get_class_info_data.dart';
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -75,7 +75,7 @@ Future<void> loginService(String loginId, String loginPassword, autoLoginChecked
         }
 
         // 수업정보 요청
-        await getClassInfo();
+        await getClassInfoData();
         // 푸시알림 권한 설정
         await requestNotification();
         // 로그인시 토큰 발급

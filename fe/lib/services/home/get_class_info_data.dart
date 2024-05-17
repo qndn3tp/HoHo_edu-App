@@ -13,7 +13,7 @@ import 'package:intl/intl.dart';
 ////////////////////////
 
 // 수업정보 가져오는 함수
-Future<void> getClassInfo() async {
+Future<void> getClassInfoData() async {
   // 컨트롤러
   final UserDataController userDataController = Get.put(UserDataController()); // 유저의 로그인 데이터 컨트롤러
 
@@ -48,6 +48,7 @@ Future<void> getClassInfo() async {
     // 응답을 성공적으로 받았을 때
     if (response.statusCode == 200) {
       final resultList = json.decode(response.body);
+      print(resultList);
 
       // 응답 데이터가 성공일 때
       if (resultList[0]["result"] == null) {
