@@ -23,7 +23,7 @@ class BookReadDateData {
   }
 }
 
-//데이터 컨트롤러
+// 데이터 컨트롤러
 class BookReadDateDataController extends GetxController {
   BookReadDateData? _bookReadDateData;           
 
