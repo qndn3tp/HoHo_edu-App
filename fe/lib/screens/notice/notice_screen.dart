@@ -50,7 +50,7 @@ class _NoticeScreenState extends State<NoticeScreen> {
                     setState(() {
                       current = index;
                       // tab 클릭시 인덱스에 따른 TabBar 내 스크롤 이동
-                      scrollToIndex(context, index, scrollController, tabs.length);
+                      scrollToIndex(index, scrollController, tabs.length);
                     });
                   },
                   child: AnimatedContainer(
@@ -116,7 +116,7 @@ class TabPage extends StatelessWidget {
     return ListView.builder(
       itemCount: noticeDataController.noticeDataList?.length ?? 0,
       itemBuilder: (context, index) {
-        return noticeListTile(context, index);
+        return noticeListTile(index);
       }
     );
   }

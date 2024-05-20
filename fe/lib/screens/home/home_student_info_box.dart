@@ -8,8 +8,8 @@ import '../../style.dart';
 // 학생 정보 박스(센터명, 이름, 수강정보) //
 ///////////////////////////////////////////
 
-Widget studentInfoBox(context, name) {
-  final screenSize = MediaQuery.of(context).size;
+Widget studentInfoBox(name) {
+  final screenSize = MediaQuery.of(Get.context!).size;
 
   // 컨트롤러 
   final userDataController = Get.put(UserDataController());             // 유저의 로그인 데이터
@@ -23,7 +23,7 @@ Widget studentInfoBox(context, name) {
   return Container(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(30),
-      color: Theme.of(context).colorScheme.onSecondaryContainer,
+      color: Theme.of(Get.context!).colorScheme.onSecondaryContainer,
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

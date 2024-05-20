@@ -51,7 +51,7 @@ class SettingNotificationMode extends StatelessWidget {
             onTap: () {
               Get.changeThemeMode(ThemeMode.system);
               themeController.changeAndStoreThemeMode('system');
-              changeSystemMode(context);
+              changeSystemMode();
             }
           ),
         ],

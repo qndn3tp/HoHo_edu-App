@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // 수업정보 박스
   List<Widget> _buildBanners(BuildContext context, List<String> snamesList) {
-    return snamesList.map((name) => studentInfoBox(context, name)).toList();
+    return snamesList.map((name) => studentInfoBox(name)).toList();
   }
   Widget bannerCarousel(BuildContext context, List<String> snamesList) {
     final banners = _buildBanners(context, snamesList);
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.transparent,
           appBar: homeAppBar(screenSize),
           // 앱 바의 사이드 메뉴
-          endDrawer: appbarDrawer(context),
+          endDrawer: appbarDrawer(),
           // 바디
           body: Center(
             child: Column(

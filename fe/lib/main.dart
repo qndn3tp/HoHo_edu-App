@@ -82,7 +82,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    autoLoginFuture = checkAndPerformAutoLogin(context);
+    autoLoginFuture = checkAndPerformAutoLogin();
   }
 
   @override
@@ -90,7 +90,7 @@ class _MyAppState extends State<MyApp> {
 
     // 화면모드: 시스템 모드
     if (themeController.themeMode.value == 'system') {
-      changeSystemMode(context);
+      changeSystemMode();
     }
 
     return FutureBuilder<Widget>(

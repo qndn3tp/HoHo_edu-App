@@ -44,7 +44,7 @@ final drawerList = [
   },
 ];
 
-Widget appbarDrawer(context) {
+Widget appbarDrawer() {
   // 학생 정보
   final classInfoDataController = Get.put(ClassInfoDataController());
   final namesList = classInfoDataController.getSnamesList(classInfoDataController.classInfoDataList);
@@ -58,7 +58,7 @@ Widget appbarDrawer(context) {
           accountName: const Text("안녕하세요", style: TextStyle(color: Colors.white, fontSize: 20),),
           accountEmail: Text('$namesText학생 학부모님', style: const TextStyle(color: Colors.white, fontSize: 17),),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.onSecondaryContainer,
+            color: Theme.of(Get.context!).colorScheme.onSecondaryContainer,
             borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(20.0),
               bottomRight: Radius.circular(20.0),
@@ -106,7 +106,7 @@ Widget appbarDrawer(context) {
           child: ListTile(
             title: const Text("로그아웃"),
             leading: SizedBox(
-              child: Icon(Icons.logout, color: Theme.of(context).colorScheme.secondary),
+              child: Icon(Icons.logout, color: Theme.of(Get.context!).colorScheme.secondary),
             ),
           ),
         ),

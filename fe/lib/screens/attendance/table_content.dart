@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/attendance_data.dart';
 import 'package:flutter_application/screens/attendance/attendance_icon.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../style.dart';
 
@@ -8,8 +9,8 @@ import '../../style.dart';
 //  하단 내용(일자-출석내용)  //
 ///////////////////////////////
 
-Widget tableContent(context, AttendanceData attendanceData) {
-  final Size screenSize = MediaQuery.of(context).size;
+Widget tableContent(AttendanceData attendanceData) {
+  final Size screenSize = MediaQuery.of(Get.context!).size;
   const int columnFlex = 3; 
 
   // 일자
@@ -30,7 +31,7 @@ Widget tableContent(context, AttendanceData attendanceData) {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 10),
     height: screenSize.height * 0.1,
-    color: Theme.of(context).colorScheme.onSecondary,
+    color: Theme.of(Get.context!).colorScheme.onSecondary,
     child: Row(
       children: [
         // 날짜
@@ -64,7 +65,7 @@ Widget tableContent(context, AttendanceData attendanceData) {
           flex: (10 - columnFlex*2),
           child: Text(
             "(등원 $formattedStime, 하원 $formattedEtime)",
-            style: TextStyle(color: Theme.of(context).colorScheme.secondary, fontSize: 13),
+            style: TextStyle(color: Theme.of(Get.context!).colorScheme.secondary, fontSize: 13),
           ),
         )
       ],

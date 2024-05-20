@@ -33,7 +33,7 @@ class DropDownScreen extends GetView<DropdownButtonController> {
       appBar: customAppBar(title),
       body: Column(
         children: [
-          dropDownBox(context),
+          dropDownBox(),
           Expanded(
             child: Obx(() {
               if (controller.currentItem.value != null) {

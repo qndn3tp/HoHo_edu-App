@@ -20,9 +20,9 @@ class SettingScreen extends StatelessWidget {
         child: Column(
           children: [
             // 알림 설정 
-            settingListTitle(context, "알림", const SettingNotification()),
+            settingListTitle("알림", const SettingNotification()),
             // 화면 모드 설정
-            settingListTitle(context, "화면 설정", SettingNotificationMode()),
+            settingListTitle("화면 설정", SettingNotificationMode()),
           ],
         ),
       )
@@ -30,9 +30,9 @@ class SettingScreen extends StatelessWidget {
   }
 }
 
-Widget settingListTitle(context, title, screen) {
+Widget settingListTitle(title, screen) {
   return ListTile(
-    tileColor: Theme.of(context).colorScheme.surface,
+    tileColor: Theme.of(Get.context!).colorScheme.surface,
     title: Text(title),
     onTap: (){Get.to(screen);},
   );

@@ -27,9 +27,9 @@ Future<void> loadThemeInfo() async {
 }
 
 // 화면 모드: 시스템, isLightTheme 관리
-void changeSystemMode(context) {
+void changeSystemMode() {
   final themeController = Get.put(ThemeController());
-  Brightness systemBrightness = MediaQuery.of(context).platformBrightness; //현재 기기 시스템의 화면 모드 설정
+  Brightness systemBrightness = MediaQuery.of(Get.context!).platformBrightness; //현재 기기 시스템의 화면 모드 설정
   
   if (systemBrightness == Brightness.light) {
     themeController.changeIsLightTheme(true);

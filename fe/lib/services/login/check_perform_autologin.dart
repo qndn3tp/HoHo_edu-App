@@ -33,7 +33,7 @@ class CheckStoredUserInfoController extends GetxController {
 }
 
 // 자동 로그인 수행
-Future<Widget> checkAndPerformAutoLogin(context) async {
+Future<Widget> checkAndPerformAutoLogin() async {
   final autoLoginController = Get.put(AutoLoginCheckController());
   final checkStoredUserInfoController = Get.put(CheckStoredUserInfoController());
   final connectivityController = Get.put(ConnectivityController());
@@ -51,8 +51,8 @@ Future<Widget> checkAndPerformAutoLogin(context) async {
     if (isUserInfoStored && isAutoLoginChecked) {
       loginService(id, pwd, isAutoLoginChecked);
       return Container(
-        color: Theme.of(context).colorScheme.background,
-        child: SpinKitThreeBounce(color: Theme.of(context).colorScheme.onSecondary)
+        color: Theme.of(Get.context!).colorScheme.background,
+        child: SpinKitThreeBounce(color: Theme.of(Get.context!).colorScheme.onSecondary)
       );
     } else {
       return const LoginScreen();

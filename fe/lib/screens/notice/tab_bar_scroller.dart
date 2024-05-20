@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 ////////////////////////////
 //  TabBar 내 스크롤 이동  //
 ////////////////////////////
 
-void scrollToIndex(context, int index, scrollController, tabsLength) {
-  final screenWidth = MediaQuery.of(context).size.width;        // 현재 기기의 화면넓이
+void scrollToIndex(int index, scrollController, tabsLength) {
+  final screenWidth = MediaQuery.of(Get.context!).size.width;        // 현재 기기의 화면넓이
   const itemWidth = 80 + 10;                                    // tab width + margin
   final maxScroll = (tabsLength - 1) * itemWidth - screenWidth + itemWidth;   // 최대 스크롤 위치
   

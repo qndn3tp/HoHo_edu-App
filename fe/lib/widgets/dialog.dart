@@ -21,7 +21,7 @@ Future<dynamic> failDialog1(failTitle, failDescription) {
 }
 
 // 실패 알림 (설명X)
-Future<dynamic> failDialog2(failDescription, context) {
+Future<dynamic> failDialog2(failDescription) {
   return AwesomeDialog(
     context: Get.context!,
     width: 400,
@@ -33,7 +33,7 @@ Future<dynamic> failDialog2(failDescription, context) {
     desc: failDescription,
     title: "",
     btnOkText: "확인",
-    btnOkColor: Theme.of(context).colorScheme.onSecondaryContainer,
+    btnOkColor: Theme.of(Get.context!).colorScheme.onSecondaryContainer,
     btnOkOnPress: () => {},
   ).show();
 }

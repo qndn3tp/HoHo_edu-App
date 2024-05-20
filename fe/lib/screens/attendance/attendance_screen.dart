@@ -67,13 +67,13 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                 return Column(
                   children: [
                     // 테이블 제목 (일자, 내용)
-                    tableTitle(context),
+                    tableTitle(),
                     // 테이블 내용(일자-출석내용)
                     Expanded(
                       child: ListView.builder(
                         itemCount: attendanceDataController.attendanceDataList!.length,
                         itemBuilder: (context, index) {
-                        return tableContent(context, attendanceDataController.attendanceDataList![index]);
+                        return tableContent(attendanceDataController.attendanceDataList![index]);
                         })
                     )
                   ],
@@ -125,7 +125,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
         curve: Curves.easeInOut,
       );
     } else if (newPage >= currentMonth){
-      failDialog2("다음 달을 기다려주세요 :)", context);
+      failDialog2("다음 달을 기다려주세요 :)");
     }
   }
 }

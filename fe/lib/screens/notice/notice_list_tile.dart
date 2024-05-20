@@ -35,8 +35,8 @@ List<Image> noticeImageList = [
 ];
 
 // 알림 리스트
-Widget noticeListTile(context, index) {
-  final Size screenSize = MediaQuery.of(context).size;      
+Widget noticeListTile(index) {
+  final Size screenSize = MediaQuery.of(Get.context!).size;      
   final noticeDataController = Get.put(NoticeDataController());
   final noticeNum = noticeDataController.noticeDataList![index].noticeNum;
   final themeController = Get.put(ThemeController());
@@ -82,7 +82,7 @@ Widget noticeListTile(context, index) {
           height: 25,
           width: screenSize.width * 0.25,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.onSecondary,
+            color: Theme.of(Get.context!).colorScheme.onSecondary,
             borderRadius: BorderRadius.circular(20)),
           child: Center(
             child: Text(
