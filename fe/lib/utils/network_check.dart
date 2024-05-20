@@ -1,19 +1,32 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:get/get.dart';
 
-///////////////////////////////
-// 로그인 네트워크 연결 체크 //
-/////////////////////////////
+////////////////////////////////
+// 네트워크 연결 체크 컨트롤러 //
+////////////////////////////////
 
-Future<bool> connectivityCheck() async{
-  // 네트워크 연결 체크
-  var connectivityResult = await(Connectivity().checkConnectivity());    
-  // 모바일데이터나 와이파이에 연결된 경우
-  if (connectivityResult == ConnectivityResult.mobile                     
-      || connectivityResult == ConnectivityResult.wifi) {
-      return true;
+class ConnectivityController extends GetxController {
+  var isConnected = false.obs;
+  final Connectivity connectivity = Connectivity();
+
+  @override
+  void onInit() {
+    super.onInit();
+    connectivity.onConnectivityChanged.listen(updateConnectionStatus);
+    checkInitialConnection();
   }
-  // 네트워크가 연결되지 않은 경우 알림  
-  else {                                                                  
-    return false;
+
+  Future<void> checkInitialConnection() async {
+    var connectivityResult = await connectivity.checkConnectivity();
+    updateConnectionStatus(connectivityResult);
+  }
+
+  void updateConnectionStatus(ConnectivityResult result) {
+    // 와이파이나 데이터에 연결된 경우
+    if (result == ConnectivityResult.wifi || result == ConnectivityResult.mobile) {
+      isConnected.value = true;
+    } else {
+      isConnected.value = false;
+    }
   }
 }

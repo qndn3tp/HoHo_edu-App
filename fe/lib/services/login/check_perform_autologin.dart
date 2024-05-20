@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/login/auto_login_check.dart';
 import 'package:flutter_application/screens/login/login_screen.dart';
 import 'package:flutter_application/services/login/login_service.dart';
+import 'package:flutter_application/utils/network_check.dart';
+import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -34,6 +36,7 @@ class CheckStoredUserInfoController extends GetxController {
 Future<Widget> checkAndPerformAutoLogin(context) async {
   final autoLoginController = Get.put(AutoLoginCheckController());
   final checkStoredUserInfoController = Get.put(CheckStoredUserInfoController());
+  final connectivityController = Get.put(ConnectivityController());
 
   bool isUserInfoStored = await checkStoredUserInfoController.checkStoredUserInfo();
   bool isAutoLoginChecked = autoLoginController.isChecked.value;
@@ -41,15 +44,21 @@ Future<Widget> checkAndPerformAutoLogin(context) async {
   final id = checkStoredUserInfoController.storedUserId;
   final pwd = checkStoredUserInfoController.storedUserPassword;
 
-  // 기기에 저장된 로그인정보가 있고, 자동 로그인 체크 된 경우
-  // 자동 로그인 후 홈 화면으로 이동
-  if (isUserInfoStored && isAutoLoginChecked) {
-    loginService(id, pwd, isAutoLoginChecked);
-    return Container(
-      color: Theme.of(context).colorScheme.background,
-      child: SpinKitThreeBounce(color: Theme.of(context).colorScheme.onSecondary)
-    );
+  // 네트워크 연결 확인
+  if (connectivityController.isConnected.value) {
+    // 기기에 저장된 로그인정보가 있고, 자동 로그인 체크 된 경우
+    // 자동 로그인 후 홈 화면으로 이동
+    if (isUserInfoStored && isAutoLoginChecked) {
+      loginService(id, pwd, isAutoLoginChecked);
+      return Container(
+        color: Theme.of(context).colorScheme.background,
+        child: SpinKitThreeBounce(color: Theme.of(context).colorScheme.onSecondary)
+      );
+    } else {
+      return const LoginScreen();
+    }
   } else {
+    failDialog1("연결 실패", "네트워크 연결을 확인해주세요");
     return const LoginScreen();
   }
 }

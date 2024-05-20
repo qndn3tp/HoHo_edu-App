@@ -7,6 +7,8 @@ import 'package:flutter_application/services/book/get_first_book_read_date_data.
 import 'package:flutter_application/services/book/get_monthly_book_read_data.dart';
 import 'package:flutter_application/services/book/get_yearly_book_read_count_data.dart';
 import 'package:flutter_application/services/book/get_ym_book_read_cnt_data.dart';
+import 'package:flutter_application/utils/network_check.dart';
+import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_application/services/book/get_monthly_book_score_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
@@ -21,6 +23,7 @@ import '../../style.dart';
 
 // 드롭다운 화면
 class BookScreen extends DropDownScreen {
+
   BookScreen({super.key})
     : super(
       title: "독서클리닉 결과",
@@ -29,14 +32,20 @@ class BookScreen extends DropDownScreen {
     );
 
   static Future<void> _updateBookData() async {
-    final year = getCurrentYear();
-    final month = getCurrentMonth();
+    final ConnectivityController connectivityController = Get.put(ConnectivityController());      // 네트워크 연결체크
 
-    await getFirstBookReadDateData();
-    await getMonthlyBookReadData(year, month);
-    await getMonthlyBookScoreData(year, month);
-    await getYearlyBookReadCountData(year, month);
-    await getYMBookReadCountData(year, month);
+    if (connectivityController.isConnected.value) {
+      final year = getCurrentYear();
+      final month = getCurrentMonth();
+
+      await getFirstBookReadDateData();
+      await getMonthlyBookReadData(year, month);
+      await getMonthlyBookScoreData(year, month);
+      await getYearlyBookReadCountData(year, month);
+      await getYMBookReadCountData(year, month);
+    } else {
+      failDialog1("연결 실패", "네트워크 연결을 확인해주세요");
+    }
   }
 }
 

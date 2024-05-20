@@ -14,7 +14,7 @@ Widget loginButton() {
   final autoLoginCheckController = Get.put(AutoLoginCheckController());  // 자동 로그인
 
   return GestureDetector(
-    onTap: () {
+    onTap: () async{
       FocusManager.instance.primaryFocus?.unfocus();      // 키보드 입력 해제
       loginService(
         // 아이디 입력값

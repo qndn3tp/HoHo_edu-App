@@ -11,6 +11,8 @@ import 'package:flutter_application/screens/notice/notice_screen.dart';
 import 'package:flutter_application/screens/payment/payment_screen.dart';
 import 'package:flutter_application/services/book/get_ym_book_read_cnt_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
+import 'package:flutter_application/utils/network_check.dart';
+import 'package:flutter_application/widgets/dialog.dart';
 import 'package:get/get.dart';
 import '../../widgets/box_decoration.dart';
 
@@ -93,20 +95,28 @@ Widget noticeButton() {
 
 // 독클결과 버튼
 Widget bookButton() {
+  final ConnectivityController connectivityController = Get.put(ConnectivityController());        // 네트워크 연결체크
+
   return menuButton(
     imagePath: 'assets/images/book.png',
     buttonText: '독클결과',
     onTap: () async {
-      await getFirstBookReadDateData();
-      await getMonthlyBookReadData(currentYear, currentMonth - 1);
-      await getMonthlyBookScoreData(currentYear, currentMonth - 1);
-      await getYearlyBookReadCountData(currentYear, currentMonth - 1);
-      await getYMBookReadCountData(currentYear, currentMonth - 1);
-      Get.to(
-        BookScreen(),
-        transition: Transition.cupertino,
-        duration: const Duration(milliseconds: 500),
-      );
-    },
+      // 네트워크 연결 체크
+      if (connectivityController.isConnected.value) {
+        await getFirstBookReadDateData();
+        await getMonthlyBookReadData(currentYear, currentMonth - 1);
+        await getMonthlyBookScoreData(currentYear, currentMonth - 1);
+        await getYearlyBookReadCountData(currentYear, currentMonth - 1);
+        await getYMBookReadCountData(currentYear, currentMonth - 1);
+        
+        Get.to(
+          BookScreen(),
+          transition: Transition.cupertino,
+          duration: const Duration(milliseconds: 500),
+        );
+      } else {
+        failDialog1("연결 실패", "네트워크 연결을 확인해주세요");
+      }
+    }
   );
 }
