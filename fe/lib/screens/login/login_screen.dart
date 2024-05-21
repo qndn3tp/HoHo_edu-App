@@ -38,7 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = Theme.of(context).colorScheme.secondary;
+    final detailTextStyle = TextStyle(color: Theme.of(context).colorScheme.secondary, fontSize: 13);
+    final titleTextStyle = TextStyle(color: Theme.of(context).colorScheme.onSurface, fontWeight: FontWeight.bold, fontSize: 14);
 
     return Scaffold(
       body: Center(
@@ -55,14 +56,14 @@ class _LoginScreenState extends State<LoginScreen> {
             GestureDetector(
               onTap: () => FocusManager.instance.primaryFocus?.unfocus(), // 입력 칸 밖의 화면을 터치 시, 키보드 입력 해제
               child: SingleChildScrollView(
-                padding: const EdgeInsets.all(30),
+                padding: const EdgeInsets.all(40),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // 아이디
                     Padding(
                       padding: const EdgeInsets.only(left: 5, bottom: 5),
-                      child: Text("아이디", style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 13),),
+                      child: Text("아이디", style: titleTextStyle),
                     ),
                     TextField(
                       controller: loginController.idController,
@@ -73,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     // 비밀번호
                     Padding(
                       padding: const EdgeInsets.only(left: 5, bottom: 5, top: 5),
-                      child: Text("비밀번호", style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 13),),
+                      child: Text("비밀번호", style: titleTextStyle),
                     ),
                     Obx(() => TextField(
                       controller: loginController.passwordController, 
@@ -95,14 +96,11 @@ class _LoginScreenState extends State<LoginScreen> {
             // 로그인 분실 메세지, 고객센터
             Column(
               children: [
-                Text(
-                  "아이디/비밀번호 분실 시 직원에게 문의해주세요.",
-                  style: TextStyle(color: textColor, fontSize: 12),
-                ),
+                Text("아이디/비밀번호 분실 시 직원에게 문의해주세요.", style: detailTextStyle,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("고객센터: ", style: TextStyle(color: textColor, fontSize: 13)),
+                    Text("고객센터: ", style: detailTextStyle),
                     const PhoneNumber(phoneNumber: "1899-0898"),
                   ],
                 ),

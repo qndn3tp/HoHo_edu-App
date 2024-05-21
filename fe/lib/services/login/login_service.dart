@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter_application/notifications/request_noti.dart';
 import 'package:flutter_application/screens/home/home_screen.dart';
+import 'package:flutter_application/screens/login/set_password_screen.dart';
 import 'package:flutter_application/services/home/get_class_info_data.dart';
 import 'package:flutter_application/utils/network_check.dart';
 import 'package:flutter_application/widgets/dialog.dart';
@@ -54,10 +55,9 @@ Future<void> loginService(String loginId, String loginPassword, autoLoginChecked
         final resultList = json.decode(response.body);
         final resultValue = resultList[0]['result']; 
 
+        // 응답 결과가 있는 경우
         if (resultValue == "0000") {
-          // JSON 데이터를 UserData 객체리스트(userDataList)로 파싱
           UserData userData = UserData.fromJson(resultList[0]); 
-
           final UserDataController userDataController = Get.put(UserDataController());
           userDataController.setUserData(userData); 
 
@@ -78,9 +78,19 @@ Future<void> loginService(String loginId, String loginPassword, autoLoginChecked
           // 토큰을 서버로 전송
           sendToken(token, id);
           
-          // 홈화면으로 이동
-          Get.offAll(const HomeScreen());
+          // 첫 로그인인 경우 -> 비밀번호 재설정화면
+          if (resultList[0]['firstlogin'] == "Y") {
+            Get.to(
+              const SetPasswordScreen(),
+              transition: Transition.cupertino,
+              duration: const Duration(milliseconds: 500),
+            );
+          } else {
+            // 홈화면으로 이동
+            Get.offAll(const HomeScreen());
+          }
         }
+
         // 응답 데이터가 오류일 때("9999": 오류)
         else {
           failDialog1('로그인 실패','아이디 또는 비밀번호를 잘못 입력했어요.');

@@ -12,6 +12,7 @@ class UserData {
   final String cname;
   final String brotherGb;
   final String sibling;
+  final String isFirstLogin;
 
   UserData({
     required this.id,
@@ -20,6 +21,7 @@ class UserData {
     required this.cname,
     required this.brotherGb,
     required this.sibling,
+    required this.isFirstLogin,
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) {
@@ -30,6 +32,7 @@ class UserData {
       cname: json['cname'] ?? "",
       brotherGb: json['brotherGb'] ?? "",
       sibling: json['sibling'] ?? "",
+      isFirstLogin: json['firstLogin'] ?? "",
     );
   }
 }
