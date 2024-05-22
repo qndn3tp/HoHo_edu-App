@@ -50,7 +50,6 @@ Future<void> setPasswordService() async {
     try {
       if (response.statusCode == 200) {
         final resultList = json.decode(response.body);
-        print(resultList[0]['result']);
 
         // 응답 데이터가 성공일 때
         if (resultList[0]['result'] == "0000") {

@@ -1,5 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_application/models/login_data.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 ////////////////////////////
@@ -18,9 +20,9 @@ Future<String?> getToken() async {
 
 // 클라이언트의 등록 토큰을 서버에 전송
 Future<void> sendToken(token, id) async {
+  final userDataController = Get.put(UserDataController());
+  final id = userDataController.userData!.id;
   String url = dotenv.get("TOKEN_STORAGE_URL");
-
-  print("id: $id, token: $token");
 
   final data = {
     'id': id, 

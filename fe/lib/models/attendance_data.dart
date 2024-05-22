@@ -48,5 +48,5 @@ class AttendanceDataController extends GetxController {
     _attendanceDataList = attendanceDataList;
     update();
   }
-    List<AttendanceData>? get attendanceDataList => _attendanceDataList;
+  List<AttendanceData>? get attendanceDataList => _attendanceDataList;
 }

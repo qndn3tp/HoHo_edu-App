@@ -184,7 +184,7 @@ Widget mainContent() {
                 ],
               ),
             ),
-            SizedBox(height: screenSize.height * 0.02),
+            SizedBox(height: screenSize.height * 0.01),
             // 비밀번호 확인
             Padding(
               padding: const EdgeInsets.only(left: 5, bottom: 5),
@@ -213,7 +213,7 @@ Widget mainContent() {
                   ),
               )),
             ),
-            SizedBox(height: screenSize.height * 0.05),
+            SizedBox(height: screenSize.height * 0.03),
             // 변경하기 버튼
             setPasswordButton()
           ],
