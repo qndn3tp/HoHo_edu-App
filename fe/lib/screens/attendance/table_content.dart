@@ -19,8 +19,8 @@ Widget tableContent(AttendanceData attendanceData) {
   final formattedDayname = attendanceData.dayname.substring(0, 1);
   
   // 등하원 시간
-  final formattedStime = "${attendanceData.stime.substring(0, 2)}:${attendanceData.stime.substring(2)}";
-  final formattedEtime = "${attendanceData.etime.substring(0, 2)}:${attendanceData.etime.substring(2)}";
+  final formattedStime = attendanceData.stime == "" ? "" : "${attendanceData.stime.substring(0, 2)}:${attendanceData.stime.substring(2)}";
+  final formattedEtime = attendanceData.etime == "" ? "" : "${attendanceData.etime.substring(0, 2)}:${attendanceData.etime.substring(2)}";
 
   // 과목별 출석
   final subjectList = [
@@ -53,9 +53,7 @@ Widget tableContent(AttendanceData attendanceData) {
             itemBuilder: (context, index) {
               return detailTableContent(                      
                 subjectList[index][0], 
-                subjectList[index][1], 
-                formattedStime,
-                formattedEtime,
+                subjectList[index][1],
               );    
             }
           ),
@@ -74,7 +72,7 @@ Widget tableContent(AttendanceData attendanceData) {
 }
 
 // 과목별 세부 출결 내용
-Widget detailTableContent(subject, status, formattedStime, formattedEtime) {
+Widget detailTableContent(subject, status) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
@@ -83,10 +81,7 @@ Widget detailTableContent(subject, status, formattedStime, formattedEtime) {
       // 출결 상태 아이콘
       attendanceStatusIcon(status),
       // 출결 텍스트
-      Text(
-        "$status",
-        style: const TextStyle(fontWeight: FontWeight.bold,),
-      ),
+      Text("$status",style: const TextStyle(fontWeight: FontWeight.bold)),
     ],
   );
 }
