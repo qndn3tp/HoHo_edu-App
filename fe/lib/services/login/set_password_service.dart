@@ -20,14 +20,14 @@ Future<void> setPasswordService() async {
   final loginController = Get.put(LoginController());  
   final setPasswordController = Get.put(SetPasswordController());
   final connectivityController = Get.put(ConnectivityController());    // 네트워크 연결체크
-  final userDataController = Get.put(UserDataController());
+  final loginDataController = Get.put(LoginDataController());
 
   if (connectivityController.isConnected.value) {
     // API URL
     String url = dotenv.get('LOGIN_PWD_UPDATE_URL');
 
     // 아이디
-    String loginStuId = userDataController.userData!.id;
+    String loginStuId = loginDataController.loginData!.id;
     // 기존 비밀번호
     String oldPwd = sha256_convertHash(loginController.passwordController.text);
     // 새 비밀번호

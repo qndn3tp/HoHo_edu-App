@@ -19,7 +19,7 @@ import 'package:intl/intl.dart';
 Future<void> getAttendanceData(month) async {
 
   // 컨트롤러
-  final UserDataController userDataController = Get.put(UserDataController());                    // 유저의 로그인 데이터 
+  final LoginDataController loginDataController = Get.put(LoginDataController());                    // 유저의 로그인 데이터 
   final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController());  // 드롭다운 버튼 
   final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());     // 수업정보 
   final AttendanceDataController attendanceDataController = Get.put(AttendanceDataController());  // 출석 데이터 
@@ -32,7 +32,7 @@ Future<void> getAttendanceData(month) async {
     // 아이디
     final nameIdMap = classInfoDataController.getNameId(classInfoDataController.classInfoDataList);   // 이름: 아이디
     final dropDownId = dropdownButtonController.currentItem.value;                                    // 드롭다운 선택된 이름
-    String stuId = nameIdMap[dropDownId] ?? userDataController.userData!.id;
+    String stuId = nameIdMap[dropDownId] ?? loginDataController.loginData!.id;
 
     // 현재 연도
     final currentPageMonth = month;

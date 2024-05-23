@@ -12,7 +12,7 @@ Widget studentInfoBox(name) {
   final screenSize = MediaQuery.of(Get.context!).size;
 
   // 컨트롤러 
-  final userDataController = Get.put(UserDataController());             // 유저의 로그인 데이터
+  final loginDataController = Get.put(LoginDataController());             // 유저의 로그인 데이터
   final classInfoDataController = Get.put(ClassInfoDataController());   //수업 정보
   
   // 이름:[수업정보]를 가지는 map
@@ -35,7 +35,7 @@ Widget studentInfoBox(name) {
           children: [
             // 센터 이름
             Text(
-              userDataController.userData!.cname,
+              loginDataController.loginData!.cname,
               style: const TextStyle(color: CommonColors.grey1,fontSize: 15,)),
             const SizedBox(height: 5),
             // 학생 이름

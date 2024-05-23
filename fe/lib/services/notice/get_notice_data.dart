@@ -17,7 +17,7 @@ import 'package:flutter_application/models/notice_data.dart';
 Future<void> getNoticeData(noticeNum) async {
 
   // 컨트롤러
-  final UserDataController userDataController = Get.put(UserDataController()); // 유저의 로그인 데이터 
+  final LoginDataController loginDataController = Get.put(LoginDataController()); // 유저의 로그인 데이터 
   final ConnectivityController connectivityController = Get.put(ConnectivityController());        // 네트워크 연결체크
 
   if (connectivityController.isConnected.value) {
@@ -25,14 +25,14 @@ Future<void> getNoticeData(noticeNum) async {
     String url = dotenv.get('NOTICE_URL');
 
     // 로그인 아이디
-    String id = userDataController.userData!.id;
+    String id = loginDataController.loginData!.id;
     // 현재 연도
     String yy = DateFormat('yyyy').format(DateTime(currentYear));
     String mm = DateFormat('MM').format(DateTime(currentYear, currentMonth));
     // 알림 구분 번호
     String noticeNum0 = noticeNum;
     // 형제자매 코드
-    String sibling = userDataController.userData!.sibling;
+    String sibling = loginDataController.loginData!.sibling;
 
     // HTTP POST 요청
     var response = await http.post(

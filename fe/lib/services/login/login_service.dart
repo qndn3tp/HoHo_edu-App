@@ -57,9 +57,9 @@ Future<void> loginService(String loginId, String loginPassword, autoLoginChecked
 
         // 응답 결과가 있는 경우
         if (resultValue == "0000") {
-          UserData userData = UserData.fromJson(resultList[0]); 
-          final UserDataController userDataController = Get.put(UserDataController());
-          userDataController.setUserData(userData); 
+          LoginData loginData = LoginData.fromJson(resultList[0]); 
+          final LoginDataController loginDataController = Get.put(LoginDataController());
+          loginDataController.setLoginData(loginData); 
 
           // 자동 로그인 로직: 체크된 경우 기기 저장소에 아이디, 비밀번호 저장
           if (autoLoginChecked) {
@@ -73,10 +73,8 @@ Future<void> loginService(String loginId, String loginPassword, autoLoginChecked
           await getClassInfoData();
           // 푸시알림 권한 설정
           await requestNotification();
-          // 로그인시 토큰 발급
-          final token = await getToken();
-          // 토큰을 서버로 전송
-          sendToken(token, id);
+          // 로그인시 토큰 발급, 전송
+          await getToken();
           
           // 첫 로그인인 경우 -> 비밀번호 재설정화면
           if (resultList[0]['firstlogin'] == "Y") {

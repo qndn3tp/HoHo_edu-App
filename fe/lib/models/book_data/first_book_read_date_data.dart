@@ -24,11 +24,13 @@ class BookReadDateData {
 
 // 데이터 컨트롤러
 class BookReadDateDataController extends GetxController {
-  BookReadDateData? _bookReadDateData;           
+  BookReadDateData? _bookReadDateData;          
 
   void setBookReadDateData(BookReadDateData bookReadDateData) {
     _bookReadDateData = bookReadDateData;
     update();
   }
   BookReadDateData? get bookReadDateData => _bookReadDateData;
+  String get startYear => _bookReadDateData!.startYear;
+  String get startMonth => _bookReadDateData!.startMonth;
 }

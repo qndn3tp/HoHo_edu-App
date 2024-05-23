@@ -40,7 +40,7 @@ class _BookResult3State extends State<BookResult3> {
         RichText(
           text: TextSpan(
             children: [
-              colorText("총 ${yearBookCountDataController.yearBookCountData!.totalRows}권", pointTextColor),
+              colorText("총 ${yearBookCountDataController.totalRows}권", pointTextColor),
               normalText("의 책을 읽었어요"),
             ])
         ),

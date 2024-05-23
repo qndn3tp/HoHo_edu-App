@@ -14,7 +14,7 @@ class YearBookCountData {
 
   factory YearBookCountData.fromJson(Map<String, dynamic> json) {
     return YearBookCountData(
-      totalRows: json['total_rows'] ?? "",
+      totalRows: json['total_rows'] ?? 0,
     );
   }
 }
@@ -28,4 +28,5 @@ class YearBookCountDataController extends GetxController {
     update();
   }
   YearBookCountData? get yearBookCountData => _yearBookCountData;
+  int get totalRows => _yearBookCountData!.totalRows;
 }

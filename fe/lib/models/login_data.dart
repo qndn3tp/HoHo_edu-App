@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 ///////////////////////////////////
 
 // 유저의 로그인 데이터 클래스
-class UserData {
+class LoginData {
   final String id;
   final String name;
   final String cid;
@@ -14,7 +14,7 @@ class UserData {
   final String sibling;
   final String isFirstLogin;
 
-  UserData({
+  LoginData({
     required this.id,
     required this.name,
     required this.cid,
@@ -24,8 +24,8 @@ class UserData {
     required this.isFirstLogin,
   });
 
-  factory UserData.fromJson(Map<String, dynamic> json) {
-    return UserData(
+  factory LoginData.fromJson(Map<String, dynamic> json) {
+    return LoginData(
       id: json['id'] ?? "",
       name: json['name'] ?? "",
       cid: json['cid'] ?? "",
@@ -38,13 +38,13 @@ class UserData {
 }
 
 // 유저의 로그인 데이터 컨트롤러
-class UserDataController extends GetxController {
-  UserData? _userData;           
+class LoginDataController extends GetxController {
+  LoginData? _loginData;           
 
-  void setUserData(UserData userData) {
-    _userData = userData;
+  void setLoginData(LoginData loginData) {
+    _loginData = loginData;
     update();
   }
 
-  UserData? get userData => _userData;
+  LoginData? get loginData => _loginData;
 }

@@ -78,8 +78,8 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
   @override
   void initState() {
     super.initState();
-    startYear = int.parse(bookReadDateDataController.bookReadDateData!.startYear);
-    startMonth = int.parse(bookReadDateDataController.bookReadDateData!.startMonth);
+    startYear = int.parse(bookReadDateDataController.startYear);
+    startMonth = int.parse(bookReadDateDataController.startMonth);
     totalPage = _getPageCount();
     currentPageIndex = _getPageCount() - 1;        // 현재페이지 = 총 페이지수- 1 (가장 최근 연월)
     currentPage = _getPageCount() - 1; 

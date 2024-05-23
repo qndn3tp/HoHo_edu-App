@@ -16,7 +16,7 @@ import 'package:intl/intl.dart';
 // 수업정보 가져오는 함수
 Future<void> getClassInfoData() async {
   // 컨트롤러
-  final UserDataController userDataController = Get.put(UserDataController()); // 유저의 로그인 데이터 컨트롤러
+  final LoginDataController loginDataController = Get.put(LoginDataController()); // 유저의 로그인 데이터 컨트롤러
   final ConnectivityController connectivityController = Get.put(ConnectivityController());        // 네트워크 연결체크
 
   if (connectivityController.isConnected.value) {
@@ -24,12 +24,12 @@ Future<void> getClassInfoData() async {
     String url = dotenv.get('CLASS_INFO_URL');
 
     // 형제자매 코드
-    String sibling = userDataController.userData!.sibling;
+    String sibling = loginDataController.loginData!.sibling;
     // 현재 연도
     String yy = DateFormat('yyyy').format(DateTime(currentYear));
     String mm = DateFormat('MM').format(DateTime(currentYear, currentMonth));
     // 로그인 아이디
-    String loginStuId = userDataController.userData!.id;
+    String loginStuId = loginDataController.loginData!.id;
 
     // HTTP POST 요청
     var response = await http.post(

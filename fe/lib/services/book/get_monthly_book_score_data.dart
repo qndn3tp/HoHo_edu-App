@@ -17,7 +17,7 @@ import 'package:http/http.dart' as http;
 Future<void> getMonthlyBookScoreData(year, month) async {
 
   // 컨트롤러
-  final UserDataController userDataController = Get.put(UserDataController());                   // 유저의 로그인 데이터
+  final LoginDataController loginDataController = Get.put(LoginDataController());                   // 유저의 로그인 데이터
   final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController()); // 드롭다운 버튼
   final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());    // 수업정보 
 
@@ -27,7 +27,7 @@ Future<void> getMonthlyBookScoreData(year, month) async {
   // 아이디
   final nameIdMap = classInfoDataController.getNameId(classInfoDataController.classInfoDataList);   // 이름: 아이디
   final dropDownId = dropdownButtonController.currentItem.value;                                    // 드롭다운 선택된 이름
-  String id = nameIdMap[dropDownId] ?? userDataController.userData!.id;
+  String id = nameIdMap[dropDownId] ?? loginDataController.loginData!.id;
 
   // 해당 페이지 연월
   final currrentPageYear = year;

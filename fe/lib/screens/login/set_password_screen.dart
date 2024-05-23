@@ -104,7 +104,7 @@ class SetPasswordScreen extends StatelessWidget {
               secondChild: SizedBox(height: screenSize.height * 0.04),
               crossFadeState: showExplainTextController.isExplainShow.value
                 ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond, // 스크롤 방향에 따라 하단바를 숨김
+                : CrossFadeState.showSecond, 
               duration: const Duration(milliseconds: 200),
             ),
             // 새 비밀번호 입력

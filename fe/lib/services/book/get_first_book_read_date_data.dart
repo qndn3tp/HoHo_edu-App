@@ -18,7 +18,7 @@ Future<void> getFirstBookReadDateData() async {
   // 컨트롤러
   final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController()); // 드롭다운 버튼
   final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());    // 수업정보 
-  final UserDataController userDataController = Get.put(UserDataController());                   // 유저의 로그인 데이터
+  final LoginDataController loginDataController = Get.put(LoginDataController());                   // 유저의 로그인 데이터
 
   // 독서클리닉 목록 API URL
   String url = dotenv.get('BOOK_READ_FIRST_DATE_URL');
@@ -26,7 +26,7 @@ Future<void> getFirstBookReadDateData() async {
   // 아이디
   final nameIdMap = classInfoDataController.getNameId(classInfoDataController.classInfoDataList);   // 이름: 아이디
   final dropDownId = dropdownButtonController.currentItem.value;                                    // 드롭다운 선택된 이름
-  String id = nameIdMap[dropDownId] ?? userDataController.userData!.id;
+  String id = nameIdMap[dropDownId] ?? loginDataController.loginData!.id;
 
   // HTTP POST 요청
   var response = await http.post(

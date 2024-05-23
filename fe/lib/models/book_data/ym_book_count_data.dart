@@ -49,8 +49,8 @@ class YMBookCountDataController extends GetxController {
   // 독서 차트 데이터
   void setBookChartData() {
     // 시작 연월
-    final startYear = int.parse(bookReadDateDataController.bookReadDateData!.startYear);
-    final startMonth = int.parse(bookReadDateDataController.bookReadDateData!.startMonth);
+    final startYear = int.parse(bookReadDateDataController.startYear);
+    final startMonth = int.parse(bookReadDateDataController.startMonth);
     // 페이지 연월
     final pageYear = int.parse(_ymBookCountDataList![0].year);
     // 현재 연월
