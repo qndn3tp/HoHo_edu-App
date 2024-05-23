@@ -8,12 +8,13 @@ import 'package:get/get.dart';
 class AttendanceData {
   final String ymd;
   final String dayname;
-  final String stime;
-  final String etime;
+  final String stime;         // 등원 시간
+  final String etime;         // 하원 시간
   final String gbS;
-  final String timecheckS;
+  final String timecheckS;    // 서당 출결
   final String gbI;
-  final String timecheckI;
+  final String timecheckI;    // 독서 출결
+  final String check;         // ERR: 수업이 없는데 등원한 경우/OK
   
   AttendanceData({
     required this.ymd,
@@ -24,18 +25,20 @@ class AttendanceData {
     required this.timecheckS,
     required this.gbI,
     required this.timecheckI,
+    required this.check,
   });
 
   factory AttendanceData.fromJson(Map<String, dynamic> json) {
     return AttendanceData(
       ymd: json['ymd'] ?? "",
       dayname: json['dayname'] ?? "",
-      stime: json['stime'] ?? "",
-      etime: json['etime'] ?? "",
+      stime: json['tstime'] ?? "",
+      etime: json['tetime'] ?? "",
       gbS: json['gb_s'] ?? "",
-      timecheckS: json['timechk_s'] ?? "",
+      timecheckS: json['op_s_str'] ?? "",       
       gbI: json['gb_i'] ?? "",
-      timecheckI: json['timechk_i'] ?? "",
+      timecheckI: json['op_i_str'] ?? "",
+      check: json['chk'] ?? "",
     );
   }
 }
