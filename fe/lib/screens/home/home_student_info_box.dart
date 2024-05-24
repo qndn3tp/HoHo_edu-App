@@ -36,7 +36,7 @@ Widget studentInfoBox(name) {
             // 센터 이름
             Text(
               loginDataController.loginData!.cname,
-              style: const TextStyle(color: CommonColors.grey1,fontSize: 15,)),
+              style: const TextStyle(color: CommonColors.grey1,fontSize: 16,)),
             const SizedBox(height: 5),
             // 학생 이름
             RichText(
@@ -44,7 +44,7 @@ Widget studentInfoBox(name) {
                 children: [
                   TextSpan(
                     text: name,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                    style: const TextStyle( fontSize: 25, fontWeight: FontWeight.bold)),
                   const TextSpan(
                     text: " 학생",
                     style: TextStyle(fontSize: 25)),
@@ -67,7 +67,7 @@ Widget studentInfoBox(name) {
 
                   return Text(
                     "[$subjectName$subjectNum] 수업중 ($dateName $formattedStartTime~$formattedEndTime)",
-                    style: const TextStyle(color: CommonColors.grey1, fontSize: 15),);
+                    style: const TextStyle(color: CommonColors.grey1, fontSize: 16),);
                 }
               )
             )

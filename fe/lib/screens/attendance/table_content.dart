@@ -91,7 +91,7 @@ Widget detailTableContent(subject, status, check) {
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
       // 출결 과목 아이콘
-      check == "OK" ? attendanceSubjectIcon(subject) : const SizedBox(),
+      check == "ERR" ? const SizedBox() :attendanceSubjectIcon(subject),
       // 출결 상태 아이콘
       attendanceStatusIcon(status),
       // 출결 텍스트

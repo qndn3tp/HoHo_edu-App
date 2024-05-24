@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               width: 120,
               height:120,
-              child: Image.asset('assets/images/login_logo.png')
+              child: Image.asset('assets/images/loginLogo.png')
             ),
             // 로그인 입력
             GestureDetector(

@@ -10,8 +10,8 @@ TextSpan normalText(text) {
     text: text,
     style: TextStyle(
       color: themeController.isLightTheme.value ? Colors.black : Colors.white, 
-      fontWeight: FontWeight.bold, 
-      fontSize: 20),
+      fontSize: 22,
+      fontFamily: "BMJUA"),
   );
 }
 // 강조 텍스트
@@ -20,7 +20,7 @@ TextSpan colorText(text, color) {
     text: text,
     style: TextStyle(
       color: color,
-      fontWeight: FontWeight.bold,
-      fontSize: 20)
+      fontSize: 22,
+      fontFamily: "BMJUA")
   );
 }

@@ -75,9 +75,8 @@ Widget appbarDrawer() {
                 onTap: () {
                   Get.to(drawerList[i]["screen"]);
                 },
-                // 알림
                 child: ListTile(
-                  title: Text(drawerList[i]["title"].toString()),
+                  title: Text(drawerList[i]["title"].toString(),),
                   leading: Container(
                     height: 25,
                     width: 25,

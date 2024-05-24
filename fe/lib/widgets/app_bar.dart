@@ -21,7 +21,7 @@ PreferredSizeWidget customAppBar(title) {
     // 제목
     title: Text(
       title0,
-      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     ),
     centerTitle: true,
     // 상단바 구분선

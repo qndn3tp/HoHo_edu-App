@@ -30,6 +30,8 @@ class DarkColors {
 
 
 ThemeData lightTheme = ThemeData(
+  fontFamily: 'NotoSansKR-Regular',
+
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.white,
   ),
@@ -58,6 +60,8 @@ ThemeData lightTheme = ThemeData(
 
 
 ThemeData darkTheme = ThemeData(
+  fontFamily: 'NotoSansKR-Regular',
+  
   appBarTheme: const AppBarTheme(
     backgroundColor: DarkColors.basic,
   ),

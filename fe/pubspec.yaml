@@ -53,3 +53,17 @@ flutter:
     - assets/images/drawer/
 
     - .env
+
+  fonts:
+    - family: NotoSansKR-Bold
+      fonts: 
+        - asset: assets/fonts/NotoSansKR-Bold.ttf
+    - family: NotoSansKR-Regular
+      fonts: 
+        - asset: assets/fonts/NotoSansKR-Regular.ttf
+    - family: NotoSansKR-SemiBold
+      fonts: 
+        - asset: assets/fonts/NotoSansKR-SemiBold.ttf
+    - family: BMJUA
+      fonts: 
+        - asset: assets/fonts/BMJUA.ttf
