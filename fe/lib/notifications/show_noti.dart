@@ -26,7 +26,7 @@ Future<void> showNotification(RemoteMessage message) async {
   final noticeNum = int.parse(message.data['noticeNum']); // 개별 알림 구분번호
 
   // 사용자가 허용한 개별알림만 수신
-  if (switchButtonController.buttonCheckedList[noticeNum] == true) {    
+  if (noticeNum >= 0 && switchButtonController.buttonCheckedList[noticeNum] == true) {    
       flutterLocalNotificationsPlugin.show(
       0,
       message.data["title"],
