@@ -7,7 +7,7 @@ import 'package:flutter_application/models/login_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_application/models/notice_data.dart';
+import 'package:flutter_application/models/notice_data/notice_data.dart';
 
 //////////////////
 //  알림 정보   //

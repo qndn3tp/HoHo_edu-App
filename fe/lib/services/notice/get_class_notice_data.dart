@@ -5,7 +5,7 @@ import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:flutter_application/models/notice_data.dart';
+import 'package:flutter_application/models/notice_data/notice_data.dart';
 
 ///////////////////
 // 수업 안내 상세 //

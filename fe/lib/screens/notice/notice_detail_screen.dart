@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/models/notice_data.dart';
+import 'package:flutter_application/models/notice_data/notice_data.dart';
 import 'package:flutter_application/models/notice_data/class_notice_detail_data.dart';
 import 'package:flutter_application/screens/Notice/Notice_list_tile.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
