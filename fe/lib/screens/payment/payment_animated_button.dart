@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/screens/payment/payment_list_screen.dart';
+import 'package:get/get.dart';
 
 //////////////////
 //   결제 버튼  //
@@ -13,7 +15,9 @@ class PaymentAnimatedButton extends StatefulWidget {
 
 class _PaymentAnimatedButtonState extends State<PaymentAnimatedButton> with SingleTickerProviderStateMixin {
   // 애니메이션 컨트롤러 
-  late AnimationController _animationController;      
+  late AnimationController _animationController;   
+  final PaymentAmountController paymentAmountController = Get.put(PaymentAmountController());
+  
 
   @override
   void initState() {
@@ -67,21 +71,21 @@ class _PaymentAnimatedButtonState extends State<PaymentAnimatedButton> with Sing
           ),
           child: Center(
             // 결제 텍스트
-              child: RichText(
-                text: const TextSpan(
+              child: Obx(() => RichText(
+                text: TextSpan(
                   children: [
-                    TextSpan(
+                    const TextSpan(
                       text: "총 ",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     TextSpan(
-                      text: "360,000",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xffffd91c))),
-                    TextSpan(
+                      text: paymentAmountController.getTotalAmount(),
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xffffd91c))),
+                    const TextSpan(
                       text: "원 결제",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   ]
                 ),
-              )
+              ))
           ),
         ),
       ),

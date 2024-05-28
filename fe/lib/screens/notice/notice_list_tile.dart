@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/notice_data.dart';
 import 'package:flutter_application/screens/Notice/notice_detail_screen.dart';
+import 'package:flutter_application/screens/attendance/attendance_screen.dart';
+import 'package:flutter_application/screens/book/book_screen.dart';
+import 'package:flutter_application/screens/home/home_screen.dart';
+import 'package:flutter_application/screens/payment/payment_screen.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_application/style.dart';
 import 'package:get/get.dart';
@@ -11,7 +15,7 @@ import 'package:get/get.dart';
 
 // 알림 색상
 List<Color> lightNoticeColorList = [
-  CommonColors.grey3,            // 공지
+  CommonColors.grey3,           // 공지
   LightColors.blue,             // 수업
   LightColors.green,            // 출석
   LightColors.orange,           // 결제
@@ -42,15 +46,31 @@ Widget noticeListTile(index) {
   final themeController = Get.put(ThemeController());
 
   return GestureDetector(
-    onTap: () {
-      // 공지, 수업 알림은 클릭 시 상세 페이지
-      if (noticeNum == 0 || noticeNum == 1) {
-        Get.to(
-          NoticeDetail(index: index), 
-          transition: Transition.cupertino, 
-          duration: const Duration(milliseconds: 500)
-        );
+    onTap: () {                   // 알림 탭 -> 해당화면으로 이동
+      Widget page;
+      switch (noticeNum) {
+        case 0:
+        case 1:
+          page = NoticeDetail(index: index);
+          break;
+        case 2:
+          page = AttendanceScreen();
+          break;
+        case 3:
+          page = const PaymentScreen();
+          break;
+        case 4:
+          page = BookScreen();
+          break;
+        default:
+          page = const HomeScreen();
+          return;
       }
+      Get.to(
+        page, 
+        transition: Transition.cupertino, 
+        duration: const Duration(milliseconds: 500)
+      );
     },
     child: Column(
       children: [
