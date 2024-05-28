@@ -78,6 +78,6 @@ Future<void> getAttendanceData(month) async {
       attendanceDataController.setAttendanceDataList([]);     // 빈 리스트로 설정하여 화면에서 데이터를 제거
     }
   } else {
-    failDialog1("연결 실패", "네트워크 연결을 확인해주세요");
+    failDialog1("연결 실패", "인터넷 연결을 확인해주세요");
   }
 }

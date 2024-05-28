@@ -74,6 +74,6 @@ Future<void> getNoticeData(noticeNum) async {
       throw Exception('$e');
     }
   } else {
-    failDialog1("연결 실패", "네트워크 연결을 확인해주세요");
+    failDialog1("연결 실패", "인터넷 연결을 확인해주세요");
   }
 }

@@ -58,7 +58,7 @@ Future<Widget> checkAndPerformAutoLogin() async {
       return const LoginScreen();
     }
   } else {
-    failDialog1("연결 실패", "네트워크 연결을 확인해주세요");
+    failDialog1("연결 실패", "인터넷 연결을 확인해주세요");
     return const LoginScreen();
   }
 }

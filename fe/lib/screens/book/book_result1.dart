@@ -100,7 +100,7 @@ class _BookResult1State extends State<BookResult1> {
             // 월간 읽은 책의 권수
             Positioned(
               left: screenSize.width - 95,
-              top: 10,
+              top: 5,
               child: SizedBox(
                 height: 80,
                 width: 80,
@@ -110,7 +110,7 @@ class _BookResult1State extends State<BookResult1> {
                     style: const TextStyle(
                       fontSize: 35, 
                       color: Colors.white, 
-                      fontWeight: FontWeight.bold,))
+                      fontFamily: "BMJUA"))
                 ),
               ),
             ),

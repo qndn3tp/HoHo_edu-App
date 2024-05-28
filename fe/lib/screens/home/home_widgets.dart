@@ -35,7 +35,7 @@ Widget menuButton({
           width: 60,
           decoration: imageBoxDecoration(imagePath, BoxFit.contain),
         ),
-        Text(buttonText, style: const TextStyle(fontSize: 17),)
+        Text(buttonText, style: const TextStyle(fontSize: 17, fontFamily: 'NotoSansKR-SemiBold'),)
       ]
     ),
   );
@@ -115,7 +115,7 @@ Widget bookButton() {
           duration: const Duration(milliseconds: 500),
         );
       } else {
-        failDialog1("연결 실패", "네트워크 연결을 확인해주세요");
+        failDialog1("연결 실패", "인터넷 연결을 확인해주세요");
       }
     }
   );
