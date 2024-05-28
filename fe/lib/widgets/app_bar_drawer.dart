@@ -11,6 +11,7 @@ import 'package:flutter_application/style.dart';
 import 'package:flutter_application/utils/logout.dart';
 import 'package:flutter_application/widgets/box_decoration.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /////////////////////
 // 앱 바의 사이드바 //
@@ -91,6 +92,19 @@ Widget appbarDrawer() {
             },
           ),
         ),
+        Container(
+          margin: EdgeInsets.only(bottom: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("호호 더보기", style: TextStyle(fontSize: 15),),
+              shortcutIcon("https://hohoedu.co.kr", "assets/images/shortcut_logo/hoho.png"),
+              shortcutIcon("https://blog.naver.com/st8898ds", "assets/images/shortcut_logo/naver.png"),
+              shortcutIcon("https://youtube.com/@tv-ex4in?si=iiHywF2iEXabR0Sk", "assets/images/shortcut_logo/youtube.png"),
+              shortcutIcon("https://pf.kakao.com/_xeexhxkK", "assets/images/shortcut_logo/kakao.png"),
+            ],
+          ),
+        ),
         // 구분선
         const Divider(),
         // 로그아웃
@@ -110,6 +124,21 @@ Widget appbarDrawer() {
           ),
         ),
       ],
+    ),
+  );
+}
+
+// 바로가기 아이콘
+Widget shortcutIcon(url, imgPath) {
+  return InkWell(
+    onTap: () {
+      launchUrl(Uri.parse(url));
+    },
+    child: Container(
+      margin: const EdgeInsets.all(5),
+      width: 40,
+      height: 40,
+      decoration: imageBoxDecoration(imgPath, BoxFit.contain),
     ),
   );
 }
