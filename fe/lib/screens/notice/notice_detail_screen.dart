@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/notice_data.dart';
+import 'package:flutter_application/models/notice_data/class_notice_detail_data.dart';
 import 'package:flutter_application/screens/Notice/Notice_list_tile.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ import 'package:get/get.dart';
 class NoticeDetail extends StatelessWidget {
   final int index; 
   final NoticeDataController noticeDataController = Get.put(NoticeDataController());
+  final ClassNoticeDataController classNoticeDataController = Get.put(ClassNoticeDataController());
 
   NoticeDetail({super.key, required this.index});
 
@@ -43,23 +45,18 @@ class NoticeDetail extends StatelessWidget {
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                 ],
               ),
-              const SizedBox(height: 10),
-              const Divider(height: 1),
-              // 이미지
-              Container(
-                margin: const EdgeInsets.only(top: 30),
-                width: double.infinity,
-                height: 300,
-                color: Colors.deepPurple[100],
-                child: const Center(child: Text("이미지")),
+              // 구분선
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Divider(height: 1),
               ),
               // 본문
               Container(
                 margin: const EdgeInsets.only(top: 30),
-                width: double.infinity,
-                height: 300,
-                color: Colors.amber[100],
-                child: const Center(child: Text("본문")),
+                child: Text(
+                  classNoticeDataController.classNoticeData!.prequest,
+                  style: const TextStyle(fontSize: 16),
+                ),
               )
             ],
           ),

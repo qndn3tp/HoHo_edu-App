@@ -5,6 +5,7 @@ import 'package:flutter_application/screens/attendance/attendance_screen.dart';
 import 'package:flutter_application/screens/book/book_screen.dart';
 import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:flutter_application/screens/payment/payment_screen.dart';
+import 'package:flutter_application/services/notice/get_class_notice_data.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_application/style.dart';
 import 'package:get/get.dart';
@@ -46,11 +47,12 @@ Widget noticeListTile(index) {
   final themeController = Get.put(ThemeController());
 
   return GestureDetector(
-    onTap: () {                   // 알림 탭 -> 해당화면으로 이동
+    onTap: () async{                   // 알림 탭 -> 해당화면으로 이동
       Widget page;
       switch (noticeNum) {
         case 0:
         case 1:
+          await getClassNoticeData(index);
           page = NoticeDetail(index: index);
           break;
         case 2:
