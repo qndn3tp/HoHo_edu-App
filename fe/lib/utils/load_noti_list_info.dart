@@ -1,4 +1,4 @@
-import 'package:flutter_application/screens/setting/setting_notification.dart';
+import 'package:flutter_application/screens/mypage/setting/setting_notification.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

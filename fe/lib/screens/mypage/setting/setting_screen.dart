@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/screens/setting/setting_notification.dart';
-import 'package:flutter_application/screens/setting/setting_screen_mode.dart';
+import 'package:flutter_application/screens/mypage/setting/setting_notification.dart';
+import 'package:flutter_application/screens/mypage/setting/setting_screen_mode.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:get/get.dart';
 
