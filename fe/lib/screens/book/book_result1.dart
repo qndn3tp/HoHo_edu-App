@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/book_data/monthly_book_title_data.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
-import 'package:flutter_application/widgets/box_decoration.dart';
+import 'package:flutter_application/widgets/imagebox_decoration.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_application/widgets/text_span.dart';
 import 'package:get/get.dart';

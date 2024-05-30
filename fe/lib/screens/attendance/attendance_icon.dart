@@ -1,6 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/widgets/box_decoration.dart';
+import 'package:flutter_application/widgets/imagebox_decoration.dart';
 
 ///////////////////
 //  출결 아이콘  //

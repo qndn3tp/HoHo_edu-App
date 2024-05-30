@@ -3,7 +3,7 @@ import 'package:flutter_application/models/class_info_data.dart';
 import 'package:flutter_application/screens/home/home_menu_box.dart';
 import 'package:flutter_application/screens/home/home_student_info_box.dart';
 import 'package:flutter_application/screens/home/test.dart';
-import 'package:flutter_application/screens/home/webview_test.dart';
+import 'package:flutter_application/screens/mypage/mypage_screen.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:flutter_application/widgets/app_bar_drawer.dart';
 import 'package:flutter_application/widgets/box_decoration.dart';
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   children: [
                     TextButton(onPressed: (){Get.to(const Test());}, child: const Text("리포트", style: TextStyle(color: Colors.black),)),
-                    TextButton(onPressed: (){Get.to(const WebviewTest());}, child: const Text("웹뷰", style: TextStyle(color: Colors.black))),
+                    TextButton(onPressed: (){Get.to(MyPage());}, child: const Text("마이페이지", style: TextStyle(color: Colors.black),)),
                   ],
                 ),
                 SizedBox(height: screenSize.height * 0.1),

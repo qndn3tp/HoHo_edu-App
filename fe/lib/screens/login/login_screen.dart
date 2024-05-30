@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/login/auto_login_check.dart';
 import 'package:flutter_application/screens/login/login_button.dart';
-import 'package:flutter_application/widgets/phone_number.dart';
+import 'package:flutter_application/widgets/make_phone_call.dart';
 import 'package:get/get.dart';
 import '../../style.dart';import '../login/login_box.dart';
 
@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("고객센터: ", style: detailTextStyle),
-                    const PhoneNumber(phoneNumber: "1899-0898"),
+                    phoneNumberText(),
                   ],
                 ),
               ],

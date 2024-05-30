@@ -14,7 +14,7 @@ import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/utils/network_check.dart';
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:get/get.dart';
-import '../../widgets/box_decoration.dart';
+import '../../widgets/imagebox_decoration.dart';
 
 ///////////////////////
 //    홈 화면 위젯    //
