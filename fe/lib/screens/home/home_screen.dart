@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/models/class_info_data.dart';
 import 'package:flutter_application/screens/home/home_menu_box.dart';
 import 'package:flutter_application/screens/home/home_student_info_box.dart';
-import 'package:flutter_application/screens/home/test.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:flutter_application/widgets/imagebox_decoration.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
@@ -81,11 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
           body: Center(
             child: Column(
               children: [
-                Row(
-                  children: [
-                    TextButton(onPressed: (){Get.to(const Test());}, child: const Text("리포트", style: TextStyle(color: Colors.black),)),
-                  ],
-                ),
                 SizedBox(height: screenSize.height * 0.1),
                 // 학생 정보 박스(이름, 센터, 수강정보)
                 bannerCarousel(context, snamesList),

@@ -26,8 +26,8 @@ final scoreImageList = [
   'assets/images/book/book_score_area6.png',
 ];
 
-Widget scoreIndicator(context, index) {
-  final Size screenSize = MediaQuery.of(context).size;
+Widget scoreIndicator(index) {
+  final Size screenSize = MediaQuery.of(Get.context!).size;
   // 컨트롤러
   final BookScoreDataController bookScoreDataController = Get.put(BookScoreDataController());
 
@@ -49,7 +49,7 @@ Widget scoreIndicator(context, index) {
       width: 30,
       decoration: imageBoxDecoration(titleImage, BoxFit.contain)
     ),
-    backgroundColor: Theme.of(context).colorScheme.onBackground,
+    backgroundColor: Theme.of(Get.context!).colorScheme.onBackground,
     progressColor: progressColor,
     barRadius: const Radius.circular(10),
     animation: true,

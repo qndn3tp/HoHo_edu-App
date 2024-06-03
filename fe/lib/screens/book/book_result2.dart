@@ -68,7 +68,7 @@ class _BookResult2State extends State<BookResult2> {
                   // 각 영역별 점수
                   return Container(
                     margin: EdgeInsets.only(left: screenSize.width * 0.05),
-                    child: scoreIndicator(context, index),
+                    child: scoreIndicator(index),
                   );
                 },
               ),

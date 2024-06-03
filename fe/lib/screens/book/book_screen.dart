@@ -3,6 +3,8 @@ import 'package:flutter_application/models/book_data/first_book_read_date_data.d
 import 'package:flutter_application/screens/book/book_result1.dart';
 import 'package:flutter_application/screens/book/book_result2.dart';
 import 'package:flutter_application/screens/book/book_result3.dart';
+import 'package:flutter_application/screens/book/hanSchool_report.dart';
+import 'package:flutter_application/screens/book/bookSchool_report.dart';
 import 'package:flutter_application/services/book/get_first_book_read_date_data.dart';
 import 'package:flutter_application/services/book/get_monthly_book_read_data.dart';
 import 'package:flutter_application/services/book/get_yearly_book_read_count_data.dart';
@@ -113,6 +115,10 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                       : DarkColors.basic,
                     child: Column(
                       children: [
+                        // 한스쿨 리포트
+                        HanReport(year: currentPage.year, month: currentPage.month),
+                        // 북스쿨 리포트
+                        BookReport(year: currentPage.year, month: currentPage.month),
                         // 독서클리닉 결과 1
                         BookResult1(year: currentPage.year, month: currentPage.month),
                         // 독서클리닉 결과 2
