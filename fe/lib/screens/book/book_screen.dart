@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/book_data/first_book_read_date_data.dart';
+import 'package:flutter_application/models/book_data/is_report_class_exist_data.dart';
 import 'package:flutter_application/screens/book/book_result1.dart';
 import 'package:flutter_application/screens/book/book_result2.dart';
 import 'package:flutter_application/screens/book/book_result3.dart';
@@ -9,6 +10,8 @@ import 'package:flutter_application/services/book/get_first_book_read_date_data.
 import 'package:flutter_application/services/book/get_monthly_book_read_data.dart';
 import 'package:flutter_application/services/book/get_yearly_book_read_count_data.dart';
 import 'package:flutter_application/services/book/get_ym_book_read_cnt_data.dart';
+import 'package:flutter_application/services/book/school_report/get_is_report_class_exist.dart';
+import 'package:flutter_application/services/book/school_report/get_report_weekly_data.dart';
 import 'package:flutter_application/utils/network_check.dart';
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
@@ -39,7 +42,9 @@ class BookScreen extends DropDownScreen {
     if (connectivityController.isConnected.value) {
       final year = getCurrentYear();
       final month = getCurrentMonth();
-
+      
+      await getIsReportClassExist(year, month);
+      await getReportWeeklyData(year, month);
       await getFirstBookReadDateData();
       await getMonthlyBookReadData(year, month);
       await getMonthlyBookScoreData(year, month);
@@ -62,6 +67,7 @@ class MonthlyScreen extends StatefulWidget {
 class _MonthlyScreenState extends State<MonthlyScreen> {
   final bookReadDateDataController = Get.put(BookReadDateDataController());
   final themeController = Get.put(ThemeController());
+  final isReportClassExistDataController = Get.put(IsReportClassExistDataController());
   late PageController _pageController;
 
   // 가입 연월                
@@ -115,10 +121,14 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                       : DarkColors.basic,
                     child: Column(
                       children: [
-                        // 한스쿨 리포트
-                        HanReport(year: currentPage.year, month: currentPage.month),
-                        // 북스쿨 리포트
-                        BookReport(year: currentPage.year, month: currentPage.month),
+                        // 한스쿨 리포트(과목 수강중인 경우만)
+                        isReportClassExistDataController.isSExist 
+                          ? HanReport(year: currentPage.year, month: currentPage.month)
+                          : const SizedBox(),
+                        // 북스쿨 리포트(과목 수강중인 경우만)
+                        isReportClassExistDataController.isIExist 
+                          ? BookReport(year: currentPage.year, month: currentPage.month)
+                          : const SizedBox(),
                         // 독서클리닉 결과 1
                         BookResult1(year: currentPage.year, month: currentPage.month),
                         // 독서클리닉 결과 2
@@ -154,6 +164,8 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
     final month = _getPageMonth();
 
     Future fetchData(year, month) async { 
+      await getIsReportClassExist(year, month);
+      await getReportWeeklyData(year, month);
       await getMonthlyBookReadData(year, month);
       await getMonthlyBookScoreData(year, month);
       await getYearlyBookReadCountData(year, month);

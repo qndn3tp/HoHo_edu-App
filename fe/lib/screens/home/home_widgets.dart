@@ -10,6 +10,8 @@ import 'package:flutter_application/screens/book/book_screen.dart';
 import 'package:flutter_application/screens/notice/notice_screen.dart';
 import 'package:flutter_application/screens/payment/payment_screen.dart';
 import 'package:flutter_application/services/book/get_ym_book_read_cnt_data.dart';
+import 'package:flutter_application/services/book/school_report/get_is_report_class_exist.dart';
+import 'package:flutter_application/services/book/school_report/get_report_weekly_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/utils/network_check.dart';
 import 'package:flutter_application/widgets/dialog.dart';
@@ -103,6 +105,8 @@ Widget bookButton() {
     onTap: () async {
       // 네트워크 연결 체크
       if (connectivityController.isConnected.value) {
+        await getIsReportClassExist(currentYear, currentMonth - 1);
+        await getReportWeeklyData(currentYear, currentMonth -1);
         await getFirstBookReadDateData();
         await getMonthlyBookReadData(currentYear, currentMonth - 1);
         await getMonthlyBookScoreData(currentYear, currentMonth - 1);

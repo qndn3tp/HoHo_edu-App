@@ -1,14 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/models/book_data/report_weekly_data.dart';
+import 'package:flutter_application/screens/book/hanSchool_report.dart';
 import 'package:flutter_application/screens/book/school_monthly_result.dart';
 import 'package:flutter_application/style.dart';
 import 'package:flutter_application/widgets/dashed_divider.dart';
-import 'package:flutter_application/widgets/imagebox_decoration.dart';
+import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_application/widgets/text_span.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 
 /////////////
 ///북스쿨////
@@ -25,6 +26,9 @@ class BookReport extends StatefulWidget {
 }
 
 class _BookReportState extends State<BookReport> {
+  final dropdownButtonController = Get.put(DropdownButtonController());
+  final reportWeeklyDataController = Get.put(ReportWeeklyDataController());
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,19 +37,19 @@ class _BookReportState extends State<BookReport> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // 북스쿨 이미지
-          Container(
-            height: 80,
-            width: 80,
-            decoration: imageBoxDecoration(
-              'assets/images/book/book_report_book.png', BoxFit.contain),
-          ),
+          titleImage("book_report_book.png"),
           // 텍스트
           Obx(() => RichText(
-            text: normalText("김호호 학생은 2024년 5월에"),
-          )),
+            text: TextSpan(
+              children: [
+                normalText("${dropdownButtonController.currentItem.value} 학생은 "),
+                normalText(widget.pageDate),
+                normalText("에"),
+              ]),
+            )),
           RichText(
             text: TextSpan(children: [
-              colorText("새움 1호", LightColors.blue),
+              colorText(reportWeeklyDataController.iBookName, LightColors.blue),
               normalText("를 학습했어요."),
             ]),
           ),
@@ -86,7 +90,12 @@ class _BookReportState extends State<BookReport> {
 
 // 주차별 내용
 Widget weeklyBookResult(int week) {
-  return Stack(
+  final reportWeeklyDataController = Get.put(ReportWeeklyDataController());
+  // 해당 주차의 데이터 유무
+  final isValidData = week <= reportWeeklyDataController.iWeeklyDataList.length ? true : false;
+
+  return isValidData
+  ? Stack(
     children: [
       Row(
         children: [
@@ -108,24 +117,8 @@ Widget weeklyBookResult(int week) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 수업 내용
-                  Row(
-                    children: [
-                      Container(
-                        width: 20,
-                        height: 20,
-                        margin: const EdgeInsets.all(5),
-                        decoration: imageBoxDecoration(
-                          "assets/images/book/book_report1.png",
-                          BoxFit.contain),
-                      ),
-                      const Text("수업 내용", style: TextStyle(
-                        color: Color(0xff34b8bc),
-                        fontFamily: "NotoSansKR-SemiBold"),
-                      )
-                    ],
-                  ),
-                  const Text(
-                      "어쩌고저쩌고dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"),
+                  subTitleImage("book_report1.png", "수업내용", const Color(0xff34b8bc)),
+                  Text(reportWeeklyDataController.iWeeklyDataList[week - 1].weekNote2),
                   const SizedBox(height: 20),
                 ],
               ),
@@ -141,7 +134,8 @@ Widget weeklyBookResult(int week) {
         child: const DashedVerticalDivider(),
       ),
     ],
-  );
+  )
+  : const SizedBox();
 }
 
 
@@ -180,8 +174,6 @@ class _BookReportImageState extends State<BookReportImage> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 20, 20, 40),
-      // height: 500,
-      // width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white, 
         borderRadius: BorderRadius.circular(15)),
