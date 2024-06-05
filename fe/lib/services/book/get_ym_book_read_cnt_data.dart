@@ -27,7 +27,7 @@ Future<void> getYMBookReadCountData(year, month) async {
   // 아이디
   final nameIdMap = classInfoDataController.getNameId(classInfoDataController.classInfoDataList);   // 이름: 아이디
   final dropDownId = dropdownButtonController.currentItem.value;                                    // 드롭다운 선택된 이름
-  String id = nameIdMap[dropDownId] ?? loginDataController.loginData!.id;
+  String stuId = nameIdMap[dropDownId] ?? loginDataController.loginData!.id;
 
   // 해당 페이지 연월
   final currrentPageYear = year;
@@ -38,7 +38,7 @@ Future<void> getYMBookReadCountData(year, month) async {
   var response = await http.post(
     Uri.parse(url), 
     body: {
-      'id': id, 
+      'stuid': stuId, 
       'yy': yy
     }
   );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/login/login_box.dart';
 import 'package:flutter_application/screens/login/login_screen.dart';
-import 'package:flutter_application/services/login/set_password_service.dart';
+import 'package:flutter_application/services/login/password_update.dart';
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:get/get.dart';
 import '../../style.dart';
@@ -238,7 +238,7 @@ Widget setPasswordButton() {
       } else if (!checkPasswordController.isSame.value) {
         failDialog2("비밀번호를 다시 확인해주세요");
       } else if (setPasswordController.isValid.value && checkPasswordController.isSame.value) {
-        setPasswordService(); // 비밀번호 변경
+        passwordUpdate(); // 비밀번호 변경
       }
     },
     child: Center(

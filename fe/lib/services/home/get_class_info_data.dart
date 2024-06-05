@@ -29,7 +29,7 @@ Future<void> getClassInfoData() async {
     String yy = DateFormat('yyyy').format(DateTime(currentYear));
     String mm = DateFormat('MM').format(DateTime(currentYear, currentMonth));
     // 로그인 아이디
-    String loginStuId = loginDataController.loginData!.id;
+    String stuId = loginDataController.loginData!.id;
 
     // HTTP POST 요청
     var response = await http.post(
@@ -38,7 +38,7 @@ Future<void> getClassInfoData() async {
         'sibling': sibling, 
         'yy': yy,
         'mm': mm,
-        'loginstuid': loginStuId,
+        'stuid': stuId,
       }
     );
 

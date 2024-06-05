@@ -26,13 +26,13 @@ Future<void> getFirstBookReadDateData() async {
   // 아이디
   final nameIdMap = classInfoDataController.getNameId(classInfoDataController.classInfoDataList);   // 이름: 아이디
   final dropDownId = dropdownButtonController.currentItem.value;                                    // 드롭다운 선택된 이름
-  String id = nameIdMap[dropDownId] ?? loginDataController.loginData!.id;
+  String stuId = nameIdMap[dropDownId] ?? loginDataController.loginData!.id;
 
   // HTTP POST 요청
   var response = await http.post(
     Uri.parse(url), 
     body: {
-      'id': id, 
+      'stuid': stuId, 
     }
   );
 

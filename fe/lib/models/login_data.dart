@@ -26,7 +26,7 @@ class LoginData {
 
   factory LoginData.fromJson(Map<String, dynamic> json) {
     return LoginData(
-      id: json['id'] ?? "",
+      id: json['stuid'] ?? "",
       name: json['name'] ?? "",
       cid: json['cid'] ?? "",
       cname: json['cname'] ?? "",

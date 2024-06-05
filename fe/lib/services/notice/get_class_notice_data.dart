@@ -24,7 +24,7 @@ Future<void> getClassNoticeData(index) async {
     // 선생님 아이디
     String teaId = noticeDataController.noticeDataList![index].teacherId;
     // 학생 아이디
-    String stuId = noticeDataController.noticeDataList![index].stuId2;
+    String id = noticeDataController.noticeDataList![index].stuId2;
     // 현재 날짜
     String ymd = noticeDataController.noticeDataList![index].ymd;
     // 수업 교시
@@ -38,7 +38,7 @@ Future<void> getClassNoticeData(index) async {
         'teaid': teaId,
         'ymd': ymd,
         'stime': sTime,
-        'stuid': stuId,
+        'stuid': id,
         'gb': gb,
       }
     );

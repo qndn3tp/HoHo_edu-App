@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 ///////////////////
 
 // 출석 데이터 가져오는 함수
-Future<void> setPasswordService() async {
+Future<void> passwordUpdate() async {
 
   // 컨트롤러
   final loginController = Get.put(LoginController());  
@@ -27,7 +27,7 @@ Future<void> setPasswordService() async {
     String url = dotenv.get('LOGIN_PWD_UPDATE_URL');
 
     // 아이디
-    String loginStuId = loginDataController.loginData!.id;
+    String stuId = loginDataController.loginData!.id;
     // 기존 비밀번호
     String oldPwd = sha256_convertHash(loginController.passwordController.text);
     // 새 비밀번호
@@ -37,7 +37,7 @@ Future<void> setPasswordService() async {
     var response = await http.post(
       Uri.parse(url), 
       body: {
-        'loginstuid': loginStuId, 
+        'stuid': stuId, 
         'old_pwd': oldPwd,
         'new_pwd': newPwd
       }
