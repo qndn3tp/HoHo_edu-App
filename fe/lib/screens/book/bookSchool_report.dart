@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/models/book_data/report_monthly_data.dart';
 import 'package:flutter_application/models/book_data/report_weekly_data.dart';
 import 'package:flutter_application/screens/book/hanSchool_report.dart';
 import 'package:flutter_application/screens/book/school_monthly_result.dart';
@@ -28,9 +29,12 @@ class BookReport extends StatefulWidget {
 class _BookReportState extends State<BookReport> {
   final dropdownButtonController = Get.put(DropdownButtonController());
   final reportWeeklyDataController = Get.put(ReportWeeklyDataController());
+  final reportMonthlyDataController = Get.put(ReportMonthlyDataController());
   
   @override
   Widget build(BuildContext context) {
+    final isValidData = reportMonthlyDataController.iMonthlyDataList.length > 0 ? true : false;
+
     return Container(
       color: const Color(0xffe7eef8),
       child: Column(
@@ -69,17 +73,9 @@ class _BookReportState extends State<BookReport> {
               },
             ),
           ),
-          // 글쓰기 사진
+          // 글쓰기 이미지
           RichText(text: normalText("이번 달의 글쓰기")),
-          const BookReportImage(),
-          // 텍스트
-          RichText(text: normalText("월간 학습 성취도 평가 결과에서")),
-          RichText(
-            text: TextSpan(children: [
-              colorText("표현력", const Color(0xffed4282)),
-              normalText("이 매우 뛰어났어요."),
-            ]),
-          ),
+          isValidData ? const BookReportImage() : const SizedBox(),
           // 최종 평가
           monthlyReportResult("book"),
         ],
@@ -149,52 +145,74 @@ class BookReportImage extends StatefulWidget {
 }
 
 class _BookReportImageState extends State<BookReportImage> {
-  Widget imageSlider(path, index) => Image.network(path, width: 500, height: 500, fit: BoxFit.contain,);
+  final reportMonthlyDataController = Get.put(ReportMonthlyDataController());
+  
+  Widget imageSlider(path, index) {
+    return GestureDetector(
+      onTap: () => showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          child: SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Image.network(path, fit: BoxFit.contain),
+          ),
+        ),
+      ),
+      child: Image.network(
+        path,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
 
-  var images = [
-    "https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg",
-    "https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg"
-  ];
   var activeIndex = 0;
 
   Widget indicator() => Container(
-    margin: const EdgeInsets.only(bottom: 20.0),
     alignment: Alignment.bottomCenter,
     child: AnimatedSmoothIndicator(
       activeIndex: activeIndex,
-      count: images.length,
-      effect: JumpingDotEffect(
-        dotHeight: 6,
-        dotWidth: 6,
-        activeDotColor: Colors.white,
-        dotColor: Colors.white.withOpacity(0.6)),
+      count: reportMonthlyDataController.bookSchooldImages.length,
+      effect: const JumpingDotEffect(
+        dotHeight: 8,
+        dotWidth: 8,
+        activeDotColor: Color(0xff868ad6),
+        dotColor: CommonColors.grey3),
     ));
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(20, 20, 20, 40),
-      decoration: BoxDecoration(
-        color: Colors.white, 
-        borderRadius: BorderRadius.circular(15)),
-      child: Stack(alignment: Alignment.bottomCenter, children: <Widget>[
-        CarouselSlider.builder(
-          options: CarouselOptions(
-            initialPage: 0,
-            viewportFraction: 1,
-            enlargeCenterPage: true,
-            onPageChanged: (index, reason) => setState(() {
-              activeIndex = index;
-            }),
-          ),
-          itemCount: images.length,
-          itemBuilder: (context, index, realIndex) {
-            final path = images[index];
-            return imageSlider(path, index);
-          },
-        ),
-        Align(alignment: Alignment.bottomCenter, child: indicator())
-      ]),
+      margin: const EdgeInsets.only(bottom: 40),
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+            height: 400,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white, 
+              borderRadius: BorderRadius.circular(15)),
+            child: Center(
+              child: CarouselSlider.builder(
+                options: CarouselOptions(
+                  initialPage: 0,
+                  viewportFraction: 1,
+                  enlargeCenterPage: true,
+                  onPageChanged: (index, reason) => setState(() {
+                    activeIndex = index;
+                  }),
+                ),
+                itemCount: reportMonthlyDataController.bookSchooldImages.length,
+                itemBuilder: (context, index, realIndex) {
+                final path = reportMonthlyDataController.bookSchooldImages[index];
+                return imageSlider(path, index);
+              },
+            ),
+          )),
+          indicator()
+        ],
+      ),
     );
   }
 }

@@ -11,6 +11,7 @@ import 'package:flutter_application/services/book/get_monthly_book_read_data.dar
 import 'package:flutter_application/services/book/get_yearly_book_read_count_data.dart';
 import 'package:flutter_application/services/book/get_ym_book_read_cnt_data.dart';
 import 'package:flutter_application/services/book/school_report/get_is_report_class_exist.dart';
+import 'package:flutter_application/services/book/school_report/get_report_monthly_data.dart';
 import 'package:flutter_application/services/book/school_report/get_report_weekly_data.dart';
 import 'package:flutter_application/utils/network_check.dart';
 import 'package:flutter_application/widgets/dialog.dart';
@@ -45,6 +46,7 @@ class BookScreen extends DropDownScreen {
       
       await getIsReportClassExist(year, month);
       await getReportWeeklyData(year, month);
+      await getReportMonthlyData(year, month);
       await getFirstBookReadDateData();
       await getMonthlyBookReadData(year, month);
       await getMonthlyBookScoreData(year, month);
@@ -166,6 +168,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
     Future fetchData(year, month) async { 
       await getIsReportClassExist(year, month);
       await getReportWeeklyData(year, month);
+      await getReportMonthlyData(year, month);
       await getMonthlyBookReadData(year, month);
       await getMonthlyBookScoreData(year, month);
       await getYearlyBookReadCountData(year, month);

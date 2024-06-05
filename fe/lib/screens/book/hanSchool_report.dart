@@ -70,14 +70,6 @@ class _HanReportState extends State<HanReport> {
               },
             ),
           ),
-          // 텍스트
-          RichText(text: normalText("월간 학습 성취도 평가 결과에서")),
-          RichText(
-            text: TextSpan(children: [
-              colorText("표현력", const Color(0xffed4282)),
-              normalText("이 매우 뛰어났어요."),
-            ]),
-          ),
           // 최종 평가
           monthlyReportResult("han"),
         ],
