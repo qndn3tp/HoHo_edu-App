@@ -9,6 +9,7 @@ TextSpan normalText(text) {
   return TextSpan(
     text: text,
     style: TextStyle(
+      height: 1.3,
       color: themeController.isLightTheme.value ? Colors.black : Colors.white, 
       fontSize: 22,
       fontFamily: "BMJUA"),
@@ -19,6 +20,7 @@ TextSpan colorText(text, color) {
   return TextSpan(
     text: text,
     style: TextStyle(
+      height: 1.3,
       color: color,
       fontSize: 22,
       fontFamily: "BMJUA")

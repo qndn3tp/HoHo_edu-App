@@ -137,13 +137,19 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
                   onPressed: (){
                     paymentAmountController.setAllChecked();
                   }, 
-                  child: const Text("전체 선택", style: TextStyle(color: Colors.black, fontSize: 14))), 
-                const Text("|", style: TextStyle(color: Colors.black)),
+                  child: Text(
+                    "전체 선택", 
+                  style: TextStyle(color: Theme.of(Get.context!).colorScheme.onSurface, fontSize: 14))), 
+                Text(
+                  "|", 
+                  style: TextStyle(color: Theme.of(Get.context!).colorScheme.onSurface)),
                 TextButton(
                   onPressed: (){
                     paymentAmountController.setAllUnChecked();
                   }, 
-                  child: const Text("전체 삭제", style: TextStyle(color: Colors.black, fontSize: 14)))
+                  child: Text(
+                    "전체 삭제", 
+                    style: TextStyle(color: Theme.of(Get.context!).colorScheme.onSurface, fontSize: 14)))
               ]
             ),
             Expanded(

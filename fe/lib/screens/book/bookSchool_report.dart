@@ -8,6 +8,7 @@ import 'package:flutter_application/style.dart';
 import 'package:flutter_application/widgets/dashed_divider.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_application/widgets/text_span.dart';
+import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -29,14 +30,14 @@ class BookReport extends StatefulWidget {
 class _BookReportState extends State<BookReport> {
   final dropdownButtonController = Get.put(DropdownButtonController());
   final reportWeeklyDataController = Get.put(ReportWeeklyDataController());
-  final reportMonthlyDataController = Get.put(ReportMonthlyDataController());
+  final themeController = Get.put(ThemeController());
   
   @override
   Widget build(BuildContext context) {
-    final isValidData = reportMonthlyDataController.iMonthlyDataList.length > 0 ? true : false;
-
-    return Container(
-      color: const Color(0xffe7eef8),
+    return Obx(() => Container(
+      color: themeController.isLightTheme.value 
+        ? const Color(0xffe7eef8) 
+        : DarkColors.basic,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -53,7 +54,9 @@ class _BookReportState extends State<BookReport> {
             )),
           RichText(
             text: TextSpan(children: [
-              colorText(reportWeeklyDataController.iBookName, LightColors.blue),
+              colorText(
+                reportWeeklyDataController.iBookName, 
+                themeController.isLightTheme.value ? LightColors.blue : DarkColors.blue),
               normalText("를 학습했어요."),
             ]),
           ),
@@ -61,7 +64,7 @@ class _BookReportState extends State<BookReport> {
           Container(
             margin: const EdgeInsets.fromLTRB(20, 20, 20, 40),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(15),
             ),
             child: ListView.builder(
@@ -75,12 +78,12 @@ class _BookReportState extends State<BookReport> {
           ),
           // 글쓰기 이미지
           RichText(text: normalText("이번 달의 글쓰기")),
-          isValidData ? const BookReportImage() : const SizedBox(),
+          const BookReportImage(),
           // 최종 평가
           monthlyReportResult("book"),
         ],
       ),
-    );
+    ));
   }
 }
 
@@ -147,6 +150,7 @@ class BookReportImage extends StatefulWidget {
 class _BookReportImageState extends State<BookReportImage> {
   final reportMonthlyDataController = Get.put(ReportMonthlyDataController());
   
+  
   Widget imageSlider(path, index) {
     return GestureDetector(
       onTap: () => showDialog(
@@ -155,13 +159,25 @@ class _BookReportImageState extends State<BookReportImage> {
           child: SizedBox(
             width: double.infinity,
             height: double.infinity,
-            child: Image.network(path, fit: BoxFit.contain),
+            child: Image.network(
+              path, fit: BoxFit.contain,
+              errorBuilder: (context, error, stackTrace) {
+                return const Center(
+                  child: Text('이미지를 불러올 수 없어요.'),
+                );
+              }
+            ),
           ),
         ),
       ),
       child: Image.network(
         path,
         fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return const Center(
+            child: Text('이미지를 불러올 수 없어요.'),
+          );
+        }
       ),
     );
   }
@@ -182,6 +198,8 @@ class _BookReportImageState extends State<BookReportImage> {
 
   @override
   Widget build(BuildContext context) {
+    final isValidImage = reportMonthlyDataController.iMonthlyDataList.length > 0 ? true : false;
+
     return Container(
       margin: const EdgeInsets.only(bottom: 40),
       child: Column(
@@ -191,25 +209,28 @@ class _BookReportImageState extends State<BookReportImage> {
             height: 400,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.white, 
+              color: Theme.of(context).colorScheme.secondaryContainer, 
               borderRadius: BorderRadius.circular(15)),
             child: Center(
-              child: CarouselSlider.builder(
-                options: CarouselOptions(
-                  initialPage: 0,
-                  viewportFraction: 1,
-                  enlargeCenterPage: true,
-                  onPageChanged: (index, reason) => setState(() {
-                    activeIndex = index;
-                  }),
-                ),
-                itemCount: reportMonthlyDataController.bookSchooldImages.length,
-                itemBuilder: (context, index, realIndex) {
-                final path = reportMonthlyDataController.bookSchooldImages[index];
-                return imageSlider(path, index);
-              },
-            ),
-          )),
+              child: isValidImage
+              ? CarouselSlider.builder(
+                  options: CarouselOptions(
+                    initialPage: 0,
+                    viewportFraction: 1,
+                    enlargeCenterPage: true,
+                    onPageChanged: (index, reason) => setState(() {
+                      activeIndex = index;
+                    }),
+                  ),
+                  itemCount: reportMonthlyDataController.bookSchooldImages.length,
+                  itemBuilder: (context, index, realIndex) {
+                    final path = reportMonthlyDataController.bookSchooldImages[index];
+                    return imageSlider(path, index);
+                  },
+                )
+              : const Text("아직 이미지가 없어요 :("),
+            )
+          ),
           indicator()
         ],
       ),

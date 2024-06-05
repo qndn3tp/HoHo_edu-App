@@ -6,6 +6,7 @@ import 'package:flutter_application/widgets/dashed_divider.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_application/widgets/imagebox_decoration.dart';
 import 'package:flutter_application/widgets/text_span.dart';
+import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -28,11 +29,14 @@ class HanReport extends StatefulWidget {
 class _HanReportState extends State<HanReport> {
   final dropdownButtonController = Get.put(DropdownButtonController());
   final reportWeeklyDataController = Get.put(ReportWeeklyDataController());
+  final themeController = Get.put(ThemeController());
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xfffaeef4),
+    return Obx(() => Container(
+      color: themeController.isLightTheme.value 
+        ? const Color(0xfffaeef4) 
+        : DarkColors.basic,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -46,11 +50,13 @@ class _HanReportState extends State<HanReport> {
                 normalText(widget.pageDate),
                 normalText("에"),
               ]),
-            )),
+          )),
           RichText(
             text: TextSpan(
               children: [
-                colorText(reportWeeklyDataController.sBookName, LightColors.blue),
+                colorText(
+                  reportWeeklyDataController.sBookName, 
+                  themeController.isLightTheme.value ? LightColors.blue : DarkColors.blue),
                 normalText("를 학습했어요."),
               ]),
           ),
@@ -58,7 +64,7 @@ class _HanReportState extends State<HanReport> {
           Container(
             margin: const EdgeInsets.fromLTRB(20, 20, 20, 40),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(15),
             ),
             child: ListView.builder(
@@ -71,10 +77,10 @@ class _HanReportState extends State<HanReport> {
             ),
           ),
           // 최종 평가
-          monthlyReportResult("han"),
+           monthlyReportResult("han"),
         ],
       ),
-    );
+    ));
   }
 }
 
@@ -95,7 +101,10 @@ Widget weeklyHanResult(week) {
               child: Center(
                 child: Text(
                   "$week주차",
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: CommonColors.grey4),
+                  style: TextStyle(
+                    fontSize: 16, 
+                    fontWeight: FontWeight.bold, 
+                    color: Theme.of(Get.context!).colorScheme.secondary),
                 )),
             ),
             Expanded(

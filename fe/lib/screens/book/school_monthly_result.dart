@@ -46,7 +46,7 @@ Widget monthlyReportResult(String title) {
         height: 90,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(Get.context!).colorScheme.secondaryContainer,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Stack(
@@ -133,7 +133,7 @@ Widget scoreBox(isColored){
     height: 20,
     width: 20,
     decoration: BoxDecoration(
-      color: isColored ? pointColor : Colors.white,
+      color: isColored ? pointColor : Theme.of(Get.context!).colorScheme.secondaryContainer,
       border: Border.all(
         color: pointColor,
         width: 2,
