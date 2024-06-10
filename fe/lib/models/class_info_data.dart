@@ -106,7 +106,7 @@ class ClassInfoDataController extends GetxController {
       String subjectDateName = data.dateName;
       
       if (!subjectMap.containsKey(studentName)) {
-        subjectMap[studentName] = [];
+        subjectMap[studentName] = [[subjectName, subjectNumber, subjectSTime, subjectETime, subjectDateName]];
       } else {
         subjectMap[studentName]!.add([subjectName, subjectNumber, subjectSTime, subjectETime, subjectDateName]);
       }

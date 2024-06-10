@@ -67,7 +67,7 @@ Widget studentInfoBox(name) {
 
                   return Text(
                     "[$subjectName$subjectNum] 수업중 ($dateName $formattedStartTime~$formattedEndTime)",
-                    style: const TextStyle(color: CommonColors.grey1, fontSize: 16),);
+                    style: const TextStyle(color: CommonColors.grey1, fontSize: 14),);
                 }
               )
             )
