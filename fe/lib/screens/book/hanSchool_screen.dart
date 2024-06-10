@@ -115,7 +115,7 @@ Widget weeklyHanResult(week) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // 학습 어휘
-                    subTitleImage("han_report1.png", "학습어휘", const Color(0xff868ad6)),
+                    subTitleImage("han_report1.png", "신습한자/학습어휘", const Color(0xff868ad6)),
                     Text(reportWeeklyDataController.sWeeklyDataList[week - 1].weekNote1),
                     const SizedBox(height: 5),
                     // 수업 지도

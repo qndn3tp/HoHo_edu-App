@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/book_data/report_monthly_data.dart';
 import 'package:flutter_application/models/book_data/report_weekly_data.dart';
-import 'package:flutter_application/screens/book/hanSchool_report.dart';
+import 'package:flutter_application/screens/book/hanSchool_screen.dart';
 import 'package:flutter_application/screens/book/school_monthly_result.dart';
 import 'package:flutter_application/style.dart';
 import 'package:flutter_application/widgets/dashed_divider.dart';
@@ -149,7 +149,6 @@ class BookReportImage extends StatefulWidget {
 
 class _BookReportImageState extends State<BookReportImage> {
   final reportMonthlyDataController = Get.put(ReportMonthlyDataController());
-  
   
   Widget imageSlider(path, index) {
     return GestureDetector(

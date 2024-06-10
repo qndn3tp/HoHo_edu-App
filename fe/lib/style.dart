@@ -52,7 +52,7 @@ ThemeData lightTheme = ThemeData(
       onBackground: CommonColors.grey3,       //text1
       secondaryContainer: CommonColors.grey2,
       onSecondaryContainer: LightColors.blue,
-      error: Colors.red,                      // danger
+      error: LightColors.orange,               // danger
       onError: Colors.red,                    //no use
       brightness: Brightness.light, 
   ),
@@ -82,7 +82,7 @@ ThemeData darkTheme = ThemeData(
       onBackground: CommonColors.grey4,
       secondaryContainer: CommonColors.grey4,
       onSecondaryContainer: DarkColors.indigo,
-      error: Colors.red,           
+      error: DarkColors.orange,           
       onError: Colors.red, 
       brightness: Brightness.dark, 
   ),

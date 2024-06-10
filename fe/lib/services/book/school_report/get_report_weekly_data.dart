@@ -38,6 +38,7 @@ Future<void> getReportWeeklyData(year, month) async {
     Uri.parse(url), 
     body: {
       'stuid': stuId, 
+      // 'stuid': "hohosc20220211201023",
       'ym': ym
     }
   );

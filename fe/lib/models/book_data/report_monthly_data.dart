@@ -1,8 +1,8 @@
 import 'package:get/get.dart';  
 
-///////////////////////////////////
-// 한스쿨, 북스쿨 주차별 수업내용 //
-///////////////////////////////////
+/////////////////////////////
+// 한스쿨, 북스쿨 월말 결과 //
+/////////////////////////////
 
 // 데이터 클래스
 class ReportMonthlyData {
@@ -125,7 +125,6 @@ class ReportMonthlyDataController extends GetxController {
         maxScoreIdx['I']!.add(i);
       }
     }
-
   }
   get maxScoreIndexS => maxScoreIdx['S'];
   get maxScoreIndexI => maxScoreIdx['I'];

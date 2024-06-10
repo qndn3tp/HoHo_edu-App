@@ -30,17 +30,26 @@ Widget monthlyReportResult(String title) {
 
   const pointColor = Color(0xff868ad6);
 
+  final isValidResult = reportMonthlyDataController.iScore.length > 0 ? true : false;
+
   return Column(
     children: [
       // 텍스트
-      RichText(text: normalText("월간 학습 성취도 평가에서")),
-      RichText(
-        text: TextSpan(children: [
-          colorText(best.join(", "), const Color(0xffed4282)),
-          normalText("이"),
-        ]),
-      ),
-      RichText(text: normalText("매우 뛰어났어요.")),
+      RichText(text: normalText("월간 학습 성취도 평가")),
+      isValidResult
+      ? Column(
+        children: [
+          RichText(
+            text: TextSpan(children: [
+              colorText(best.join(", "), const Color(0xffed4282)),
+              normalText("이"),
+            ]),
+          ),
+          RichText(text: normalText("매우 뛰어났어요.")),
+        ],
+      )
+      : const SizedBox(),
+      // 점수 박스
       Container(
         margin: const EdgeInsets.fromLTRB(20, 20, 20, 80),
         height: 90,

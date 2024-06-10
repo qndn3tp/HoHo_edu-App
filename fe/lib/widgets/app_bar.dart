@@ -45,7 +45,13 @@ PreferredSizeWidget homeAppBar(screenSize) {
       child: Image.asset('assets/images/appbar/appbar_logo.png'),
     ),
     iconTheme: const IconThemeData(color: CommonColors.grey4),
-    actions: [IconButton(onPressed: (){Get.to(const MyPage());}, icon: const Icon(Icons.account_circle))],
+    actions: [
+      IconButton(
+        onPressed: (){
+          Get.to(const MyPage());
+        }, 
+        icon: const Icon(Icons.account_circle, size: 30, color: CommonColors.grey4,)
+      )],
     backgroundColor: const Color(0xfffffde3),
     elevation: 0,
     centerTitle: false,

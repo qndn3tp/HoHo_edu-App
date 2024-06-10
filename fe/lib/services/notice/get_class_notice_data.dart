@@ -19,7 +19,7 @@ Future<void> getClassNoticeData(index) async {
 
   if (connectivityController.isConnected.value) {
     // API URL
-    String url = dotenv.get('NOTICE_VIEW_1');
+    String url = dotenv.get('NOTICE_VIEW_1_URL');
 
     // 선생님 아이디
     String teaId = noticeDataController.noticeDataList![index].teacherId;
