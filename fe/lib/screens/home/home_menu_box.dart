@@ -58,7 +58,7 @@ Widget menuBox(Size screenSize) {
           children: [
             // 출석체크
             attendanceButton(),
-            // 학원비납부
+            // 학원비내역
             paymentButton(),
           ],
         ),

@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // 학생 정보 박스(이름, 센터, 수강정보)
                 bannerCarousel(context, snamesList),
                 const SizedBox(height: 30),
-                // 메뉴 박스(출석체크, 학원비 납부, 알림장, 독클결과)
+                // 메뉴 박스(출석체크, 학원비 내역, 알림장, 독클결과)
                 menuBox(screenSize),
               ],
             ),

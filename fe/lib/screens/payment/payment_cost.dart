@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 // 결제내용- 결제 정보(금액)
-Widget paymentCost(cost, {textColor, pointColor}) {
+Widget paymentCost(cost, isPaid) {
+  final textColor = Theme.of(Get.context!).colorScheme.secondary;
+  final pointColor = isPaid ? textColor : Theme.of(Get.context!).colorScheme.onSecondaryContainer;
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [

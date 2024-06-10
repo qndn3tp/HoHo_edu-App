@@ -59,7 +59,7 @@ Widget noticeListTile(index) {
           page = AttendanceScreen();
           break;
         case 3:
-          page = const PaymentScreen();
+          page = PaymentDropdownScreen();
           break;
         case 4:
           page = BookScreen();

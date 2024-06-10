@@ -13,6 +13,7 @@ import 'package:flutter_application/services/book/get_ym_book_read_cnt_data.dart
 import 'package:flutter_application/services/book/school_report/get_is_report_class_exist.dart';
 import 'package:flutter_application/services/book/school_report/get_report_monthly_data.dart';
 import 'package:flutter_application/services/book/school_report/get_report_weekly_data.dart';
+import 'package:flutter_application/services/payment/get_payment_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/utils/network_check.dart';
 import 'package:flutter_application/widgets/dialog.dart';
@@ -60,14 +61,15 @@ Widget attendanceButton() {
   );
 }
 
-// 학원비 납부 버튼
+// 학원비 내역 버튼
 Widget paymentButton() {
   return menuButton(
     imagePath: 'assets/images/payment.png',
-    buttonText: '학원비 납부',
-    onTap: () {
+    buttonText: '학원비 내역',
+    onTap: () async {
+      await getPaymentData();
       Get.to(
-        const PaymentScreen(),
+        PaymentDropdownScreen(),
         transition: Transition.cupertino,
         duration: const Duration(milliseconds: 500),
       );
@@ -82,7 +84,7 @@ Widget noticeButton() {
   return menuButton(
     imagePath: 'assets/images/notice.png',
     buttonText: '알림장',
-    onTap: () async {
+    onTap: () {
       // 알림 확인
       readNotiController.isRead.value =true;
       readNotiController.storeisReadInfo(true);
@@ -102,7 +104,7 @@ Widget bookButton() {
 
   return menuButton(
     imagePath: 'assets/images/book.png',
-    buttonText: '독클결과',
+    buttonText: '월간 레포트',
     onTap: () async {
       // 네트워크 연결 체크
       if (connectivityController.isConnected.value) {
