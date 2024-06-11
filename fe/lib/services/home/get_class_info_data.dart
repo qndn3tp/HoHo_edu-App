@@ -20,7 +20,6 @@ Future<void> getClassInfoData() async {
   final ConnectivityController connectivityController = Get.put(ConnectivityController());        // 네트워크 연결체크
 
   if (connectivityController.isConnected.value) {
-    // 수업정보 API URL
     String url = dotenv.get('CLASS_INFO_URL');
 
     // 형제자매 코드
@@ -55,7 +54,6 @@ Future<void> getClassInfoData() async {
         // 응답 데이터가 성공일 때
         if (resultList[0]["result"] == null) {
           final resultList0 = resultList.cast<Map<String, dynamic>>();
-          // JSON 데이터를 classInfoData 객체리스트로 파싱
           List<ClassInfoData> classInfoDataList = resultList0.map<ClassInfoData>((json) => ClassInfoData.fromJson(json)).toList();
           final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());     
           classInfoDataController.setClassInfoDataList(classInfoDataList);

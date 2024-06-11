@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
 
+///////////////////////
+// 학원비 내역 데이터 //
+///////////////////////
+
 class PaymentData {
   final String classDate;        // 수업연월
   final String subjectName;        // 수업 구분

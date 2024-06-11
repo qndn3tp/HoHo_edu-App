@@ -21,7 +21,6 @@ Future<void> getNoticeData(noticeNum) async {
   final ConnectivityController connectivityController = Get.put(ConnectivityController());        // 네트워크 연결체크
 
   if (connectivityController.isConnected.value) {
-    // 알림 정보 API URL
     String url = dotenv.get('NOTICE_URL');
 
     // 로그인 아이디
@@ -59,7 +58,6 @@ Future<void> getNoticeData(noticeNum) async {
         // 응답 데이터가 성공일 때
         if (resultList[0]["result"] == null) {
           final resultList0 = resultList.cast<Map<String, dynamic>>();
-          // JSON 데이터를 NoticeData 객체리스트로 파싱
           List<NoticeData> noticeDataList = resultList0.map<NoticeData>((json) => NoticeData.fromJson(json)).toList();
           final NoticeDataController noticeDataController = Get.put(NoticeDataController());
           noticeDataController.setNoticeDataList(noticeDataList);

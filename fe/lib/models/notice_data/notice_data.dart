@@ -1,10 +1,10 @@
 import 'package:get/get.dart';  
 
 /////////////////
-// 알림 데이터 //
+// 알림장 데이터 //
 ////////////////
 
-// 알림 데이터 클래스
+// 데이터 클래스
 class NoticeData {
   final String title;
   final String body;
@@ -42,7 +42,8 @@ class NoticeData {
     );
   }
 }
-// 알림 데이터 컨트롤러
+
+// 데이터 컨트롤러
 class NoticeDataController extends GetxController {
   List<NoticeData>? _noticeDataList;
 

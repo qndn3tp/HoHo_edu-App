@@ -23,7 +23,7 @@ Future<void> passwordUpdate() async {
   final loginDataController = Get.put(LoginDataController());
 
   if (connectivityController.isConnected.value) {
-    // API URL
+
     String url = dotenv.get('LOGIN_PWD_UPDATE_URL');
 
     // 아이디

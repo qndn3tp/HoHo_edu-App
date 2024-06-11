@@ -3,9 +3,9 @@ import 'package:flutter_application/models/book_data/first_book_read_date_data.d
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:get/get.dart';  
 
-//////////////////////////////
-//  연간 월별 독서량 데이터  //
-//////////////////////////////
+////////////////////////////////////
+// 연간 월별 독서량 데이터(그래프) //
+////////////////////////////////////
 
 // 데이터 클래스
 class YMBookCountData {

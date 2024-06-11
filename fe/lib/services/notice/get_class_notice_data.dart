@@ -18,7 +18,6 @@ Future<void> getClassNoticeData(index) async {
   final NoticeDataController noticeDataController = Get.put(NoticeDataController());
 
   if (connectivityController.isConnected.value) {
-    // API URL
     String url = dotenv.get('NOTICE_VIEW_1_URL');
 
     // 선생님 아이디

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 //  로그인시 받아온 유저의 데이터  //
 ///////////////////////////////////
 
-// 유저의 로그인 데이터 클래스
+// 데이터 클래스
 class LoginData {
   final String id;
   final String name;
@@ -37,7 +37,7 @@ class LoginData {
   }
 }
 
-// 유저의 로그인 데이터 컨트롤러
+// 데이터 컨트롤러
 class LoginDataController extends GetxController {
   LoginData? _loginData;           
 

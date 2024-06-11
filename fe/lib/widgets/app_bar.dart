@@ -3,14 +3,12 @@ import 'package:flutter_application/screens/mypage/mypage_screen.dart';
 import 'package:flutter_application/style.dart';
 import 'package:get/get.dart';
 
-//////////////
-//  상단바  //
-//////////////
+////////////
+// 상단바 //
+///////////
 
 // 각 페이지 화면 앱바
 PreferredSizeWidget customAppBar(title) {
-  String title0 = title;
-
   return AppBar(
     // 뒤로가기 버튼(홈으로 이동)
     leading: IconButton(
@@ -21,7 +19,7 @@ PreferredSizeWidget customAppBar(title) {
     ),
     // 제목
     title: Text(
-      title0,
+      title,
       style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     ),
     centerTitle: true,
