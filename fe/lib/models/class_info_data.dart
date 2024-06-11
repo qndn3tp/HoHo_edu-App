@@ -15,6 +15,7 @@ class ClassInfoData {
   final String stime;
   final String etime;
   final String dateName;
+  final String startYM;
 
   
   ClassInfoData ({
@@ -27,6 +28,7 @@ class ClassInfoData {
     required this.stime,
     required this.etime,
     required this.dateName,
+    required this.startYM,
   });
 
   factory ClassInfoData.fromJson(Map<String, dynamic> json) {
@@ -40,9 +42,11 @@ class ClassInfoData {
       stime: json['stime'] ?? "",
       etime: json['etime'] ?? "",
       dateName: json['DATENAME'] ?? "",
+      startYM: json['sym'] ?? "",
     );
   }
 }
+
 // 데이터 컨트롤러
 class ClassInfoDataController extends GetxController {
   List<ClassInfoData>? _classInfoDataList;
@@ -59,15 +63,6 @@ class ClassInfoDataController extends GetxController {
       return []; // 예외 처리: null 체크
     } else {
       return classInfoDataList.map((classInfoData) => classInfoData.sName).toSet().toList();
-    }
-  }
-
-  // 학생 수
-  int getStuNum(List<ClassInfoData>? classInfoDataList) {
-    if (classInfoDataList == null) {
-      return 0; // 예외 처리: null 체크
-    } else {
-      return classInfoDataList.map((classInfoData) => classInfoData.sName).toSet().toList().length;
     }
   }
 
@@ -93,6 +88,7 @@ class ClassInfoDataController extends GetxController {
   // 학생 이름:[수업정보]를 가지는 Map
   Map<String, List<List<String>>> getSubjectMap(List<ClassInfoData>? classInfoDataList) {
     Map<String, List<List<String>>> subjectMap = {};
+
     if (classInfoDataList == null) {
       return subjectMap;
     }
@@ -112,5 +108,47 @@ class ClassInfoDataController extends GetxController {
       }
     }
     return subjectMap;
+  }
+  
+  // 학생 이름:[수업 시작 연월]을 가지는 Map
+  Map<String, String> getStartYMMap(List<ClassInfoData>? classInfoDataList) {
+    Map<String, String> startYMMap = {};
+    
+    if (classInfoDataList == null) {
+      return startYMMap;
+    }
+    
+    for (var data in classInfoDataList) {
+      String studentName = data.sName;
+      String startYM = data.startYM;
+      
+      if (!startYMMap.containsKey(studentName)) {
+        startYMMap[studentName] = startYM;
+      } else {
+      }
+    }
+    return startYMMap;
+  }
+
+  // 학생 이름:[수업별 시작 연월]을 가지는 Map
+  Map<String, List<List<String>>> getSubjectDate(List<ClassInfoData>? classInfoDataList) {
+    Map<String, List<List<String>>> subjectDateMap = {};
+
+    if (classInfoDataList == null) {
+      return subjectDateMap;
+    }
+    
+    for (var data in classInfoDataList) {
+      String studentName = data.sName;
+      String gubunName = data.gubunName;
+      String startYM = data.startYM;
+      
+      if (!subjectDateMap.containsKey(studentName)) {
+        subjectDateMap[studentName] = [[gubunName, startYM]];
+      } else {
+        subjectDateMap[studentName]!.add([gubunName, startYM]);
+      }
+    }
+    return subjectDateMap;
   }
 }
