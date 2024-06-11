@@ -26,7 +26,6 @@ Future<void> loginService(String loginId, String loginPassword, autoLoginChecked
     // 사용자 로그인 정보(아이디,비밀번호)를 기기에 저장
     final storage = Get.find<FlutterSecureStorage>();
 
-    // 로그인 API URL
     String url = dotenv.get('LOGIN_URL');
 
     // 로그인 아이디, 비밀번호
