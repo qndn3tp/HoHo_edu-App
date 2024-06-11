@@ -1,14 +1,12 @@
 import 'dart:convert';
 import 'package:flutter_application/models/book_data/ym_book_count_data.dart';
-import 'package:flutter_application/models/class_info_data.dart';
-import 'package:flutter_application/models/login_data.dart';
 import 'package:flutter_application/utils/network_check.dart';
-import 'package:flutter_application/widgets/dropdown_button_controller.dart';
+import 'package:flutter_application/widgets/date_format.dart';
+import 'package:flutter_application/utils/get_dropdown_stuId.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 //////////////////////////////
 //  연간 월별 독서량 데이터  //
@@ -18,24 +16,20 @@ import 'package:intl/intl.dart';
 Future<void> getYMBookReadCountData(year, month) async {
 
   // 컨트롤러
-  final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController()); // 드롭다운 버튼
-  final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());    // 수업정보 
-  final LoginDataController loginDataController = Get.put(LoginDataController());                // 유저의 로그인 데이터
-  final ConnectivityController connectivityController = Get.put(ConnectivityController());       // 네트워크 연결체크
+  final ConnectivityController connectivityController = Get.put(ConnectivityController());
+  final StudentIdController studentIdController = Get.put(StudentIdController()); 
 
   if (connectivityController.isConnected.value) {  
 
     String url = dotenv.get("BOOK_READ_YM_CNT_URL");
 
-    // 아이디
-    final nameIdMap = classInfoDataController.getNameId(classInfoDataController.classInfoDataList);   // 이름: 아이디
-    final dropDownId = dropdownButtonController.currentItem.value;                                    // 드롭다운 선택된 이름
-    String stuId = nameIdMap[dropDownId] ?? loginDataController.loginData!.id;
+    // 학생 아이디
+    final stuId = studentIdController.id.value;
 
     // 해당 페이지 연월
     final currrentPageYear = year;
     final currentPageMonth = month;
-    String yy = DateFormat('yyyy').format(DateTime(currrentPageYear, currentPageMonth));
+    String yy = formatY(currrentPageYear, currentPageMonth);
 
     // HTTP POST 요청
     var response = await http.post(

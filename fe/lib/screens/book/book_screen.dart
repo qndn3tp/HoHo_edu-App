@@ -14,13 +14,13 @@ import 'package:flutter_application/services/book/school_report/get_is_report_cl
 import 'package:flutter_application/services/book/school_report/get_report_monthly_data.dart';
 import 'package:flutter_application/services/book/school_report/get_report_weekly_data.dart';
 import 'package:flutter_application/utils/network_check.dart';
+import 'package:flutter_application/widgets/date_format.dart';
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_application/services/book/get_monthly_book_score_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:flutter_application/widgets/dropdown_screen.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../style.dart';
 
 ////////////////////////
@@ -207,7 +207,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
           onPressed: () => goToPage(currentPageIndex - 1),
         ),
         Text(
-          DateFormat('yyyy.MM').format(DateTime(_getPageYear(), _getPageMonth())),
+          formatYM_dot(_getPageYear(), _getPageMonth()),
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),        
         IconButton(

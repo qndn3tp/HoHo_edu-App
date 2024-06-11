@@ -6,11 +6,11 @@ import 'package:flutter_application/screens/book/hanSchool_screen.dart';
 import 'package:flutter_application/screens/book/school_monthly_result.dart';
 import 'package:flutter_application/style.dart';
 import 'package:flutter_application/widgets/dashed_divider.dart';
+import 'package:flutter_application/widgets/date_format.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_application/widgets/text_span.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 /////////////
@@ -21,7 +21,7 @@ class BookReport extends StatefulWidget {
   final int month;
   final String pageDate;
 
-  BookReport({super.key, required this.year, required this.month}) : pageDate = DateFormat('yyyy년 M월').format(DateTime(year, month));
+  BookReport({super.key, required this.year, required this.month}) : pageDate = formatYMKorean(year, month);
 
   @override
   State<BookReport> createState() => _BookReportState();

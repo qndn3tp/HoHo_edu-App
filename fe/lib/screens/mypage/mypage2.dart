@@ -19,8 +19,6 @@ Widget mypage2() {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 나의 정보
-        CustomListTile(title: "나의 정보", onTap: () {}),
         // 호호에듀 더보기
         CustomListTile(
           title: "호호에듀 더보기",
@@ -40,7 +38,7 @@ Widget mypage2() {
 }
 
 
-////////////////////////////////////////////////
+
 class CustomListTile extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
@@ -64,12 +62,12 @@ class CustomListTile extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Text(
                   title,
-                  style: const TextStyle(
-                      fontFamily: "NotoSansKR-SemiBold", fontSize: 15),
+                  style: const TextStyle(fontFamily: "NotoSansKR-SemiBold", fontSize: 15),
                 ),
               ),
-              const Icon(EvaIcons.chevronRightOutline,
-                  color: CommonColors.grey4),
+              const Icon(
+                EvaIcons.chevronRightOutline,
+                color: CommonColors.grey4),
             ],
           ),
           const Divider(height: 20),

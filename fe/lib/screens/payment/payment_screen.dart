@@ -77,9 +77,9 @@ class _PaymentScreenState extends State<PaymentScreen> with SingleTickerProvider
           child: ListView.builder(
             itemCount: paymentDataController.paymentCnt,
             itemBuilder: ((context, index) {
-              final classDate = formatYM(paymentDataController.paymentDataList![index].classDate);  
+              final classDate = paymentFormatYM(paymentDataController.paymentDataList![index].classDate);  
               final subjectName = paymentDataController.paymentDataList![index].subjectName;           
-              final paymentDate = formatYMD(paymentDataController.paymentDataList![index].paymentDate);
+              final paymentDate = paymentFormatYMD(paymentDataController.paymentDataList![index].paymentDate);
               final totalAmount = NumberFormat('#,###').format(paymentDataController.paymentDataList![index].totalAmount);
 
               // 결제여부 
@@ -90,7 +90,7 @@ class _PaymentScreenState extends State<PaymentScreen> with SingleTickerProvider
 
               // 현금영수증(현금 결제 여부)
               final bool isValidCashRecipts = setValidPaymentMethod(paymentDataController.paymentDataList![index]).contains("현금결제");
-              final cashReceiptsDate = formatYMD(paymentDataController.paymentDataList![index].cashReceiptsDate);
+              final cashReceiptsDate = paymentFormatYMD(paymentDataController.paymentDataList![index].cashReceiptsDate);
 
               // 결제 내용
               return Container(
@@ -174,7 +174,7 @@ Widget horiozontalDivider(){
 }
 
 // 연월 포맷팅
-String formatYM(String date) {
+String paymentFormatYM(String date) {
   final year = date.substring(0, 4);
   final month = date.substring(5, 7);
   String formattedDate = "$year년 $month월";
@@ -182,7 +182,7 @@ String formatYM(String date) {
 }
 
 // 연월일 포맷팅
-String formatYMD(String date) {
+String  paymentFormatYMD(String date) {
   if (date == "") {
     return "-";
   }

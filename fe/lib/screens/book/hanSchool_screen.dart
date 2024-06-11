@@ -3,12 +3,12 @@ import 'package:flutter_application/models/book_data/report_weekly_data.dart';
 import 'package:flutter_application/screens/book/school_monthly_result.dart';
 import 'package:flutter_application/style.dart';
 import 'package:flutter_application/widgets/dashed_divider.dart';
+import 'package:flutter_application/widgets/date_format.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_application/widgets/imagebox_decoration.dart';
 import 'package:flutter_application/widgets/text_span.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 ///////////
@@ -19,8 +19,7 @@ class HanReport extends StatefulWidget {
   final int month;
   final String pageDate;
 
-  HanReport({super.key, required this.year, required this.month})
-      : pageDate = DateFormat('yyyy년 M월').format(DateTime(year, month));
+  HanReport({super.key, required this.year, required this.month}): pageDate = formatYMKorean(year, month);
 
   @override
   State<HanReport> createState() => _HanReportState();

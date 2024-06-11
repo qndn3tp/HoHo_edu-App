@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:flutter_application/utils/network_check.dart';
+import 'package:flutter_application/widgets/date_format.dart';
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application/models/login_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_application/models/notice_data/notice_data.dart';
 
 //////////////////
@@ -26,8 +26,7 @@ Future<void> getNoticeData(noticeNum) async {
     // 로그인 아이디
     String id = loginDataController.loginData!.id;
     // 현재 연도
-    String yy = DateFormat('yyyy').format(DateTime(currentYear));
-    String mm = DateFormat('MM').format(DateTime(currentYear, currentMonth));
+    String ym = formatYM(currentYear, currentMonth);
     // 알림 구분 번호
     String noticeNum0 = noticeNum;
     // 형제자매 코드
@@ -38,8 +37,7 @@ Future<void> getNoticeData(noticeNum) async {
       Uri.parse(url), 
       body: {
         'sibling': sibling,
-        'yy': yy,
-        'mm': mm,
+        'ym': ym,
         'stuid': id,
         'noticeNum': noticeNum0,
       }

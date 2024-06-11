@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/book_data/monthly_book_title_data.dart';
+import 'package:flutter_application/widgets/date_format.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_application/widgets/imagebox_decoration.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_application/widgets/text_span.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../style.dart';
 
 /////////////////////////////////
@@ -17,7 +17,7 @@ class BookResult1 extends StatefulWidget {
   final int month;
   final String pageDate;
 
-  BookResult1({super.key, required this.year, required this.month}) : pageDate = DateFormat('yyyy년 M월').format(DateTime(year, month));
+  BookResult1({super.key, required this.year, required this.month}) : pageDate = formatYMKorean(year, month);
 
   @override
   State<BookResult1> createState() => _BookResult1State();

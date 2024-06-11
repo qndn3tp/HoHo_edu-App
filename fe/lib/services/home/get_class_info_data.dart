@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:flutter_application/models/class_info_data.dart';
 import 'package:flutter_application/utils/network_check.dart';
+import 'package:flutter_application/widgets/date_format.dart';
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application/models/login_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 ////////////////////////
 //  수업 정보, 형제   //
@@ -24,9 +24,10 @@ Future<void> getClassInfoData() async {
 
     // 형제자매 코드
     String sibling = loginDataController.loginData!.sibling;
+
     // 현재 연도
-    String yy = DateFormat('yyyy').format(DateTime(currentYear));
-    String mm = DateFormat('MM').format(DateTime(currentYear, currentMonth));
+    String ym = formatYM(currentYear, currentMonth);
+    
     // 로그인 아이디
     String stuId = loginDataController.loginData!.id;
 
@@ -35,8 +36,7 @@ Future<void> getClassInfoData() async {
       Uri.parse(url), 
       body: {
         'sibling': sibling, 
-        'yy': yy,
-        'mm': mm,
+        'ym': ym,
         'stuid': stuId,
       }
     );
