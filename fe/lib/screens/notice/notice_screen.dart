@@ -112,7 +112,6 @@ class TabPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ListView.builder(
       itemCount: noticeDataController.noticeDataList?.length ?? 0,
       itemBuilder: (context, index) {

@@ -5,16 +5,16 @@ import 'package:flutter_application/screens/Notice/Notice_list_tile.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:get/get.dart';
 
-//////////////////////////
-// 공지, 수업 상세페이지 //
-//////////////////////////
+/////////////////////
+// 수업 상세페이지 //
+////////////////////
 
-class NoticeDetail extends StatelessWidget {
+class ClassDetailScreen_ extends StatelessWidget {
   final int index; 
   final NoticeDataController noticeDataController = Get.put(NoticeDataController());
   final ClassNoticeDataController classNoticeDataController = Get.put(ClassNoticeDataController());
 
-  NoticeDetail({super.key, required this.index});
+  ClassDetailScreen_({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {

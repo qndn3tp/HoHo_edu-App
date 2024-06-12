@@ -15,6 +15,7 @@ class NoticeData {
   final String sTime;
   final String subjectGb;
   final String stuId2;
+  final int idx;
 
   NoticeData({
     required this.title,
@@ -26,6 +27,7 @@ class NoticeData {
     required this.sTime,
     required this.subjectGb,
     required this.stuId2,
+    required this.idx,
   });
 
   factory NoticeData.fromJson(Map<String, dynamic> json) {
@@ -39,6 +41,7 @@ class NoticeData {
       sTime: json['stime'] ?? "",
       subjectGb: json['sgb'] ?? "",
       stuId2: json['stuid2'] ?? "",
+      idx: json['idx'] ?? 0,
     );
   }
 }

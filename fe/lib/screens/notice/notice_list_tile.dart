@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/notice_data/notice_data.dart';
-import 'package:flutter_application/screens/Notice/notice_detail_screen.dart';
 import 'package:flutter_application/screens/attendance/attendance_screen.dart';
 import 'package:flutter_application/screens/book/book_screen.dart';
 import 'package:flutter_application/screens/home/home_screen.dart';
+import 'package:flutter_application/screens/notice/class_detail_screen.dart';
+import 'package:flutter_application/screens/notice/official_detail_screen.dart';
 import 'package:flutter_application/screens/payment/payment_screen.dart';
 import 'package:flutter_application/services/notice/get_class_notice_data.dart';
+import 'package:flutter_application/services/notice/get_official_notice_data.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_application/style.dart';
 import 'package:get/get.dart';
@@ -51,9 +53,11 @@ Widget noticeListTile(index) {
       Widget page;
       switch (noticeNum) {
         case 0:
+          await getOfficialNoticeData(index);
+          page = OfficialDetailScreen_(index: index);
         case 1:
           await getClassNoticeData(index);
-          page = NoticeDetail(index: index);
+          page = ClassDetailScreen_(index: index);
           break;
         case 2:
           page = AttendanceScreen();
