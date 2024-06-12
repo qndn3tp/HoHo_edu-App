@@ -24,12 +24,16 @@ Future<void> getYMBookReadCountData(year, month) async {
     String url = dotenv.get("BOOK_READ_YM_CNT_URL");
 
     // 학생 아이디
-    final stuId = studentIdController.id.value;
+    final stuId = studentIdController.getStuId();
+    // final stuId = studentIdController.getStuId();
 
     // 해당 페이지 연월
     final currrentPageYear = year;
     final currentPageMonth = month;
     String yy = formatY(currrentPageYear, currentPageMonth);
+
+    print('stuid:$stuId');
+    
 
     // HTTP POST 요청
     var response = await http.post(

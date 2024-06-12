@@ -23,7 +23,7 @@ Future<void> getIsReportClassExist(year, month) async {
     String url = dotenv.get('REPORT_CLASS_YN_URL');
 
     // 학생 아이디
-    final stuId = studentIdController.id.value;
+    final stuId = studentIdController.getStuId();
 
     // 해당 페이지 연월
     final currrentPageYear = year;

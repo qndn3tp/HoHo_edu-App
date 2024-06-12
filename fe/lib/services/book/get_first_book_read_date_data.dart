@@ -23,7 +23,7 @@ Future<void> getFirstBookReadDateData() async {
     String url = dotenv.get('BOOK_READ_FIRST_DATE_URL');
     
     // 학생 아이디
-    final stuId = studentIdController.id.value;
+    final stuId = studentIdController.getStuId();
 
     // HTTP POST 요청
     var response = await http.post(

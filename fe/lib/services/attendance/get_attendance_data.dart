@@ -25,7 +25,7 @@ Future<void> getAttendanceData(month) async {
     String url = dotenv.get('TIME_CHECK_URL');
     
     // 학생 아이디
-    final stuId = studentIdController.id.value;
+    final stuId = studentIdController.getStuId();
 
     // 현재 연도
     final currentPageMonth = month;

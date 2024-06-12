@@ -22,7 +22,7 @@ Future<void> getPaymentData() async {
     String url = dotenv.get('PAYMENT_RESULT_URL');
 
     // 학생 아이디
-    final stuId = studentIdController.id.value;
+    final stuId = studentIdController.getStuId();
 
     // 현재년도
     final currrentYear = getCurrentYear().toString();
@@ -61,7 +61,6 @@ Future<void> getPaymentData() async {
     }
     // 응답을 받지 못했을 때
     catch (e) {
-      throw Exception('$e');
     }
   } else {
     failDialog1("연결 실패", "인터넷 연결을 확인해주세요");

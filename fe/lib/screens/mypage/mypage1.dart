@@ -93,7 +93,7 @@ Widget mypage1() {
             }
           ),
         ),
-        const SizedBox(height: 20)
+        const SizedBox(height: 10)
       ],
     ),
   );

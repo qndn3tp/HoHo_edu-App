@@ -13,15 +13,11 @@ class StudentIdController extends GetxController {
 
   RxString id = "".obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    setStuId();
-  }
-
-  setStuId() {
+  getStuId() {
     final nameIdMap = classInfoDataController.getNameId(classInfoDataController.classInfoDataList); // 이름: 아이디
     final dropDownId = dropdownButtonController.currentItem.value;                                  // 드롭다운 선택된 이름
     id.value = nameIdMap[dropDownId] ?? loginDataController.loginData!.id;
+
+    return id.value;
   }
 }
