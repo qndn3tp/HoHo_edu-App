@@ -16,7 +16,7 @@ class ClassInfoData {
   final String etime;
   final String dateName;
   final String startYM;
-
+  final String lastYM;
   
   ClassInfoData ({
     required this.stuId,
@@ -29,6 +29,7 @@ class ClassInfoData {
     required this.etime,
     required this.dateName,
     required this.startYM,
+    required this.lastYM,
   });
 
   factory ClassInfoData.fromJson(Map<String, dynamic> json) {
@@ -43,6 +44,7 @@ class ClassInfoData {
       etime: json['etime'] ?? "",
       dateName: json['DATENAME'] ?? "",
       startYM: json['sym'] ?? "",
+      lastYM: json['lastym'] ?? "",
     );
   }
 }
@@ -100,11 +102,12 @@ class ClassInfoDataController extends GetxController {
       String subjectSTime = data.stime;
       String subjectETime = data.etime;
       String subjectDateName = data.dateName;
+      String lastYM = data.lastYM;
       
       if (!subjectMap.containsKey(studentName)) {
-        subjectMap[studentName] = [[subjectName, subjectNumber, subjectSTime, subjectETime, subjectDateName]];
+        subjectMap[studentName] = [[subjectName, subjectNumber, subjectSTime, subjectETime, subjectDateName, lastYM]];
       } else {
-        subjectMap[studentName]!.add([subjectName, subjectNumber, subjectSTime, subjectETime, subjectDateName]);
+        subjectMap[studentName]!.add([subjectName, subjectNumber, subjectSTime, subjectETime, subjectDateName, lastYM]);
       }
     }
     return subjectMap;

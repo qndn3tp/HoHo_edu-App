@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'package:flutter_application/models/class_info_data.dart';
 import 'package:flutter_application/utils/network_check.dart';
-import 'package:flutter_application/widgets/date_format.dart';
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application/models/login_data.dart';
-import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:get/get.dart';
 
 ////////////////////////
@@ -24,9 +22,6 @@ Future<void> getClassInfoData() async {
 
     // 형제자매 코드
     String sibling = loginDataController.loginData!.sibling;
-
-    // 현재 연도
-    String ym = formatYM(currentYear, currentMonth);
     
     // 로그인 아이디
     String stuId = loginDataController.loginData!.id;
@@ -36,7 +31,6 @@ Future<void> getClassInfoData() async {
       Uri.parse(url), 
       body: {
         'sibling': sibling, 
-        'ym': ym,
         'stuid': stuId,
       }
     );
@@ -50,6 +44,7 @@ Future<void> getClassInfoData() async {
       // 응답을 성공적으로 받았을 때
       if (response.statusCode == 200) {
         final resultList = json.decode(response.body);
+        print(resultList);
 
         // 응답 데이터가 성공일 때
         if (resultList[0]["result"] == null) {
