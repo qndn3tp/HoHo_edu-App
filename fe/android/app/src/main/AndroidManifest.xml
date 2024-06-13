@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
-        android:label="flutter_application"
+        android:label="호호서당 i-위드"
         android:name="${applicationName}"
         android:icon="@mipmap/app_icon">
         <activity
