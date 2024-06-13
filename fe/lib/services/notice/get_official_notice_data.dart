@@ -40,8 +40,8 @@ Future<void> getOfficialNoticeData(index) async {
         // 응답 데이터가 성공일 때
         if (resultList[0]["result"] == null) {
           OfficialNoticeData officialNoticeData = OfficialNoticeData.fromJson(resultList[0]);
-          final OfficialDataController officialDataController = Get.put(OfficialDataController());
-          officialDataController.setOfficialNoticeData(officialNoticeData);
+          final OfficialNoticeDataController officialNoticeDataController = Get.put(OfficialNoticeDataController());
+          officialNoticeDataController.setOfficialNoticeData(officialNoticeData);
         }
         else {
         }

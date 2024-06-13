@@ -32,9 +32,6 @@ Future<void> getYMBookReadCountData(year, month) async {
     final currentPageMonth = month;
     String yy = formatY(currrentPageYear, currentPageMonth);
 
-    print('stuid:$stuId');
-    
-
     // HTTP POST 요청
     var response = await http.post(
       Uri.parse(url), 

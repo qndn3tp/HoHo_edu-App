@@ -32,7 +32,7 @@ class OfficialNoticeData {
 }
 
 // 데이터 컨트롤러
-class OfficialDataController extends GetxController {
+class OfficialNoticeDataController extends GetxController {
   OfficialNoticeData? _officialNoticeData;
 
   void setOfficialNoticeData(OfficialNoticeData officialNoticeData) {

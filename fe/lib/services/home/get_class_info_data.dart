@@ -44,7 +44,6 @@ Future<void> getClassInfoData() async {
       // 응답을 성공적으로 받았을 때
       if (response.statusCode == 200) {
         final resultList = json.decode(response.body);
-        print(resultList);
 
         // 응답 데이터가 성공일 때
         if (resultList[0]["result"] == null) {

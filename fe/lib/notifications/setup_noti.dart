@@ -6,7 +6,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 ///////////////////
 
 Future<void> setupNotification({isFlutterLocalNotificationsInitialized}) async {
-  print("@@@@@@셋업@@@@@@");
 
   // iOS: 포그라운드 메시지 프레젠테이션 옵션 업데이트
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(

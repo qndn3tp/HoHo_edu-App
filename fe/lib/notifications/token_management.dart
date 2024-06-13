@@ -30,16 +30,10 @@ Future<void> sendToken(token) async {
   };
 
   try {
-    var response = await http.post(
+    await http.post(
       Uri.parse(url), 
       body: data
     );
-    if (response.statusCode == 200) {
-      print('데이터가 성공적으로 전송되었습니다.');
-    } else {
-      print('데이터 전송에 실패했습니다. 상태 코드: ${response.statusCode}');
-    }
   } catch (e) {
-    print('오류 발생: $e');
   }
 }

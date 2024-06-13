@@ -9,7 +9,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  print("백그라운드 수신 ${message.data}");
     
   // 저장된 개별 알림 정보 로드
   await loadButtonCheckedInfo();
