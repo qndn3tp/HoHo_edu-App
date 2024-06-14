@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/notifications/request_noti.dart';
 import 'package:flutter_application/screens/mypage/setting/notification_info_box.dart';
+import 'package:flutter_application/services/mypage/get_is_paymentnotice_exist_.dart';
 import 'package:flutter_application/utils/load_noti_list_info.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:get/get.dart';
@@ -14,16 +15,33 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // 알림 토글 버튼 컨트롤러
 class SwitchButtonController extends GetxController {
+  final isPaymentNoticeExistController = Get.put(IsPaymentNoticeExistController());
+  late List<String> buttonNameList;
+  late RxList<bool> buttonCheckedList;
+
+  @override
+  void onInit() {
+    super.onInit();
+    final isPaymentNoticeExist = isPaymentNoticeExistController.isPaymentNoticeExist.value;
+    buttonNameList = isPaymentNoticeExist ? buttonNameList1 : buttonNameList2;
+    buttonCheckedList = List.filled(buttonNameList.length, false).obs;
+  }
+
   // 토글 버튼의 이름 리스트
-  final List<String> buttonNameList = [
+  final List<String> buttonNameList1 = [
     "공지 알림",
     "수업 알림",
     "출석 알림",
+    "독클 알림",
     "결제 알림",
+
+  ];
+  final List<String> buttonNameList2 = [
+    "공지 알림",
+    "수업 알림",
+    "출석 알림",
     "독클 알림",
   ];
-  // 토글 버튼의 상태 리스트
-  final List<bool> buttonCheckedList = List.filled(5, false).obs;
 
   // 알림 정보를 기기의 로컬저장소에 저장
   Future<void> storeButtonCheckedInfo(int index) async {
@@ -33,6 +51,7 @@ class SwitchButtonController extends GetxController {
 
   int get buttonCount => buttonNameList.length;
 }
+
 
 class SettingNotification extends StatefulWidget {
   const SettingNotification({super.key});

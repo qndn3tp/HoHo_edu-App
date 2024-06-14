@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/mypage/setting/setting_notification.dart';
 import 'package:flutter_application/screens/mypage/setting/setting_screen_mode.dart';
+import 'package:flutter_application/services/mypage/get_is_paymentnotice_exist_.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:get/get.dart';
 
@@ -34,6 +35,9 @@ Widget settingListTitle(title, screen) {
   return ListTile(
     tileColor: Theme.of(Get.context!).colorScheme.surface,
     title: Text(title),
-    onTap: (){Get.to(screen);},
+    onTap: () async{
+      title == "알림" ? await getIsPaymentNoticeExist() : null;
+      Get.to(screen);
+    },
   );
 }

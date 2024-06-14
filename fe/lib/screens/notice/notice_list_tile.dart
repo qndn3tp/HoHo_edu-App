@@ -20,15 +20,16 @@ List<Color> lightNoticeColorList = [
   CommonColors.grey3,           // 공지
   LightColors.blue,             // 수업
   LightColors.green,            // 출석
-  LightColors.orange,           // 결제
   LightColors.purple,           // 독클
+  LightColors.orange,           // 결제
+
 ];
 List<Color> darkNoticeColorList = [
   CommonColors.grey2,
   DarkColors.blue,
   DarkColors.green,
-  DarkColors.orange,
   DarkColors.purple,
+  DarkColors.orange,
 ];
 
 // 알림 이미지
@@ -36,8 +37,8 @@ List<Image> noticeImageList = [
   Image.asset('assets/images/notice_official.png'),    // 공지
   Image.asset('assets/images/class.png'),              // 수업
   Image.asset('assets/images/attendance.png'),         // 출석
-  Image.asset('assets/images/payment.png'),            // 결제
   Image.asset('assets/images/book.png'),               // 독클
+  Image.asset('assets/images/payment.png'),            // 결제
 ];
 
 // 알림 리스트
@@ -62,10 +63,10 @@ Widget noticeListTile(index) {
           page = AttendanceScreen();
           break;
         case 3:
-          page = PaymentDropdownScreen();
+          page = BookScreen();
           break;
         case 4:
-          page = BookScreen();
+          page = PaymentDropdownScreen();
           break;
         default:
           page = const HomeScreen();

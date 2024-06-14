@@ -24,7 +24,7 @@ class _NoticeScreenState extends State<NoticeScreen> {
   // TabBar 인덱스
   int current = 0;
   // TabBar Tabs
-  final List<String> tabs = ["공지", "수업", "출석", "결제", "독클"];
+  final List<String> tabs = ["공지", "수업", "출석", "독클", "결제"];
 
   @override
   Widget build(BuildContext context) {
