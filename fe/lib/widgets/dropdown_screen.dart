@@ -33,7 +33,9 @@ class DropDownScreen extends GetView<DropdownButtonController> {
       appBar: customAppBar(title),
       body: Column(
         children: [
+          // 드롭다운 박스(이름)
           dropDownBox(),
+          // 각 드롭다운에 해당하는 화면
           Expanded(
             child: Obx(() {
               if (controller.currentItem.value != null) {

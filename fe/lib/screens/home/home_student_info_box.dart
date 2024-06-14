@@ -6,16 +6,16 @@ import 'package:flutter_application/widgets/date_format.dart';
 import 'package:get/get.dart';
 import '../../style.dart';
 
-///////////////////////////////////////////
-// 학생 정보 박스(센터명, 이름, 수강정보) //
-///////////////////////////////////////////
+///////////////////////
+// 학생 수업정보 박스 //
+///////////////////////
 
 Widget studentInfoBox(name) {
   final screenSize = MediaQuery.of(Get.context!).size;
 
   // 컨트롤러 
-  final loginDataController = Get.put(LoginDataController());           // 유저의 로그인 데이터
-  final classInfoDataController = Get.put(ClassInfoDataController());   //수업 정보
+  final loginDataController = Get.put(LoginDataController());           
+  final classInfoDataController = Get.put(ClassInfoDataController());   
   
   // 이름:[수업정보]를 가지는 map
   final nameSubjectMap = classInfoDataController.getSubjectMap(classInfoDataController.classInfoDataList);

@@ -26,7 +26,6 @@ class DropDownButtonWidget extends GetView<DropdownButtonController> {
         onChanged: (int? index) {
           controller.changeDropDownMenu(index);
         },
-        
         items: controller.nameList.value.map<DropdownMenuItem<int>>(
           (String menuName) {
             return DropdownMenuItem<int>(

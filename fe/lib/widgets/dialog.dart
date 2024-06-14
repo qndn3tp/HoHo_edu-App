@@ -2,6 +2,10 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+/////////////////
+// 커스텀 알림 //
+////////////////
+
 // 실패 알림 (설명O)
 Future<dynamic> failDialog1(failTitle, failDescription) {
   return AwesomeDialog(

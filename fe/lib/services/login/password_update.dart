@@ -9,17 +9,17 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:get/get.dart';
 
-///////////////////
-//  출석 데이터  //
-///////////////////
+/////////////////////
+// 비밀번호 재설정 //
+////////////////////
 
-// 출석 데이터 가져오는 함수
+// 비밀번호 재설정 함수
 Future<void> passwordUpdate() async {
 
   // 컨트롤러
   final loginController = Get.put(LoginController());  
   final setPasswordController = Get.put(SetPasswordController());
-  final connectivityController = Get.put(ConnectivityController());    // 네트워크 연결체크
+  final connectivityController = Get.put(ConnectivityController()); 
   final loginDataController = Get.put(LoginDataController());
 
   if (connectivityController.isConnected.value) {
@@ -43,8 +43,7 @@ Future<void> passwordUpdate() async {
       }
     );
 
-    if (response.headers['content-type']
-    ?.toLowerCase().contains('charset=utf-8') != true) {
+    if (response.headers['content-type']?.toLowerCase().contains('charset=utf-8') != true) {
       response.headers['content-type'] = 'application/json; charset=utf-8';
     }
     try {
@@ -62,6 +61,7 @@ Future<void> passwordUpdate() async {
       }
     }
     catch (e) {
+      null;
     }
   } else {
     failDialog1("연결 실패", "인터넷 연결을 확인해주세요");

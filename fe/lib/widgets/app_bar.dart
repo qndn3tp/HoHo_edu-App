@@ -46,11 +46,11 @@ PreferredSizeWidget homeAppBar(screenSize) {
     actions: [
       IconButton(
         onPressed: (){
-          Get.to(const MyPage());
+          Get.to(const MyPageScreen());
         }, 
         icon: const Icon(Icons.account_circle, size: 30, color: CommonColors.grey4,)
       )],
-    backgroundColor: const Color(0xfffffde3),
+    backgroundColor: CommonColors.backgroundYellow,
     elevation: 0,
     centerTitle: false,
   );

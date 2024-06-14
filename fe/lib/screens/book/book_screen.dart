@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/constants.dart';
 import 'package:flutter_application/models/book_data/first_book_read_date_data.dart';
 import 'package:flutter_application/models/book_data/is_report_class_exist_data.dart';
 import 'package:flutter_application/screens/book/book_result1.dart';
@@ -23,9 +24,9 @@ import 'package:flutter_application/widgets/dropdown_screen.dart';
 import 'package:get/get.dart';
 import '../../style.dart';
 
-////////////////////////
-//    독클결과 화면    //
-////////////////////////
+////////////////////
+//  독클결과 화면 //
+///////////////////
 
 // 드롭다운 화면
 class BookScreen extends DropDownScreen {
@@ -83,7 +84,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
   // 현재 페이지 인덱스
   late int currentPageIndex;    
   // 페이지 이동을 위한 변수
-  late var currentPage;
+  late int currentPage;
 
   @override
   void initState() {
@@ -188,9 +189,11 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
       }
       _pageController.animateToPage(
         currentPage,
-        duration: const Duration(milliseconds: 500),
+        duration: transitionDuration,
         curve: Curves.easeInOut,
       );
+    } else if (newPage >= currentMonth){
+      failDialog2("다음 달을 기다려주세요 :)");
     }
   }
 

@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 /////////////////
 // 리스트 타일 //
 ////////////////
+
 Widget mypage2() {
   final screenSize = MediaQuery.of(Get.context!).size;
 
@@ -15,23 +16,22 @@ Widget mypage2() {
     height: screenSize.height * 0.4,
     width: double.infinity,
     padding: const EdgeInsets.all(20),
-    // 리스트 타일
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // 호호에듀 더보기
         CustomListTile(
           title: "호호에듀 더보기",
           onTap: () {
-            Get.to(AboutHohoeduScreen());
-          }),
+            Get.to(const AboutHohoeduScreen());
+          }
+        ),
         // 설정
         CustomListTile(
           title: "설정",
           onTap: () {
             Get.to(const SettingScreen());
-          }),
-        const Expanded(child: Text("")),
+          }
+        ),
       ],
     ),
   );

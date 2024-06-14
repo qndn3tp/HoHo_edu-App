@@ -41,7 +41,7 @@ class SetPasswordController extends GetxController {
 // 비밀번호 확인 컨트롤러
 class CheckPasswordController extends GetxController {
   final setPasswordController = Get.put(SetPasswordController());
-  final TextEditingController newPasswordCheckController = TextEditingController();
+  final newPasswordCheckController = TextEditingController();
 
   RxBool isSame = false.obs;
 
@@ -75,7 +75,6 @@ class ShowExplainTextController extends GetxController {
     isExplainShow.value = value;
   }
 }
-
 
 class SetPasswordScreen extends StatelessWidget {
   const SetPasswordScreen({super.key});
@@ -241,35 +240,33 @@ Widget setPasswordButton() {
         passwordUpdate(); // 비밀번호 변경
       }
     },
-    child: Center(
-      child: Container(
-        height: 50,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [
-                Color.fromARGB(255, 145, 154, 255),
-                Color.fromARGB(255, 46, 57, 251),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black.withOpacity(.3),
-                  spreadRadius: 1,
-                  blurRadius: 2,
-                  offset: const Offset(0, 1))
-            ]),
+    child: Container(
+      height: 50,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [
+              Color.fromARGB(255, 145, 154, 255),
+              Color.fromARGB(255, 46, 57, 251),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(.3),
+              spreadRadius: 1,
+              blurRadius: 2,
+              offset: const Offset(0, 1))
+          ]),
         child: const Center(
           child: Text(
             "변경하기",
             style: TextStyle(
-                fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white),
+              fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
       ),
-    ),
   );
 }

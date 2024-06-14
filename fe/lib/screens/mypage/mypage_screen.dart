@@ -4,8 +4,8 @@ import 'package:flutter_application/screens/mypage/mypage2.dart';
 import 'package:flutter_application/screens/mypage/mypage3.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 
-class MyPage extends StatelessWidget {
-  const MyPage({super.key});
+class MyPageScreen extends StatelessWidget {
+  const MyPageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

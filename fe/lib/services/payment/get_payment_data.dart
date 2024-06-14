@@ -36,9 +36,7 @@ Future<void> getPaymentData() async {
       }
     );
 
-    if (response.headers['content-type']
-    ?.toLowerCase()
-    .contains('charset=utf-8') != true) {
+    if (response.headers['content-type']?.toLowerCase().contains('charset=utf-8') != true) {
       response.headers['content-type'] = 'application/json; charset=utf-8';
     }
     try {
@@ -61,6 +59,7 @@ Future<void> getPaymentData() async {
     }
     // 응답을 받지 못했을 때
     catch (e) {
+      null;
     }
   } else {
     failDialog1("연결 실패", "인터넷 연결을 확인해주세요");

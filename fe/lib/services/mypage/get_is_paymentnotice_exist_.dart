@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 // 결제 알림 사용 여부 //
 ////////////////////////
 
+// 결제 알림 사용 컨트롤러 
 class IsPaymentNoticeExistController extends GetxController {
   RxBool isPaymentNoticeExist = false.obs;
 
@@ -34,8 +35,7 @@ Future<void> getIsPaymentNoticeExist() async {
     );
 
     // 응답의 content-type utf-8로 인코딩으로 설정
-    if (response.headers['content-type']
-    ?.toLowerCase().contains('charset=utf-8') != true) {
+    if (response.headers['content-type']?.toLowerCase().contains('charset=utf-8') != true) {
       response.headers['content-type'] = 'application/json; charset=utf-8';
     }
     try {

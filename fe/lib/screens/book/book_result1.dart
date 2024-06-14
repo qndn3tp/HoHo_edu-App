@@ -13,11 +13,11 @@ import '../../style.dart';
 /////////////////////////////////
 
 class BookResult1 extends StatefulWidget {
+  BookResult1({super.key, required this.year, required this.month}) : pageDate = formatYMKorean(year, month);
+
   final int year;
   final int month;
   final String pageDate;
-
-  BookResult1({super.key, required this.year, required this.month}) : pageDate = formatYMKorean(year, month);
 
   @override
   State<BookResult1> createState() => _BookResult1State();
@@ -59,7 +59,7 @@ class _BookResult1State extends State<BookResult1> {
               ]),
           ),
         ),
-        // 독서클리닉 목록(책 제목 리스트)
+        // 독클 목록(책 제목)
         ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),

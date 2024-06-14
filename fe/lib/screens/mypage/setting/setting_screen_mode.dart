@@ -3,10 +3,10 @@ import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:get/get.dart';
 
-
 ////////////////////
 /// 화면 모드 설정 //
 ////////////////////
+
 class SettingNotificationMode extends StatelessWidget {
   SettingNotificationMode({super.key});
   

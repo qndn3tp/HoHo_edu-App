@@ -22,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // 컨트롤러
-  final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController()); // 수업 정보 
+  final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController()); 
   final readNotiController = Get.put(ReadNotiController());   // 푸시 알림 확인 여부
   final themeController = Get.put(ThemeController());
 

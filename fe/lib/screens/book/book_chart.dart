@@ -18,7 +18,7 @@ class BookChart extends StatefulWidget {
 
 class _BookChartState extends State<BookChart> {
   // 컨트롤러
-  YMBookCountDataController ymBookCountDataController = Get.put(YMBookCountDataController());
+  final ymBookCountDataController = Get.put(YMBookCountDataController());
   final themeController = Get.put(ThemeController());
 
   // 색상값
@@ -40,7 +40,6 @@ class _BookChartState extends State<BookChart> {
     const Color(0xfffa963c)
   ];
 
-
   // 평균값
   bool showAvg = false;
 
@@ -50,8 +49,8 @@ class _BookChartState extends State<BookChart> {
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
-            color: themeController.isLightTheme.value ? const Color(0xfffefefa) : const Color(0xff5a5a5a), // 배경색
-            borderRadius: BorderRadius.circular(15), // border-radius: 15%;
+            color: themeController.isLightTheme.value ? const Color(0xfffefefa) : const Color(0xff5a5a5a), 
+            borderRadius: BorderRadius.circular(15),
             boxShadow: [
               BoxShadow(
                 color: themeController.isLightTheme.value ? const Color(0xffE7E7DD) : const Color(0xff343333),

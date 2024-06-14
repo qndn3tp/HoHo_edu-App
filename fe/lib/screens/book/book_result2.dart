@@ -20,13 +20,12 @@ class BookResult2 extends StatefulWidget {
 
 class _BookResult2State extends State<BookResult2> {
   // 컨트롤러
-  BookScoreDataController bookScoreDataController = Get.put(BookScoreDataController());
+  final bookScoreDataController = Get.put(BookScoreDataController());
   final themeController = Get.put(ThemeController());
-
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     final pageHeight = screenSize.height - 200;
     final pointTextColor = themeController.isLightTheme.value ? LightColors.orange : DarkColors.orange;
 
@@ -46,9 +45,7 @@ class _BookResult2State extends State<BookResult2> {
               ]
             )
           ),
-          SizedBox(
-            height: pageHeight * 0.1, 
-            child: RichText(text: normalText("풍부해졌어요"))),
+          RichText(text: normalText("풍부해졌어요")),
           // 이미지
           Container(
             height: pageHeight * 0.35, 

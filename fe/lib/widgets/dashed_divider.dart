@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/style.dart';
 
+/////////////////
+// 점선 구분선 //
+////////////////
+
 // 점선 수직 구분선
 class DashedVerticalDivider extends StatelessWidget {
   const DashedVerticalDivider({super.key});

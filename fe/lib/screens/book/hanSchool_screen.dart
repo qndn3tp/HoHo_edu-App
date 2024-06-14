@@ -11,15 +11,16 @@ import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+////////////
+// 한스쿨 //
 ///////////
-//한스쿨//
-//////////
+
 class HanReport extends StatefulWidget {
+  HanReport({super.key, required this.year, required this.month}): pageDate = formatYMKorean(year, month);
+
   final int year;
   final int month;
   final String pageDate;
-
-  HanReport({super.key, required this.year, required this.month}): pageDate = formatYMKorean(year, month);
 
   @override
   State<HanReport> createState() => _HanReportState();

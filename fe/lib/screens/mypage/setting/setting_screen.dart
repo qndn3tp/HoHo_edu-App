@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 ///////////////
 // 설정 화면 //
 ///////////////
+
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
 

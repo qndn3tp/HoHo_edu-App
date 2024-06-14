@@ -18,7 +18,8 @@ class LoginController extends GetxController {
 // 비밀번호 숨김 컨트롤러
 class  PasswordVisibleController extends GetxController {
   var passwordVisible = false.obs;
-    void switchPasswordVisibility() {
+
+  void switchPasswordVisibility() {
     passwordVisible.value = !passwordVisible.value;
   }
 }
@@ -97,13 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Column(
               children: [
                 Text("아이디/비밀번호 분실 시 직원에게 문의해주세요.", style: detailTextStyle,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("고객센터: ", style: detailTextStyle),
-                    phoneNumberText(),
-                  ],
-                ),
+                phoneNumberText(),
               ],
             )
           ],

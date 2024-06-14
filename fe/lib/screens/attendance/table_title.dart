@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../style.dart';
-///////////////////////////
-//    출석 테이블 제목    //
-///////////////////////////
+
+//////////////////////
+// 출석 테이블 제목 //
+/////////////////////
 
 Widget tableTitle() {
   final Size screenSize = MediaQuery.of(Get.context!).size;

@@ -13,9 +13,10 @@ import 'package:get/get.dart';
 
 // 수업정보 가져오는 함수
 Future<void> getClassInfoData() async {
+  
   // 컨트롤러
-  final LoginDataController loginDataController = Get.put(LoginDataController()); // 유저의 로그인 데이터 컨트롤러
-  final ConnectivityController connectivityController = Get.put(ConnectivityController());        // 네트워크 연결체크
+  final LoginDataController loginDataController = Get.put(LoginDataController()); 
+  final ConnectivityController connectivityController = Get.put(ConnectivityController());        
 
   if (connectivityController.isConnected.value) {
     String url = dotenv.get('CLASS_INFO_URL');
@@ -36,8 +37,7 @@ Future<void> getClassInfoData() async {
     );
 
     // 응답의 content-type utf-8로 인코딩으로 설정
-    if (response.headers['content-type']
-    ?.toLowerCase().contains('charset=utf-8') != true) {
+    if (response.headers['content-type']?.toLowerCase().contains('charset=utf-8') != true) {
       response.headers['content-type'] = 'application/json; charset=utf-8';
     }
     try {

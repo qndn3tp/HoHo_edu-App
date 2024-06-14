@@ -8,11 +8,16 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
+/////////////////
+// 자동 로그인 //
+/////////////////
+
+
 // 기기에 저장된 유저 정보 컨트롤러
 class CheckStoredUserInfoController extends GetxController {
   AutoLoginCheckController autoLoginCheckController = Get.put(AutoLoginCheckController());
 
-  final storage = Get.put(const FlutterSecureStorage()); 
+  final storage = Get.put(const FlutterSecureStorage());  // 기기의 보안 저장소
 
   late String storedUserId;
   late String storedUserPassword;
@@ -24,7 +29,6 @@ class CheckStoredUserInfoController extends GetxController {
     if (userInfo != null) {
       storedUserId = userInfo.split(" ")[1]; 
       storedUserPassword = userInfo.split(" ")[3]; 
-      
       autoLoginCheckController.isChecked.value = true;
       return true;
     }
@@ -38,7 +42,9 @@ Future<Widget> checkAndPerformAutoLogin() async {
   final checkStoredUserInfoController = Get.put(CheckStoredUserInfoController());
   final connectivityController = Get.put(ConnectivityController());
 
+  // 기기에 저장된 유저 정보 유무
   bool isUserInfoStored = await checkStoredUserInfoController.checkStoredUserInfo();
+  // 자동 로그인 체크 유무 
   bool isAutoLoginChecked = autoLoginController.isChecked.value;
 
   final id = checkStoredUserInfoController.storedUserId;
@@ -46,7 +52,7 @@ Future<Widget> checkAndPerformAutoLogin() async {
 
   // 네트워크 연결 확인
   if (connectivityController.isConnected.value) {
-    // 기기에 저장된 로그인정보가 있고, 자동 로그인 체크 된 경우
+    // 기기에 저장된 로그인 정보가 있고, 자동 로그인 체크 된 경우
     // 자동 로그인 후 홈 화면으로 이동
     if (isUserInfoStored && isAutoLoginChecked) {
       loginService(id, pwd, isAutoLoginChecked);

@@ -49,7 +49,6 @@ Widget menuBox(Size screenSize) {
           spreadRadius: 1.0
         ),
       ]),
-    
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -82,10 +81,14 @@ Widget menuBox(Size screenSize) {
                 width: 22, 
                 height: 22, 
                 decoration: BoxDecoration(
-                  color: themeController.isLightTheme.value ? const Color(0xffff3939): const Color.fromARGB(255, 250, 84, 84),
+                  color: themeController.isLightTheme.value 
+                    ? const Color(0xffff3939)
+                    : const Color.fromARGB(255, 250, 84, 84),
                   shape: BoxShape.circle, 
                   border: Border.all(
-                    color: themeController.isLightTheme.value ? const Color(0xfff2f2f2): const Color(0xff3c3c3c), 
+                    color: themeController.isLightTheme.value 
+                      ? const Color(0xfff2f2f2)
+                      : const Color(0xff3c3c3c), 
                     width: 4, 
                   ),
                 )

@@ -8,9 +8,9 @@ import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
-//////////////////////////////
-//  연간 월별 독서량 데이터  //
-//////////////////////////////
+/////////////////////////////////////
+// 연간 월별 독서량 데이터(선그래프) //
+/////////////////////////////////////
 
 // 연간 월별 독서량 데이터 가져오는 함수
 Future<void> getYMBookReadCountData(year, month) async {
@@ -25,7 +25,6 @@ Future<void> getYMBookReadCountData(year, month) async {
 
     // 학생 아이디
     final stuId = studentIdController.getStuId();
-    // final stuId = studentIdController.getStuId();
 
     // 해당 페이지 연월
     final currrentPageYear = year;
@@ -42,8 +41,7 @@ Future<void> getYMBookReadCountData(year, month) async {
     );
 
     // 응답의 content-type utf-8로 인코딩으로 설정
-    if (response.headers['content-type']
-    ?.toLowerCase().contains('charset=utf-8') != true) {
+    if (response.headers['content-type']?.toLowerCase().contains('charset=utf-8') != true) {
       response.headers['content-type'] = 'application/json; charset=utf-8';
     }
     try {

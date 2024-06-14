@@ -29,8 +29,7 @@ Future<void> getOfficialNoticeData(index) async {
       }
     );
 
-    if (response.headers['content-type']
-    ?.toLowerCase().contains('charset=utf-8') != true) {
+    if (response.headers['content-type']?.toLowerCase().contains('charset=utf-8') != true) {
       response.headers['content-type'] = 'application/json; charset=utf-8';
     }
     try {

@@ -12,10 +12,10 @@ import '../../style.dart';import 'book_chart.dart';
 //////////////////////
 
 class BookResult3 extends StatefulWidget {
+  const BookResult3({super.key, required this.year, required this.month});
+
   final int year;
   final int month;
-
-  const BookResult3({super.key, required this.year, required this.month});
 
   @override
   State<BookResult3> createState() => _BookResult3State();
@@ -23,13 +23,12 @@ class BookResult3 extends StatefulWidget {
 
 class _BookResult3State extends State<BookResult3> {
   // 컨트롤러
-  YearBookCountDataController yearBookCountDataController = Get.put(YearBookCountDataController());          // 연간 독서량
-  YMBookCountDataController ymBookCountDataController = Get.put(YMBookCountDataController()); // 연간 월별 독서량
+  final yearBookCountDataController = Get.put(YearBookCountDataController());          
+  final ymBookCountDataController = Get.put(YMBookCountDataController()); 
   final themeController = Get.put(ThemeController());
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
     final pageHeight = MediaQuery.of(context).size.height - 200;
     final pointTextColor = themeController.isLightTheme.value ? LightColors.green : DarkColors.green;
 
@@ -47,7 +46,7 @@ class _BookResult3State extends State<BookResult3> {
         // 독서 그래프
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 30), 
-          margin: EdgeInsets.symmetric(vertical:  pageHeight * 0.08),
+          margin: EdgeInsets.symmetric(vertical: pageHeight * 0.08),
           child: const BookChart()
         ),
         // 독서 그래프 정보
@@ -56,13 +55,11 @@ class _BookResult3State extends State<BookResult3> {
           children: [
             // 평균 독서량
             bookChartReport(
-              screenSize: screenSize,
               title: "평균 독서량", 
               value: "${ymBookCountDataController.meanReadCount}권",
             ),
             // 다독한 달
             bookChartReport(
-              screenSize: screenSize,
               title: "다독한 달", 
               value: "${ymBookCountDataController.maxReadMonth}월, ${ymBookCountDataController.maxReadCount}권",
             ),
@@ -75,13 +72,13 @@ class _BookResult3State extends State<BookResult3> {
 }
 
 // 독서 그래프 정보
-Widget bookChartReport({required Size screenSize, required String title, required String value}) {
+Widget bookChartReport({required String title, required String value}) {
   final themeController = Get.put(ThemeController());
   final isLightTheme = themeController.isLightTheme.value;
 
   return Container(
     height: 80,
-    width: screenSize.width * 0.4,
+    width: MediaQuery.of(Get.context!).size.width * 0.4,
     decoration: BoxDecoration(
       color: isLightTheme ? const Color(0xfff8f8ed) : CommonColors.grey5,
       borderRadius: BorderRadius.circular(15),

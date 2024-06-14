@@ -16,12 +16,13 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 /////////////
 ///북스쿨////
 ////////////
+
 class BookReport extends StatefulWidget {
+  BookReport({super.key, required this.year, required this.month}) : pageDate = formatYMKorean(year, month);
+
   final int year;
   final int month;
   final String pageDate;
-
-  BookReport({super.key, required this.year, required this.month}) : pageDate = formatYMKorean(year, month);
 
   @override
   State<BookReport> createState() => _BookReportState();
@@ -39,7 +40,6 @@ class _BookReportState extends State<BookReport> {
         ? const Color(0xffe7eef8) 
         : DarkColors.basic,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // 북스쿨 이미지
           titleImage("book_report_book.png"),
@@ -102,23 +102,24 @@ Widget weeklyBookResult(int week) {
           Expanded(
             flex: 2,
             child: Center(
-              child: Text( "$week주차", style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: CommonColors.grey4),
+              child: Text(
+                "$week주차", 
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: CommonColors.grey4),
             )),
           ),
           Expanded(
             flex: 7,
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
+              margin:  const EdgeInsets.fromLTRB(10, 0, 0, 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 수업 내용
                   subTitleImage("book_report1.png", "수업내용", const Color(0xff34b8bc)),
                   Text(reportWeeklyDataController.iWeeklyDataList[week - 1].weekNote2),
-                  const SizedBox(height: 20),
                 ],
               ),
             ),
@@ -171,7 +172,7 @@ class _BookReportImageState extends State<BookReportImage> {
       ),
       child: Image.network(
         path,
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
         errorBuilder: (context, error, stackTrace) {
           return const Center(
             child: Text('이미지를 불러올 수 없어요.'),
@@ -227,7 +228,7 @@ class _BookReportImageState extends State<BookReportImage> {
                     return imageSlider(path, index);
                   },
                 )
-              : const Text("아직 이미지가 없어요 :("),
+              : const Text("아직 이미지가 업로드 되지 않았어요."),
             )
           ),
           indicator()

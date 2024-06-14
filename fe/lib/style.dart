@@ -6,8 +6,8 @@ class CommonColors {
   static const Color grey3 = Color(0xffc1c5c7);
   static const Color grey4 = Color(0xff5a5a5a);
   static const Color grey5 = Color(0xff4b4b4b);
-  static const Color grey6 = Color(0xFF2B2B2B);
-  static const Color grey7 = Color(0xFF1A1A1A);
+  
+  static const Color backgroundYellow = Color(0xfffffde3);
 }
 
 class LightColors {

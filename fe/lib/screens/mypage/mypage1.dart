@@ -5,9 +5,10 @@ import 'package:flutter_application/style.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:get/get.dart';
 
-//////////////
-// 학생정보 //
-//////////////
+////////////////////
+// 상단 학생 정보 //
+///////////////////
+
 Widget mypage1() {
   final screenSize = MediaQuery.of(Get.context!).size;
   const subtitleTextStyle = TextStyle(color: CommonColors.grey4);
@@ -34,7 +35,7 @@ Widget mypage1() {
   final subjectDateList = convertDataToList(subjectDateMap);
   
   return Container(
-    color: const Color(0xfffffde3),
+    color: CommonColors.backgroundYellow,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -77,11 +78,12 @@ Widget mypage1() {
         ),
         // 수평 구분선
         Container(color: CommonColors.grey3, width: double.infinity, height: 1),
-        // 함께한 날짜
+        // 공부 기간
         Container(
           margin: const EdgeInsets.only(left: 10, top: 20),
           child: Text("호호에듀와 공부한 지 $dates째에요 😊📖", style: bodyTextStyle,)
         ),
+        // 상세 공부 기간
         Container(
           margin: const EdgeInsets.only(left: 10, top: 5),
           child: ListView.builder(

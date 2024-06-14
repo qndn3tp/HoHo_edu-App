@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../style.dart';
+
 ///////////////////////////////
 // 아이디,비밀번호 입력 박스 ///
 ///////////////////////////////
@@ -7,7 +8,6 @@ import '../../style.dart';
 InputDecoration loginBoxDecoration(text, {passwordVisibleController}) {
 
   return InputDecoration(
-
     enabledBorder: const OutlineInputBorder(
       borderSide: BorderSide(color: Color(0xffeff9ff),),
       borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -20,8 +20,8 @@ InputDecoration loginBoxDecoration(text, {passwordVisibleController}) {
     ? IconButton(
       icon: Icon(
         passwordVisibleController.passwordVisible.value
-        ? Icons.visibility
-        : Icons.visibility_off,
+          ? Icons.visibility
+          : Icons.visibility_off,
         color: CommonColors.grey4,
       ),
       onPressed: passwordVisibleController.switchPasswordVisibility

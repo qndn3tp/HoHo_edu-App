@@ -41,9 +41,7 @@ Future<void> getMonthlyBookReadData(year, month) async {
     );
 
     // 응답의 content-type utf-8로 인코딩으로 설정
-    if (response.headers['content-type']
-    ?.toLowerCase()
-    .contains('charset=utf-8') != true) {
+    if (response.headers['content-type']?.toLowerCase().contains('charset=utf-8') != true) {
       response.headers['content-type'] = 'application/json; charset=utf-8';
     }
     try {
@@ -68,7 +66,6 @@ Future<void> getMonthlyBookReadData(year, month) async {
     catch (e) {
       final BookTitleDataController bookTitleDataController = Get.put(BookTitleDataController());     
       bookTitleDataController.setBookTitleDataList([]);
-      // failDialog1("$month월은 독클 결과가 없어요 :(",'');
     }
   } else {
     failDialog1("연결 실패", "인터넷 연결을 확인해주세요");

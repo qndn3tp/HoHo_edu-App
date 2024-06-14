@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_icons/lottiefiles.dart';
+import 'package:flutter_application/style.dart';
 import 'package:lottie/lottie.dart';
 
 //////////////////////
@@ -9,7 +10,7 @@ import 'package:lottie/lottie.dart';
 Widget notificationInfoBox(isChecked, bellController) {
   return Container(
     height: 80,
-    color: const Color(0xfffffde3),
+    color: CommonColors.backgroundYellow,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -29,14 +30,14 @@ Widget notificationInfoBox(isChecked, bellController) {
           children: [
             Text(
               isChecked 
-              ? "알림을 받고 있어요." 
-              : "알림을 받고 있지 않아요.",
+                ? "알림을 받고 있어요." 
+                : "알림을 받고 있지 않아요.",
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
             ),
             Text(
               isChecked
-              ? "방해금지모드나 무음모드에서는 울리지 않아요."
-              : "개별 알림을 받으려면 알림을 켜주세요!",
+                ? "방해금지모드나 무음모드에서는 울리지 않아요."
+                : "개별 알림을 받으려면 알림을 켜주세요!",
               style: const TextStyle(color: Colors.black),
             ),
           ],

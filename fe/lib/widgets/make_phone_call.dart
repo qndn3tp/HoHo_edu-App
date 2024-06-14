@@ -18,7 +18,7 @@ Widget phoneNumberText() {
         null;
       }
     },
-    child: Text(phoneNumber, style: TextStyle(color: Theme.of(Get.context!).colorScheme.secondary, fontSize: 13),),
+    child: Text("고객센터 연결하기($phoneNumber)", style: TextStyle(color: Theme.of(Get.context!).colorScheme.secondary, fontSize: 13),),
   );
 }
 

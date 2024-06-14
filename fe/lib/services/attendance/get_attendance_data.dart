@@ -9,15 +9,14 @@ import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
-///////////////////
-//  출석 데이터  //
-///////////////////
+/////////////////
+// 출석 데이터 //
+/////////////////
 
-// 출석 데이터 가져오는 함수
 Future<void> getAttendanceData(month) async {
 
   // 컨트롤러
-  final AttendanceDataController attendanceDataController = Get.put(AttendanceDataController());  // 출석 데이터 
+  final AttendanceDataController attendanceDataController = Get.put(AttendanceDataController());
   final ConnectivityController connectivityController = Get.put(ConnectivityController());        
   final StudentIdController studentIdController = Get.put(StudentIdController());
 
@@ -41,8 +40,7 @@ Future<void> getAttendanceData(month) async {
     );
 
     // 응답의 content-type utf-8로 인코딩으로 설정
-    if (response.headers['content-type']
-    ?.toLowerCase().contains('charset=utf-8') != true) {
+    if (response.headers['content-type']?.toLowerCase().contains('charset=utf-8') != true) {
       response.headers['content-type'] = 'application/json; charset=utf-8';
     }
     try {
@@ -53,7 +51,6 @@ Future<void> getAttendanceData(month) async {
         // 응답 데이터가 성공일 때
         if (resultList[0]["result"] == null) {
           final resultList0 = resultList.cast<Map<String, dynamic>>();
-          // JSON 데이터를 AttendenceData 객체 리스트로 파싱
           List<AttendanceData> attenceDataList = resultList0.map<AttendanceData>((json) => AttendanceData.fromJson(json)).toList();
           final AttendanceDataController attendanceDataController = Get.put(AttendanceDataController());     
           attendanceDataController.setAttendanceDataList(attenceDataList);

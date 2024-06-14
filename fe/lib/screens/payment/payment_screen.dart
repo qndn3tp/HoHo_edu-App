@@ -18,6 +18,7 @@ import '../../style.dart';
 
 class PaymentDropdownScreen extends StatelessWidget {
   PaymentDropdownScreen({super.key});
+
   final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController());
   final themeController = Get.put(ThemeController());
 
@@ -30,7 +31,9 @@ class PaymentDropdownScreen extends StatelessWidget {
       appBar: customAppBar("학원비 내역"),
       body: Column(
         children: [
+          // 드롭다운 박스(이름)
           dropDownBox(),
+          // 드롭다운 화면
           Expanded(
             child: Obx(() {
               if (dropdownButtonController.currentItem.value != null) {
@@ -66,8 +69,8 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> with SingleTickerProviderStateMixin {
   final themeController = Get.put(ThemeController());
-  final PaymentDataController paymentDataController = Get.put(PaymentDataController());
-  final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController());
+  final paymentDataController = Get.put(PaymentDataController());
+  final dropdownButtonController = Get.put(DropdownButtonController());
 
   @override
   Widget build(BuildContext context) {

@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 ///////////////////////
 // 고객센터, 로그아웃 //
 ///////////////////////
+
 Widget mypage3() {
   return Container(
     padding: const EdgeInsets.all(20),
@@ -38,13 +39,13 @@ Widget mypage3() {
             onTap: () {
               // 이전의 모든 화면을 지우고 로그인 페이지로 이동
               Get.offUntil(
-                GetPageRoute(page: () => const LoginScreen(),),
+                GetPageRoute(
+                  page: () => const LoginScreen()),
                 (route) => false);
               logout();
             },
             child: Container(
-            height: 50,
-              padding: const EdgeInsets.all(10),
+              height: 50,
               width: double.infinity,
               decoration: BoxDecoration(
                 border: Border.all(
@@ -55,7 +56,7 @@ Widget mypage3() {
             ),
           ),
         ),
-        // 저작권표시
+        // 저작권 표시
         copyright(),
       ],
     ),
