@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/constants.dart';
 import 'package:flutter_application/models/attendance_data.dart';
 import 'package:flutter_application/screens/attendance/table_content.dart';
 import 'package:flutter_application/screens/attendance/table_title.dart';
@@ -40,7 +41,8 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
   final currentMonth = getCurrentMonth();
   var currentPage = getCurrentMonth() - 1;
   late PageController pageController;
-  // 출석데이터 컨트롤러
+
+  // 컨트롤러
   final attendanceDataController = Get.put(AttendanceDataController());
 
   @override
@@ -121,7 +123,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
 
       pageController.animateToPage(
         currentPage,
-        duration: const Duration(milliseconds: 500),
+        duration: transitionDuration,
         curve: Curves.easeInOut,
       );
     } else if (newPage >= currentMonth){

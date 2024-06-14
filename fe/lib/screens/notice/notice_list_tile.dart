@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/constants.dart';
 import 'package:flutter_application/models/notice_data/notice_data.dart';
 import 'package:flutter_application/screens/attendance/attendance_screen.dart';
 import 'package:flutter_application/screens/book/book_screen.dart';
@@ -8,42 +9,15 @@ import 'package:flutter_application/screens/payment/payment_screen.dart';
 import 'package:flutter_application/services/notice/get_class_notice_data.dart';
 import 'package:flutter_application/services/notice/get_official_notice_data.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
-import 'package:flutter_application/style.dart';
 import 'package:get/get.dart';
 
 /////////////////////////
 //  알림장 리스트 타일  //
 /////////////////////////
 
-// 알림 색상
-List<Color> lightNoticeColorList = [
-  CommonColors.grey3,           // 공지
-  LightColors.blue,             // 수업
-  LightColors.green,            // 출석
-  LightColors.purple,           // 독클
-  LightColors.orange,           // 결제
-
-];
-List<Color> darkNoticeColorList = [
-  CommonColors.grey2,
-  DarkColors.blue,
-  DarkColors.green,
-  DarkColors.purple,
-  DarkColors.orange,
-];
-
-// 알림 이미지
-List<Image> noticeImageList = [
-  Image.asset('assets/images/notice_official.png'),    // 공지
-  Image.asset('assets/images/class.png'),              // 수업
-  Image.asset('assets/images/attendance.png'),         // 출석
-  Image.asset('assets/images/book.png'),               // 독클
-  Image.asset('assets/images/payment.png'),            // 결제
-];
-
 // 알림 리스트
 Widget noticeListTile(index) {
-  final Size screenSize = MediaQuery.of(Get.context!).size;      
+  final screenSize = MediaQuery.of(Get.context!).size;      
   final noticeDataController = Get.put(NoticeDataController());
   final noticeNum = noticeDataController.noticeDataList![index].noticeNum;
   final themeController = Get.put(ThemeController());
@@ -74,8 +48,8 @@ Widget noticeListTile(index) {
       }
       Get.to(
         page, 
-        transition: Transition.cupertino, 
-        duration: const Duration(milliseconds: 500)
+        transition: transitionType, 
+        duration: transitionDuration
       );
     },
     child: Column(
@@ -92,7 +66,7 @@ Widget noticeListTile(index) {
                 : darkNoticeColorList[noticeNum], 
               borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.all(5),
-            child: noticeImageList[noticeNum],
+            child: Image.asset(noticeImageList[noticeNum]),
           )),
           // 텍스트
           title: Text(

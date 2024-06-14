@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/constants.dart';
 import 'package:flutter_application/models/book_data/report_monthly_data.dart';
 import 'package:flutter_application/widgets/dashed_divider.dart';
 import 'package:flutter_application/widgets/text_span.dart';
@@ -6,9 +7,6 @@ import 'package:get/get.dart';
 
 Widget monthlyReportResult(String title) {
   final reportMonthlyDataController = Get.put(ReportMonthlyDataController());
-
-  final hanResultTitle = ["한자 습득", "어휘 활용", "의미 이해", "문장 적용"];
-  final bookResultTitle = ["표현력", "사고력", "추론력", "분석력"];
 
   // 점수
   final hanScore = reportMonthlyDataController.sScore;
@@ -143,10 +141,7 @@ Widget scoreBox(isColored){
     width: 20,
     decoration: BoxDecoration(
       color: isColored ? pointColor : Theme.of(Get.context!).colorScheme.secondaryContainer,
-      border: Border.all(
-        color: pointColor,
-        width: 2,
-      ),
+      border: Border.all(color: pointColor, width: 2),
     ),
   );
 }

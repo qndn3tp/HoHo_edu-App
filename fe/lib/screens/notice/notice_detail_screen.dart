@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/models/notice_data/class_notice_detail_data.dart';
 import 'package:flutter_application/models/notice_data/notice_data.dart';
 import 'package:flutter_application/models/notice_data/official_notice_detail_data.dart';
-import 'package:flutter_application/screens/Notice/Notice_list_tile.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:get/get.dart';
+import 'package:flutter_application/constants.dart';
 
 //////////////////////////
 // 공지, 수업 상세페이지 //
 //////////////////////////
 
 class NoticeDetailScreen extends StatelessWidget {
+  NoticeDetailScreen({super.key, required this.index, required this.noticeNum});
+
   final int index; 
   final int noticeNum;  // 알림 구분 값(공지:0, 수업:1)
-  final NoticeDataController noticeDataController = Get.put(NoticeDataController());
-  final OfficialNoticeDataController officialNoticeDataController = Get.put(OfficialNoticeDataController());
-  final ClassNoticeDataController classNoticeDataController = Get.put(ClassNoticeDataController());
-
-  NoticeDetailScreen({super.key, required this.index, required this.noticeNum});
+  final noticeDataController = Get.put(NoticeDataController());
+  final officialNoticeDataController = Get.put(OfficialNoticeDataController());
+  final classNoticeDataController = Get.put(ClassNoticeDataController());
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class NoticeDetailScreen extends StatelessWidget {
                       color: lightNoticeColorList[noticeDataController.noticeDataList![index].noticeNum], 
                       borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.all(5),
-                    child: noticeImageList[noticeDataController.noticeDataList![index].noticeNum], 
+                    child: Image.asset(noticeImageList[noticeDataController.noticeDataList![index].noticeNum]), 
                   ),
                   // 알림 제목
                   Text(
@@ -70,8 +70,8 @@ class NoticeDetailScreen extends StatelessWidget {
                         );
                       }
                     )
-                  ):
-                  const SizedBox(height: 30,),
+                  )
+                  : const SizedBox(height: 30,),
                   // 글
                   Text(
                     officialNoticeDataController.officialNoticeData!.content,

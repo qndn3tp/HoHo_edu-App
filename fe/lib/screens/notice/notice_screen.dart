@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/constants.dart';
 import 'package:flutter_application/models/notice_data/notice_data.dart';
 import 'package:flutter_application/screens/Notice/Notice_list_tile.dart';
 import 'package:flutter_application/screens/notice/tab_bar_scroller.dart';
@@ -7,9 +8,10 @@ import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import '../../style.dart';
-////////////////////////
-//    알림장  화면    //
-////////////////////////
+
+///////////////////
+//  알림장 화면  //
+//////////////////
 
 class NoticeScreen extends StatefulWidget {
   const NoticeScreen({super.key});
@@ -24,11 +26,10 @@ class _NoticeScreenState extends State<NoticeScreen> {
   // TabBar 인덱스
   int current = 0;
   // TabBar Tabs
-  final List<String> tabs = ["공지", "수업", "출석", "독클", "결제"];
+  final List<String> tabs = noticeTabs;
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       // 상단바
       appBar: customAppBar("알림장"),
@@ -106,9 +107,9 @@ class _NoticeScreenState extends State<NoticeScreen> {
 
 // Tab View Page
 class TabPage extends StatelessWidget {
-  final noticeDataController = Get.put(NoticeDataController());
-
   TabPage({super.key});
+
+  final noticeDataController = Get.put(NoticeDataController());
 
   @override
   Widget build(BuildContext context) {

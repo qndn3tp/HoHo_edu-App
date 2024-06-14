@@ -1,35 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/constants.dart';
 import 'package:flutter_application/models/book_data/monthly_book_score_data.dart';
 import 'package:flutter_application/widgets/imagebox_decoration.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-////////////////////////
-//    독클 점수 바    //
-////////////////////////
-
-final scoreColorList = [
-  const Color(0xffff44b2),
-  const Color(0xff5a60d8),
-  const Color(0xffff7f4b),
-  const Color(0xff7acf11),
-  const Color(0xffffa60c),
-  const Color(0xffab55e5)
-];
-
-final scoreImageList = [
-  'assets/images/book/book_score_area1.png',
-  'assets/images/book/book_score_area2.png',
-  'assets/images/book/book_score_area3.png',
-  'assets/images/book/book_score_area4.png',
-  'assets/images/book/book_score_area5.png',
-  'assets/images/book/book_score_area6.png',
-];
+///////////////////
+//  독클 점수 바 //
+//////////////////
 
 Widget scoreIndicator(index) {
-  final Size screenSize = MediaQuery.of(Get.context!).size;
   // 컨트롤러
-  final BookScoreDataController bookScoreDataController = Get.put(BookScoreDataController());
+  final  bookScoreDataController = Get.put(BookScoreDataController());
 
   // 퍼센트 점수
   final scorePercent = bookScoreDataController.bookScoreDataList![index].per * (1 / 100);
@@ -41,7 +23,7 @@ Widget scoreIndicator(index) {
   final titleImage = scoreImageList[areaIndex - 1];
 
   return LinearPercentIndicator(
-    width: screenSize.width * 1 / 3,
+    width: MediaQuery.of(Get.context!).size.width * 1 / 3,
     lineHeight: 20,
     percent: scorePercent,
     leading: Container(

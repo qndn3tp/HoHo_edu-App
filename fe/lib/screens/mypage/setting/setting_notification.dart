@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/constants.dart';
 import 'package:flutter_application/notifications/request_noti.dart';
 import 'package:flutter_application/screens/mypage/setting/notification_info_box.dart';
 import 'package:flutter_application/services/mypage/get_is_paymentnotice_exist_.dart';
@@ -27,22 +28,6 @@ class SwitchButtonController extends GetxController {
     buttonCheckedList = List.filled(buttonNameList.length, false).obs;
   }
 
-  // 토글 버튼의 이름 리스트
-  final List<String> buttonNameList1 = [
-    "공지 알림",
-    "수업 알림",
-    "출석 알림",
-    "독클 알림",
-    "결제 알림",
-
-  ];
-  final List<String> buttonNameList2 = [
-    "공지 알림",
-    "수업 알림",
-    "출석 알림",
-    "독클 알림",
-  ];
-
   // 알림 정보를 기기의 로컬저장소에 저장
   Future<void> storeButtonCheckedInfo(int index) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -63,7 +48,7 @@ class SettingNotification extends StatefulWidget {
 class _SettingNotificationState extends State<SettingNotification> with TickerProviderStateMixin {
   // 컨트롤러
   late AnimationController bellController;        // 알림 아이콘
-  final switchButtonController = Get.put(SwitchButtonController()); // 알림 토글 버튼
+  final switchButtonController = Get.put(SwitchButtonController()); 
 
   // 전체 알림 스위치
   late bool _isNotiChecked;

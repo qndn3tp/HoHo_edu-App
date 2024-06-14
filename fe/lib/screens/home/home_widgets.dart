@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/constants.dart';
 import 'package:flutter_application/screens/attendance/attendance_screen.dart';
 import 'package:flutter_application/screens/home/home_menu_box.dart';
 import 'package:flutter_application/services/attendance/get_attendance_data.dart';
@@ -15,20 +16,14 @@ import 'package:flutter_application/services/book/school_report/get_report_month
 import 'package:flutter_application/services/book/school_report/get_report_weekly_data.dart';
 import 'package:flutter_application/services/payment/get_payment_data.dart';
 import 'package:flutter_application/utils/get_current_date.dart';
-import 'package:flutter_application/utils/network_check.dart';
-import 'package:flutter_application/widgets/dialog.dart';
 import 'package:get/get.dart';
 import '../../widgets/imagebox_decoration.dart';
 
-///////////////////////
-//    홈 화면 위젯    //
-///////////////////////
+//////////////////
+// 홈 화면 위젯 //
+/////////////////
 
-Widget menuButton({
-  required String imagePath,
-  required String buttonText,
-  required VoidCallback onTap,
-}) {
+Widget menuButton({buttonText, imagePath, onTap}) {
   return InkWell(
     onTap: onTap,
     child: Column(
@@ -48,14 +43,14 @@ Widget menuButton({
 // 출석체크 버튼
 Widget attendanceButton() {
   return menuButton(
-    imagePath: 'assets/images/attendance.png',
-    buttonText: '출석체크',
+    buttonText: homeMenuList[0][0],
+    imagePath: homeMenuList[0][1],
     onTap: () async {
       await getAttendanceData(currentMonth);
       Get.to(
         AttendanceScreen(),
-        transition: Transition.cupertino,
-        duration: const Duration(milliseconds: 500),
+        transition: transitionType,
+        duration: transitionDuration,
       );
     },
   );
@@ -64,14 +59,14 @@ Widget attendanceButton() {
 // 학원비 내역 버튼
 Widget paymentButton() {
   return menuButton(
-    imagePath: 'assets/images/payment.png',
-    buttonText: '학원비 내역',
+    buttonText: homeMenuList[1][0],
+    imagePath: homeMenuList[1][1],
     onTap: () async {
       await getPaymentData();
       Get.to(
         PaymentDropdownScreen(),
-        transition: Transition.cupertino,
-        duration: const Duration(milliseconds: 500),
+        transition: transitionType,
+        duration: transitionDuration,
       );
     },
   );
@@ -82,17 +77,16 @@ Widget noticeButton() {
   final readNotiController = Get.put(ReadNotiController());
 
   return menuButton(
-    imagePath: 'assets/images/notice.png',
-    buttonText: '알림장',
+    buttonText: homeMenuList[2][0],
+    imagePath: homeMenuList[2][1],
     onTap: () {
       // 알림 확인
-      readNotiController.isRead.value =true;
+      readNotiController.isRead.value = true;
       readNotiController.storeisReadInfo(true);
-
       Get.to(
         const NoticeScreen(),
-        transition: Transition.cupertino,
-        duration: const Duration(milliseconds: 500),
+        transition: transitionType,
+        duration: transitionDuration,
       );
     },
   );
@@ -100,31 +94,23 @@ Widget noticeButton() {
 
 // 독클결과 버튼
 Widget bookButton() {
-  final ConnectivityController connectivityController = Get.put(ConnectivityController());        // 네트워크 연결체크
-
   return menuButton(
-    imagePath: 'assets/images/book.png',
-    buttonText: '월간 레포트',
+    buttonText:  homeMenuList[3][0],
+    imagePath:  homeMenuList[3][1],
     onTap: () async {
-      // 네트워크 연결 체크
-      if (connectivityController.isConnected.value) {
-        await getIsReportClassExist(currentYear, currentMonth - 1);
-        await getReportWeeklyData(currentYear, currentMonth -1);
-        await getReportMonthlyData(currentYear, currentMonth -1);
-        await getFirstBookReadDateData();
-        await getMonthlyBookReadData(currentYear, currentMonth - 1);
-        await getMonthlyBookScoreData(currentYear, currentMonth - 1);
-        await getYearlyBookReadCountData(currentYear, currentMonth - 1);
-        await getYMBookReadCountData(currentYear, currentMonth - 1);
-        
-        Get.to(
-          BookScreen(),
-          transition: Transition.cupertino,
-          duration: const Duration(milliseconds: 500),
-        );
-      } else {
-        failDialog1("연결 실패", "인터넷 연결을 확인해주세요");
-      }
+      await getIsReportClassExist(currentYear, currentMonth - 1);
+      await getReportWeeklyData(currentYear, currentMonth -1);
+      await getReportMonthlyData(currentYear, currentMonth -1);
+      await getFirstBookReadDateData();
+      await getMonthlyBookReadData(currentYear, currentMonth - 1);
+      await getMonthlyBookScoreData(currentYear, currentMonth - 1);
+      await getYearlyBookReadCountData(currentYear, currentMonth - 1);
+      await getYMBookReadCountData(currentYear, currentMonth - 1);
+      Get.to(
+        BookScreen(),
+        transition: transitionType,
+        duration: transitionDuration,
+      );
     }
   );
 }
