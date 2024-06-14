@@ -56,20 +56,22 @@ class NoticeDetailScreen extends StatelessWidget {
               ? Column(
                 children: [
                   // 이미지
-                  Container(
+                  officialNoticeDataController.officialNoticeData!.imageUrl != ""
+                  ? Container(
                     margin: const EdgeInsets.symmetric(vertical: 30),
                     height: 300, 
                     width: double.infinity, 
                     child: Image.network(
                       officialNoticeDataController.officialNoticeData!.imageUrl, 
-                      fit: BoxFit.fitHeight,
+                      fit: BoxFit.contain,
                       errorBuilder: (context, error, stackTrace) {
                         return const Center(
                           child: Text('이미지를 불러올 수 없어요.'),
                         );
                       }
                     )
-                  ),
+                  ):
+                  const SizedBox(height: 30,),
                   // 글
                   Text(
                     officialNoticeDataController.officialNoticeData!.content,

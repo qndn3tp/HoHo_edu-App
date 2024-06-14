@@ -197,7 +197,7 @@ class _BookReportImageState extends State<BookReportImage> {
 
   @override
   Widget build(BuildContext context) {
-    final isValidImage = reportMonthlyDataController.iMonthlyDataList.length > 0 ? true : false;
+    final isValidImage = reportMonthlyDataController.bookSchooldImages.length > 0 ? true : false;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 40),

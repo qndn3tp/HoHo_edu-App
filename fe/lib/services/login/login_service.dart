@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:flutter_application/constants.dart';
 import 'package:flutter_application/notifications/request_noti.dart';
 import 'package:flutter_application/screens/home/home_screen.dart';
+import 'package:flutter_application/screens/login/login_screen.dart';
 import 'package:flutter_application/screens/login/set_password_screen.dart';
 import 'package:flutter_application/services/home/get_class_info_data.dart';
 import 'package:flutter_application/utils/network_check.dart';
@@ -21,6 +23,7 @@ import '../../utils/login_encryption.dart';
 // 로그인 로직 수행 함수
 Future<void> loginService(String loginId, String loginPassword, autoLoginChecked) async {
   final connectivityController = Get.put(ConnectivityController()); 
+  final LoginController loginController = Get.put(LoginController());
   
   if (connectivityController.isConnected.value){
     // 사용자 로그인 정보(아이디,비밀번호)를 기기에 저장
@@ -30,7 +33,7 @@ Future<void> loginService(String loginId, String loginPassword, autoLoginChecked
 
     // 로그인 아이디, 비밀번호
     String id = loginId;
-    String shaPassword = sha256_convertHash(loginPassword); // 비밀번호: sha256으로 암호화
+    String shaPassword = sha256_convertHash(loginPassword); 
     String md5Password = md5_convertHash(loginPassword);
 
     // HTTP POST 요청
@@ -44,8 +47,7 @@ Future<void> loginService(String loginId, String loginPassword, autoLoginChecked
     );
 
     // 응답의 content-type utf-8로 인코딩으로 설정
-    if (response.headers['content-type']
-    ?.toLowerCase().contains('charset=utf-8') != true) {
+    if (response.headers['content-type']?.toLowerCase().contains('charset=utf-8') != true) {
       response.headers['content-type'] = 'application/json; charset=utf-8';
     }
     try {
@@ -79,27 +81,30 @@ Future<void> loginService(String loginId, String loginPassword, autoLoginChecked
           if (resultList[0]['firstlogin'] == "Y") {
             Get.to(
               const SetPasswordScreen(),
-              transition: Transition.cupertino,
-              duration: const Duration(milliseconds: 500),
+              transition: transitionType,
+              duration: transitionDuration,
             );
           } else {
             // 홈화면으로 이동
             Get.offAll(const HomeScreen());
           }
         }
-
         // 응답 데이터가 오류일 때("9999": 오류)
         else {
-          failDialog1('로그인 실패','아이디 또는 비밀번호를 잘못 입력했어요.');
+          failDialog1('로그인 실패', '아이디 또는 비밀번호를 잘못 입력했어요.');
         }
       }
     }
     // 응답을 받지 못했을 때
     catch (e) {
-      failDialog1(
-        '로그인 실패',
-        '아이디와 비밀번호를 입력해주세요.'
-      );
+      if (id == "" || shaPassword == "" || md5Password == "") {
+        failDialog1('로그인 실패', '아이디와 비밀번호를 입력해주세요.');
+      } else {
+        await failDialog1('로그인 실패', '아이디 또는 비밀번호를 잘못 입력했어요.');
+        // 아이디, 비밀번호 입력 초기화
+        loginController.idController.text = "";
+        loginController.passwordController.text = "";
+      }
     }
   } else {
     failDialog1("연결 실패", "인터넷 연결을 확인해주세요");
