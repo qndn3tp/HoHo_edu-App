@@ -2,10 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/book_data/report_monthly_data.dart';
 import 'package:flutter_application/models/book_data/report_weekly_data.dart';
-import 'package:flutter_application/screens/book/hanSchool_screen.dart';
-import 'package:flutter_application/screens/book/school_monthly_result.dart';
+import 'package:flutter_application/screens/book/school_report/school_monthly_result.dart';
+import 'package:flutter_application/screens/book/school_report/school_weekly_result.dart';
 import 'package:flutter_application/style.dart';
-import 'package:flutter_application/widgets/dashed_divider.dart';
 import 'package:flutter_application/widgets/date_format.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_application/widgets/text_span.dart';
@@ -72,7 +71,19 @@ class _BookReportState extends State<BookReport> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                return weeklyBookResult(index + 1);
+                final week = index + 1;
+                final isValidData = week <= reportWeeklyDataController.iWeeklyDataList.length ? true : false;
+
+                return SchoolWeeklyResult(
+                  week: week,
+                  isValidData: isValidData,
+                  children: isValidData
+                    ? [
+                      subTitleImage("book_report1.png", "수업내용", const Color(0xff34b8bc)),
+                      Text(reportWeeklyDataController.iWeeklyDataList[week - 1].weekNote2),
+                    ]
+                    : [],
+                );
               },
             ),
           ),
@@ -80,62 +91,11 @@ class _BookReportState extends State<BookReport> {
           RichText(text: normalText("이번 달의 글쓰기")),
           const BookReportImage(),
           // 최종 평가
-          monthlyReportResult("book"),
+          schoolMonthlyResult("book"),
         ],
       ),
     ));
   }
-}
-
-// 주차별 내용
-Widget weeklyBookResult(int week) {
-  final reportWeeklyDataController = Get.put(ReportWeeklyDataController());
-  // 해당 주차의 데이터 유무
-  final isValidData = week <= reportWeeklyDataController.iWeeklyDataList.length ? true : false;
-
-  return isValidData
-  ? Stack(
-    children: [
-      Row(
-        children: [
-          // 주차
-          Expanded(
-            flex: 2,
-            child: Center(
-              child: Text(
-                "$week주차", 
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: CommonColors.grey4),
-            )),
-          ),
-          Expanded(
-            flex: 7,
-            child: Container(
-              margin:  const EdgeInsets.fromLTRB(10, 0, 0, 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // 수업 내용
-                  subTitleImage("book_report1.png", "수업내용", const Color(0xff34b8bc)),
-                  Text(reportWeeklyDataController.iWeeklyDataList[week - 1].weekNote2),
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-      // 수직 구분선
-      Positioned(
-        top: 0,
-        bottom: 0,
-        left: MediaQuery.of(Get.context!).size.width / 5, // 구분선이 시작되는 위치 조정
-        child: const DashedVerticalDivider(),
-      ),
-    ],
-  )
-  : const SizedBox();
 }
 
 
@@ -184,20 +144,24 @@ class _BookReportImageState extends State<BookReportImage> {
 
   var activeIndex = 0;
 
-  Widget indicator() => Container(
-    alignment: Alignment.bottomCenter,
-    child: AnimatedSmoothIndicator(
-      activeIndex: activeIndex,
-      count: reportMonthlyDataController.bookSchooldImages.length,
-      effect: const JumpingDotEffect(
-        dotHeight: 8,
-        dotWidth: 8,
-        activeDotColor: Color(0xff868ad6),
-        dotColor: CommonColors.grey3),
-    ));
+  Widget indicator() {
+    return Container(
+      alignment: Alignment.bottomCenter,
+      child: AnimatedSmoothIndicator(
+        activeIndex: activeIndex,
+        count: reportMonthlyDataController.bookSchooldImages.length,
+        effect: const JumpingDotEffect(
+          dotHeight: 8,
+          dotWidth: 8,
+          activeDotColor: Color(0xff868ad6),
+          dotColor: CommonColors.grey3),
+      )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    // 이미지 유무
     final isValidImage = reportMonthlyDataController.bookSchooldImages.length > 0 ? true : false;
 
     return Container(
@@ -214,20 +178,20 @@ class _BookReportImageState extends State<BookReportImage> {
             child: Center(
               child: isValidImage
               ? CarouselSlider.builder(
-                  options: CarouselOptions(
-                    initialPage: 0,
-                    viewportFraction: 1,
-                    enlargeCenterPage: true,
-                    onPageChanged: (index, reason) => setState(() {
-                      activeIndex = index;
-                    }),
-                  ),
-                  itemCount: reportMonthlyDataController.bookSchooldImages.length,
-                  itemBuilder: (context, index, realIndex) {
-                    final path = reportMonthlyDataController.bookSchooldImages[index];
-                    return imageSlider(path, index);
-                  },
-                )
+                options: CarouselOptions(
+                  initialPage: 0,
+                  viewportFraction: 1,
+                  enlargeCenterPage: true,
+                  onPageChanged: (index, reason) => setState(() {
+                  activeIndex = index;
+                  }),
+                ),
+                itemCount: reportMonthlyDataController.bookSchooldImages.length,
+                itemBuilder: (context, index, realIndex) {
+                  final path = reportMonthlyDataController.bookSchooldImages[index];
+                  return imageSlider(path, index);
+                },
+              )
               : const Text("아직 이미지가 업로드 되지 않았어요."),
             )
           ),

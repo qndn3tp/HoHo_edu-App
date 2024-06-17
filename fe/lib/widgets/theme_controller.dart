@@ -18,14 +18,6 @@ class ThemeController extends GetxController {
   }
 }
 
-// 화면 모드 로드
-Future<void> loadThemeInfo() async {
-  final themeController = Get.put(ThemeController());
-
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  themeController.themeMode.value = prefs.getString('themeMode') ?? 'system'; 
-}
-
 // 화면 모드: 시스템, isLightTheme 관리
 void changeSystemMode() {
   final themeController = Get.put(ThemeController());

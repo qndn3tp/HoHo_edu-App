@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/login/login_screen.dart';
 import 'package:flutter_application/style.dart';
 import 'package:flutter_application/utils/logout.dart';
-import 'package:flutter_application/widgets/copyright.dart';
 import 'package:flutter_application/widgets/make_phone_call.dart';
 import 'package:get/get.dart';
 
@@ -57,7 +56,9 @@ Widget mypage3() {
           ),
         ),
         // 저작권 표시
-        copyright(),
+        const Center(
+          child: Text("ⓒHOHOEDU All Right Reserved",style: TextStyle(fontSize: 12))
+        ),
       ],
     ),
   );

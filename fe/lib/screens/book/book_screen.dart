@@ -5,12 +5,12 @@ import 'package:flutter_application/models/book_data/is_report_class_exist_data.
 import 'package:flutter_application/screens/book/book_result1.dart';
 import 'package:flutter_application/screens/book/book_result2.dart';
 import 'package:flutter_application/screens/book/book_result3.dart';
-import 'package:flutter_application/screens/book/hanSchool_screen.dart';
-import 'package:flutter_application/screens/book/bookSchool_screen.dart';
+import 'package:flutter_application/screens/book/school_report/hanSchool_screen.dart';
+import 'package:flutter_application/screens/book/school_report/bookSchool_screen.dart';
 import 'package:flutter_application/services/book/get_first_book_read_date_data.dart';
 import 'package:flutter_application/services/book/get_monthly_book_read_data.dart';
 import 'package:flutter_application/services/book/get_yearly_book_read_count_data.dart';
-import 'package:flutter_application/services/book/get_ym_book_read_cnt_data.dart';
+import 'package:flutter_application/services/book/get_ym_book_read_count_data.dart';
 import 'package:flutter_application/services/book/school_report/get_is_report_class_exist.dart';
 import 'package:flutter_application/services/book/school_report/get_report_monthly_data.dart';
 import 'package:flutter_application/services/book/school_report/get_report_weekly_data.dart';
@@ -35,19 +35,22 @@ class BookScreen extends DropDownScreen {
     : super(
       title: "월간 레포트",
       updateData: _updateBookData,
-      monthlyScreenBuilder: const MonthlyScreen(),
+      dropdownChildScreenBuilder: const MonthlyScreen(),
     );
 
   static Future<void> _updateBookData() async {
-    final ConnectivityController connectivityController = Get.put(ConnectivityController());      // 네트워크 연결체크
+    final ConnectivityController connectivityController = Get.put(ConnectivityController());
+    final isReportClassExistDataController = Get.put(IsReportClassExistDataController());
 
     if (connectivityController.isConnected.value) {
       final year = getCurrentYear();
       final month = getCurrentMonth();
       
       await getIsReportClassExist(year, month);
-      await getReportWeeklyData(year, month);
-      await getReportMonthlyData(year, month);
+      if (isReportClassExistDataController.isSExist || isReportClassExistDataController.isSExist) {
+        await getReportWeeklyData(currentYear, currentMonth -1);
+        await getReportMonthlyData(currentYear, currentMonth -1);
+      }
       await getFirstBookReadDateData();
       await getMonthlyBookReadData(year, month);
       await getMonthlyBookScoreData(year, month);

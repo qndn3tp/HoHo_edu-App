@@ -5,7 +5,7 @@ import 'package:flutter_application/widgets/dashed_divider.dart';
 import 'package:flutter_application/widgets/text_span.dart';
 import 'package:get/get.dart';
 
-Widget monthlyReportResult(String title) {
+Widget schoolMonthlyResult(String title) {
   final reportMonthlyDataController = Get.put(ReportMonthlyDataController());
 
   // 점수

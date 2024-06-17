@@ -55,7 +55,7 @@ Widget noticeListTile(index) {
     child: Column(
       children: [
         ListTile(
-          contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
           // 이미지
           leading: Obx(() => Container(
             width: 60,
@@ -87,7 +87,8 @@ Widget noticeListTile(index) {
           child: Center(
             child: Text(
               noticeDataController.noticeDataList![index].ymdTime.split(" ")[0],
-              style: const TextStyle(fontSize: 12,),))
+              style: const TextStyle(fontSize: 12,))
+          )
         ),
         // 구분선
         const Divider(height: 1),

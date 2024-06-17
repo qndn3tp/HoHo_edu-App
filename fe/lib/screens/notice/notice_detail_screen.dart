@@ -31,7 +31,7 @@ class NoticeDetailScreen extends StatelessWidget {
               // 알림 제목
               Row(
                 children: [
-                  // 알림 이미지
+                  // 알림 아이콘 이미지
                   Container(
                     margin: const EdgeInsets.only(right: 10),
                     width: 30,
@@ -54,11 +54,12 @@ class NoticeDetailScreen extends StatelessWidget {
               noticeNum == 0
               // 공지 내용 상세
               ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 이미지
                   officialNoticeDataController.officialNoticeData!.imageUrl != ""
                   ? Container(
-                    margin: const EdgeInsets.symmetric(vertical: 30),
+                    margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
                     height: 300, 
                     width: double.infinity, 
                     child: Image.network(
@@ -71,12 +72,12 @@ class NoticeDetailScreen extends StatelessWidget {
                       }
                     )
                   )
-                  : const SizedBox(height: 30,),
+                  : const SizedBox(height: 30, width: double.infinity),
                   // 글
                   Text(
                     officialNoticeDataController.officialNoticeData!.content,
                     style: const TextStyle(fontSize: 16),
-                  )
+                  ),
                 ],
               )
               // 수업 내용 상세

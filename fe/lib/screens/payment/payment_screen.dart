@@ -1,62 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/payment_data.dart';
 import 'package:flutter_application/services/payment/get_payment_data.dart';
-import 'package:flutter_application/widgets/app_bar.dart';
-import 'package:flutter_application/widgets/dropdown_box.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
+import 'package:flutter_application/widgets/dropdown_screen.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:flutter_application/screens/payment/payment_cost.dart';
 import 'package:flutter_application/screens/payment/payment_info.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../style.dart';
 
 /////////////////////
 // 학원비 내역 화면 //
 /////////////////////
 
-class PaymentDropdownScreen extends StatelessWidget {
-  PaymentDropdownScreen({super.key});
-
-  final DropdownButtonController dropdownButtonController = Get.put(DropdownButtonController());
-  final themeController = Get.put(ThemeController());
-
-  @override
-  Widget build(BuildContext context) {
-    dropdownButtonController.updateDropDownMenus();
-
-    return Scaffold(
-      backgroundColor: themeController.isLightTheme.value ? CommonColors.grey2 : DarkColors.basic,
-      appBar: customAppBar("학원비 내역"),
-      body: Column(
-        children: [
-          // 드롭다운 박스(이름)
-          dropDownBox(),
-          // 드롭다운 화면
-          Expanded(
-            child: Obx(() {
-              if (dropdownButtonController.currentItem.value != null) {
-                return FutureBuilder<void>(
-                  future: getPaymentData(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return SpinKitThreeBounce(color: Theme.of(context).colorScheme.onSecondary);
-                    } else if (snapshot.hasError) {
-                      return Text("Error: ${snapshot.error}");
-                    } else {
-                      return const PaymentScreen();
-                    }
-                  },
-                );
-              } else {
-                return Container();
-              }
-            },
-          ))
-        ],
-      ),
+class PaymentDropdownScreen extends DropDownScreen {
+  PaymentDropdownScreen({super.key})
+    : super(
+      title: "학원비 납부",
+      updateData: _updatePaymentData,
+      dropdownChildScreenBuilder: const PaymentScreen(),
     );
+
+  static Future<void> _updatePaymentData() async {
+    await getPaymentData(); 
   }
 }
 

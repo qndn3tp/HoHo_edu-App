@@ -20,7 +20,7 @@ class AttendanceScreen extends DropDownScreen {
     : super(
       title: "출석 체크",
       updateData: _updateAttendanceData,
-      monthlyScreenBuilder: const MonthlyScreen(),
+      dropdownChildScreenBuilder: const MonthlyScreen(),
     );
 
   static Future<void> _updateAttendanceData() async {

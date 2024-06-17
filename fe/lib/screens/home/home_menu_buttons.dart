@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/constants.dart';
+import 'package:flutter_application/models/book_data/is_report_class_exist_data.dart';
 import 'package:flutter_application/screens/attendance/attendance_screen.dart';
 import 'package:flutter_application/screens/home/home_menu_box.dart';
 import 'package:flutter_application/services/attendance/get_attendance_data.dart';
@@ -10,7 +11,7 @@ import 'package:flutter_application/services/book/get_yearly_book_read_count_dat
 import 'package:flutter_application/screens/book/book_screen.dart';
 import 'package:flutter_application/screens/notice/notice_screen.dart';
 import 'package:flutter_application/screens/payment/payment_screen.dart';
-import 'package:flutter_application/services/book/get_ym_book_read_cnt_data.dart';
+import 'package:flutter_application/services/book/get_ym_book_read_count_data.dart';
 import 'package:flutter_application/services/book/school_report/get_is_report_class_exist.dart';
 import 'package:flutter_application/services/book/school_report/get_report_monthly_data.dart';
 import 'package:flutter_application/services/book/school_report/get_report_weekly_data.dart';
@@ -94,13 +95,17 @@ Widget noticeButton() {
 
 // 독클결과 버튼
 Widget bookButton() {
+  final isReportClassExistDataController = Get.put(IsReportClassExistDataController());
+  
   return menuButton(
     buttonText:  homeMenuList[3][0],
     imagePath:  homeMenuList[3][1],
     onTap: () async {
       await getIsReportClassExist(currentYear, currentMonth - 1);
-      await getReportWeeklyData(currentYear, currentMonth -1);
-      await getReportMonthlyData(currentYear, currentMonth -1);
+      if (isReportClassExistDataController.isSExist || isReportClassExistDataController.isSExist) {
+        await getReportWeeklyData(currentYear, currentMonth -1);
+        await getReportMonthlyData(currentYear, currentMonth -1);
+      }
       await getFirstBookReadDateData();
       await getMonthlyBookReadData(currentYear, currentMonth - 1);
       await getMonthlyBookScoreData(currentYear, currentMonth - 1);

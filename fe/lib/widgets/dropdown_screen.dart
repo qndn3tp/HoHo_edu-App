@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
-import 'package:flutter_application/widgets/dropdown_box.dart';
+import 'package:flutter_application/widgets/dropdown_button.dart';
 import 'package:flutter_application/widgets/dropdown_button_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -16,13 +16,13 @@ class DropDownScreen extends GetView<DropdownButtonController> {
 
   final String title;
   final Future<void> Function() updateData;
-  final Widget monthlyScreenBuilder; 
+  final Widget dropdownChildScreenBuilder; 
 
   DropDownScreen({
     super.key, 
     required this.title, 
     required this.updateData, 
-    required this.monthlyScreenBuilder
+    required this.dropdownChildScreenBuilder
   });
 
   @override
@@ -34,7 +34,15 @@ class DropDownScreen extends GetView<DropdownButtonController> {
       body: Column(
         children: [
           // 드롭다운 박스(이름)
-          dropDownBox(),
+          Container(
+            margin: const EdgeInsets.all(20),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                border: Border.all(color: Theme.of(Get.context!).colorScheme.onBackground, width: 2), 
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const DropDownButtonWidget()),
+          ),
           // 각 드롭다운에 해당하는 화면
           Expanded(
             child: Obx(() {
@@ -48,7 +56,7 @@ class DropDownScreen extends GetView<DropdownButtonController> {
                       return Text("Error: ${snapshot.error}");
                     } else {
                       // MonthlyScreen을 생성하여 반환
-                      return monthlyScreenBuilder;
+                      return dropdownChildScreenBuilder;
                     }
                   },
                 );

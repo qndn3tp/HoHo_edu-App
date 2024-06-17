@@ -1,11 +1,17 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_application/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_application/notifications/background_noti.dart';
+import 'package:flutter_application/notifications/show_noti.dart';
 
 ///////////////////
-//  fcm 알림 세팅  //
+//  fcm 알림 세팅 //
 ///////////////////
 
-Future<void> setupNotification({isFlutterLocalNotificationsInitialized}) async {
+Future<void> setupFcm({isFlutterLocalNotificationsInitialized}) async {
+  // FCM 초기화
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);  
 
   // iOS: 포그라운드 메시지 프레젠테이션 옵션 업데이트
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
@@ -40,4 +46,10 @@ Future<void> setupNotification({isFlutterLocalNotificationsInitialized}) async {
       ),
     ),
   );
+
+  // FCM 메시지 수신
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    showNotification(message);
+  });
 }
