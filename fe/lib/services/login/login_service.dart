@@ -5,6 +5,7 @@ import 'package:flutter_application/screens/home/home_screen.dart';
 import 'package:flutter_application/screens/login/login_screen.dart';
 import 'package:flutter_application/screens/login/set_password_screen.dart';
 import 'package:flutter_application/services/home/get_class_info_data.dart';
+import 'package:flutter_application/services/login/get_is_paymentnotice_exist_.dart';
 import 'package:flutter_application/utils/network_check.dart';
 import 'package:flutter_application/widgets/dialog.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -76,6 +77,8 @@ Future<void> loginService(String loginId, String loginPassword, autoLoginChecked
           await requestNotification();
           // 로그인시 토큰 발급, 전송
           await getToken();
+          // 결제알림 유무 확인
+          await getIsPaymentNoticeExist();
           
           // 첫 로그인인 경우 -> 비밀번호 재설정화면
           if (resultList[0]['firstlogin'] == "Y") {

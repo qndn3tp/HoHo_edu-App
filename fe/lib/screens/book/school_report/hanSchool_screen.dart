@@ -32,6 +32,7 @@ class _HanReportState extends State<HanReport> {
 
   @override
   Widget build(BuildContext context) {
+    final isValidBook = reportWeeklyDataController.sBookName != "" ? true : false;
     
     return Obx(() => Container(
       color: themeController.isLightTheme.value 
@@ -52,13 +53,15 @@ class _HanReportState extends State<HanReport> {
               ]),
           )),
           RichText(
-            text: TextSpan(
+            text: isValidBook
+            ? TextSpan(
               children: [
                 colorText(
                   reportWeeklyDataController.sBookName, 
                   themeController.isLightTheme.value ? LightColors.blue : DarkColors.blue),
                 normalText("를 학습했어요."),
-              ]),
+              ])
+            : normalText("학습 데이터가 없어요."),
           ),
           // 주차별 내용
           Container(

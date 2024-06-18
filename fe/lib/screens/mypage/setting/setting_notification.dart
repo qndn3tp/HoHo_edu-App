@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_icons/lottiefiles.dart';
 import 'package:flutter_application/constants.dart';
 import 'package:flutter_application/notifications/request_noti.dart';
-import 'package:flutter_application/services/mypage/get_is_paymentnotice_exist_.dart';
+import 'package:flutter_application/services/login/get_is_paymentnotice_exist_.dart';
 import 'package:flutter_application/style.dart';
 import 'package:flutter_application/utils/load_noti_list_info.dart';
 import 'package:flutter_application/widgets/app_bar.dart';

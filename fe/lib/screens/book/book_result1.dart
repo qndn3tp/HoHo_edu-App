@@ -35,6 +35,7 @@ class _BookResult1State extends State<BookResult1> {
     final pageHeight = screenSize.height - 200;
     final pointTextColor = themeController.isLightTheme.value ? LightColors.indigo : DarkColors.blue;
     final detailTextColor = themeController.isLightTheme.value ? CommonColors.grey4 : CommonColors.grey3;
+    final isValidData = bookTitleDataController.monthlyBookCount > 0 ? true : false;
 
     return Column(
       children: [
@@ -44,19 +45,21 @@ class _BookResult1State extends State<BookResult1> {
           text: TextSpan(
             children: [
               normalText("${dropdownButtonController.currentItem.value} 학생은 "),
-              colorText(widget.pageDate, pointTextColor),
+              colorText(widget.pageDate.substring(6,), pointTextColor),
               normalText("에"),
             ]),
           )), 
         SizedBox(
           height: pageHeight * 0.15,
           child: RichText(
-            text: TextSpan(
+            text: isValidData
+            ? TextSpan(
               children: [
                 normalText("총 "),
                 colorText("${bookTitleDataController.monthlyBookCount}권", pointTextColor),
                 normalText("의 책을 읽었어요!"),
-              ]),
+              ])
+            : normalText("책을 읽지 않았어요."),
           ),
         ),
         // 독클 목록(책 제목)

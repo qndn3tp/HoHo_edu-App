@@ -26,15 +26,20 @@ Widget schoolMonthlyResult(String title) {
   final score = title == "han" ? hanScore : bookScore;
   final best = title == "han" ? hanBest : bookBest;
 
-  const pointColor = Color(0xff868ad6);
+  late bool isValidData;
+  if (title == "han") {
+    isValidData = reportMonthlyDataController.sScore.length > 0 ? true : false;
+  } else {
+    isValidData = reportMonthlyDataController.iScore.length > 0 ? true: false;
+  }
 
-  final isValidResult = reportMonthlyDataController.iScore.length > 0 ? true : false;
+  const pointColor = Color(0xff868ad6);
 
   return Column(
     children: [
       // 텍스트
       RichText(text: normalText("월간 학습 성취도 평가")),
-      isValidResult
+      isValidData
       ? Column(
         children: [
           RichText(
@@ -95,25 +100,28 @@ Widget schoolMonthlyResult(String title) {
                 Expanded(
                   flex: 6,
                   child: SizedBox(
-                    child: score != ""
-                    ? Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: List.generate(
-                        4,
-                        (index) => SizedBox(
+                        4, (index) => SizedBox(
                           height: 45,
                           width: 70,
-                          child: Row(
+                          child: isValidData 
+                          ? Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               score[2 * index] == "Y" ? scoreBox(true) : scoreBox(false),
                               score[2 * index + 1] == "Y" ? scoreBox(true) : scoreBox(false),
                             ],
+                          )
+                          // 아직 데이터가 없는 경우
+                          : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [scoreBox(false), scoreBox(false)],
                           ),
                         ),
                       ),
                     )
-                    : const SizedBox(),
                   ),
                 ),
               ],

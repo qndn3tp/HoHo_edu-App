@@ -29,13 +29,15 @@ class _BookResult2State extends State<BookResult2> {
     final screenSize = MediaQuery.of(context).size;
     final pageHeight = screenSize.height - 200;
     final pointTextColor = themeController.isLightTheme.value ? LightColors.orange : DarkColors.orange;
+    final isScoreValid = bookScoreDataController.getFirstScoreName() != "" ? true : false;
 
     return SizedBox(
       height: pageHeight,
       child: Column(
         children: [
           // 텍스트
-          RichText(
+          isScoreValid
+          ? RichText(
             text: TextSpan(
               children: [
                 normalText("위의 책을 읽고 "),
@@ -45,8 +47,11 @@ class _BookResult2State extends State<BookResult2> {
                 normalText(" 능력이"),
               ]
             )
-          ),
-          RichText(text: normalText("풍부해졌어요")),
+          )
+          : RichText(text: normalText("독서량이 충분하지 않아")),
+          isScoreValid
+          ? RichText(text: normalText("풍부해졌어요"))
+          : RichText(text: normalText("통계를 볼 수 없어요 \u{1F622}")),
           // 이미지
           Container(
             height: pageHeight * 0.35, 

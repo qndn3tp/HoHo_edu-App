@@ -34,6 +34,8 @@ class _BookReportState extends State<BookReport> {
   
   @override
   Widget build(BuildContext context) {
+    final isValidBook = reportWeeklyDataController.iBookName != "" ? true : false;
+
     return Obx(() => Container(
       color: themeController.isLightTheme.value 
         ? const Color(0xffe7eef8) 
@@ -52,12 +54,15 @@ class _BookReportState extends State<BookReport> {
               ]),
             )),
           RichText(
-            text: TextSpan(children: [
-              colorText(
-                reportWeeklyDataController.iBookName, 
-                themeController.isLightTheme.value ? LightColors.blue : DarkColors.blue),
-              normalText("를 학습했어요."),
-            ]),
+            text: isValidBook
+            ? TextSpan(
+              children: [
+                colorText(
+                  reportWeeklyDataController.iBookName, 
+                  themeController.isLightTheme.value ? LightColors.blue : DarkColors.blue),
+                normalText("를 학습했어요."),
+            ])
+            : normalText("학습 데이터가 없어요."),
           ),
           // 주차별 내용
           Container(
@@ -88,7 +93,7 @@ class _BookReportState extends State<BookReport> {
             ),
           ),
           // 글쓰기 이미지
-          RichText(text: normalText("이번 달의 글쓰기")),
+          RichText(text: normalText("이달의 글쓰기")),
           const BookReportImage(),
           // 최종 평가
           schoolMonthlyResult("book"),
@@ -192,7 +197,7 @@ class _BookReportImageState extends State<BookReportImage> {
                   return imageSlider(path, index);
                 },
               )
-              : const Text("아직 이미지가 업로드 되지 않았어요."),
+              : const Text("이미지가 업로드 되지 않았어요."),
             )
           ),
           indicator()
