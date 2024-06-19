@@ -6,14 +6,13 @@ import 'package:get/get.dart';
 
 // 데이터 클래스
 class ReportMonthlyData {
-  final String bookGubun;
-  final String image1;
-  final String image2;
-  final String image3;
-  final String image4;
-  final String score;
-  final String isSend;
-  final String imageUrl;
+  final String bookGubun;    // 한스쿨 북스쿨 구분
+  final String image1;       // 북스쿨 이미지 1
+  final String image2;       //              2 
+  final String image3;       //              3 
+  final String image4;       //              4
+  final String score;        // 표 점수
+  final String imageUrl;     // 북스쿨 이미지 주소
   
   ReportMonthlyData({
     required this.bookGubun,
@@ -22,7 +21,6 @@ class ReportMonthlyData {
     required this.image3,
     required this.image4,
     required this.score,
-    required this.isSend,
     required this.imageUrl,
   });
 
@@ -34,7 +32,6 @@ class ReportMonthlyData {
       image3: json['addfile3'] ?? "",
       image4: json['addfile4'] ?? "",
       score: json['jresult'] ?? "",
-      isSend: json['sendyn'] ?? "",
       imageUrl: json['lurl'] ?? "",
     );
   }

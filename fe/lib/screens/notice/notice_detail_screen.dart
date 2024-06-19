@@ -3,6 +3,7 @@ import 'package:flutter_application/models/notice_data/class_notice_detail_data.
 import 'package:flutter_application/models/notice_data/notice_data.dart';
 import 'package:flutter_application/models/notice_data/official_notice_detail_data.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
+import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter_application/constants.dart';
 
@@ -18,6 +19,7 @@ class NoticeDetailScreen extends StatelessWidget {
   final noticeDataController = Get.put(NoticeDataController());
   final officialNoticeDataController = Get.put(OfficialNoticeDataController());
   final classNoticeDataController = Get.put(ClassNoticeDataController());
+  final themeController = Get.put(ThemeController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,9 @@ class NoticeDetailScreen extends StatelessWidget {
                     width: 30,
                     height: 30,
                     decoration: BoxDecoration(
-                      color: lightNoticeColorList[noticeDataController.noticeDataList![index].noticeNum], 
+                      color: themeController.isLightTheme.value
+                        ? lightNoticeColorList[noticeDataController.noticeDataList![index].noticeNum]
+                        : darkNoticeColorList[noticeDataController.noticeDataList![index].noticeNum],
                       borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.all(5),
                     child: Image.asset(noticeImageList[noticeDataController.noticeDataList![index].noticeNum]), 

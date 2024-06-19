@@ -51,6 +51,7 @@ Future<void> getClassInfoData() async {
           List<ClassInfoData> classInfoDataList = resultList0.map<ClassInfoData>((json) => ClassInfoData.fromJson(json)).toList();
           final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController());     
           classInfoDataController.setClassInfoDataList(classInfoDataList);
+          classInfoDataController.setSnamesList(classInfoDataList);
         }
         // 응답 데이터가 오류일 때("9999": 오류)
         else {

@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 
 // 데이터 클래스
 class BookReadDateData {
-  final String startYear;
-  final String startMonth;
+  final String startYear;    // 시작 연
+  final String startMonth;   // 시작 월
 
   BookReadDateData({
     required this.startYear,

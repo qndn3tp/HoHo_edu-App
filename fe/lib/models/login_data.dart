@@ -6,33 +6,21 @@ import 'package:get/get.dart';
 
 // 데이터 클래스
 class LoginData {
-  final String id;
-  final String name;
-  final String cid;
-  final String cname;
-  final String brotherGb;
-  final String sibling;
-  final String isFirstLogin;
+  final String id;             // 학생 아이디
+  final String cname;          // 센터 이름
+  final String sibling;        // 형제 코드
 
   LoginData({
     required this.id,
-    required this.name,
-    required this.cid,
     required this.cname,
-    required this.brotherGb,
     required this.sibling,
-    required this.isFirstLogin,
   });
 
   factory LoginData.fromJson(Map<String, dynamic> json) {
     return LoginData(
       id: json['stuid'] ?? "",
-      name: json['name'] ?? "",
-      cid: json['cid'] ?? "",
       cname: json['cname'] ?? "",
-      brotherGb: json['brotherGb'] ?? "",
       sibling: json['sibling'] ?? "",
-      isFirstLogin: json['firstLogin'] ?? "",
     );
   }
 }

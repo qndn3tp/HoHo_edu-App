@@ -6,17 +6,14 @@ import 'package:get/get.dart';
 
 // 데이터 클래스
 class IsReportClassExistData {
-  final String bookGubun;
-  final int isExist;
+  final int isExist;        // 한스쿨, 북스쿨 존재 여부
   
   IsReportClassExistData({
-    required this.bookGubun,
     required this.isExist,
   });
 
   factory IsReportClassExistData.fromJson(Map<String, dynamic> json) {
     return IsReportClassExistData(
-      bookGubun: json['gubun'] ?? "",
       isExist: json['cnt'] ?? 0,
     );
   }

@@ -6,17 +6,14 @@ import 'package:get/get.dart';
 
 // 데이터 클래스
 class BookTitleData {
-  final String bookGubun;
-  final String title;
+  final String title;        // 책 제목
   
   BookTitleData({
-    required this.bookGubun,
     required this.title,
   });
 
   factory BookTitleData.fromJson(Map<String, dynamic> json) {
     return BookTitleData(
-      bookGubun: json['book_gubun'] ?? "",
       title: json['title'] ?? "",
     );
   }

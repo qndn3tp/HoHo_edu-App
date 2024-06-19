@@ -22,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // 컨트롤러
-  final ClassInfoDataController classInfoDataController = Get.put(ClassInfoDataController()); 
+  final classInfoDataController = Get.put(ClassInfoDataController()); 
   final readNotiController = Get.put(ReadNotiController());   // 푸시 알림 확인 여부
   final themeController = Get.put(ThemeController());
 
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     // 형제자매 이름 리스트
-    List<String> snamesList = classInfoDataController.getSnamesList(classInfoDataController.classInfoDataList);
+    List<String> snamesList = classInfoDataController.snamesList;
 
     return Obx(
       () => Container(

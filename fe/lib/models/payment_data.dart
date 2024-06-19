@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 class PaymentData {
   final String classDate;        // 수업연월
-  final String subjectName;        // 수업 구분
+  final String subjectName;      // 수업 구분
   final int totalAmount;         // 결제금액
   final String paymentDate;      // 결제일
   final int cardAmount;          // 카드 입금액

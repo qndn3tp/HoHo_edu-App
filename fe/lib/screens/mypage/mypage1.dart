@@ -16,7 +16,7 @@ Widget mypage1() {
 
   // 학생 정보
   final classInfoDataController = Get.put(ClassInfoDataController());
-  final namesList = classInfoDataController.getSnamesList(classInfoDataController.classInfoDataList);
+  final namesList = classInfoDataController.snamesList;
   final namesText = namesList.join(",");
   final loginDataController = Get.put(LoginDataController());
 

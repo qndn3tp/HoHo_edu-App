@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 // 데이터 클래스
 class YearBookCountData {
-  final int totalRows;
+  final int totalRows;    // 독서 권수
 
   YearBookCountData({
     required this.totalRows,

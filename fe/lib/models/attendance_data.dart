@@ -6,19 +6,19 @@ import 'package:get/get.dart';
 
 // 데이터 클래스
 class AttendanceData {
-  final String ymd;
-  final String dayname;
+  final String ymd;           // 연월일
+  final String dayname;       // 요일
   final String stime;         // 등원 시간
   final String etime;         // 하원 시간
-  final String gbS;
-  final String timecheckS;    // 서당 출결
-  final String gbI;
-  final String timecheckI;    // 독서 출결
-  final String check;         // ERR: 수업이 없는데 등원한 경우/OK
+  final String gbS;           // 한스쿨
+  final String timecheckS;    // 한스쿨 출결
+  final String gbI;           // 북스쿨
+  final String timecheckI;    // 북스쿨 출결
+  final String check;         // ERR: 수업이 없는데 등원한 경우 / OK: 정상
   
   AttendanceData({
-    required this.ymd,
-    required this.dayname,
+    required this.ymd,      
+    required this.dayname,   
     required this.stime,
     required this.etime,
     required this.gbS,

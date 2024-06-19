@@ -20,7 +20,7 @@ class DropdownButtonController extends GetxController {
 
   // classInfoDataController.nameList를 기반으로 드롭다운 메뉴를 업데이트
   void updateDropDownMenus() {
-    final newList = classInfoDataController.getSnamesList(classInfoDataController.classInfoDataList);
+    final newList = classInfoDataController.snamesList;
     nameList.value = newList;
 
     // 기존 currentItem이 새로운 리스트의 첫 번째 값으로 설정됨

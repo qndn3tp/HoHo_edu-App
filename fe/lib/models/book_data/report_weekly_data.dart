@@ -6,13 +6,13 @@ import 'package:get/get.dart';
 
 // 데이터 클래스
 class ReportWeeklyData {
-  final String bookGubun;
-  final String bookName;
-  final String bookNumber;
-  final String week;
-  final String weekNote1;
-  final String weekNote2;
-  final int score;
+  final String bookGubun;     // 한스쿨 북스쿨 구분
+  final String bookName;      // 교재 이름
+  final String bookNumber;    // 교재 호수
+  final String week;          // 주차
+  final String weekNote1;     // 설명 1 
+  final String weekNote2;     // 설명 2
+  final int score;            // 점수
   
   ReportWeeklyData({
     required this.bookGubun,

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 // 데이터 클래스
 class ClassNoticeData {
-  final String prequest;
+  final String prequest;       // 설명
 
   ClassNoticeData({
     required this.prequest

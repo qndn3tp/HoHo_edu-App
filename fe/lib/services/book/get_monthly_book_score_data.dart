@@ -55,7 +55,8 @@ Future<void> getMonthlyBookScoreData(year, month) async {
           // JSON 데이터를 bookScoreData 객체리스트로 파싱
           List<BookScoreData> bookScoreDataList = resultList0.map<BookScoreData>((json) => BookScoreData.fromJson(json)).toList();
           final BookScoreDataController bookScoreDataController = Get.put(BookScoreDataController());    
-          bookScoreDataController.setBookScoreDataList(bookScoreDataList);                               
+          bookScoreDataController.setBookScoreDataList(bookScoreDataList);           
+          bookScoreDataController.setScoreName();                    
         }
         // 응답 데이터가 오류일 때("9999": 오류)
         else {

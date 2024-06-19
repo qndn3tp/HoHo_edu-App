@@ -6,16 +6,16 @@ import 'package:get/get.dart';
 
 // 데이터 클래스
 class NoticeData {
-  final String title;
-  final String body;
-  final int noticeNum;
-  final String ymdTime;
-  final String ymd;
-  final String teacherId;
-  final String sTime;
-  final String subjectGb;
-  final String stuId2;
-  final int idx;
+  final String title;        // 제목
+  final String body;         // 내용
+  final int noticeNum;       // 구분 번호
+  final String ymdTime;      // 시간
+  final String ymd;          // 수업 클릭시 필요(사용X)
+  final String teacherId;    // ..
+  final String sTime;        // ..
+  final String subjectGb;    // ..
+  final String stuId2;       // ..
+  final int idx;             // 공지 클릭시 필요(사용X)
 
   NoticeData({
     required this.title,

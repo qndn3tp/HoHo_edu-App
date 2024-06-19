@@ -9,9 +9,9 @@ import 'package:get/get.dart';
 
 // 데이터 클래스
 class YMBookCountData {
-  final String year;
-  final String month;
-  final int count;
+  final String year;     // 연
+  final String month;    // 월
+  final int count;       // 독서 권수
   
   YMBookCountData({
     required this.year,

@@ -6,26 +6,17 @@ import 'package:get/get.dart';
 
 // 데이터 클래스
 class OfficialNoticeData {
-  final String title;
-  final String content;
-  final String imageFile;
-  final String year;
-  final String imageUrl;
+  final String content;      // 내용
+  final String imageUrl;     // 이미지 주소
 
   OfficialNoticeData({
-    required this.title,
     required this.content,
-    required this.imageFile,
-    required this.year,
     required this.imageUrl,
   });
 
   factory OfficialNoticeData.fromJson(Map<String, dynamic> json) {
     return OfficialNoticeData(
-      title: json["title"] ?? "",
       content: json["note"] ?? "",
-      imageFile: json["addfile"] ?? "",
-      year: json["yy"] ?? "",
       imageUrl: json["url"] ?? "",
     );
   }

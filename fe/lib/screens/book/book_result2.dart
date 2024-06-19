@@ -29,7 +29,7 @@ class _BookResult2State extends State<BookResult2> {
     final screenSize = MediaQuery.of(context).size;
     final pageHeight = screenSize.height - 200;
     final pointTextColor = themeController.isLightTheme.value ? LightColors.orange : DarkColors.orange;
-    final isScoreValid = bookScoreDataController.getFirstScoreName() != "" ? true : false;
+     final isScoreValid = bookScoreDataController.firstScoreName != "" ? true : false;
 
     return SizedBox(
       height: pageHeight,
@@ -41,9 +41,9 @@ class _BookResult2State extends State<BookResult2> {
             text: TextSpan(
               children: [
                 normalText("위의 책을 읽고 "),
-                colorText(bookScoreDataController.getFirstScoreName(), pointTextColor),  // 가장 점수가 높은 영역
+                colorText(bookScoreDataController.firstScoreName, pointTextColor),  // 가장 점수가 높은 영역
                 normalText(", "),
-                colorText(bookScoreDataController.getSecondScoreName(), pointTextColor), // 두번째로 점수가 높은 영역
+                colorText(bookScoreDataController.secondScoreName, pointTextColor), // 두번째로 점수가 높은 영역
                 normalText(" 능력이"),
               ]
             )
