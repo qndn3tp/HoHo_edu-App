@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/constants.dart';
 import 'package:flutter_application/models/book_data/is_report_class_exist_data.dart';
 import 'package:flutter_application/screens/attendance/attendance_screen.dart';
-import 'package:flutter_application/screens/home/home_menu_box.dart';
+import 'package:flutter_application/screens/notice/notice_badge_controller.dart';
 import 'package:flutter_application/services/attendance/get_attendance_data.dart';
 import 'package:flutter_application/services/book/get_first_book_read_date_data.dart';
 import 'package:flutter_application/services/book/get_monthly_book_read_data.dart';
@@ -75,15 +75,12 @@ Widget paymentButton() {
 
 // 알림장 버튼
 Widget noticeButton() {
-  final readNotiController = Get.put(ReadNotiController());
-
   return menuButton(
     buttonText: homeMenuList[2][0],
     imagePath: homeMenuList[2][1],
-    onTap: () {
+    onTap: () async{
       // 알림 확인
-      readNotiController.isRead.value = true;
-      readNotiController.storeisReadInfo(true);
+      await loadNoticeBadge();
       Get.to(
         const NoticeScreen(),
         transition: transitionType,

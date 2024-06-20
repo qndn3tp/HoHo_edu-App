@@ -1,27 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/home/home_menu_buttons.dart';
+import 'package:flutter_application/screens/notice/notice_badge_controller.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /////////////////
 //  메뉴 박스  //
 /////////////////
 
-// 푸시 알림 확인 여부 컨트롤러
-class ReadNotiController extends GetxController {
-  RxBool isRead = true.obs;
-
-  // 로컬 저장소에 저장
-  Future<void> storeisReadInfo(value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isRead', value);
-  }
-}
-
 Widget menuBox(Size screenSize) {
-  final readNotiController = Get.put(ReadNotiController());
   final themeController = Get.put(ThemeController());
+  final NoticeBadgeController noticeBadgeController = Get.put(NoticeBadgeController());
 
   return Obx(() => Container(
     width: screenSize.width * 0.9,
@@ -74,23 +63,17 @@ Widget menuBox(Size screenSize) {
             ),
             // 알림 확인 여부에 따른 배지
             Obx(() => Positioned(
-              left: screenSize.width / 2 - 75,
-              child: readNotiController.isRead.value
+              left: screenSize.width / 2 - 80,
+              child: noticeBadgeController.isNoticeAllRead.value
               ? Container()           // 알림 확인 O  
               : Container(            // 알림 확인 X
-                width: 22, 
-                height: 22, 
+                width: 15, 
+                height: 15, 
                 decoration: BoxDecoration(
                   color: themeController.isLightTheme.value 
                     ? const Color(0xffff3939)
                     : const Color.fromARGB(255, 250, 84, 84),
-                  shape: BoxShape.circle, 
-                  border: Border.all(
-                    color: themeController.isLightTheme.value 
-                      ? const Color(0xfff2f2f2)
-                      : const Color(0xff3c3c3c), 
-                    width: 4, 
-                  ),
+                  shape: BoxShape.circle,
                 )
               )
             )

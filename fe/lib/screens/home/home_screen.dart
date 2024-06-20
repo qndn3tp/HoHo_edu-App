@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/models/class_info_data.dart';
 import 'package:flutter_application/screens/home/home_menu_box.dart';
 import 'package:flutter_application/screens/home/home_student_info_box.dart';
+import 'package:flutter_application/screens/notice/notice_badge_controller.dart';
 import 'package:flutter_application/widgets/app_bar.dart';
 import 'package:flutter_application/widgets/imagebox_decoration.dart';
 import 'package:flutter_application/widgets/theme_controller.dart';
 import 'package:get/get.dart';
 import 'package:banner_carousel/banner_carousel.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 ///////////////////
 //    홈 화면    //
@@ -23,14 +23,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // 컨트롤러
   final classInfoDataController = Get.put(ClassInfoDataController()); 
-  final readNotiController = Get.put(ReadNotiController());   // 푸시 알림 확인 여부
   final themeController = Get.put(ThemeController());
-
-  // 푸시 알림 확인 여부 로드
-  Future<void> _loadisReadInfo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    readNotiController.isRead.value = prefs.getBool('isRead') ?? false; 
-  }
 
   // 수업정보 박스
   List<Widget> _buildBanners(BuildContext context, List<String> snamesList) {
@@ -55,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _loadisReadInfo();
+    loadNoticeBadge();
   }
 
   @override
