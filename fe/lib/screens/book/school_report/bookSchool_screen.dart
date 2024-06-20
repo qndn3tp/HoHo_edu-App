@@ -78,6 +78,9 @@ class _BookReportState extends State<BookReport> {
               itemBuilder: (context, index) {
                 final week = index + 1;
                 final isValidData = week <= reportWeeklyDataController.iWeeklyDataList.length ? true : false;
+                
+                final weekNote2 = reportWeeklyDataController.iWeeklyDataList[week - 1].weekNote2;
+                List<String> formattedWeekNote2 = weekNote2.split(RegExp(r'<span>|</span>'));
 
                 return SchoolWeeklyResult(
                   week: week,
@@ -85,7 +88,19 @@ class _BookReportState extends State<BookReport> {
                   children: isValidData
                     ? [
                       subTitleImage("book_report1.png", "수업내용", const Color(0xff34b8bc)),
-                      Text(reportWeeklyDataController.iWeeklyDataList[week - 1].weekNote2),
+                      RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text:  formattedWeekNote2[1],
+                            style: const TextStyle(color: LightColors.blue, fontFamily: "NotoSansKR-SemiBold")
+                          ),
+                          TextSpan(
+                            text: formattedWeekNote2[2],
+                            style: const TextStyle(color: Colors.black)
+                          ),
+                        ]),
+                      )
                     ]
                     : [],
                 );

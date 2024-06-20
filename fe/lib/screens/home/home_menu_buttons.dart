@@ -98,14 +98,14 @@ Widget bookButton() {
     buttonText:  homeMenuList[3][0],
     imagePath:  homeMenuList[3][1],
     onTap: () async {
-      await getIsReportClassExist(currentYear, currentMonth - 1);
+      await getIsReportClassExist(currentYear, currentMonth);
       if (isReportClassExistDataController.isSExist || isReportClassExistDataController.isSExist) {
-        await getReportWeeklyData(currentYear, currentMonth -1);
-        await getReportMonthlyData(currentYear, currentMonth -1);
+        await getReportWeeklyData(currentYear, currentMonth);
+        await getReportMonthlyData(currentYear, currentMonth);
       }
       await getFirstBookReadDateData();
-      await getMonthlyBookReadData(currentYear, currentMonth - 1);
-      await getMonthlyBookScoreData(currentYear, currentMonth - 1);
+      await getMonthlyBookReadData(currentYear, currentMonth);
+      await getMonthlyBookScoreData(currentYear, currentMonth);
       await getYearlyBookReadCountData(currentYear, currentMonth - 1);
       await getYMBookReadCountData(currentYear, currentMonth - 1);
       Get.to(

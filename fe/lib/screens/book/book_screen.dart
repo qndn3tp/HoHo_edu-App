@@ -48,8 +48,8 @@ class BookScreen extends DropDownScreen {
       
       await getIsReportClassExist(year, month);
       if (isReportClassExistDataController.isSExist || isReportClassExistDataController.isSExist) {
-        await getReportWeeklyData(currentYear, currentMonth -1);
-        await getReportMonthlyData(currentYear, currentMonth -1);
+        await getReportWeeklyData(currentYear, currentMonth);
+        await getReportMonthlyData(currentYear, currentMonth);
       }
       await getFirstBookReadDateData();
       await getMonthlyBookReadData(year, month);
