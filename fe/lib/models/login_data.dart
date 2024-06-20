@@ -1,4 +1,4 @@
-import 'package:get/get.dart';  
+import 'package:get/get.dart';
 
 ////////////////////////////////////
 //  로그인시 받아온 유저의 데이터  //
@@ -8,11 +8,13 @@ import 'package:get/get.dart';
 class LoginData {
   final String id;             // 학생 아이디
   final String cname;          // 센터 이름
+  final String cid;
   final String sibling;        // 형제 코드
 
   LoginData({
     required this.id,
     required this.cname,
+    required this.cid,
     required this.sibling,
   });
 
@@ -20,6 +22,7 @@ class LoginData {
     return LoginData(
       id: json['stuid'] ?? "",
       cname: json['cname'] ?? "",
+      cid: json['cid'] ?? "",
       sibling: json['sibling'] ?? "",
     );
   }

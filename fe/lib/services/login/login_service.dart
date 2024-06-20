@@ -13,6 +13,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../notifications/token_management.dart';
 import '../../models/login_data.dart';
 import '../../utils/login_encryption.dart';
@@ -79,6 +80,10 @@ Future<void> loginService(String loginId, String loginPassword, autoLoginChecked
           await getToken();
           // 결제알림 유무 확인
           await getIsPaymentNoticeExist();
+
+          // 센터 아이디 저장
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setString('centerId', loginDataController.loginData!.cid);
           
           // 첫 로그인인 경우 -> 비밀번호 재설정화면
           if (resultList[0]['firstlogin'] == "Y") {

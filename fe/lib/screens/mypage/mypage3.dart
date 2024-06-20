@@ -1,33 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/models/center_info_data.dart';
 import 'package:flutter_application/screens/login/login_screen.dart';
 import 'package:flutter_application/style.dart';
 import 'package:flutter_application/utils/logout.dart';
 import 'package:flutter_application/widgets/make_phone_call.dart';
 import 'package:get/get.dart';
 
-///////////////////////
-// 고객센터, 로그아웃 //
-///////////////////////
+////////////////////
+// 센터 전화, 로그아웃 //
+////////////////////
 
 Widget mypage3() {
+  final CenterInfoDataController centerInfoDataController = Get.put(CenterInfoDataController());
+
   return Container(
     padding: const EdgeInsets.all(20),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 고객센터
-        const Text("고객센터", style: TextStyle(fontFamily: "NotoSansKR-SemiBold", fontSize: 15)),
+        // 센터 문의
+        const Text("센터 문의", style: TextStyle(fontFamily: "NotoSansKR-SemiBold", fontSize: 15)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("전화 문의: 1899-0898"),
-                Text("(평일 10:00~18:00)"),
+                Text("전화 문의: ${centerInfoDataController.centerInfoData!.centerTel}"),
+                Text("(${centerInfoDataController.centerInfoData!.centerTime})"),
               ],
             ),
-            // 고객센터 전화 버튼
+            // 센터 전화 버튼
             phoneNumberButton()
           ],
         ),

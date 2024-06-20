@@ -18,7 +18,7 @@ class MyPageScreen extends StatelessWidget {
             mypage1(),
             // 중간 내용(리스트 타일)
             mypage2(),
-            // 하단 내용(고객센터, 로그아웃)
+            // 하단 내용(센터 문의, 로그아웃)
             mypage3()
           ],
         ),

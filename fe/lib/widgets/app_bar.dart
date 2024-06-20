@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/mypage/mypage_screen.dart';
+import 'package:flutter_application/services/mypage/get_center_info_data.dart';
 import 'package:flutter_application/style.dart';
 import 'package:get/get.dart';
 
@@ -45,7 +46,8 @@ PreferredSizeWidget homeAppBar(screenSize) {
     iconTheme: const IconThemeData(color: CommonColors.grey4),
     actions: [
       IconButton(
-        onPressed: (){
+        onPressed: () async{
+          await getCenterInfoData();
           Get.to(const MyPageScreen());
         }, 
         icon: const Icon(Icons.account_circle, size: 30, color: CommonColors.grey4,)

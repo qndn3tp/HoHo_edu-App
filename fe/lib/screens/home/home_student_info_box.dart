@@ -24,6 +24,7 @@ Widget studentInfoBox(name) {
 
   return Container(
     padding: const EdgeInsets.only(top: 20, left: 30),
+    margin: const EdgeInsets.symmetric(horizontal: 5),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(30),
       color: Theme.of(Get.context!).colorScheme.onSecondaryContainer,
