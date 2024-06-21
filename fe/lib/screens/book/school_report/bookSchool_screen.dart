@@ -79,8 +79,14 @@ class _BookReportState extends State<BookReport> {
                 final week = index + 1;
                 final isValidData = week <= reportWeeklyDataController.iWeeklyDataList.length ? true : false;
                 
+                // 수업내용 글 스타일
                 final weekNote2 = reportWeeklyDataController.iWeeklyDataList[week - 1].weekNote2;
-                List<String> formattedWeekNote2 = weekNote2.split(RegExp(r'<span>|</span>'));
+                late List<String> formattedWeekNote2;
+                if (weekNote2.contains('<span>') && weekNote2.contains('</span>')) {
+                  formattedWeekNote2 = weekNote2.split(RegExp(r'<span>|</span>'));
+                } else {
+                  formattedWeekNote2 = ["", "", weekNote2];
+                }
 
                 return SchoolWeeklyResult(
                   week: week,
@@ -93,11 +99,13 @@ class _BookReportState extends State<BookReport> {
                         children: [
                           TextSpan(
                             text:  formattedWeekNote2[1],
-                            style: const TextStyle(color: LightColors.blue, fontFamily: "NotoSansKR-SemiBold")
+                            style: TextStyle(
+                              color: themeController.isLightTheme.value ? LightColors.blue : const Color(0xffbec7ff), 
+                              fontFamily: "NotoSansKR-SemiBold")
                           ),
                           TextSpan(
                             text: formattedWeekNote2[2],
-                            style: const TextStyle(color: Colors.black)
+                            style: TextStyle(color: Theme.of(Get.context!).colorScheme.onSurface)
                           ),
                         ]),
                       )
