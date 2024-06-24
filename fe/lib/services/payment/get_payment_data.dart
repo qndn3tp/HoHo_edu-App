@@ -51,7 +51,7 @@ Future<void> getPaymentData() async {
           final PaymentDataController paymentDataController = Get.put(PaymentDataController());     
           paymentDataController.setPaymentDataList(paymentDataList);
 
-          print('1');
+        
         }
         // 응답 데이터가 오류일 때("9999": 오류)
         else {
