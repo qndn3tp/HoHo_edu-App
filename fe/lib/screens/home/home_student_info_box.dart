@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/models/class_info_data.dart';
 import 'package:flutter_application/models/login_data.dart';
+import 'package:flutter_application/utils/get_current_date.dart';
 import 'package:get/get.dart';
 import '../../style.dart';
 
@@ -19,6 +20,8 @@ Widget studentInfoBox(name) {
   final nameSubjectMap = classInfoDataController.getSubjectMap(classInfoDataController.classInfoDataList);
   // 수업정보 리스트(과목명, 과목호수, 시작시간, 종료시간, 요일)
   final subjectList = nameSubjectMap[name] ?? [];
+
+  final month = getCurrentMonth();
 
   return Container(
     padding: const EdgeInsets.only(top: 20, left: 30),
@@ -51,8 +54,9 @@ Widget studentInfoBox(name) {
         const SizedBox(height: 5),
         // 수강정보
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("6월:", style: TextStyle(color: CommonColors.grey1, fontSize: 18)),
+            Text("${month}월:", style: const TextStyle(color: CommonColors.grey1, fontSize: 18)),
             Container(
               margin: const EdgeInsets.only(left: 5),
               width: screenSize.width * 0.7,
