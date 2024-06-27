@@ -50,6 +50,8 @@ Future<void> getPaymentData() async {
           List<PaymentData> paymentDataList = resultList0.map<PaymentData>((json) => PaymentData.fromJson(json)).toList();
           final PaymentDataController paymentDataController = Get.put(PaymentDataController());     
           paymentDataController.setPaymentDataList(paymentDataList);
+
+        
         }
         // 응답 데이터가 오류일 때("9999": 오류)
         else {

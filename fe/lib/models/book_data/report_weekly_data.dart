@@ -13,6 +13,7 @@ class ReportWeeklyData {
   final String weekNote1;     // 설명 1 
   final String weekNote2;     // 설명 2
   final int score;            // 점수
+  final String color;
   
   ReportWeeklyData({
     required this.bookGubun,
@@ -22,6 +23,7 @@ class ReportWeeklyData {
     required this.weekNote1,
     required this.weekNote2,
     required this.score,
+    required this.color,
   });
 
   factory ReportWeeklyData.fromJson(Map<String, dynamic> json) {
@@ -33,6 +35,7 @@ class ReportWeeklyData {
       weekNote1: json['ju_note1'] ?? "",
       weekNote2: json['ju_note2'].replaceAll('<br>', '\n') ?? "",
       score: json['jumsu'] ?? 0,
+      color: json['color'] ?? "ffe7eef8",
     );
   }
 }
