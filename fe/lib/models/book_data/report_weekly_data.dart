@@ -33,7 +33,7 @@ class ReportWeeklyData {
       bookNumber: json['mgubun_str'] ?? "",
       week: json['ju'] ?? "",
       weekNote1: json['ju_note1'] ?? "",
-      weekNote2: json['ju_note2'].replaceAll('<br>', '\n') ?? "",
+      weekNote2: json.containsKey('ju_note2') ? (json['ju_note2'] as String).replaceAll('<br>', '\n') : "",
       score: json['jumsu'] ?? 0,
       color: json['color'] ?? "ffe7eef8",
     );
